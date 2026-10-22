@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<title>X-Beam — planche de pistes</title>
+<style>
+  @font-face { font-family: "Space Mono"; src: url(../../assets/fonts/space-mono-latin-400-normal.woff) format("woff"); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(../../assets/fonts/inter-latin-400-normal.woff) format("woff"); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(../../assets/fonts/inter-latin-600-normal.woff) format("woff"); }
+  :root { --abyss: #08090C; --cobalt: #0052FF; --cyan: #00D2FF; --white: #F0F2F5; --slate: #79818C; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--abyss); color: var(--white); font: 400 15px/1.45 Inter, sans-serif; padding: 40px 48px 56px; width: 1560px; }
+  h1 { font: 600 28px/1.2 Inter; margin: 0 0 6px; }
+  .lead { color: var(--slate); margin: 0 0 28px; max-width: 1100px; }
+  .row { display: grid; grid-template-columns: 220px 300px 300px 300px 340px; gap: 20px; padding: 24px 0; border-top: 1px solid #1d2128; align-items: start; }
+  .meta b { display: block; font: 400 13px/1.3 "Space Mono"; letter-spacing: .06em; color: var(--cyan); margin-bottom: 8px; }
+  .meta h2 { font: 600 20px/1.2 Inter; margin: 0 0 8px; }
+  .meta p { margin: 0; color: #c9ced6; font-size: 14px; }
+  .tile { width: 300px; height: 300px; display: block; }
+  .cap { font: 400 11px/1.3 "Space Mono"; color: var(--slate); margin-top: 6px; letter-spacing: .04em; }
+  .scene { position: relative; width: 300px; height: 300px; overflow: hidden;
+    background:
+      radial-gradient(120px 90px at 70% 30%, rgba(255,190,120,.55), transparent 70%),
+      radial-gradient(200px 160px at 25% 75%, rgba(40,90,140,.6), transparent 70%),
+      linear-gradient(160deg, #3a3f46 0%, #14171c 55%, #2b2118 100%); }
+  .scene::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .scene img { position: absolute; right: 24px; bottom: 24px; width: 64px; height: 64px; opacity: .55; z-index: 1; }
+  .avatars { display: flex; gap: 16px; align-items: center; }
+  .avatars img { width: 136px; height: 136px; border-radius: 50%; display: block; }
+  .small { display: flex; gap: 14px; align-items: flex-end; margin-top: 18px; }
+  .small img { display: block; }
+  .zoom { display: flex; gap: 14px; margin-top: 14px; align-items: flex-end; }
+  canvas { image-rendering: pixelated; display: block; }
+  .light { display: flex; gap: 14px; margin-top: 18px; background: var(--white); padding: 14px; width: 300px; align-items: center; }
+  .light img { width: 96px; height: 96px; display: block; }
+  .note { margin-top: 28px; padding-top: 20px; border-top: 1px solid #1d2128; color: #c9ced6; max-width: 1300px; }
+  .note b { color: var(--white); }
+</style>
+<body>
+<h1>X-Beam — pistes de monogramme</h1>
+<p class="lead">Construction géométrique exacte (droites, intersections, arcs vrais), calculée par <code>xbeam.py</code>. Rendu à l’échelle 1 : les petites tailles sont de vrais pixels. Fond de la colonne filigrane : texture synthétique, pas un photogramme.</p>
+
+<div id="rows"></div>
+
+<div class="note">
+  <b>Pistes écartées :</b> lecture littérale de la charte (X + anneau posé au centre) et bouts arrondis → l’ensemble se lit comme un ventilateur ou une hélice (symétrie de rotation + moyeu). Les bouts coupés à l’horizontale font lire une lettre posée sur sa ligne de base, ce qui supprime cette lecture.
+</div>
+
+<script>
+const PISTES = [
+  ["A-onde", "A · ONDE", "Onde simple", "X typographique à largeur constante, bouts horizontaux. Une onde de vide coupe les faisceaux autour du croisement ; l’œil complète le cercle."],
+  ["A2-onde-double", "A2 · ONDE", "Onde double", "Même construction, deux ondes d’épaisseur décroissante : la propagation est lisible en grand format."],
+  ["B-projection", "B · PROJECTION", "Faisceaux de projecteur", "Chaque faisceau s’élargit de la source (gauche) vers l’écran (droite) ; bouts coupés à la verticale, comme le plan de l’écran."],
+  ["C-foyer", "C · FOYER", "Chambre noire", "Les rayons s’affinent vers l’objectif, s’y croisent, puis s’élargissent. Bouts horizontaux."],
+  ["Z-ecartee-rotor", "ÉCARTÉE", "Lecture « ventilateur »", "Bouts arrondis + anneau central : symétrie de rotation, moyeu. Référence de ce qu’il faut éviter."],
+];
+const rows = document.getElementById("rows");
+for (const [id, tag, title, text] of PISTES) {
+  const small = id.startsWith("A") ? "A-onde-petite-taille" : id;
+  rows.insertAdjacentHTML("beforeend", `
+  <div class="row">
+    <div class="meta"><b>${tag}</b><h2>${title}</h2><p>${text}</p></div>
+    <div><img class="tile" src="out/${id}_cobalt.svg" style="background:#08090C"><div class="cap">COBALT SUR ABYSS</div></div>
+    <div><img class="tile" src="out/${id}_construction.svg"><div class="cap">CONSTRUCTION</div></div>
+    <div><div class="scene"><img src="out/${small}_blanc.svg"></div><div class="cap">FILIGRANE 64 PX · BLANC 55 %</div></div>
+    <div>
+      <div class="avatars"><img src="out/${id}_avatar.svg"><img src="out/${id}_avatar-bicolore.svg"></div>
+      <div class="cap">AVATAR (RECADRAGE ROND) · MONO / BICOLORE</div>
+      <div class="small">
+        ${[48,32,24,16].map(s => `<img src="out/${small}_cobalt.svg" width="${s}" height="${s}">`).join("")}
+        ${[32,16].map(s => `<img src="out/${small}_blanc.svg" width="${s}" height="${s}">`).join("")}
+      </div>
+      <div class="cap">48 · 32 · 24 · 16 PX RÉELS${small !== id ? " (VERSION PETITE TAILLE)" : ""}</div>
+      <div class="zoom"><canvas data-src="out/${small}_cobalt.svg" data-px="16" width="128" height="128"></canvas><canvas data-src="out/${small}_cobalt.svg" data-px="32" width="128" height="128"></canvas></div>
+      <div class="cap">16 PX ET 32 PX AGRANDIS (PIXELS RÉELS)</div>
+      <div class="light"><img src="out/${id}_noir.svg"><img src="out/${id}_cobalt.svg"></div>
+      <div class="cap">FOND CLAIR (PRESSE, DOCUMENTS) · À VALIDER</div>
+    </div>
+  </div>`);
+}
+for (const c of document.querySelectorAll("canvas")) {
+  const img = new Image();
+  img.onload = () => {
+    const px = +c.dataset.px, off = document.createElement("canvas");
+    off.width = off.height = px;
+    const o = off.getContext("2d");
+    o.fillStyle = "#08090C"; o.fillRect(0, 0, px, px);
+    o.drawImage(img, 0, 0, px, px);
+    const g = c.getContext("2d");
+    g.imageSmoothingEnabled = false;
+    g.drawImage(off, 0, 0, 128, 128);
+  };
+  img.src = c.dataset.src;
+}
+</script>
+</body>
+</html>
