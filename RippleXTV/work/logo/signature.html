@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr"><meta charset="utf-8"><title>X-Beam — proposition premium</title>
+<style>
+@font-face { font-family: "Space Mono"; src: url(../../assets/fonts/space-mono-latin-400-normal.woff) format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url(../../assets/fonts/inter-latin-600-normal.woff) format("woff"); }
+body { margin: 0; background: #000; color: #F0F2F5; font: 600 14px Inter; width: 1440px; }
+.hero { display: grid; grid-template-columns: 1fr 1fr; }
+.hero div { height: 640px; display: grid; place-items: center; }
+.hero img { width: 520px; height: 520px; }
+.cap { font: 400 11px "Space Mono"; letter-spacing: .06em; color: #8B949E; }
+.band { display: grid; grid-template-columns: 1fr 1fr; }
+.feed { padding: 36px 48px; display: flex; gap: 40px; align-items: center; }
+.feed .col { display: flex; flex-direction: column; gap: 14px; }
+.feed .it { display: flex; align-items: center; gap: 10px; }
+.feed img { border-radius: 50%; display: block; }
+.big { width: 150px; height: 150px; }
+</style>
+<body>
+<div class="hero">
+  <div style="background:#08090C"><img src="out/A-signature_blanc.svg"></div>
+  <div style="background:#F0F2F5"><img src="out/A-signature_noir.svg"></div>
+</div>
+<div class="band">
+  <div class="feed" style="background:#000">
+    <img class="big" src="out/A-signature_avatar-blanc.svg">
+    <div class="col">
+      <div class="it"><img src="out/A-signature_avatar-blanc.svg" width="40" height="40">ripplextv</div>
+      <div class="it"><img src="out/A-signature-petite-taille_avatar-blanc.svg" width="28" height="28"><span class="cap">28 PX · VERSION PETITE TAILLE</span></div>
+      <div class="cap">FIL SOMBRE (OLED) · RECOMMANDÉ</div>
+    </div>
+    <img class="big" src="out/A-signature_avatar-noir-sur-cobalt.svg">
+    <div class="col">
+      <div class="it"><img src="out/A-signature_avatar-noir-sur-cobalt.svg" width="40" height="40">ripplextv</div>
+      <div class="cap">VARIANTE COBALT</div>
+    </div>
+  </div>
+  <div class="feed" style="background:#fff;color:#08090C">
+    <img class="big" src="out/A-signature_avatar-blanc.svg">
+    <div class="col">
+      <div class="it"><img src="out/A-signature_avatar-blanc.svg" width="40" height="40">ripplextv</div>
+      <div class="it"><img src="out/A-signature-petite-taille_avatar-blanc.svg" width="28" height="28"><span class="cap">28 PX</span></div>
+      <div class="cap">FIL CLAIR</div>
+    </div>
+  </div>
+</div>
+</body></html>

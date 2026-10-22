@@ -226,12 +226,13 @@ def mark(arms, cuts, spacing, end, R, offset=0.0):
     for (a1, b1), (a2, b2) in zip(waves, waves[1:]):
         for a in arms:
             pieces.append(segment_path(a, b1, a2))
-    pieces += [arm_path(a, waves[-1][1], end, R) for a in arms]
+    reach = R if callable(R) else (lambda a: R)
+    pieces += [arm_path(a, waves[-1][1], end, reach(a)) for a in arms]
     return {
         "impact": impact_path(arms, r_impact + 1e-6),
         "arms": pieces,
         "circles": [r for w in waves for r in w],
-        "R": R,
+        "R": R if not callable(R) else max(reach(a) for a in arms),
         "arms_obj": arms,
         "end": end,
     }
@@ -269,12 +270,30 @@ def piste_foyer(phi=56.0, h=36, k=0.07, cuts=(18,), spacing=60, Y=400):
     return mark(X_arms(phi, h, k), cuts, spacing, "horizontale", Y / math.sin(math.radians(phi)))
 
 
+def piste_signature(phi=56.0, h=52, cut=16, lift=16, Y=400):
+    """A★. SIGNATURE — affinage premium de la piste A.
+
+    - une seule onde, fine ;
+    - faisceaux allégés (largeur 104/800 de la hauteur, 13 %) ;
+    - croisement placé au centre optique : `lift` unités au-dessus du centre
+      géométrique, comme dans un X typographique. Les bras du bas, plus
+      longs, s'écartent davantage et assoient la lettre.
+    Le dessin est recentré verticalement par `shift` (voir svg()).
+    """
+    s = math.sin(math.radians(phi))
+    reach = lambda a: ((Y + lift) if a.u[1] > 0 else (Y - lift)) / s
+    m = mark(X_arms(phi, h), (cut,), 0, "horizontale", reach)
+    m["shift"] = -lift
+    return m
+
+
 def ecartee_rotor():
     """Écartée : bouts arrondis et symétrie de rotation -> lecture « ventilateur »."""
     return mark(X_arms(45.0, 58), (30,), 60, "cercle", 440, offset=36)
 
 
 PISTES = {
+    "A-signature": piste_signature,
     "A-onde": piste_onde,
     "A2-onde-double": lambda: piste_onde(cuts=(18, 14)),
     "B-projection": piste_projection,
@@ -291,8 +310,11 @@ def svg(m, fill=COBALT, impact_fill=None, bg=None, construction=False, title="Ri
            f"<title>{title}</title>"]
     if bg:
         out.append(f'<rect width="{SIZE}" height="{SIZE}" fill="{bg}"/>')
+    shift = m.get("shift", 0)
+    out.append(f'<g transform="translate(0 {shift})">' if shift else "<g>")
     out.append(f'<path fill="{fill}" d="{" ".join(m["arms"])}"/>')
     out.append(f'<path fill="{impact_fill}" d="{m["impact"]}"/>')
+    out.append("</g>")
     if construction:
         g = 'fill="none" stroke="#00D2FF" stroke-width="1.5"'
         out.append(f'<g {g} opacity="0.85">')
@@ -319,7 +341,7 @@ def avatar(m, fill=COBALT, impact_fill=None, fit=0.86, bg=ABYSS):
     cercle de recadrage."""
     s = fit * C / extent(m)
     inner = svg(m, fill=fill, impact_fill=impact_fill).split("\n")
-    body = "\n".join(l for l in inner if l.startswith("<path"))
+    body = "\n".join(l for l in inner if l.startswith(("<path", "<g", "</g")))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}" role="img">'
             f"<title>RippleXTV — avatar</title>"
             f'<rect width="{SIZE}" height="{SIZE}" fill="{bg}"/>'
@@ -337,6 +359,7 @@ def write_variants(name, m, outdir):
         "avatar-bicolore": avatar(m, impact_fill=CYAN),
         "avatar-noir-sur-cobalt": avatar(m, fill=ABYSS, bg=COBALT),
         "avatar-noir-sur-abyss": avatar(m, fill=ABYSS),
+        "avatar-blanc": avatar(m, fill=WHITE),
     }
     for v, s in variants.items():
         with open(os.path.join(outdir, f"{name}_{v}.svg"), "w") as f:
@@ -353,6 +376,7 @@ if __name__ == "__main__":
         write_variants(name, fn(), outdir)
     # version optique pour les petites tailles (<= 48 px) : une seule onde, plus large
     write_variants("A-onde-petite-taille", piste_onde(h=66, cuts=(40,)), outdir)
+    write_variants("A-signature-petite-taille", piste_signature(h=62, cut=36), outdir)
     # B2 : sources épaissies pour mieux tenir aux petites tailles
     write_variants("B2-projection-sources-epaissies", piste_projection(k=0.035), outdir)
     print("ok")
