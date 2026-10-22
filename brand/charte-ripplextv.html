@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RippleXTV — Charte de marque v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir-salle:#0B0B0E; --noir-bobine:#15151A; --or-ripple:#C9A24B; --or-lumiere:#E6C87F;
+    --or-profond:#7E6429; --ivoire:#F2EDE3; --gris:#9A9AA2; --velours:#7E1F2B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--noir-salle); color:var(--ivoire); font-family:"Archivo",system-ui,sans-serif; font-size:16px; line-height:1.65}
+  .wrap{max-width:1060px; margin:0 auto; padding:0 28px}
+  h1,h2,h3,.bodoni{font-family:"Bodoni Moda",serif}
+  h2{font-size:clamp(30px,4.4vw,46px); font-weight:600; letter-spacing:.01em; margin-bottom:10px}
+  h3{font-size:21px; font-weight:600; color:var(--or-lumiere); margin:34px 0 10px}
+  p{max-width:72ch; color:#D8D2C6}
+  p strong{color:var(--ivoire)}
+  .kicker{font-family:"Archivo"; font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--or-ripple); margin-bottom:14px}
+  .kicker::before{content:""; display:inline-block; width:26px; height:2px; background:var(--or-ripple); vertical-align:middle; margin-right:10px}
+  section{padding:74px 0; border-top:1px solid #232329}
+  .lede{font-family:"Bodoni Moda",serif; font-style:italic; font-size:clamp(19px,2.4vw,25px); line-height:1.5; color:var(--ivoire); max-width:60ch}
+  /* couverture */
+  header{padding:88px 0 70px; text-align:left}
+  header .seal{width:104px; height:104px; display:block; margin-bottom:34px}
+  header h1{font-size:clamp(44px,7vw,84px); font-weight:700; line-height:1.02; letter-spacing:.005em}
+  header h1 em{font-style:italic; color:var(--or-ripple)}
+  header .meta{margin-top:26px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--gris)}
+  header .meta b{color:var(--or-lumiere); font-weight:600}
+  .lockup-band{margin:44px 0 0; padding:26px 30px; background:var(--noir-bobine); border:1px solid #232329; border-radius:14px; display:flex; align-items:center; gap:26px; flex-wrap:wrap}
+  .lockup-band svg{height:52px; width:auto}
+  .lockup-band .note{font-size:12.5px; color:var(--gris); letter-spacing:.06em}
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:18px 0 8px; font-size:14.5px}
+  th{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--or-ripple); text-align:left; padding:10px 14px; border-bottom:1px solid var(--or-profond)}
+  td{padding:12px 14px; border-bottom:1px solid #232329; color:#D8D2C6; vertical-align:top}
+  td b{color:var(--ivoire)}
+  code,.mono{font-family:ui-monospace,Menlo,monospace; font-size:13px; color:var(--or-lumiere)}
+  /* couleurs */
+  .swatches{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:22px}
+  .sw{border:1px solid #232329; border-radius:12px; overflow:hidden; background:var(--noir-bobine)}
+  .sw .chip{height:92px}
+  .sw .inf{padding:12px 14px}
+  .sw .nm{font-weight:700; font-size:14px; letter-spacing:.02em}
+  .sw .hx{font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--gris); margin-top:2px}
+  .sw .rl{font-size:12px; color:var(--gris); margin-top:6px}
+  .ratio{display:flex; height:56px; border-radius:10px; overflow:hidden; margin:26px 0 6px; border:1px solid #232329}
+  .ratio div{display:flex; align-items:center; justify-content:center; font-size:12px; letter-spacing:.14em; font-weight:700}
+  /* logos */
+  .logo-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:22px}
+  .lg{border:1px solid #232329; border-radius:14px; padding:30px 24px; display:flex; flex-direction:column; gap:18px; align-items:flex-start}
+  .lg.dark{background:var(--noir-salle)} .lg.light{background:var(--ivoire)}
+  .lg svg{height:44px; width:auto}
+  .lg .cap{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gris)}
+  .lg.light .cap{color:#6b665c}
+  .dos{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:16px}
+  .do,.dont{border-radius:10px; padding:14px 16px; font-size:13.5px}
+  .do{background:#12241a; border:1px solid #1e4029; color:#BFE8C9}
+  .dont{background:#2a1417; border:1px solid #4d2129; color:#EBC3C7}
+  /* type specimen */
+  .specimen{border:1px solid #232329; border-radius:14px; background:var(--noir-bobine); padding:30px; margin-top:20px}
+  .specimen .disp{font-family:"Bodoni Moda",serif; font-size:clamp(30px,4.6vw,54px); line-height:1.08; font-weight:600}
+  .specimen .disp em{color:var(--or-ripple)}
+  .specimen .ui{margin-top:16px; font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--or-lumiere); font-weight:600}
+  .specimen .body{margin-top:12px; color:#D8D2C6; max-width:64ch}
+  /* cartouche */
+  .cartouche{display:inline-block; background:linear-gradient(180deg,rgba(11,11,14,0),rgba(11,11,14,.92) 30%); padding:26px 26px 20px; border-left:2px solid var(--or-ripple); margin-top:18px}
+  .cartouche .t{font-size:17px; font-weight:800; letter-spacing:.14em; text-transform:uppercase}
+  .cartouche .vf{font-family:"Bodoni Moda",serif; font-style:italic; font-size:14px; color:var(--or-lumiere); margin-top:2px}
+  .cartouche .c{font-size:12.5px; letter-spacing:.1em; color:var(--gris); margin-top:6px; text-transform:uppercase}
+  /* mocks */
+  .mock-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:24px; align-items:start}
+  .phone{aspect-ratio:9/16; border-radius:18px; border:1px solid #2a2a31; position:relative; overflow:hidden; background:
+     radial-gradient(120% 90% at 70% 20%, #2b2320 0%, #17141a 45%, #0B0B0E 100%)}
+  .phone .zone-label{position:absolute; top:9%; left:5%; font-size:10px; font-weight:800; letter-spacing:.22em; color:var(--or-ripple); text-transform:uppercase}
+  .phone .wm{position:absolute; top:4%; right:5%; height:14px; opacity:.75}
+  .phone .cart{position:absolute; left:5%; bottom:16%; right:20%; border-left:2px solid var(--or-ripple); padding:8px 0 8px 12px; background:linear-gradient(90deg,rgba(11,11,14,.75),rgba(11,11,14,0))}
+  .phone .cart .t{font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase}
+  .phone .cart .c{font-size:9.5px; letter-spacing:.1em; color:var(--gris); text-transform:uppercase; margin-top:2px}
+  .phone .hook{position:absolute; left:5%; top:34%; right:12%; font-family:"Bodoni Moda",serif; font-style:italic; font-size:19px; line-height:1.3; color:var(--ivoire); text-shadow:0 2px 18px rgba(0,0,0,.8)}
+  .anno{font-size:12px; color:var(--gris); margin-top:10px; line-height:1.5}
+  .anno b{color:var(--or-lumiere)}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:4px; border:1px solid #2a2a31; border-radius:14px; overflow:hidden; margin-top:24px}
+  .cell{aspect-ratio:9/16; position:relative; overflow:hidden}
+  .cell .zl{position:absolute; top:6%; left:8%; font-size:7px; font-weight:800; letter-spacing:.2em; color:var(--or-ripple); text-transform:uppercase}
+  .cell .zc{position:absolute; left:8%; bottom:8%; right:14%; border-left:1.5px solid var(--or-ripple); padding-left:6px}
+  .cell .zc .t{font-size:7.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase}
+  .cell .zc .c{font-size:6px; color:var(--gris); letter-spacing:.08em; text-transform:uppercase}
+  .c1{background:linear-gradient(160deg,#3a2e26,#141016 70%)} .c2{background:linear-gradient(200deg,#20262e,#101318 70%)}
+  .c3{background:linear-gradient(150deg,#33222a,#150f14 70%)} .c4{background:linear-gradient(170deg,#26302a,#101512 70%)}
+  .c5{background:linear-gradient(190deg,#2e2a3a,#131118 70%)} .c6{background:linear-gradient(160deg,#3a3326,#161310 70%)}
+  /* ondes */
+  .ondes{display:flex; gap:8px; align-items:center; margin-top:14px}
+  .ondes svg{height:26px; width:26px}
+  .ondes .off{opacity:.22}
+  .ondes .lbl{margin-left:10px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--or-lumiere); font-weight:700}
+  /* divers */
+  .univers{margin-top:26px; border-radius:16px; overflow:hidden; border:1px solid #232329}
+  .univers img{width:100%; display:block; filter:saturate(.92)}
+  .univers figcaption{padding:12px 16px; font-size:12.5px; color:var(--gris); background:var(--noir-bobine)}
+  ul{margin:10px 0 10px 20px; color:#D8D2C6}
+  li{margin:6px 0}
+  li b{color:var(--ivoire)}
+  footer{padding:60px 0 80px; border-top:1px solid #232329; color:var(--gris); font-size:13px}
+  footer .bodoni{font-size:26px; color:var(--ivoire); font-style:italic; margin-bottom:12px}
+  @media (max-width:640px){ section{padding:54px 0} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <svg class="seal" viewBox="0 0 120 120" aria-label="Sceau RippleXTV">
+    <rect width="120" height="120" fill="#0B0B0E"/>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <g stroke="#C9A24B" stroke-width="13.4" transform="translate(29 45) scale(0.8)">
+        <path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+        <path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/>
+      </g>
+      <path stroke="#C9A24B" stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/>
+      <path stroke="#7E6429" stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/>
+    </g>
+  </svg>
+  <div class="kicker">Charte de marque — document normatif</div>
+  <h1>RippleXTV<br><em>Le Ciné qui se propage.</em></h1>
+  <div class="meta">Version <b>1.0</b> · 22 octobre 2026 · Port-au-Prince — Paris — Los Angeles<br>Éditeur : RippleXTV Studios · Toute évolution passe par amendement écrit (§10)</div>
+  <div class="lockup-band">
+    <svg viewBox="26 14 520 92" aria-label="Lockup RippleXTV">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#C9A24B" stroke-width="13.4" transform="translate(29 45) scale(0.8)">
+          <path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+          <path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/>
+        </g>
+        <path stroke="#C9A24B" stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/>
+        <path stroke="#7E6429" stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/>
+        <g stroke="#F2EDE3" stroke-width="13" transform="translate(123 36.75) scale(0.72)">
+          <path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+          <path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/>
+          <path d="M84 0 V64"/>
+          <g transform="translate(110 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g>
+          <g transform="translate(174 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g>
+          <path d="M246 0 V64 H282"/>
+          <g transform="translate(304 0)"><path d="M40 0 H8 V64 H40"/><path d="M8 32 H34"/></g>
+          <g transform="translate(366 0)"><path d="M6 0 L46 64"/><path d="M46 0 L6 64"/></g>
+          <g transform="translate(436 0)"><path d="M4 0 H52"/><path d="M28 0 V64"/></g>
+          <path d="M516 0 L536 64 L556 0"/>
+        </g>
+      </g>
+    </svg>
+    <div class="note">Lockup principal — fond sombre. Le logotype est <b>dessiné</b> (monoligne, terminaisons rondes) : ne jamais le recomposer dans une police.</div>
+  </div>
+</header>
+
+<!-- ============ 01 PLATEFORME ============ -->
+<section id="plateforme">
+  <div class="kicker">01 · Plateforme de marque</div>
+  <h2>Dans le noir, une lumière se propage.</h2>
+  <p class="lede" style="margin-top:18px">RippleXTV existe pour qu'aucun plan mémorable ne meure : nous le montrons, nous le nommons, nous le transmettons. Un extrait bien crédit­é est une onde : elle part d'un film, traverse un écran, et continue dans la mémoire de celui qui le regarde.</p>
+  <h3>Mission</h3>
+  <p>Devenir la <strong>référence mondiale du cinéma sur les réseaux sociaux</strong> : là où un cinéphile vérifie, découvre et ressent. Pas un compte de clips : une <strong>cinémathèque verticale</strong>, exigeante sur le crédit, la qualité d'image et le récit.</p>
+  <h3>Vision à 10 ans</h3>
+  <p>2026 : une grille TikTok irréprochable. 2028 : une base de données notée par la communauté (<b>l'Indice Ripple</b>) et des éditions nationales. 2030+ : <b>RippleXTV Originals</b>, notre propre fiction. 2036 : une institution — le réflexe « vérifie sur RippleXTV ».</p>
+  <h3>Valeurs</h3>
+  <ul>
+    <li><b>Nommer.</b> Tout extrait porte son titre, son année, son réalisateur. Sans exception. C'est notre serment de cinémathèque.</li>
+    <li><b>Propager.</b> Le cinéma est une onde : chaque contenu doit donner envie de voir l'œuvre, jamais de la consommer par procuration.</li>
+    <li><b>Exiger.</b> Une source compressée, un filigrane subi, un spoiler lâché : ça ne sort pas. La qualité est notre politesse envers le cinéma.</li>
+    <li><b>Durer.</b> Nous construisons pour 2036 : le système visuel prime l'effet du moment.</li>
+  </ul>
+  <h3>Territoire &amp; personnalité</h3>
+  <p>La salle obscure : presque noire, traversée d'une lumière chaude. RippleXTV parle comme <strong>un storyteller cadré</strong> — le suspense d'un conteur, la rigueur d'un archiviste. Jamais hurleur, jamais snob.</p>
+</section>
+
+<!-- ============ 02 NOM ============ -->
+<section id="nom">
+  <div class="kicker">02 · Nom, architecture &amp; signatures</div>
+  <h2>Une marque-mère, des éditions.</h2>
+  <p>La marque est <strong>RippleXTV</strong> (casses exactes : R-i-p-p-l-e-X-T-V, le X soudé). Elle se déploie en <strong>éditions</strong> : une par territoire, chacune dans sa langue, toutes sous le même sceau, la même palette, le même système.</p>
+  <table>
+    <tr><th>Édition</th><th>Nom affiché</th><th>Identifiant cible</th><th>Signature (bio)</th><th>Langue</th></tr>
+    <tr><td><b>Maison-mère / États-Unis</b></td><td>RippleXTV</td><td><code>@ripplextv</code><br>(renommage de <span class="mono">RippleXTVofficial</span>)</td><td class="bodoni" style="font-style:italic">The Cinema.</td><td>EN</td></tr>
+    <tr><td><b>France</b></td><td>RippleXTV France</td><td><code>@ripplextv.fr</code><br>(renommage de <span class="mono">@ripplextv.france</span>)</td><td class="bodoni" style="font-style:italic">Le Ciné.</td><td>FR</td></tr>
+    <tr><td><b>Haïti</b></td><td>RippleXTV Haïti</td><td><code>@ripplextv.ht</code></td><td class="bodoni" style="font-style:italic">Sinema a.</td><td>FR / KRÈYÒL</td></tr>
+  </table>
+  <h3>Règles de nommage (intangibles)</h3>
+  <ul>
+    <li><b>Zéro underscore, zéro « official », zéro casse aléatoire.</b> Un suffixe défensif (« official ») signale une marque qui subit ; une marque de référence <em>occupe</em> son nom, simplement.</li>
+    <li>Nom affiché toujours : <b>RippleXTV + [Édition]</b> (sauf maison-mère : RippleXTV seul).</li>
+    <li>Identifiants futurs sur le même modèle : <code>@ripplextv.mx</code>, <code>@ripplextv.br</code>, <code>@ripplextv.sn</code>…</li>
+    <li>Les signatures de bio sont des <b>phrases nominales minimales</b> dans la langue de l'édition — jamais de slogans longs, jamais d'émojis.</li>
+  </ul>
+  <h3>Plan de transition des identifiants</h3>
+  <ul>
+    <li><b>Semaine forte :</b> renommer un identifiant TikTok le jour du lancement d'une franchise majeure, annoncé par une vidéo épinglée (« RippleXTV change de nom, pas de standard »).</li>
+    <li>Cycle TikTok : un changement d'identifiant par 30 jours → ordre : <code>@ripplextv.fr</code> d'abord, <code>@ripplextv.ht</code> ensuite, <code>@ripplextv</code> dès disponibilité.</li>
+    <li>Pendant 60 jours : bio de chaque édition = « Ancien nom : … » pour ne perdre aucun abonné, puis retrait.</li>
+    <li>Domaine : déposer <b>ripplextv.com</b> (et .fr / .ht) — le lien ko-fi au nom personnel disparaît de la bio au profit du domaine de marque.</li>
+  </ul>
+  <h3>Phrase-manifeste (hors logo)</h3>
+  <p class="lede" style="font-size:20px">FR : « Chaque plan envoie une onde. » · EN : “Every frame sends a ripple.” · KRÈYÒL : « Chak plan voye yon onn. »<br><span style="font-family:Archivo;font-style:normal;font-size:13px;color:var(--gris)">Usage : manifestes, intros vidéo, pieds de page, dossiers de presse. Jamais dans le logo.</span></p>
+</section>
+
+<!-- ============ 03 LOGO ============ -->
+<section id="logo">
+  <div class="kicker">03 · Logo — le Sceau &amp; le Logotype</div>
+  <h2>Le R-Onde.</h2>
+  <p>Le sceau est un <strong>R monoligne</strong> dont la jambe se prolonge en <strong>ondulation</strong>, suivi de <strong>deux arcs concentriques</strong> : le plan part du film, l'onde se propage. L'arc externe, plus fin et plus sombre, dit la dissipation de l'onde — le geste signature de la marque. Tout est tracé au trait rond : lisible à 24 px, brodable, gravable, valable en 2036.</p>
+  <div class="logo-grid">
+    <div class="lg dark">
+      <svg viewBox="0 0 120 120" style="height:96px"><rect width="120" height="120" fill="#0B0B0E"/><g fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#C9A24B" stroke-width="13.4" transform="translate(29 45) scale(0.8)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/></g><path stroke="#C9A24B" stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/><path stroke="#7E6429" stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/></g></svg>
+      <div class="cap">Le Sceau — avatar, app icon, sting</div>
+    </div>
+    <div class="lg dark">
+      <svg viewBox="26 14 520 92"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#C9A24B" stroke-width="13.4" transform="translate(29 45) scale(0.8)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/></g><path stroke="#C9A24B" stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/><path stroke="#7E6429" stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/><g stroke="#F2EDE3" stroke-width="13" transform="translate(123 36.75) scale(0.72)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/><path d="M84 0 V64"/><g transform="translate(110 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><g transform="translate(174 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><path d="M246 0 V64 H282"/><g transform="translate(304 0)"><path d="M40 0 H8 V64 H40"/><path d="M8 32 H34"/></g><g transform="translate(366 0)"><path d="M6 0 L46 64"/><path d="M46 0 L6 64"/></g><g transform="translate(436 0)"><path d="M4 0 H52"/><path d="M28 0 V64"/></g><path d="M516 0 L536 64 L556 0"/></g></g></svg>
+      <div class="cap">Lockup principal — fond sombre</div>
+    </div>
+    <div class="lg light">
+      <svg viewBox="26 14 520 92"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#0B0B0E" stroke-width="13.4" transform="translate(29 45) scale(0.8)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/></g><path stroke="#C9A24B" stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/><path stroke="#C9B070" stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/><g stroke="#0B0B0E" stroke-width="13" transform="translate(123 36.75) scale(0.72)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/><path d="M84 0 V64"/><g transform="translate(110 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><g transform="translate(174 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><path d="M246 0 V64 H282"/><g transform="translate(304 0)"><path d="M40 0 H8 V64 H40"/><path d="M8 32 H34"/></g><g transform="translate(366 0)"><path d="M6 0 L46 64"/><path d="M46 0 L6 64"/></g><g transform="translate(436 0)"><path d="M4 0 H52"/><path d="M28 0 V64"/></g><path d="M516 0 L536 64 L556 0"/></g></g></svg>
+      <div class="cap">Lockup fond clair (presse, dossiers)</div>
+    </div>
+    <div class="lg dark">
+      <svg viewBox="26 14 520 92"><g fill="none" stroke="#F2EDE3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"><g stroke-width="13.4" transform="translate(29 45) scale(0.8)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/></g><path stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/><path stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/><g stroke-width="13" transform="translate(123 36.75) scale(0.72)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/><path d="M84 0 V64"/><g transform="translate(110 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><g transform="translate(174 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><path d="M246 0 V64 H282"/><g transform="translate(304 0)"><path d="M40 0 H8 V64 H40"/><path d="M8 32 H34"/></g><g transform="translate(366 0)"><path d="M6 0 L46 64"/><path d="M46 0 L6 64"/></g><g transform="translate(436 0)"><path d="M4 0 H52"/><path d="M28 0 V64"/></g><path d="M516 0 L536 64 L556 0"/></g></g></svg>
+      <div class="cap">Filigrane vidéo — ivoire 80 %, coin haut droit</div>
+    </div>
+  </div>
+  <h3>Construction &amp; règles</h3>
+  <ul>
+    <li><b>Géométrie :</b> trait monoligne, terminaisons et angles ronds ; hampe du R = 64 unités, bol = demi-cercle r16, jambe = ondulation à deux inflexions ; arcs de propagation r30 et r44 centrés sur le bol. <b>Épaisseur du trait = 20 % de la hauteur de capitale</b> (v1.1) : le sceau doit peser en avatar 100 px — imposant, jamais lourd.</li>
+    <li><b>Espace de protection :</b> un carré vide égal à 40 % de la hauteur du sceau, sur les quatre côtés.</li>
+    <li><b>Tailles minimales :</b> sceau 24 px / 8 mm ; lockup 120 px / 40 mm ; filigrane 8 % de la largeur vidéo.</li>
+    <li><b>Avatar social :</b> toujours le Sceau sur Noir Salle (<code>ripplextv-avatar-1080.png</code>). Jamais un photogramme, jamais un visage : dans un fil, l'avatar doit être un tampon, pas une image de plus.</li>
+    <li><b>Sur photographie :</b> uniquement derrière un voile Noir Salle ≥ 60 % ou dans une zone uniformément sombre.</li>
+  </ul>
+  <h3>Interdits</h3>
+  <div class="dos">
+    <div class="do">✓ Monochromie ivoire ou noire autorisée (gravure, tampon, broderie).</div>
+    <div class="do">✓ Arcs seuls autorisés comme motif graphique (fonds, transitions, puces de liste).</div>
+    <div class="dont">✗ Déformer, incliner, ajouter ombre, lueur, dégradé, relief.</div>
+    <div class="dont">✗ Recomposer le logotype dans une police de caractères.</div>
+    <div class="dont">✗ Changer les couleurs hors palette nominative (§04).</div>
+    <div class="dont">✗ Sceau sur fond blanc en contexte social (l'avatar reste noir).</div>
+  </div>
+</section>
+
+<!-- ============ 04 COULEURS ============ -->
+<section id="couleurs">
+  <div class="kicker">04 · Couleurs</div>
+  <h2>L'Or Ripple, sur Noir Salle.</h2>
+  <p>Le jaune est pris deux fois (AlloCiné, IMDb) : nous ne serons pas le troisième jaune. Le rouge vif est pris (Netflix), le vert (Letterboxd), le noir-blanc austère (Criterion, MUBI). RippleXTV possède <strong>l'or chaud du faisceau de projection</strong> — un laiton champagne, pas un citron — posé sur le noir de la salle. C'est la couleur de la lumière qui traverse l'obscurité : celle du projecteur, celle des récompenses, celle qui dure depuis un siècle de cinéma.</p>
+  <div class="ratio">
+    <div style="width:70%; background:var(--noir-salle); color:var(--gris)">NOIR 70</div>
+    <div style="width:20%; background:var(--ivoire); color:#0B0B0E">IVOIRE 20</div>
+    <div style="width:10%; background:var(--or-ripple); color:#0B0B0E">OR 10</div>
+  </div>
+  <p style="font-size:13px; color:var(--gris)">Ratio 70-20-10 sur tout support. À l'écran, le fond noir est déjà celui de TikTok : nous fusionnons avec la salle, l'or et l'ivoire font le reste.</p>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#0B0B0E"></div><div class="inf"><div class="nm">Noir Salle</div><div class="hx">#0B0B0E · RVB 11/11/14</div><div class="rl">Fonds, avatar, voile de cartouche. 70 %.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#F2EDE3"></div><div class="inf"><div class="nm">Ivoire Écran</div><div class="hx">#F2EDE3 · RVB 242/237/227</div><div class="rl">Texte courant, logotype sur noir. 20 %.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#C9A24B"></div><div class="inf"><div class="nm">Or Ripple</div><div class="hx">#C9A24B · RVB 201/162/75</div><div class="rl">LA couleur de marque : filets, sceau, labels, Indice. 10 %.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#E6C87F"></div><div class="inf"><div class="nm">Or Lumière</div><div class="hx">#E6C87F</div><div class="rl">Hauts de lumière, italiques soulignés, hover.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#7E6429"></div><div class="inf"><div class="nm">Or Profond</div><div class="hx">#7E6429</div><div class="rl">Arc externe du sceau, ombres de l'or.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#15151A"></div><div class="inf"><div class="nm">Noir Bobine</div><div class="hx">#15151A</div><div class="rl">Surfaces, cartes, panneaux sur fond noir.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#9A9AA2"></div><div class="inf"><div class="nm">Gris Projecteur</div><div class="hx">#9A9AA2</div><div class="rl">Texte secondaire, crédits, métadonnées.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#7E1F2B"></div><div class="inf"><div class="nm">Rouge Velours</div><div class="hx">#7E1F2B</div><div class="rl">Usage unique : badge SPOILER &amp; alertes. Jamais ailleurs.</div></div></div>
+  </div>
+  <h3>Usages normatifs</h3>
+  <ul>
+    <li>Texte sur noir : <b>Ivoire Écran</b>. Texte secondaire : Gris Projecteur. Jamais de blanc pur (#FFF).</li>
+    <li>Or Ripple : filets, bordures de cartouche, labels de rubrique, sceau, Indice Ripple, mots soulignés. <b>Jamais</b> en fond de paragraphe, jamais en texte corps &lt; 14 px.</li>
+    <li>Fond clair (print, dossiers) : fond Ivoire Écran, texte Noir Salle, or identique.</li>
+    <li>Dégradés : interdits hors du voile vertical de cartouche (noir → transparent).</li>
+  </ul>
+  <figure class="univers">
+    <img src="assets/univers.jpg" alt="Univers visuel RippleXTV : salle noire, faisceau or, ondes concentriques">
+    <figcaption>Univers visuel de référence — « Dans le noir, une lumière se propage. » Cette image est l'étalon d'ambiance : toute photographie de marque (bannières, presses, dossiers) doit tenir dans ce cadre lumineux.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 05 TYPOGRAPHIE ============ -->
+<section id="typo">
+  <div class="kicker">05 · Typographie</div>
+  <h2>Bodoni Moda &amp; Archivo.</h2>
+  <p>Une <strong>didone</strong> (Bodoni Moda) pour la voix éditoriale — la typographie historique des affiches de cinéma, contrastée, prestigieuse — et une <strong>grotesque</strong> (Archivo) pour tout ce qui est information : cartouches, crédits, interfaces. Le couple couvre l'affiche et la base de données : exactement ce qu'est RippleXTV.</p>
+  <div class="specimen">
+    <div class="disp">Le plan est une onde : <em>il traverse l'écran</em> et continue en vous.</div>
+    <div class="ui">Bodoni Moda — titres, accroches, manifestes · italique pour l'accroche narrative</div>
+    <div class="body">ARCHIVO — CAPITALES ESPACÉES 12 % POUR CARTOUCHES ET LABELS · Archivo regular pour les légendes, commentaires et textes longs. Le logotype, lui, est dessiné : aucune police ne le remplace.</div>
+  </div>
+  <h3>Hiérarchie type (vidéo &amp; web)</h3>
+  <table>
+    <tr><th>Niveau</th><th>Police</th><th>Style</th><th>Usage</th></tr>
+    <tr><td><b>Accroche</b></td><td>Bodoni Moda</td><td>Italique, 600, ~7 % de la hauteur vidéo</td><td>Phrase narrative ≤ 6 mots, centre-haut</td></tr>
+    <tr><td><b>Label rubrique</b></td><td>Archivo</td><td>Capitales 800, approche +22 %</td><td>Coin haut gauche, Or Ripple</td></tr>
+    <tr><td><b>Cartouche titre</b></td><td>Archivo</td><td>Capitales 800, approche +14 %</td><td>Titre VO de l'œuvre</td></tr>
+    <tr><td><b>Crédits</b></td><td>Archivo</td><td>Capitales 500, approche +10 %, Gris Projecteur</td><td>Année — réalisateur · titre VF en Bodoni italique</td></tr>
+    <tr><td><b>Texte courant</b></td><td>Archivo</td><td>Regular 400</td><td>Légendes, descriptions, site</td></tr>
+  </table>
+  <h3>Le Cartouche — signature éditoriale</h3>
+  <p>Tout extrait porte son cartouche, en bas à gauche, sur voile noir, filet Or Ripple à gauche. C'est notre serment de cinémathèque et notre signature visuelle : aucun compte de clips ne le fait.</p>
+  <div class="cartouche">
+    <div class="t">The Godfather</div>
+    <div class="vf">Le Parrain</div>
+    <div class="c">1972 — Francis Ford Coppola</div>
+  </div>
+  <p style="font-size:13px; color:var(--gris); margin-top:10px">Titre en <b>version originale</b> toujours premier ; titre VF (ou local) en italique Bodoni ; année — réalisateur en capitales Archivo. Si l'œuvre n'a qu'un titre : deux lignes seulement.</p>
+</section>
+
+<!-- ============ 06 SYSTÈME VISUEL ============ -->
+<section id="systeme">
+  <div class="kicker">06 · Système visuel des extraits</div>
+  <h2>Un gabarit, une collection.</h2>
+  <p>Une grille premium n'est pas une somme de vignettes : c'est une <strong>collection</strong>. Chaque extrait 9:16 applique le même gabarit ; seul le photogramme change. Effet recherché : en faisant défiler, l'œil reconnaît RippleXTV avant de lire un seul mot.</p>
+  <div class="mock-row">
+    <div>
+      <div class="phone">
+        <div class="zone-label">L'Extrait</div>
+        <svg class="wm" viewBox="26 14 520 92"><g fill="none" stroke="#F2EDE3" stroke-linecap="round" opacity="0.75"><g stroke-width="13.4" transform="translate(29 45) scale(0.8)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/></g><path stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/><path stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/><g stroke-width="13" transform="translate(123 36.75) scale(0.72)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/><path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/><path d="M84 0 V64"/><g transform="translate(110 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><g transform="translate(174 0)"><path d="M8 0 V64"/><path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/></g><path d="M246 0 V64 H282"/><g transform="translate(304 0)"><path d="M40 0 H8 V64 H40"/><path d="M8 32 H34"/></g><g transform="translate(366 0)"><path d="M6 0 L46 64"/><path d="M46 0 L6 64"/></g><g transform="translate(436 0)"><path d="M4 0 H52"/><path d="M28 0 V64"/></g><path d="M516 0 L536 64 L556 0"/></g></g></svg>
+        <div class="hook">Tout semblait innocent… jusqu'à ce que tout bascule.</div>
+        <div class="cart">
+          <div class="t">The Godfather</div>
+          <div class="c">1972 — Francis Ford Coppola</div>
+        </div>
+      </div>
+      <div class="anno"><b>Gabarit 9:16.</b> Label rubrique en haut à gauche (sous la barre TikTok) · accroche Bodoni italique entre 30 % et 45 % de hauteur · cartouche en bas à gauche, au-dessus de la zone de légende TikTok (≈ 18 % bas) · filigrane ivoire en haut à droite, 8 % de largeur. La colonne droite (boutons TikTok) reste toujours vide de tout texte.</div>
+    </div>
+    <div>
+      <div class="grid3">
+        <div class="cell c1"><div class="zl">L'Extrait</div><div class="zc"><div class="t">Noces de Cendre</div><div class="c">2026 — RippleXTV Originals</div></div></div>
+        <div class="cell c2"><div class="zl">La Séance</div><div class="zc"><div class="t">In the Mood for Love</div><div class="c">2000 — Wong Kar-wai</div></div></div>
+        <div class="cell c3"><div class="zl">L'Extrait</div><div class="zc"><div class="t">Portrait de la jeune fille en feu</div><div class="c">2019 — Céline Sciamma</div></div></div>
+        <div class="cell c4"><div class="zl">L'Onde</div><div class="zc"><div class="t">Dune: Part Three</div><div class="c">Annonce — Legendary</div></div></div>
+        <div class="cell c5"><div class="zl">La Séance</div><div class="zc"><div class="t">Mulholland Dr.</div><div class="c">2001 — David Lynch</div></div></div>
+        <div class="cell c6"><div class="zl">L'Extrait</div><div class="zc"><div class="t">The Godfather</div><div class="c">1972 — F. F. Coppola</div></div></div>
+      </div>
+      <div class="anno"><b>Effet collection.</b> Même emplacement du label, même cartouche, même gradation : la grille devient une vitrine de cinémathèque. Les photogrammes (ici figurés) restent les seules variables.</div>
+    </div>
+  </div>
+  <h3>Gradation « LUT Ripple v1 »</h3>
+  <ul>
+    <li>Ombres : remontées, teintées <code>#0B0B0E</code> (aucun noir bouché, aucun bleu numérique).</li>
+    <li>Hautes lumières : teintées <code>#E6C87F</code> à 8 % (chaleur du projecteur).</li>
+    <li>Saturation : −12 · Contraste : courbe en S légère · Grain argentique : 1,5 % · Vignettage : 6 %.</li>
+    <li>Interdit : filtres colorés saturés, HDR criard, netteté artificielle, recadrage qui coupe les visages au menton.</li>
+  </ul>
+</section>
+
+<!-- ============ 07 INDICE ============ -->
+<section id="indice">
+  <div class="kicker">07 · L'Indice Ripple</div>
+  <h2>Notre note : des ondes, pas des étoiles.</h2>
+  <p>Toute référence possède sa mesure (étoiles, tomates, notes /10). La nôtre est dans notre nom : une œuvre appréciée <b>fait des ondes</b>. L'Indice Ripple se note de 1 à 5 ondes, le glyphe étant l'arc de propagation du sceau.</p>
+  <div class="ondes">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="2.4" stroke-linecap="round"><path d="M9 7 A 7 7 0 0 1 9 17"/><path d="M14 4 A 11 11 0 0 1 14 20"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="2.4" stroke-linecap="round"><path d="M9 7 A 7 7 0 0 1 9 17"/><path d="M14 4 A 11 11 0 0 1 14 20"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="2.4" stroke-linecap="round"><path d="M9 7 A 7 7 0 0 1 9 17"/><path d="M14 4 A 11 11 0 0 1 14 20"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="2.4" stroke-linecap="round"><path d="M9 7 A 7 7 0 0 1 9 17"/><path d="M14 4 A 11 11 0 0 1 14 20"/></svg>
+    <svg class="off" viewBox="0 0 24 24" fill="none" stroke="#C9A24B" stroke-width="2.4" stroke-linecap="round"><path d="M9 7 A 7 7 0 0 1 9 17"/><path d="M14 4 A 11 11 0 0 1 14 20"/></svg>
+    <div class="lbl">4 ondes — « ça propage »</div>
+  </div>
+  <ul style="margin-top:18px">
+    <li><b>Échelle :</b> 1 onde « ça s'arrête là » · 2 « ça frémit » · 3 « ça porte » · 4 « ça propage » · 5 « ça traversera le temps ».</li>
+    <li><b>Usage :</b> réservé à <b>La Séance</b> (analyse) et, plus tard, à la base de données communautaire. Jamais sur un simple extrait : on ne note pas ce qu'on n'a pas analysé.</li>
+    <li><b>Indépendance :</b> l'Indice n'est jamais négociable, jamais sponsorisé. Un partenariat se signale, la note reste entière.</li>
+  </ul>
+</section>
+
+<!-- ============ 08 ÉDITORIAL ============ -->
+<section id="editorial">
+  <div class="kicker">08 · Système éditorial</div>
+  <h2>Des rendez-vous, pas du flux.</h2>
+  <table>
+    <tr><th>Rubrique</th><th>Format</th><th>Rythme</th><th>Contenu normé</th></tr>
+    <tr><td><b>L'Extrait</b></td><td>Clip ≤ 90 s</td><td>Quotidien</td><td>Photogramme/clip gradé LUT Ripple · accroche Bodoni ≤ 6 mots · cartouche obligatoire · filigrane</td></tr>
+    <tr><td><b>La Séance</b></td><td>Analyse 60–120 s</td><td>2 × / semaine</td><td>Décryptage d'une scène · Indice Ripple en fin · cartouche + chapitre analysé</td></tr>
+    <tr><td><b>L'Onde</b></td><td>Actu 30–60 s</td><td>Selon actualité</td><td>Annonces, castings, dates · ton factuel · cartouche « annonce »</td></tr>
+    <tr><td><b>RippleXTV Originals</b></td><td>Fiction maison</td><td>Saisons</td><td>Œuvres originales (ex. <i>Noces de Cendre</i>) · label propre : sceau + « Originals » · carton de début et de fin</td></tr>
+  </table>
+  <h3>Ton : le storyteller cadré</h3>
+  <ul>
+    <li><b>Oui :</b> accroches narratives suspendues (« Tout semblait innocent… »), verbes précis, noms propres, chiffres exacts, silences assumés, tutoiement rare et jamais complice-forcé.</li>
+    <li><b>Non :</b> <span class="mono">CHOC · INCROYABLE · TU NE DEVINERAS JAMAIS · 😱 · « ce détail va te choquer »</span>, points d'exclamation multiples, fautes volontaires, majuscules hurlées.</li>
+    <li><b>Règle d'or :</b> le suspense sert le film, jamais le clic. Si l'accroche promet plus que l'extrait, on la coupe.</li>
+  </ul>
+  <h3>Politiques intangibles</h3>
+  <ul>
+    <li><b>Spoilers :</b> aucune révélation dans une accroche ni dans les 10 premières secondes. Une analyse qui spoile porte le badge <span style="color:#EBC3C7">SPOILER</span> (Rouge Velours) dès la première image.</li>
+    <li><b>Sources :</b> master ≥ 1080p, aucun cam, aucun rip compressé, aucun filigrane extérieur subi. Sinon, l'extrait ne sort pas — même viral potentiel.</li>
+    <li><b>Crédit &amp; droit :</b> cartouche systématique + mention « © studio / distributeur — extrait à des fins de critique et d'analyse » en légende. Le crédit n'est pas une faiblesse juridique : c'est notre stature.</li>
+    <li><b>Originals :</b> nos fictions maison portent le label Originals et ne sont jamais mélangées aux extraits dans les listes de lecture.</li>
+    <li><b>Communauté :</b> on répond aux cinéphiles, on corrige publiquement une erreur de cartouche (« erratum » en story), on cite toute source tierce.</li>
+  </ul>
+</section>
+
+<!-- ============ 09 GOUVERNANCE ============ -->
+<section id="gouvernance">
+  <div class="kicker">09 · Gouvernance &amp; décennie</div>
+  <h2>Le contenu change chaque semaine. Le système, tous les trois ans.</h2>
+  <ul>
+    <li><b>Intouchables (horizon 2036) :</b> le Sceau R-Onde · l'Or Ripple sur Noir Salle · le Cartouche de crédit · le principe « nommer toute œuvre ».</li>
+    <li><b>Évolutifs (par amendement) :</b> rubriques, LUT (± 5 %), gabarits de plateforme, polices de secours.</li>
+    <li><b>Amandements :</b> toute modification de la charte est datée, signée, journalisée ci-dessous, et annoncée en interne avant application.</li>
+  </ul>
+  <table>
+    <tr><th>Version</th><th>Date</th><th>Objet</th></tr>
+    <tr><td><b>1.0</b></td><td>22/10/2026</td><td>Fondation : plateforme, nom &amp; éditions, sceau &amp; logotype, palette, typographies, gabarit d'extrait, Indice Ripple, rubriques, politiques.</td></tr>
+    <tr><td><b>1.1</b></td><td>22/10/2026</td><td>Renforcement optique du trait : monoline portée de 14 % à 20 % de la capitale (sceau, logotype, filigrane), ondulation du R amplifiée pour rester lisible en trait épais, arcs de propagation repris (r30 / r44) et épaissis. Motif : lisibilité et autorité en avatar social.</td></tr>
+  </table>
+  <h3>Feuille de route décennale</h3>
+  <ul>
+    <li><b>2026-2027 — La grille :</b> gabarit appliqué à 100 % des publications · renommages d'identifiants · avatar Sceau sur les trois éditions · listes de lecture renommées selon les rubriques.</li>
+    <li><b>2027-2028 — La référence :</b> ripplextv.com (base de données, Indice Ripple communautaire) · sting vidéo 2 s (le sceau se trace, l'onde se propage, une note grave + ripple sonore) · kit presse.</li>
+    <li><b>2029-2032 — L' studio :</b> RippleXTV Originals en saisons · éditions nationales supplémentaires · événements « Séances » en salle.</li>
+    <li><b>2032-2036 — L'institution :</b> application, curation partenaire, archive — le sceau n'aura pas changé d'un trait.</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="bodoni">« Chaque plan envoie une onde. »</div>
+  RippleXTV — Charte de marque v1.0 · document normatif interne &amp; presse · fichiers sources : <code>brand/logo/*.svg</code>, avatars PNG 400/1080 · contact éditions : nom affiché + identifiant cible (§02).
+</footer>
+
+</div>
+</body>
+</html>

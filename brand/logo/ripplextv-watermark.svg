@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 12 512 96">
+  <!-- RippleXTV — Filigrane video (monochrome ivoire, opacite 80 %) v1.1 -->
+  <g fill="none" stroke="#F2EDE3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
+    <g stroke-width="13.4" transform="translate(29 45) scale(0.8)">
+      <path d="M8 0 V64"/>
+      <path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+      <path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/>
+    </g>
+    <path stroke-width="8" d="M66.6 32.9 A30 30 0 0 1 66.6 82.7"/>
+    <path stroke-width="6.5" d="M74.4 21.3 A44 44 0 0 1 74.4 94.3"/>
+    <g stroke-width="13" transform="translate(123 36.75) scale(0.72)">
+      <path d="M8 0 V64"/>
+      <path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+      <path d="M26 32 C40 38 24 46 38 52 C48 57 50 60 52 64"/>
+      <path d="M84 0 V64"/>
+      <g transform="translate(110 0)">
+        <path d="M8 0 V64"/>
+        <path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+      </g>
+      <g transform="translate(174 0)">
+        <path d="M8 0 V64"/>
+        <path d="M8 0 H26 A16 16 0 0 1 26 32 H8"/>
+      </g>
+      <path d="M246 0 V64 H282"/>
+      <g transform="translate(304 0)">
+        <path d="M40 0 H8 V64 H40"/>
+        <path d="M8 32 H34"/>
+      </g>
+      <g transform="translate(366 0)">
+        <path d="M6 0 L46 64"/>
+        <path d="M46 0 L6 64"/>
+      </g>
+      <g transform="translate(436 0)">
+        <path d="M4 0 H52"/>
+        <path d="M28 0 V64"/>
+      </g>
+      <path d="M516 0 L536 64 L556 0"/>
+    </g>
+  </g>
+</svg>
