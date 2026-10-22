@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr"><meta charset="utf-8"><title>X-Beam — noir ou cobalt</title>
+<style>
+@font-face { font-family: "Space Mono"; src: url(../../assets/fonts/space-mono-latin-400-normal.woff) format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url(../../assets/fonts/inter-latin-600-normal.woff) format("woff"); }
+body { margin: 0; background: #000; color: #F0F2F5; font: 600 15px Inter; padding: 32px; width: 1500px; }
+.row { display: grid; grid-template-columns: 170px 210px 190px 190px 190px 330px; gap: 18px; align-items: center; padding: 22px 0; border-top: 1px solid #1d2128; }
+.head { font: 400 11px/1.35 "Space Mono"; color: #8B949E; letter-spacing: .05em; }
+.white { background: #F0F2F5; width: 210px; height: 210px; display: grid; place-items: center; }
+.white img { width: 170px; height: 170px; }
+.av { width: 150px; height: 150px; border-radius: 50%; display: block; }
+.feed { display: flex; flex-direction: column; gap: 12px; }
+.feed div { display: flex; align-items: center; gap: 10px; font: 600 14px Inter; }
+.feed img { border-radius: 50%; display: block; }
+canvas { image-rendering: pixelated; display: block; }
+.z { display: flex; gap: 10px; }
+</style>
+<body>
+<div class="row" style="border:0;padding-top:0">
+  <div class="head">PISTE</div><div class="head">X NOIR SUR CLAIR</div><div class="head">AVATAR · X NOIR<br>SUR COBALT</div><div class="head">AVATAR · X COBALT<br>SUR ABYSS</div><div class="head">AVATAR · X NOIR<br>SUR ABYSS</div><div class="head">FIL SOMBRE (OLED) · 40 ET 28 PX RÉELS<br>+ 32 PX AGRANDI</div>
+</div>
+<div id="rows"></div>
+<script>
+const R = [["B-projection","N°3 · B PROJECTION"],["B2-projection-sources-epaissies","B2 · SOURCES ÉPAISSIES"],["A-onde","N°1 · A ONDE (RÉF.)"]];
+for (const [id, t] of R) {
+  document.getElementById("rows").insertAdjacentHTML("beforeend", `<div class="row">
+  <div class="head" style="color:#F0F2F5">${t}</div>
+  <div class="white"><img src="out/${id}_noir.svg"></div>
+  <img class="av" src="out/${id}_avatar-noir-sur-cobalt.svg">
+  <img class="av" src="out/${id}_avatar.svg">
+  <img class="av" src="out/${id}_avatar-noir-sur-abyss.svg">
+  <div style="display:flex;gap:18px;align-items:center">
+    <div class="feed">
+      <div><img src="out/${id}_avatar-noir-sur-cobalt.svg" width="40" height="40">ripplextv</div>
+      <div><img src="out/${id}_avatar.svg" width="40" height="40">ripplextv</div>
+      <div><img src="out/${id}_avatar-noir-sur-cobalt.svg" width="28" height="28"><img src="out/${id}_avatar.svg" width="28" height="28"></div>
+    </div>
+    <div class="z"><canvas data-src="out/${id}_avatar-noir-sur-cobalt.svg" width="96" height="96"></canvas><canvas data-src="out/${id}_avatar.svg" width="96" height="96"></canvas></div>
+  </div></div>`);
+}
+for (const c of document.querySelectorAll("canvas")) {
+  const img = new Image();
+  img.onload = () => { const o = document.createElement("canvas"); o.width = o.height = 32;
+    const x = o.getContext("2d"); x.beginPath(); x.arc(16,16,16,0,7); x.clip(); x.drawImage(img,0,0,32,32);
+    const g = c.getContext("2d"); g.imageSmoothingEnabled = false; g.drawImage(o,0,0,96,96); };
+  img.src = c.dataset.src;
+}
+</script></body></html>

@@ -314,7 +314,7 @@ def extent(m):
     return max(math.hypot(float(x) - C, float(y) - C) for x, y in pts)
 
 
-def avatar(m, fill=COBALT, impact_fill=None, fit=0.86):
+def avatar(m, fill=COBALT, impact_fill=None, fit=0.86, bg=ABYSS):
     """Avatar 1000 x 1000 : le monogramme occupe `fit` du diamètre du
     cercle de recadrage."""
     s = fit * C / extent(m)
@@ -322,7 +322,7 @@ def avatar(m, fill=COBALT, impact_fill=None, fit=0.86):
     body = "\n".join(l for l in inner if l.startswith("<path"))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SIZE} {SIZE}" role="img">'
             f"<title>RippleXTV — avatar</title>"
-            f'<rect width="{SIZE}" height="{SIZE}" fill="{ABYSS}"/>'
+            f'<rect width="{SIZE}" height="{SIZE}" fill="{bg}"/>'
             f'<g transform="translate({C} {C}) scale({s:.4f}) translate({-C} {-C})">{body}</g></svg>')
 
 
@@ -335,6 +335,8 @@ def write_variants(name, m, outdir):
         "construction": svg(m, construction=True, bg=ABYSS),
         "avatar": avatar(m),
         "avatar-bicolore": avatar(m, impact_fill=CYAN),
+        "avatar-noir-sur-cobalt": avatar(m, fill=ABYSS, bg=COBALT),
+        "avatar-noir-sur-abyss": avatar(m, fill=ABYSS),
     }
     for v, s in variants.items():
         with open(os.path.join(outdir, f"{name}_{v}.svg"), "w") as f:
@@ -351,4 +353,6 @@ if __name__ == "__main__":
         write_variants(name, fn(), outdir)
     # version optique pour les petites tailles (<= 48 px) : une seule onde, plus large
     write_variants("A-onde-petite-taille", piste_onde(h=66, cuts=(40,)), outdir)
+    # B2 : sources épaissies pour mieux tenir aux petites tailles
+    write_variants("B2-projection-sources-epaissies", piste_projection(k=0.035), outdir)
     print("ok")
