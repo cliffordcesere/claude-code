@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1400">
+<style>@font-face{font-family:"Space Mono";src:url("../fonts/space-mono-latin-400-normal.woff")}text{font-family:"Space Mono",monospace;letter-spacing:.04em}</style>
+<rect width="1800" height="1400" fill="#08090C"/>
+<g transform="translate(620 300)">
+<rect x="-547.83" y="-208.00" width="1095.66" height="1216.00" fill="none" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="3 6"/>
+<text x="-535.83" y="992.00" fill="#8B949E" font-size="14" text-anchor="start">ZONE DE PROTECTION</text>
+<line x1="-399.83" y1="-208.00" x2="-399.83" y2="0.00" stroke="#8B949E" stroke-width="1.5"/>
+<line x1="-407.83" y1="-208.00" x2="-391.83" y2="-208.00" stroke="#8B949E" stroke-width="1.5"/>
+<line x1="-407.83" y1="0.00" x2="-391.83" y2="0.00" stroke="#8B949E" stroke-width="1.5"/>
+<text x="-411.83" y="-104.00" fill="#8B949E" font-size="14" text-anchor="middle" transform="rotate(-90 -411.83 -104.00)">26U</text>
+<path fill="#262C36" d="M 86.53 420.06 A 93.74 93.74 0 0 1 0.00 477.74 A 93.74 93.74 0 0 1 -86.53 420.06 L -62.50 384.00 L -86.53 347.94 A 93.74 93.74 0 0 1 0.00 290.26 A 93.74 93.74 0 0 1 86.53 347.94 L 62.50 384.00 L 86.53 420.06 Z M 96.87 435.57 L 339.83 800.00 L 214.84 800.00 L 10.34 493.26 A 109.74 109.74 0 0 0 96.87 435.57 Z M -10.34 493.26 L -214.84 800.00 L -339.83 800.00 L -96.87 435.57 A 109.74 109.74 0 0 0 -10.34 493.26 Z M -96.87 332.43 L -318.50 0.00 L -193.50 0.00 L -10.34 274.74 A 109.74 109.74 0 0 0 -96.87 332.43 Z M 10.34 274.74 L 193.50 0.00 L 318.50 0.00 L 96.87 332.43 A 109.74 109.74 0 0 0 10.34 274.74 Z"/>
+<line x1="-469.83" y1="0.00" x2="379.83" y2="0.00" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="2 5"/>
+<text x="389.83" y="5.00" fill="#8B949E" font-size="14" text-anchor="start">LIGNE DE TÊTE</text>
+<line x1="-469.83" y1="800.00" x2="379.83" y2="800.00" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="2 5"/>
+<text x="389.83" y="805.00" fill="#8B949E" font-size="14" text-anchor="start">LIGNE DE BASE</text>
+<line x1="-469.83" y1="400.00" x2="379.83" y2="400.00" stroke="#8B949E" stroke-width="1.5" stroke-dasharray="2 5"/>
+<text x="389.83" y="420.00" fill="#8B949E" font-size="14" text-anchor="start">CENTRE 50U</text>
+<line x1="-469.83" y1="384.00" x2="379.83" y2="384.00" stroke="#00D2FF" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="389.83" y="376.00" fill="#00D2FF" font-size="14" text-anchor="start">CROISEMENT 48U</text>
+<line x1="-296.00" y1="-60.00" x2="317.33" y2="860.00" stroke="#00D2FF" stroke-width="1" stroke-dasharray="10 5"/>
+<line x1="296.00" y1="-60.00" x2="-317.33" y2="860.00" stroke="#00D2FF" stroke-width="1" stroke-dasharray="10 5"/>
+<line x1="144.00" y1="600.00" x2="224.00" y2="600.00" stroke="#00D2FF" stroke-width="1.5"/>
+<line x1="224.00" y1="600.00" x2="224.00" y2="720.00" stroke="#00D2FF" stroke-width="1.5"/>
+<text x="184.00" y="590.00" fill="#00D2FF" font-size="14" text-anchor="middle">2</text>
+<text x="236.00" y="666.00" fill="#00D2FF" font-size="14" text-anchor="start">3</text>
+<circle cx="0" cy="384.00" r="93.74" fill="none" stroke="#00D2FF" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="0" cy="384.00" r="109.74" fill="none" stroke="#00D2FF" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="0" cy="290.26" r="5" fill="#00D2FF"/>
+<circle cx="0" cy="477.74" r="5" fill="#00D2FF"/>
+<line x1="-106.00" y1="355.60" x2="-215.00" y2="335.60" stroke="#00D2FF" stroke-width="1"/>
+<text x="-222.00" y="325.60" fill="#00D2FF" font-size="14" text-anchor="end">ONDE 2U</text>
+<text x="-222.00" y="345.60" fill="#00D2FF" font-size="14" text-anchor="end">r1 = 11,72U</text>
+<line x1="112.73" y1="121.16" x2="199.27" y2="178.84" stroke="#00D2FF" stroke-width="2"/>
+<text x="213.27" y="196.84" fill="#00D2FF" font-size="14" text-anchor="start">FAISCEAU 13U</text>
+<line x1="-479.83" y1="0.00" x2="-479.83" y2="800.00" stroke="#00D2FF" stroke-width="1.5"/>
+<line x1="-487.83" y1="0.00" x2="-471.83" y2="0.00" stroke="#00D2FF" stroke-width="1.5"/>
+<line x1="-487.83" y1="800.00" x2="-471.83" y2="800.00" stroke="#00D2FF" stroke-width="1.5"/>
+<text x="-491.83" y="400.00" fill="#00D2FF" font-size="14" text-anchor="middle" transform="rotate(-90 -491.83 400.00)">100U</text>
+<line x1="-339.83" y1="820.00" x2="-339.83" y2="900.00" stroke="#8B949E" stroke-width="1"/>
+<line x1="339.83" y1="820.00" x2="339.83" y2="900.00" stroke="#8B949E" stroke-width="1"/>
+<line x1="-339.83" y1="880.00" x2="339.83" y2="880.00" stroke="#00D2FF" stroke-width="1.5"/>
+<text x="0.00" y="870.00" fill="#00D2FF" font-size="14" text-anchor="middle">84,96U</text>
+</g>
+<text x="1270.00" y="120.00" fill="#F0F2F5" font-size="15" text-anchor="start">RIPPLEXTV</text>
+<text x="1270.00" y="158.00" fill="#F0F2F5" font-size="26" text-anchor="start">MONOGRAMME X-BEAM</text>
+<text x="1270.00" y="186.00" fill="#8B949E" font-size="14" text-anchor="start">PLAN DE CONSTRUCTION · v01</text>
+<text x="1270.00" y="230.00" fill="#00D2FF" font-size="14" text-anchor="start">U = 1/100 DE LA HAUTEUR</text>
+<text x="1270.00" y="290.00" fill="#00D2FF" font-size="14" text-anchor="start">1</text>
+<text x="1298.00" y="290.00" fill="#F0F2F5" font-size="14" text-anchor="start">FAISCEAUX DROITS, LARGEUR 13U</text>
+<text x="1270.00" y="316.00" fill="#00D2FF" font-size="14" text-anchor="start">2</text>
+<text x="1298.00" y="316.00" fill="#F0F2F5" font-size="14" text-anchor="start">AXES EN PENTE 3:2 (56,31°)</text>
+<text x="1270.00" y="342.00" fill="#00D2FF" font-size="14" text-anchor="start">3</text>
+<text x="1298.00" y="342.00" fill="#F0F2F5" font-size="14" text-anchor="start">COUPES HORIZONTALES, HAUTEUR 100U</text>
+<text x="1270.00" y="368.00" fill="#00D2FF" font-size="14" text-anchor="start">4</text>
+<text x="1298.00" y="368.00" fill="#F0F2F5" font-size="14" text-anchor="start">CROISEMENT 2U AU-DESSUS DU CENTRE</text>
+<text x="1270.00" y="394.00" fill="#00D2FF" font-size="14" text-anchor="start">5</text>
+<text x="1298.00" y="394.00" fill="#F0F2F5" font-size="14" text-anchor="start">ONDE 2U ; SON BORD INTÉRIEUR PASSE</text>
+<text x="1270.00" y="420.00" fill="#00D2FF" font-size="14" text-anchor="start"></text>
+<text x="1298.00" y="420.00" fill="#F0F2F5" font-size="14" text-anchor="start">PAR LES SOMMETS HAUT ET BAS</text>
+<text x="1270.00" y="446.00" fill="#00D2FF" font-size="14" text-anchor="start"></text>
+<text x="1298.00" y="446.00" fill="#F0F2F5" font-size="14" text-anchor="start">DU CROISEMENT</text>
+<text x="1270.00" y="472.00" fill="#00D2FF" font-size="14" text-anchor="start">6</text>
+<text x="1298.00" y="472.00" fill="#F0F2F5" font-size="14" text-anchor="start">LARGEUR HORS TOUT DÉDUITE : 84,96U</text>
+<text x="1270.00" y="540.00" fill="#8B949E" font-size="14" text-anchor="start">VERSIONS</text>
+<text x="1270.00" y="570.00" fill="#F0F2F5" font-size="14" text-anchor="start">STANDARD · 64 PX ET PLUS</text>
+<text x="1270.00" y="594.00" fill="#8B949E" font-size="14" text-anchor="start">FAISCEAU 13U · ONDE 2U</text>
+<text x="1270.00" y="630.00" fill="#F0F2F5" font-size="14" text-anchor="start">PETITE TAILLE · MOINS DE 64 PX</text>
+<text x="1270.00" y="654.00" fill="#8B949E" font-size="14" text-anchor="start">FAISCEAU 15U · ONDE 4U</text>
+<text x="1270.00" y="720.00" fill="#8B949E" font-size="14" text-anchor="start">COULEURS</text>
+<rect x="1270" y="736" width="26" height="26" fill="#08090C" stroke="#8B949E"/>
+<text x="1310.00" y="755.00" fill="#F0F2F5" font-size="14" text-anchor="start">NOIR ABYSS #08090C</text>
+<rect x="1270" y="774" width="26" height="26" fill="#F0F2F5"/>
+<text x="1310.00" y="793.00" fill="#F0F2F5" font-size="14" text-anchor="start">BLANC TITANIUM #F0F2F5</text>
+<text x="1270.00" y="840.00" fill="#8B949E" font-size="14" text-anchor="start">UNE SEULE COULEUR À LA FOIS.</text>
+<text x="1270.00" y="864.00" fill="#8B949E" font-size="14" text-anchor="start">NI DÉGRADÉ, NI CONTOUR, NI EFFET.</text>
+<text x="1270.00" y="1270.00" fill="#00D2FF" font-size="14" text-anchor="start">STATUT : PROPOSÉ À VALIDATION</text>
+<text x="1270.00" y="1296.00" fill="#8B949E" font-size="14" text-anchor="start">RECHERCHE D’ANTÉRIORITÉ À FAIRE</text>
+</svg>
