@@ -160,6 +160,8 @@ Trois faits l'établissent :
 
 **Registre D — L'objectivation.** Troisième personne, présent, phrases nominales. Réservé au prologue.
 
+Cette voix n'a accès qu'à ce qu'un objectif enregistre : les positions, les durées, les sons, la direction des regards. Elle ne connaît ni les intentions, ni les états, ni la possession des objets, ni ce qu'un personnage sait. « Il attend », « pas le sien », « il comprend » sont des fautes de registre, pas des maladresses de style.
+
 ### 2.5 Ce que Maddie ne dit jamais
 
 Elle ne se juge pas. Jamais de « je suis cruelle ».
@@ -213,6 +215,8 @@ Elle ne mentionne jamais son père sans un objet, une langue ou un nom.
 
 **ACQUIS.** Urgentiste senior, hôpital Édouard-Herriot, pavillon H, urgences médico-chirurgicales. Carrure solide tassée par la fatigue. Cernes violets. Du gris aux tempes, joues creuses. Collègue de Paul Mercier.
 
+**Il connaissait Maddie avant la nuit de 2016.** Elle vivait avec Paul, il était le collègue de Paul, il a dîné avec elle. Il n'arrive donc pas chez une inconnue : il arrive chez l'ancienne compagne de son ami, dans un appartement où cet ami a vécu, avec les clés de cet ami. C'est ce qui autorise le tutoiement du prologue. Les huit ans de silence commencent **après** cette nuit-là.
+
 **Le sweat gris.** Huit ans. Capuche repoussée dans le dos, coton peluché aux poignets, une tache jaune sur la manche droite qui a disparu en huit ans de lessives. **À assumer par un détail** : il en a acheté quatre identiques, ou la couture intérieure porte une marque encore lisible. C'est un homme qui ne change rien.
 
 **Le geste du menton. FIXÉ.**
@@ -258,7 +262,7 @@ Et il y a pire que la non-venue : le mot. Il a classé une mourante dans la cat�
 
 **La bombe.** Au chapitre 23, Bastien le lui dit : « Paul a décroché. Il a dit que tu dormais. Il m'a passé le téléphone. »
 
-Trois informations dans une phrase, et chacune détruit un étage de ce que Maddie a construit.
+Maddie sait déjà, depuis la nuit de 2016, qu'il a pris l'appareil des mains de Paul. Elle ne sait pas le reste. La révélation ne porte donc pas sur un fait, elle porte sur **un mot** : « il a dit que tu dormais ». Un mot ne se punit pas, et c'est précisément ce qui la laisse sans recours.
 
 **OUVERT :** le détail du porte-clés de Paul, un objet identifiable qui reviendra. **PROPOSITION :** un décapsuleur en métal, ou une étiquette de plastique avec un prénom mal écrit.
 
@@ -659,7 +663,8 @@ Aucun « je » tant qu'une main ne touche pas son menton (§ 2.3).
 Le tableau est celui d'un coma par benzodiazépines et alcool : Glasgow bas, dépression respiratoire, ronflement obstructif avec apnées, hypersialorrhée, vomissements.
 
 - Le ronflement est écrit une fois, sans adjectif : « Un ronflement. Puis rien. »
-- L'arrêt respiratoire dure plus que le silence d'un dormeur. Il est écrit, jamais commenté.
+- L'arrêt respiratoire dure plus que le silence d'un dormeur. Il est écrit, jamais commenté : « Ce silence-là est plus long que le premier. »
+- L'homme ne bouge pas. Ses yeux restent sur la bouche ouverte. Un objectif filme une direction, jamais une intention : « il attend » est une faute de registre.
 - Personne, dans la scène, ne nomme le bruit. C'est ce qui permet au lecteur de le prendre pour du sommeil.
 
 Le lecteur reçoit donc la preuve et la lit de travers — exactement comme Paul. Il est en position d'assister, de savoir et de ne pas intervenir, dès la première page (§ 1.3, mécanisme 2).
@@ -668,18 +673,27 @@ Le lecteur reçoit donc la preuve et la lit de travers — exactement comme Paul
 
 **FIXÉ.** Deux appareils, deux rôles, aucune confusion possible.
 
-- **Le téléphone au sol** est celui de Maddie. Haut-parleur, écran allumé, appel en cours, compteur visible. Il diffuse la voix de l'homme qui arrive.
+- **Le téléphone au sol** est celui de Maddie. Haut-parleur, écran allumé, appel en cours, compteur visible : 14:17 quand Bastien entre. Il diffuse la voix de l'homme qui arrive.
 - **Le téléphone à l'oreille** est celui de Paul. C'est avec cet appareil que la communication a été établie, et c'est lui que Bastien tient ensuite.
 
-La ligne du texte est déjà écrite : « La voix qui sort du haut-parleur est faible, déformée par la course et le micro d'un autre téléphone. » L'« autre téléphone » est celui de Paul.
+La ligne du texte est déjà écrite : « La voix qui sort du haut-parleur est faible, déformée par le souffle et par le micro d'un autre téléphone. » L'« autre téléphone » est celui de Paul.
 
-**Un seul détail doit signaler l'appartenance** de l'appareil que Bastien tient : une coque, un écran fêlé, un porte-clés au bout. Un détail, jamais deux, jamais expliqué.
+**L'appartenance ne se dit jamais.** Le registre D n'a pas accès à la possession d'un objet (§ 2.4). Elle se déduit des **positions**, que la caméra enregistre sans les commenter :
+
+- un téléphone sur le carrelage, près de la main ouverte ;
+- un téléphone contre l'oreille de l'homme qui entre ;
+- quand il raccroche, il le pose sur le plan de travail, écran contre le marbre ;
+- vingt lignes plus bas, il en sort un troisième de sa poche pour appeler le 15.
+
+Trois appareils dans une cuisine. Le lecteur n'en compte pas le nombre : il enregistre des positions. Il ne comprend qu'au chapitre 23, quand Bastien dit « il m'a passé le téléphone ».
+
+Le geste de poser l'appareil écran contre le marbre ne s'explique pas non plus. Un homme qui fait ça ne veut pas voir ce qu'il y a sur l'écran.
 
 Quand Bastien raccroche, le téléphone au sol affiche « Appel terminé ». Le silence tombe.
 
-### 11.4 Ce qui s'est passé avant 04:17
+### 11.4 Ce qui s'est passé avant 14:17
 
-**FIXÉ.** Le prologue commence alors que l'appel est déjà ouvert depuis quatre minutes. Voici ce que le lecteur n'a pas vu, et qui ne lui sera dit qu'au chapitre 23.
+**FIXÉ.** Le prologue commence alors que l'appel est déjà ouvert depuis quatorze minutes. Voici ce que le lecteur n'a pas vu, et qui ne lui sera dit qu'au chapitre 23.
 
 1. Maddie appelle Paul.
 2. Paul décroche. Il est ivre. Il est dans une soirée. Bastien est à côté de lui.
@@ -690,7 +704,15 @@ Quand Bastien raccroche, le téléphone au sol affiche « Appel terminé ». Le 
 7. **Bastien ne le corrige pas.** Il écoute. Il entend le rythme, les blancs, et la proximité du son : la bouche est collée au micro, donc elle est au sol.
 8. Il demande l'adresse. Il prend les clés. Il part seul.
 
+**Le plan, et la seule chose qu'elle n'avait pas prévue.** Maddie a tout calculé : les cachets de sa mère, la vodka, l'heure à laquelle Paul rentrerait de sa soirée pour qu'il trouve le corps. Elle a calculé une découverte, pas un secours. Puis elle a appelé.
+
+L'appel est le seul écart du plan, et il est de sa main. Ce n'est pas un appel au secours : c'est une vérification. Elle compose le numéro pour s'assurer qu'il y a quelqu'un de l'autre côté. Il y a quelqu'un, et ce n'est pas celui qu'elle a appelé.
+
 **Le point de rupture, et il est double :** Paul a classé une mourante dans la catégorie des gens qui cuvent, et il l'a fait devant un médecin. Bastien a entendu le classement et ne l'a pas démenti.
+
+**Ce que Maddie sait au sortir de cette nuit, et ce qu'elle ignore.** Elle sait que Bastien a pris le téléphone des mains de Paul : elle était au sol, elle a entendu une voix d'homme à côté d'elle, puis une autre, et elle a compris ce que cela voulait dire. Elle ignore que Paul avait décroché avant lui, qu'il tenait la ligne depuis quatorze minutes, et qu'il a dit « elle dort ».
+
+Son grief porte donc sur la bonne personne et sur le mauvais fait. Elle reproche à Bastien d'avoir répondu à sa place ; ce qu'elle ne sait pas, c'est que la place avait déjà été prise, et que le mot qui l'a tuée n'est pas un acte mais un classement.
 
 ### 11.5 Ce qui revient au chapitre 23
 
@@ -707,9 +729,15 @@ Trois informations, et chacune détruit un étage de ce que Maddie a construit p
 | Ce qui est écrit | Ce qui est vrai |
 |---|---|
 | Intoxication paracétamol et alcool | **Benzodiazépines et alcool.** Le paracétamol ne donne pas de coma rapide : il tue en 48 à 72 heures par nécrose hépatique, avec un patient conscient. |
-| Boîte de Doliprane | **Boîte d'anxiolytiques**, ouverte sur le plan de travail. Si elle vient de chez Hélène, la mère entre dans le livre sans paraître. |
-| « Préparez une voie centrale et de la NAC » | **Voie périphérique.** Aucune voie centrale en préhospitalier pour une intoxiquée de dix-neuf ans, et la NAC est l'antidote du paracétamol : elle n'a plus d'objet. |
-| Deux doigts sur la carotide, alors qu'elle est face contre le sol | **Le pouls radial.** |
+| Boîte de Doliprane | **Une boîte de Lexomil ouverte, au nom d'Hélène Delcroix.** La vignette de pharmacie est un fait que la caméra peut lire ; l'appartenance n'est jamais commentée. Le lecteur comprend au chapitre 12, et il se souvient d'une boîte. |
+| « Préparez une voie centrale et de la NAC » | **Voie périphérique et plateau d'intubation.** Aucune voie centrale en préhospitalier pour une intoxiquée de dix-neuf ans ; la NAC est l'antidote du paracétamol et n'a plus d'objet. Un Glasgow 7 impose de protéger les voies aériennes : c'est ce qu'il demande, et c'est ce qui explique le goût de plastique au réveil. |
+| Deux doigts sur la carotide, alors qu'elle est face contre le sol | **Le pouls radial, au creux du poignet.** La carotide est inatteignable dans cette position. La durée se donne par le geste, pas par un décompte : « Le bras glisse sur le carrelage. Il le reprend, il appuie encore. » Un « il compte » est une opération invisible, donc une faute de registre. |
+
+**Au réveil, le goût n'est pas le charbon.** Le charbon activé n'est plus systématique et il est contre-indiqué en cas de risque d'inhalation, ce qui est le cas. Le goût est celui d'une sonde : « un goût de plastique au fond de la gorge ». Il paie la réplique du téléphone et signe l'intubation.
+
+**Le regard.** « Le regard glisse au plafond » et non « fixé sur un point qui n'existe pas » : la caméra ne sait pas qu'un point n'existe pas, elle filme une direction. Les pupilles dilatées restent, elles relèvent de l'hypoxie.
+
+**La mâchoire.** « Verrouillée » est un trismus, que les benzodiazépines ne produisent pas. « Ma bouche est ouverte et rien sort » reprend la première image du prologue et la paie de l'intérieur.
 
 **Deux points à ne pas corriger :**
 
