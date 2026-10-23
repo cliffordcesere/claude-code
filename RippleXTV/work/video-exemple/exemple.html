@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<title>Exemple d'habillage vidéo RippleXTV</title>
+<style>
+  @font-face { font-family: "Syne"; font-weight: 700; src: url(../../assets/fonts/syne-latin-700-normal.woff) format("woff"); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(../../assets/fonts/inter-latin-400-normal.woff) format("woff"); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(../../assets/fonts/inter-latin-600-normal.woff) format("woff"); }
+  @font-face { font-family: "Space Mono"; src: url(../../assets/fonts/space-mono-latin-400-normal.woff) format("woff"); }
+  :root { --abyss: #08090C; --cyan: #00D2FF; --white: #F0F2F5; --meta: #8B949E; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #15181d; padding: 40px; display: flex; flex-direction: column; gap: 40px; }
+
+  /* Canevas vidéo vertical 1080 x 1920, géométrie du gabarit VIDEO-EXTRAIT (charte §7A) */
+  .frame { width: 1080px; height: 1920px; position: relative; overflow: hidden; background: var(--abyss); color: var(--white); }
+  .cartouche { position: absolute; left: 64px; top: 208px; width: 856px; font: 400 28px/1.35 "Space Mono"; letter-spacing: .06em; text-transform: uppercase; z-index: 2; }
+  .cartouche .t { color: var(--white); }
+  .cartouche .r { color: var(--meta); }
+  .sep { position: absolute; left: 64px; top: 352px; width: 856px; height: 2px; background: var(--cyan); z-index: 2; }
+  .cadre { position: absolute; left: 0; top: 400px; width: 1080px; height: 800px; display: flex; align-items: center; justify-content: center; }
+  .cadre img { width: 1080px; height: auto; display: block; }   /* contain : toute l'image, sans recadrage */
+  .st { position: absolute; left: 96px; top: 1280px; width: 800px; height: 160px; display: flex; align-items: flex-start; justify-content: center; z-index: 2; }
+  .st p { font: 600 44px/1.2 "Inter"; text-align: center; color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,.4); }
+  .st.plaque p { display: inline-block; background: rgba(8,9,12,.75); padding: 12px 20px; text-shadow: none; }
+  .wm { position: absolute; left: 856px; width: 64px; height: 64px; opacity: .55; z-index: 2; display: flex; justify-content: flex-end; }
+  .wm img { height: 64px; }
+
+  /* Variante plein cadre : l'image occupe tout l'écran (recadrage à valider) */
+  .plein .fond { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  .plein .voile { position: absolute; left: 0; top: 0; width: 1080px; height: 560px;
+    background: linear-gradient(to bottom, rgba(8,9,12,.82) 0%, rgba(8,9,12,.55) 45%, rgba(8,9,12,0) 100%); z-index: 1; }
+
+  /* Planche */
+  .board { width: 1760px; background: #0E1014; padding: 48px; display: grid; grid-template-columns: 540px 540px 1fr; gap: 40px; color: var(--white); font: 400 20px/1.45 "Inter"; }
+  .board h1 { grid-column: 1 / -1; font: 600 34px/1.2 "Inter"; }
+  .board .sub { grid-column: 1 / -1; color: var(--meta); margin-top: -28px; font: 400 18px/1.4 "Space Mono"; letter-spacing: .03em; }
+  .vign { position: relative; width: 540px; height: 960px; }
+  .vign img { width: 540px; height: 960px; display: block; }
+  .vign .zone { position: absolute; left: 32px; top: 80px; width: 428px; height: 720px; border: 1.5px dashed rgba(0,210,255,.7); }
+  .tag { font: 400 15px/1.3 "Space Mono"; letter-spacing: .06em; color: var(--cyan); margin-bottom: 10px; text-transform: uppercase; }
+  .tag.b { color: var(--meta); }
+  .pin { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: var(--cyan); color: var(--abyss); font: 600 16px/30px "Inter"; text-align: center; }
+  .legend ol { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .legend li { display: grid; grid-template-columns: 38px 1fr; }
+  .legend li span { width: 30px; height: 30px; border-radius: 50%; background: var(--cyan); color: var(--abyss); font: 600 16px/30px "Inter"; text-align: center; }
+  .legend b { font-weight: 600; }
+  .legend .no { margin-top: 26px; padding-top: 20px; border-top: 1px solid #262b33; color: #c9ced6; }
+</style>
+<body>
+
+<!-- A. Gabarit VIDEO-EXTRAIT : l'image du film à son format d'origine -->
+<div class="frame" id="A">
+  <!-- cartouche et sous-titres ancrés sur les bords réels de l'image, pas sur le cadre de 800 px -->
+  <div class="cartouche" style="top:374px"><div class="t">TITRE DU FILM (AAAA)</div><div class="r">RÉAL. PRÉNOM NOM</div></div>
+  <div class="sep" style="top:474px"></div>
+  <div class="cadre"><img src="simulation-1.85.jpg" alt=""></div>
+  <div class="st" style="top:1148px"><p>Sous-titre d’exemple : la réplique<br>exacte, vérifiée, sur deux lignes.</p></div>
+  <div class="wm" style="top:374px"><img src="../../assets/logos/RXTV_monogramme-petite-taille_blanc_v01.svg" alt=""></div>
+</div>
+
+<!-- B. Variante plein cadre (recadrage vertical : à valider) -->
+<div class="frame plein" id="B">
+  <img class="fond" src="image-9x16.jpg" alt="">
+  <div class="voile"></div>
+  <div class="cartouche"><div class="t">TITRE DU FILM (AAAA)</div><div class="r" style="color:#C9CED6">RÉAL. PRÉNOM NOM</div></div>
+  <div class="sep"></div>
+  <div class="st plaque"><p>Sous-titre d’exemple : la réplique<br>exacte, vérifiée, sur deux lignes.</p></div>
+  <div class="wm" style="top:208px"><img src="../../assets/logos/RXTV_monogramme-petite-taille_blanc_v01.svg" alt=""></div>
+</div>
+
+<div class="board" id="planche">
+  <h1>Habillage vidéo RippleXTV : exemple sur votre capture</h1>
+  <div class="sub">CANEVAS 1080 × 1920 · POINTILLÉS CYAN = ZONE UTILE (HORS INTERFACE TIKTOK)</div>
+  <div>
+    <div class="tag">A · Recommandé : format d’origine</div>
+    <div class="vign"><img id="imgA"><div class="zone"></div>
+      <div class="pin" style="left:-15px;top:192px">1</div>
+      <div class="pin" style="left:-15px;top:232px">2</div>
+      <div class="pin" style="left:-15px;top:385px">3</div>
+      <div class="pin" style="left:-15px;top:590px">4</div>
+      <div class="pin" style="left:478px;top:186px">5</div>
+    </div>
+  </div>
+  <div>
+    <div class="tag b">B · Variante plein cadre : recadrage à valider</div>
+    <div class="vign"><img id="imgB"><div class="zone"></div>
+      <div class="pin" style="left:-15px;top:110px">1</div>
+      <div class="pin" style="left:-15px;top:162px">2</div>
+      <div class="pin" style="left:-15px;top:660px">4</div>
+      <div class="pin" style="left:478px;top:104px">5</div>
+    </div>
+  </div>
+  <div class="legend">
+    <ol>
+      <li><span>1</span><div><b>Cartouche</b> · Space Mono 28 px, capitales. Titre, année, réalisateur ; chef opérateur seulement s’il est vérifié.</div></li>
+      <li><span>2</span><div><b>Filet cyan</b> · 2 px, sous le cartouche. Seul élément de couleur. En A, cartouche et sous-titres suivent les bords réels de l’image.</div></li>
+      <li><span>3</span><div><b>L’image</b> · au format d’origine du film, entière, sans recadrage ni filtre. Ici : simulation 1,85:1 découpée dans votre capture.</div></li>
+      <li><span>4</span><div><b>Sous-titres</b> · Inter Semi-Bold 44 px, blanc, centrés, deux lignes au plus. Sur fond noir : ombre légère. Sur l’image : plaque noire à 75 %. Jamais d’encadré blanc.</div></li>
+      <li><span>5</span><div><b>Monogramme</b> · oui, mais discret : version petite taille, blanc à 55 %, 64 px, en haut à droite, aligné sur le cartouche. Jamais sur un visage ni sur les sous-titres. Pas d’intro logo.</div></li>
+    </ol>
+    <div class="no"><b>À éviter :</b> encadrés blancs, emojis, accroches du type « jusqu’à ce que tout bascule », zooms choc, sous-titres mot à mot colorés.</div>
+  </div>
+</div>
+
+<script>
+// Les vignettes de la planche sont les rendus A et B réduits (injectés par le script d'export).
+</script>
+</body>
+</html>
