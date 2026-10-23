@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<title>Carrousels RippleXTV — 23.10.2026</title>
+<style>
+  @font-face { font-family: "Syne"; font-weight: 700; src: url(../../../assets/fonts/syne-latin-700-normal.woff) format("woff"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Syne"; font-weight: 700; src: url(../../../assets/fonts/syne-latin-ext-700-normal.woff) format("woff"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(../../../assets/fonts/inter-latin-400-normal.woff) format("woff"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(../../../assets/fonts/inter-latin-ext-400-normal.woff) format("woff"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(../../../assets/fonts/inter-latin-600-normal.woff) format("woff"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(../../../assets/fonts/inter-latin-ext-600-normal.woff) format("woff"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  @font-face { font-family: "Space Mono"; src: url(../../../assets/fonts/space-mono-latin-400-normal.woff) format("woff"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Space Mono"; src: url(../../../assets/fonts/space-mono-latin-ext-400-normal.woff) format("woff"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+
+  :root {
+    --abyss: #08090C; --cobalt: #0052FF; --cyan: #00D2FF; --white: #F0F2F5;
+    --meta: #8B949E;   /* gris de métadonnées : 6,47:1 sur Abyss (le Slate de la charte, 4,33:1, ne passe pas) */
+    --body: #D5D9DF;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #222; display: flex; flex-direction: column; gap: 40px; padding: 40px; }
+
+  /* Canevas 1080 x 1350. Marges : 64 à gauche ; 160 à droite et 170 en bas laissés
+     libres de tout élément essentiel (interface TikTok en mode photo). */
+  .slide { width: 1080px; height: 1350px; background: var(--abyss); position: relative; overflow: hidden; color: var(--white); }
+  .head { position: absolute; top: 64px; left: 64px; right: 64px; display: flex; align-items: center; justify-content: space-between;
+          font: 400 24px/1 "Space Mono"; letter-spacing: .08em; color: var(--meta); }
+  .head .brand { display: flex; align-items: center; gap: 16px; }
+  .head img { height: 36px; display: block; }
+  .zone { position: absolute; left: 64px; width: 856px; top: 200px; bottom: 170px; display: flex; flex-direction: column; }
+
+  .kicker { font: 400 28px/1.35 "Space Mono"; letter-spacing: .08em; color: var(--cyan); text-transform: uppercase; }
+  .title { font: 700 92px/1.04 "Syne"; letter-spacing: .03em; text-transform: uppercase; margin-top: 28px; }
+  .rule { width: 160px; height: 2px; background: var(--cyan); margin: 44px 0 40px; }
+  .lead { font: 400 40px/1.3 "Inter"; color: var(--body); }
+  .meta { font: 400 26px/1.45 "Space Mono"; letter-spacing: .05em; color: var(--meta); text-transform: uppercase; }
+  .body { font: 400 40px/1.32 "Inter"; color: var(--body); }
+  .body em { font-style: italic; color: var(--white); }
+  .body b, .lead b { font-weight: 600; color: var(--white); }
+  .num { font: 700 168px/1 "Syne"; color: var(--cobalt); letter-spacing: .02em; }
+  .h2 { font: 700 60px/1.08 "Syne"; text-transform: uppercase; letter-spacing: .03em; margin-top: 20px; }
+  .quote { font: 600 52px/1.24 "Inter"; color: var(--white); }
+  .push { margin-top: auto; }
+  .t-cover .zone { justify-content: center; }
+  .cite { font: 400 44px/1.3 "Space Mono"; color: var(--white); letter-spacing: .02em; border-left: 2px solid var(--cyan); padding-left: 32px; margin: 8px 0 44px; }
+
+  .timeline { margin-top: 40px; display: flex; flex-direction: column; gap: 26px; border-left: 2px solid var(--cyan); padding-left: 36px; }
+  .timeline .y { font: 400 28px/1 "Space Mono"; color: var(--cyan); letter-spacing: .06em; }
+  .timeline .t { font: 600 40px/1.2 "Inter"; margin-top: 10px; }
+  .timeline .d { font: 400 24px/1.3 "Space Mono"; color: var(--meta); letter-spacing: .05em; margin-top: 6px; text-transform: uppercase; }
+
+  .frames { display: flex; align-items: flex-end; gap: 56px; margin-top: 44px; }
+  .frames .f { border: 3px solid var(--white); }
+  .frames .s { border: 3px dashed var(--meta); }
+  .frames .l { font: 400 22px/1.3 "Space Mono"; color: var(--meta); letter-spacing: .05em; margin-top: 14px; text-transform: uppercase; }
+
+  .sources { font: 400 26px/1.55 "Space Mono"; color: var(--body); letter-spacing: .02em; margin-top: 0; padding: 0; }
+  .sources li { list-style: none; }
+  .sign { margin-top: auto; display: flex; align-items: center; gap: 28px; }
+  .sign img { height: 96px; }
+  .sign div { font: 400 26px/1.4 "Space Mono"; letter-spacing: .08em; color: var(--meta); text-transform: uppercase; }
+</style>
+<body>
+<script>
+// Typographie française : espace fine insécable avant ; : ! ? et à l'intérieur des guillemets.
+const fr = s => s.replace(/ ([;:!?»])/g, " $1").replace(/« /g, "« ");
+
+const C = [
+  {
+    id: "Coen-Prix-Lumiere",
+    slides: [
+      { type: "cover", kicker: "Prix Lumière 2026", title: "Les Coen,<br>le sérieux<br>de l’absurde",
+        lead: "Trois idées pour comprendre la précision de leur mise en scène.",
+        meta: "Joel et Ethan Coen · Lyon, 16.10.2026" },
+      { type: "text", kicker: "Le contexte",
+        body: "Le 16 octobre, à Lyon, Joel et Ethan Coen ont reçu le 18<sup>e</sup> <b>Prix Lumière</b>, qui distingue une œuvre entière. Ils succèdent à Michael Mann et sont le deuxième duo honoré, après les frères Dardenne.",
+        meta: "Barton Fink (1991) · Palme d’or<br>Fargo (1996)<br>No Country for Old Men (2007)" },
+      { type: "idea", num: "01", h2: "Tout est décidé avant",
+        body: "Leurs films sont storyboardés avant le tournage. Au montage, ils signent eux‑mêmes, sous un pseudonyme : <b>Roderick Jaynes</b>, monteur qui n’existe pas, nommé deux fois à l’Oscar du montage.",
+        meta: "Fargo (1996) · No Country for Old Men (2007)" },
+      { type: "idea", num: "02", h2: "La fausse histoire vraie",
+        cite: "« This is a true story. »",
+        body: "C’est la première phrase de <em>Fargo</em>. L’histoire est pourtant, pour l’essentiel, inventée. Le carton donne à la fiction le ton d’un fait divers : la forme prend l’absurde au sérieux.",
+        meta: "Fargo (1996)" },
+      { type: "idea", num: "03", h2: "La menace par le silence",
+        body: "Dans <em>No Country for Old Men</em>, la musique est presque absente. La tension tient aux bruits : le vent, les pas, les portes. Rien ne dit au spectateur quoi ressentir ; il guette.",
+        meta: "No Country for Old Men (2007)" },
+      { type: "reading", kicker: "Notre lecture",
+        quote: "Chez les Coen, la rigueur n’adoucit pas l’absurde : elle le rend inévitable. On rit, mais d’un rire inquiet." },
+      { type: "sources",
+        items: ["Lyon Capitale, 16.10.2026", "Tribune de Lyon, 2026", "Cleveland Magazine (storyboards)", "No Film School (Roderick Jaynes)", "Snopes (Fargo)", "The Playlist (No Country for Old Men)"],
+        credits: "Films cités : Barton Fink (1991), Fargo (1996), No Country for Old Men (2007), réal. Joel et Ethan Coen." },
+    ],
+  },
+  {
+    id: "Minotaure-Oscars",
+    slides: [
+      { type: "cover", kicker: "Oscars 2027", title: "Un film en russe pour la France",
+        lead: "<em>Minotaure</em>, d’Andreï Zviaguintsev, et la question que pose ce choix.",
+        meta: "Minotaure (2026) · Réal. Andreï Zviaguintsev" },
+      { type: "text", kicker: "Le contexte",
+        body: "Le 16 septembre, le CNC a annoncé que <b>Minotaure</b> représentera la France à l’Oscar du meilleur film international, parmi cinq films présélectionnés. Grand Prix à Cannes en mai, il est sorti en salles le 14 octobre.",
+        meta: "Cérémonie : 14 mars 2027, Los Angeles" },
+      { type: "idea", num: "01", h2: "Ce que disent les règles",
+        body: "La langue n’est pas un obstacle : le film doit même être majoritairement non anglophone. Le pays doit attester que le contrôle créatif est surtout aux mains de ses citoyens, de ses résidents ou de réfugiés.",
+        meta: "Règlement du film international, 99<sup>e</sup> cérémonie" },
+      { type: "idea", num: "02", h2: "Un précédent récent",
+        body: "En 2025, <em>Emilia Pérez</em> de Jacques Audiard représentait déjà la France, en espagnol. <em>Minotaure</em> va plus loin : tourné en russe par un cinéaste russe en exil, il est produit principalement par des sociétés françaises.",
+        meta: "Emilia Pérez (2024) · Réal. Jacques Audiard" },
+      { type: "timeline", num: "03", h2: "Chabrol, transposé",
+        body: "Un mari découvre la liaison de sa femme. Zviaguintsev transpose l’intrigue dans la Russie de 2022, celle de la mobilisation.",
+        items: [["1969", "La Femme infidèle", "Claude Chabrol"], ["2002", "Unfaithful", "Adrian Lyne"], ["2026", "Minotaure", "Andreï Zviaguintsev"]] },
+      { type: "reading", kicker: "Notre lecture",
+        quote: "Préférer <em>Minotaure</em> à <em>La Bataille de Gaulle</em>, c’est choisir ce que la France montre de son cinéma : son histoire, ou sa capacité à accueillir celle des autres." },
+      { type: "sources",
+        items: ["CNC, communiqué du 16.09.2026", "Unifrance, 09.2026", "Ozap, 09.2026", "Franceinfo Culture, 05.2026", "AMPAS, règlement du film international (99<sup>e</sup>)"],
+        credits: "Films cités : Minotaure (2026), réal. Andreï Zviaguintsev ; La Femme infidèle (1969), réal. Claude Chabrol ; Unfaithful (2002), réal. Adrian Lyne ; Emilia Pérez (2024), réal. Jacques Audiard." },
+    ],
+  },
+  {
+    id: "Moulin-Nemes",
+    slides: [
+      { type: "cover", kicker: "En salles le 28 octobre", title: "Nemes filme Jean Moulin",
+        lead: "Ce qu’il faut savoir de sa méthode avant d’entrer dans la salle.",
+        meta: "Moulin (2026) · Réal. László Nemes" },
+      { type: "text", kicker: "Le contexte",
+        body: "Juin 1943 : Jean Moulin, chef de la Résistance, est arrêté à Caluire, puis interrogé par Klaus Barbie. <b>Gilles Lellouche</b> l’incarne face à <b>Lars Eidinger</b>. Présenté en compétition à Cannes, c’est le premier film en français de László Nemes.",
+        meta: "Avec Louise Bourgoin, Félix Lefebvre<br>Scénario Olivier Demangel" },
+      { type: "frames", num: "01", h2: "La méthode du Fils de Saul",
+        body: "En 2015, Nemes tourne en 35 mm, au format presque carré, avec un seul objectif de 40 mm. La caméra colle au personnage ; l’horreur reste floue, à l’arrière-plan.",
+        meta: "Le Fils de Saul (2015) · Image Mátyás Erdély" },
+      { type: "idea", num: "02", h2: "Ce que l’on sait de Moulin",
+        body: "Même chef opérateur, de nouveau la pellicule 35 mm. Selon les critiques présents à Cannes, la caméra suit les personnages au plus près, dans des espaces fermés et une lumière faible.",
+        meta: "Image Mátyás Erdély" },
+      { type: "idea", num: "03", h2: "Une critique partagée",
+        body: "À Cannes, certains ont vu un thriller implacable, à la mise en scène étouffante ; d’autres, le plus classique de ses films. Le débat porte moins sur le sujet que sur la forme.",
+        meta: "Trois Couleurs · Critikat · Le Mag du Ciné" },
+      { type: "reading", kicker: "Ce que nous regarderons",
+        quote: "Ce qui reste dans le champ, ce qui en est exclu, et ce que le flou cache, ou révèle." },
+      { type: "sources",
+        items: ["Wikipédia, Moulin (2026 film)", "Sortiraparis, 2026", "UGC, fiche du film", "Trois Couleurs, Cannes 2026", "Critikat, Cannes 2026", "American Cinematographer, 01.2016"],
+        credits: "Films cités : Moulin (2026) et Le Fils de Saul (2015), réal. László Nemes, image Mátyás Erdély." },
+    ],
+  },
+];
+
+const MONO = "../../../assets/logos/RXTV_monogramme_blanc_v01.svg";
+function slide(c, s, i, n) {
+  const head = `<div class="head"><div class="brand"><img src="${MONO}" alt="">RIPPLEXTV · FRANCE</div><div>${String(i + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}</div></div>`;
+  let z = "";
+  if (s.type === "cover") {
+    z = `<div class="kicker">${s.kicker}</div><div class="title">${s.title}</div><div class="rule"></div><div class="lead">${s.lead}</div><div class="meta" style="margin-top:40px">${s.meta}</div>`;
+  } else if (s.type === "text") {
+    z = `<div class="kicker">${s.kicker}</div><div class="rule"></div><div class="body">${s.body}</div><div class="meta push">${s.meta}</div>`;
+  } else if (s.type === "idea" || s.type === "timeline" || s.type === "frames") {
+    z = `<div class="num">${s.num}</div><div class="h2">${s.h2}</div><div class="rule"></div>`;
+    if (s.cite) z += `<div class="cite">${s.cite}</div>`;
+    z += `<div class="body">${s.body}</div>`;
+    if (s.type === "timeline") z += `<div class="timeline">${s.items.map(([y, t, d]) => `<div><div class="y">${y}</div><div class="t">${t}</div><div class="d">${d}</div></div>`).join("")}</div>`;
+    if (s.type === "frames") z += `<div class="frames"><div><div class="f" style="width:300px;height:225px"></div><div class="l">1,33:1 · Le Fils de Saul</div></div><div><div class="s" style="width:430px;height:180px"></div><div class="l">2,39:1 · Scope, pour comparer</div></div></div>`;
+    if (s.meta) z += `<div class="meta push">${s.meta}</div>`;
+  } else if (s.type === "reading") {
+    z = `<div class="kicker">${s.kicker}</div><div class="rule"></div><div class="quote">${s.quote}</div>`;
+  } else if (s.type === "sources") {
+    z = `<div class="kicker">Sources</div><div class="rule"></div><ul class="sources">${s.items.map(x => `<li>${x}</li>`).join("")}</ul><div class="meta" style="margin-top:36px;text-transform:none;letter-spacing:.02em">${s.credits}<br>Composition typographique, aucune image de film.</div><div class="sign"><img src="${MONO}" alt=""><div>RippleXTV<br>L’empreinte cinématographique.</div></div>`;
+  }
+  return `<div class="slide t-${s.type}" data-name="RXTV_FR_${c.id}_CARROUSEL_fr_v01_${String(i + 1).padStart(2, "0")}">${head}<div class="zone">${fr(z)}</div></div>`;
+}
+document.body.insertAdjacentHTML("beforeend", C.map(c => c.slides.map((s, i) => slide(c, s, i, c.slides.length)).join("")).join(""));
+</script>
+</body>
+</html>
