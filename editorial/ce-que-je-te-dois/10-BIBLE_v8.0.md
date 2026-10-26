@@ -175,15 +175,15 @@ Elle ne mentionne jamais son père sans un objet, une langue ou un nom.
 
 ### Madeleine « Maddie » Delcroix — 27 ans
 
-**ACQUIS.** Métisse. Père haïtien absent. Mère : Hélène, bourgeoise blanche d'Écully. Peau mate, masse de cheveux crépus, chignon haut tenu par deux épingles invisibles, zéro mèche libre. Silhouette mince, noir, cuir sombre, laine. Ongles rongés jusqu'à la peau.
+**ACQUIS.** Métisse. Père haïtien absent. Mère : Hélène, blanche, issue d'une famille très riche d'Écully. La famille de Maddie est très riche ; ses difficultés financières actuelles ne sont pas celles de sa famille. Peau mate, masse de cheveux crépus, chignon haut tenu par deux épingles invisibles, zéro mèche libre. Silhouette mince, noir, cuir sombre, laine. Ongles rongés jusqu'à la peau.
 
-**Logement.** 30 m² sous les toits, rue des Pierres-Plantées, Croix-Rousse, 1er. Poutres basses, tomettes rouges devant l'évier, grande fenêtre sans rideaux sur les cours grises. Ordre au millimètre : classeurs de facturation alignés par année, écran 27 pouces, carton à dessins sanglé. « Personne n'entrait ici, personne ne déplaçait mes affaires. »
+**Logement.** 42 m² sous les toits, rue des Pierres-Plantées, Croix-Rousse, 1er. Petit deux-pièces : une chambre et un séjour. Maddie y vivait en colocation avec Paul en 2016, lors de sa tentative de suicide : elle occupait la chambre et Paul le séjour. Elle y vit désormais seule ; Paul habite avec sa compagne. À Écully, sa chambre d'enfance faisait presque la taille de cet appartement. Sa mère a conservé sa chambre ; retourner y vivre reste une possibilité matérielle que Maddie refuse. Poutres basses, tomettes rouges devant l'évier, grande fenêtre sans rideaux sur les cours grises. Ordre au millimètre : classeurs de facturation alignés par année, écran 27 pouces, carton à dessins sanglé. « Personne n'entrait ici, personne ne déplaçait mes affaires. »
 
 **Le corps comme discipline.** Douche brûlante, nuque baissée, paumes contre la faïence. Huile de ricin, deux pressions. Le chignon est une armure ; Hélène tirait ses cheveux au fer pour les dompter « entre ses genoux dans sa salle de bains d'Écully ». Maddie a coupé elle-même, aux ciseaux de cuisine, devant le lavabo.
 
 **La ligne de vie 2016-2024.**
-- **2016, 19 ans** : vit à la Grande-Côte avec Paul. Il vient de partir. Elle organise sa mort pour qu'il la trouve. Elle appelle. Bastien vient.
-- **2016-2017** : réanimation, quelques jours d'hospitalisation, retour dans l'appartement vide. Elle apprend Photoshop seule, la nuit, tutoriels américains, son coupé pour ne pas réveiller Paul de l'autre côté de la cloison.
+- **2016, 19 ans** : vit rue des Pierres-Plantées, à la Croix-Rousse, en colocation avec Paul. Elle organise sa mort pour qu'il la trouve. La cause de sa tentative de suicide reste ouverte. Elle appelle. Bastien vient.
+- **2016-2017** : réanimation, quelques jours d'hospitalisation, retour dans l'appartement partagé avec Paul. Elle apprend Photoshop seule, la nuit, tutoriels américains, son coupé pour ne pas réveiller Paul de l'autre côté de la cloison.
 - **2017-2019 — OUVERT.** Le texte dit « trois ans de piges mal payées et de nuits blanches » pour s'acheter son ordre. Il manque le détail : quels clients, quelle première falsification, quelle première humiliation.
 - **2019-2024** : indépendante. Piges, refontes, maquettes. Vidal, son plus gros client, ne paie plus depuis l'été.
 - **Le faux CV** : Beaux-Arts deux ans puis abandon, école privée à Perrache, deux ans dans une « boîte de com corporate » qui refaisait les chartes de cliniques privées. **Entièrement faux.** Mensonge rodé, récité sans une hésitation.
@@ -197,7 +197,7 @@ Elle ne mentionne jamais son père sans un objet, une langue ou un nom.
 
 **ACQUIS.** Algérienne, fille d'ouvriers de Vénissieux. Corps dense, mains courtes aux ongles ras et aux cuticules arrachées. Une cicatrice blanche de deux centimètres en travers de la première phalange du pouce gauche. Grain de beauté minuscule sur l'arête du nez. Deux rides d'expression déjà creusées.
 
-**Le corps, une seule fois.** Les yeux sont **marron clair, presque dorés sous les néons**, et ils sont décrits au chapitre 2, une seule fois. Aucune autre description des yeux dans le roman : une variation, ici, se lit comme une hésitation.
+**Le corps, une seule fois.** Les yeux sont **marron clair**, et ils sont décrits au chapitre 2, une seule fois. Aucune autre description des yeux dans le roman : une variation, ici, se lit comme une hésitation.
 
 **L'odeur, deux notes maximum.** Le tabac blond et la mandarine. Aucune autre note olfactive ne lui est attachée. Si la mandarine revient dans un studio vide au chapitre 27, elle devient un motif ; tant qu'elle ne revient pas, elle reste un détail.
 
@@ -207,7 +207,7 @@ Elle ne mentionne jamais son père sans un objet, une langue ou un nom.
 
 **Parcours.** CFJ, deux tentatives, il y a huit ans. Échec à l'oral de culture générale après avoir dit au jury que leur revue de presse ressemblait à un encart pour LVMH. Deuxième fois sur liste d'attente, 6 000 € d'inscription, pas les moyens. Retour à Lyon le soir même. *L'Écho du Rhône* — « ça ou rédactrice de fiches produits pour des assurances mutualistes à Part-Dieu ». Elle a choisi les emmerdes.
 
-**La brèche. FIXÉ.** Elle couvre Maddie. Mais **pas au chapitre 5 sur le CV** : au chapitre 4, elle lui confie des pièces issues d'une fuite, à une inconnue de la veille. C'est son premier compromis, et il est commis avant qu'elle sache quoi que ce soit. Le chapitre 5 ne fonde donc pas son éthique, il l'enfonce.
+**La brèche. FIXÉ.** Au chapitre 4, elle confie des pièces issues d'une fuite à une collaboratrice rencontrée deux jours plus tôt. C'est son premier compromis, antérieur à la découverte du faux parcours. Au chapitre 5, elle vérifie l'ancien emploi de Maddie pour la recommander, découvre le mensonge et choisit de ne pas le révéler aux deux autres. Elle défend la collaboration et prend en charge ce qui sera dit de son parcours. Le premier compromis devient une couverture consciente. Voir § 5.1.
 
 **Que voit Nora ?** Le livre est à la première personne : le lecteur ne sait d'elle que ce que Maddie perçoit. **Règle tenue sur trente chapitres :** Nora ne dit jamais ce qu'elle pense, elle dit ce qu'elle a fait. Le lecteur reconstitue. C'est la seule façon de lui donner une intériorité dans un récit qui n'y a pas accès.
 
@@ -215,7 +215,7 @@ Elle ne mentionne jamais son père sans un objet, une langue ou un nom.
 
 **ACQUIS.** Urgentiste senior, hôpital Édouard-Herriot, pavillon H, urgences médico-chirurgicales. Carrure solide tassée par la fatigue. Cernes violets. Du gris aux tempes, joues creuses. Collègue de Paul Mercier.
 
-**Il connaissait Maddie avant la nuit de 2016.** Elle vivait avec Paul, il était le collègue de Paul, il a dîné avec elle. Il n'arrive donc pas chez une inconnue : il arrive chez l'ancienne compagne de son ami, dans un appartement où cet ami a vécu, avec les clés de cet ami. C'est ce qui autorise le tutoiement du prologue. Les huit ans de silence commencent **après** cette nuit-là.
+**Il connaissait Maddie avant la nuit de 2016.** Elle vivait avec Paul, il était le collègue de Paul, il a dîné avec elle. Il n'arrive donc pas chez une inconnue : il arrive chez la colocataire de son ami, dans l'appartement que cet ami partage avec elle, avec les clés de cet ami. C'est ce qui autorise le tutoiement du prologue. Les huit ans de silence commencent **après** cette nuit-là.
 
 **Le sweat gris.** Huit ans. Capuche repoussée dans le dos, coton peluché aux poignets, une tache jaune sur la manche droite qui a disparu en huit ans de lessives. **À assumer par un détail** : il en a acheté quatre identiques, ou la couture intérieure porte une marque encore lisible. C'est un homme qui ne change rien.
 
@@ -262,13 +262,13 @@ Et il y a pire que la non-venue : le mot. Il a classé une mourante dans la cat�
 
 **La bombe.** Au chapitre 23, Bastien le lui dit : « Paul a décroché. Il a dit que tu dormais. Il m'a passé le téléphone. »
 
-Maddie sait déjà, depuis la nuit de 2016, qu'il a pris l'appareil des mains de Paul. Elle ne sait pas le reste. La révélation ne porte donc pas sur un fait, elle porte sur **un mot** : « il a dit que tu dormais ». Un mot ne se punit pas, et c'est précisément ce qui la laisse sans recours.
+Maddie sait seulement que Bastien a répondu à son appel. Elle ignore que Paul avait décroché et lui avait passé l'appareil. La révélation lui apprend ces faits, mais sa portée décisive tient à **un mot** : « il a dit que tu dormais ». Un mot ne se punit pas, et c'est précisément ce qui la laisse sans recours.
 
 **OUVERT :** le détail du porte-clés de Paul, un objet identifiable qui reviendra. **PROPOSITION :** un décapsuleur en métal, ou une étiquette de plastique avec un prénom mal écrit.
 
 ### Hélène Delcroix — 58 ans
 
-**ACQUIS.** Blanche, bourgeoise, Écully. Caution solidaire du bail de sa fille. Elle n'a pas de scène : le mécanisme est déjà en place.
+**ACQUIS.** Blanche, très riche, Écully. La maison familiale comporte une chambre pour Maddie presque aussi grande que son appartement actuel de 42 m². Caution solidaire du bail de sa fille. Elle n'a pas de scène : le mécanisme est déjà en place.
 
 - Un SMS, mardi 22 h : « Madeleine, appelle-moi cette semaine. Il faut qu'on fasse le point. » Resté sans réponse.
 - Un prélèvement de loyer le vendredi à 8 h. Un logiciel de syndic qui envoie un avis d'impayé automatique à la caution solidaire.
@@ -322,11 +322,13 @@ Maddie sait déjà, depuis la nuit de 2016, qu'il a pris l'appareil des mains de
 |---|---|
 | Contrat *L'Écho* | 2 500 € HT, négocié après 2 800 demandés |
 | Découpage | un tiers à la signature, un tiers au gabarit, solde au bouclage |
-| Acompte versé | 833 €, crédité sous 48 h |
+| Acompte versé | 833 €, crédité jeudi 28 novembre ; délai attendu de 48 h après la signature du lundi vers midi, légèrement dépassé |
 | Solde bancaire mercredi | 180,40 € |
 | Dette Vidal | 4 200 € |
 | Loyer | prélevé vendredi 8 h |
 | Caution | Hélène |
+
+**Chronologie de l'acompte. FIXÉ.** Signature lundi 25 novembre vers midi. Mercredi 27 à 6 h, aucun virement entrant : le délai attendu de quarante-huit heures n'est pas encore écoulé. Les 833 € sont effectivement crédités jeudi 28. À partir de cet encaissement, le récit tient compte de la somme disponible ; le chapitre 6 ne repose pas sur un acompte encore absent. Le montant du loyer et les éventuels autres mouvements du compte restent à établir avant de conclure à un impayé.
 
 **Le vocabulaire de l'argent :** une indépendante ne raisonne pas en mensualités, elle raisonne en **encaissements**. Maddie ne dit pas « je gagne », elle dit « ça crédite », « ça rebondit », « le virement passe ». Elle ne dit jamais « salaire ».
 
@@ -365,7 +367,27 @@ Un noir ne se juge pas sur sa direction morale, il se juge sur sa mécanique : c
 
 **Ce qui la rend dangereuse :** chaque mensonge contient une vérité qui le rend crédible. Le mépris pour les Ehpad est authentique. La connaissance du milieu est authentique. **Elle a appris Photoshop seule, à dix-neuf ans, la nuit, dans sa chambre de la Grande-Côte, tutoriels américains, son coupé pour ne pas réveiller Paul de l'autre côté de la cloison.** C'est son vrai diplôme, et elle ne peut pas le présenter.
 
-**Chapitre 5 — ce que Nora découvre. OUVERT. PROPOSITION :** elle ne découvre pas les diplômes, elle découvre **l'absence de toute trace**. Un appel à l'école de Perrache, une recherche dans un annuaire de pigistes, un ancien collègue qui n'a jamais entendu parler d'elle. Ce n'est pas un mensonge qui tombe, c'est un vide qui apparaît — plus inquiétant, et plus difficile à avouer.
+**Chapitre 5 — la recommandation et le mensonge partagé. FIXÉ.**
+
+**Le déclencheur.** Nora veut faire une place durable à Maddie dans le travail du journal. Son savoir-faire l'a convaincue ; elle souhaite défendre la poursuite de leur collaboration auprès des deux autres. Elle vérifie pour la recommander, pas parce qu'elle la soupçonne. Le bouclage crée l'urgence de la scène, pas le motif de la vérification.
+
+**La vérification.** Nora prépare sa proposition et cherche l'agence où Maddie prétend avoir travaillé deux ans. Elle y connaît quelqu'un. Jeudi matin, avant le bouclage, elle demande son CV à Maddie, qui promet de l'envoyer plus tard. La prise de contact professionnelle a déjà fait apparaître une anomalie : son interlocuteur ne retrouve pas Madeleine Delcroix et demande quelle fonction elle occupait. Ce n'est pas encore une preuve que tout son parcours est faux. La vérification porte sur l'emploi annoncé, pas sur les diplômes.
+
+**La confrontation.** Nora laisse d'abord une possibilité d'explication : « Tu travaillais sous quel nom, là-bas ? » Maddie pourrait encore invoquer une sous-traitance ou une mission extérieure. Nora lui apprend alors qu'elle a engagé sa propre parole : « Je leur ai dit que je voulais te garder. » Maddie découvre son mensonge au milieu d'un service qu'on lui rend. Elle reconnaît n'avoir jamais travaillé dans l'agence. Nora demande ce qui est vrai dans le reste ; elle comprend l'étendue du faux parcours.
+
+**Le coût du choix de Nora.** Le bouclage approche, les fichiers sont ouverts sur l'ordinateur de Maddie et les pièces confidentielles lui ont déjà été confiées. La remplacer immédiatement aurait un coût réel. Nora décide de ne rien dire aux deux autres et de défendre malgré tout la collaboration. Le travail de Maddie est bon ; ses diplômes ne changent rien aux pages. En la couvrant, Nora protège aussi son propre jugement et sa décision de lui avoir fait confiance aussi vite. Ces raisons se déduisent de ses actes et de ses paroles : la narration n'accède pas à sa pensée.
+
+**Le nouvel arrangement.** Nora prend en charge la présentation du parcours de Maddie : « Quand ils te demanderont ton parcours, tu me laisses répondre. » Elle n'invente pas nécessairement de nouveaux titres ; le contenu exact de sa présentation reste à écrire. Le mouvement fixé est qu'elle organise désormais ce qui sera dit aux autres au lieu de révéler le mensonge. Maddie reste, mais ne dispose plus seule de son histoire professionnelle officielle.
+
+**Le trouble intime.** Maddie éprouve du soulagement à cette consigne : elle n'a plus à tenir seule son mensonge. Cette prise en charge peut être vécue comme une proximité, tandis que Nora peut la présenter comme un problème réglé avant le bouclage. Le secret partagé rapproche sans constituer un aveu amoureux ni provoquer une scène érotique immédiate.
+
+**La place du lecteur.** Il a de bonnes raisons de vouloir que Maddie reste. L'arrangement lui paraît donc défendable au moment où Nora entre sciemment dans la dissimulation. La complicité se construit par une solution raisonnable, pas par une déclaration de corruption.
+
+**Contraintes de construction.** Le premier compromis de Nora reste la remise des pièces au chapitre 4. Le chapitre 5 ajoute une couverture consciente du faux parcours ; il ne fonde pas sa première brèche. Le mécanisme est fixé, les répliques servent de points d'appui à la rédaction. Le chapitre se construit un beat à la fois avant toute rédaction suivie.
+
+**La trace publique. FIXÉ.** La page parcours du site de Maddie indique le nom de l'agence, deux ans d'emploi et les chartes pour des cliniques privées. Nora y trouve le nom sans qu'il ait été prononcé au déjeuner du chapitre 3. Son contact est une femme qu'elle connaissait à la fac, directrice artistique de l'agence depuis 2017. Nora l'appelle mercredi soir, après avoir proposé aux deux autres de garder Maddie au-delà des quatre dossiers déjà prévus au contrat. Le contact ne la retrouve ni dans les anciens contrats ni après vérification auprès de la comptabilité. Jeudi à 11 h 40, Nora emmène Maddie dans la cour ; l'envoi du bon à tirer reste prévu à midi. Maddie dispose encore d'un alibi de mission en régie facturée par portage, mais ne l'a pas formulé lorsque Nora lui apprend sa recommandation.
+
+**Détails à établir.** Le nom de l'agence reste à choisir ; le repère [AGENCE] est provisoire dans le beat. Le contenu exact de la présentation du parcours aux deux autres reste également à construire.
 
 ### 5.2 Le faux de Bastien
 
@@ -555,7 +577,7 @@ Pas de scène de tendresse « réparatrice » après la transgression : ici, la 
 
 **Ch. 4 — L'infographie. EN COURS.** Mercredi. La remise des pièces. La signature Delorme. Le geste reproduit sur son propre menton. La nuit de la Grande-Côte qui remonte par l'ordonnance.
 
-**Ch. 5 — Le vide.** Jeudi, bouclage. Nora vérifie et trouve **l'absence de trace** plutôt qu'un mensonge : l'école de Perrache n'a jamais entendu son nom. Confrontation, aveu brut, le secret partagé fonctionne comme un aphrodisiaque. Le premier compromis de Nora a eu lieu au chapitre 4.
+**Ch. 5 — Le vide.** Jeudi, bouclage. Nora veut défendre une collaboration durable avec Maddie auprès des deux autres. Une prise de contact avec l'agence de son faux parcours fait apparaître une absence de trace. Confrontation : Maddie reconnaît le mensonge et apprend que Nora a déjà engagé sa parole pour elle. Nora la garde, ne révèle pas le faux parcours aux autres et prend en charge sa présentation professionnelle. Maddie éprouve du soulagement à ne plus porter seule le mensonge ; le secret devient une proximité. Le premier compromis de Nora reste la remise des pièces au chapitre 4. Mécanisme détaillé au § 5.1 ; rédaction un beat à la fois.
 *Bascule du mouvement :* le dossier paraît le jeudi. Il ne nomme personne, il décrit un service.
 
 **Ch. 6 — La trace.** Vendredi. Le loyer. Hélène par SMS. Maddie fait pression sur Paul — non pas avec un appel manqué, mais avec ce qu'elle croit être un appel manqué. Il obéit. Il consulte. Il laisse son nom dans un journal. L'interne apparaît. Maddie comprend que Bastien s'est accusé.
@@ -622,7 +644,7 @@ Pas de scène de tendresse « réparatrice » après la transgression : ici, la 
 |---|---|---|
 | 1 | Ce que Maddie exige, ch. 22-23 (§ 5.4) | M3, M4, la fin |
 | 2 | L'interne : exposer ou couvrir (§ 5.5) | M3, tout l'arc moral |
-| 3 | Ce que Nora découvre exactement au ch. 5 (§ 5.1) | Le pivot du M1 |
+| 3 | Le nom de l’agence et la présentation du parcours aux deux autres (§ 5.1) | La réalisation du ch. 5 ; le site de Maddie et le contact de fac de Nora sont fixés |
 | 4 | Le nom de l'interne — proposition : Camille Roux | M1 dès le ch. 6 |
 | 5 | La ligne de vie, partie 2019-2024 | La voix, la crédibilité |
 | 6 | La rature du ch. 22 : ce qu'elle recouvre | M1, la preuve |
@@ -669,9 +691,9 @@ Le tableau est celui d'un coma par benzodiazépines et alcool : Glasgow bas, dé
 
 Le lecteur reçoit donc la preuve et la lit de travers — exactement comme Paul. Il est en position d'assister, de savoir et de ne pas intervenir, dès la première page (§ 1.3, mécanisme 2).
 
-### 11.3 L'architecture des deux téléphones
+### 11.3 L'architecture des trois téléphones
 
-**FIXÉ.** Deux appareils, deux rôles, aucune confusion possible.
+**FIXÉ.** Trois appareils, trois positions : le téléphone de Maddie au sol, celui de Paul à l'oreille de Bastien puis sur le plan de travail, celui de Bastien dans sa poche puis utilisé pour appeler le 15.
 
 - **Le téléphone au sol** est celui de Maddie. Haut-parleur, écran allumé, appel en cours, compteur visible : 14:17 quand Bastien entre. Il diffuse la voix de l'homme qui arrive.
 - **Le téléphone à l'oreille** est celui de Paul. C'est avec cet appareil que la communication a été établie, et c'est lui que Bastien tient ensuite.
@@ -682,12 +704,10 @@ La ligne du texte est déjà écrite : « La voix qui sort du haut-parleur est f
 
 - un téléphone sur le carrelage, près de la main ouverte ;
 - un téléphone contre l'oreille de l'homme qui entre ;
-- quand il raccroche, il le pose sur le plan de travail, écran contre le marbre ;
+- quand il raccroche, il le pose sur le plan de travail ;
 - vingt lignes plus bas, il en sort un troisième de sa poche pour appeler le 15.
 
 Trois appareils dans une cuisine. Le lecteur n'en compte pas le nombre : il enregistre des positions. Il ne comprend qu'au chapitre 23, quand Bastien dit « il m'a passé le téléphone ».
-
-Le geste de poser l'appareil écran contre le marbre ne s'explique pas non plus. Un homme qui fait ça ne veut pas voir ce qu'il y a sur l'écran.
 
 Quand Bastien raccroche, le téléphone au sol affiche « Appel terminé ». Le silence tombe.
 
@@ -710,7 +730,7 @@ L'appel est le seul écart du plan, et il est de sa main. Ce n'est pas un appel 
 
 **Le point de rupture, et il est double :** Paul a classé une mourante dans la catégorie des gens qui cuvent, et il l'a fait devant un médecin. Bastien a entendu le classement et ne l'a pas démenti.
 
-**Ce que Maddie sait au sortir de cette nuit, et ce qu'elle ignore.** Elle sait que Bastien a pris le téléphone des mains de Paul : elle était au sol, elle a entendu une voix d'homme à côté d'elle, puis une autre, et elle a compris ce que cela voulait dire. Elle ignore que Paul avait décroché avant lui, qu'il tenait la ligne depuis quatorze minutes, et qu'il a dit « elle dort ».
+**Ce que Maddie sait au sortir de cette nuit, et ce qu'elle ignore.** Elle sait seulement que Bastien a répondu à son appel. Inconsciente avant son réveil au contact de sa main, elle n'a pas assisté à la transmission du téléphone et ne sait pas qui avait décroché avant lui. Elle ignore que Paul avait décroché avant lui, qu'il tenait la ligne depuis quatorze minutes, et qu'il a dit « elle dort ».
 
 Son grief porte donc sur la bonne personne et sur le mauvais fait. Elle reproche à Bastien d'avoir répondu à sa place ; ce qu'elle ne sait pas, c'est que la place avait déjà été prise, et que le mot qui l'a tuée n'est pas un acte mais un classement.
 
@@ -748,7 +768,7 @@ Trois informations, et chacune détruit un étage de ce que Maddie a construit p
 
 ### 11.7 La séquence des gestes
 
-Il entre. Il voit le corps. Il s'arrête. Il baisse le téléphone. Il s'agenouille. Il prend le pouls radial. Il compte. Il regarde autour de lui, et il ne touche à rien. Il appelle le 15. Il donne l'âge, le tableau, le score. Il annonce qu'il l'emmène. Il raccroche. Il la retourne. Il pose la main sur son menton et passe le pouce près de sa bouche pour décoller une mèche de cheveux collée par la salive.
+Il entre. Il s'arrête. Il raccroche le téléphone qu'il tient à l'oreille et le pose sur le plan de travail. Un ronflement, puis rien. Ses yeux restent sur la bouche ouverte. Il s'agenouille. Deux doigts au creux du poignet. Il appuie. Le bras glisse, il le reprend, il appuie encore. Il relève la tête et regarde autour de lui. Il ne touche à rien d'autre. Il sort son téléphone de sa poche et appelle le 15. Il donne l'âge, le tableau, le score. Il annonce qu'il l'emmène. Il raccroche pendant que la voix parle encore. Il la retourne. La tête roule, le regard glisse au plafond. Il pose la main sur son menton. Le pouce passe près de sa bouche. Une mèche de cheveux y est collée. Elle se détache.
 
 **Sa main sur mon menton.**
 
