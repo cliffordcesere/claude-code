@@ -24,9 +24,10 @@ Réglages
   --fps <n>               Cadence (défaut : config.fps)
   --duration <s>          Durée (défaut : config.duration)
   --scale <n>             Facteur de pixels (2 = rendu deux fois plus défini ; 0.25 = test miniature)
+  --workers <n>           Pages de rendu en parallèle (défaut : min(4, cœurs - 1))
   --motion-blur <n>       Flou de mouvement : n sous-images moyennées par image (4 conseillé ; obturateur 180°)
   --crf <n>               Qualité H.264 / VP9 (défaut 16 / 24 ; plus bas = meilleur)
-  --gif-width <px>        Largeur du GIF (défaut 600)
+  --gif-width <px>        Largeur du GIF (défaut 600). Le grain est coupé pour les GIF (poids) ; --keep-grain pour le garder
   --alpha                 Fond transparent (ProRes 4444 / WebM) : la scène doit avoir un fond transparent
   --query <k=v&...>       Paramètres d'URL ajoutés (ex. "guides=1")
   --allow-missing-fonts   Ne pas échouer si une police déclarée manque (déconseillé)
@@ -37,7 +38,7 @@ Diagnostic
 
 function parseArgs(argv) {
   const a = { _: [] };
-  const flags = new Set(["pdf", "alpha", "check", "help", "allow-missing-fonts"]);
+  const flags = new Set(["pdf", "alpha", "check", "help", "allow-missing-fonts", "keep-grain"]);
   for (let i = 0; i < argv.length; i++) {
     const s = argv[i];
     if (s.startsWith("--")) {
@@ -80,7 +81,10 @@ async function main() {
   if (!input) { console.log(HELP); process.exit(1); }
   const file = path.resolve(input);
   if (!fs.existsSync(file)) { console.error("Fichier introuvable :", file); process.exit(1); }
-  const url = "file://" + file + "?render=1" + (args.query ? "&" + args.query : "");
+  // Le grain animé multiplie le poids d'un GIF par 10 ou plus : on le coupe sauf demande contraire.
+  const isGif = args.format === "gif" || /\.gif$/i.test(args.out || "");
+  const query = [args.query, isGif && !args["keep-grain"] ? "nograin=1" : null].filter(Boolean).join("&");
+  const url = "file://" + file + "?render=1" + (query ? "&" + query : "");
 
   const browser = await launch(pw);
   try {
@@ -97,30 +101,32 @@ async function main() {
     const blur = Math.max(1, Number(args["motion-blur"] || 1));
     const stillDefault = cfg.still != null ? cfg.still : duration;
 
-    // 2. Page de rendu à la taille exacte
-    const ctx = await browser.newContext({ viewport: { width: cfg.width, height: cfg.height }, deviceScaleFactor: scale });
-    const page = await ctx.newPage();
-    page.on("pageerror", e => console.error("Erreur JS dans la page :", e.message));
-    await page.goto(url, { waitUntil: "networkidle" });
-    await page.evaluate(() => { if (typeof window.__seek !== "function") throw new Error("window.__seek absent"); window.__seek(0); });
-
-    // 3. Polices : on refuse un rendu avec police de secours
-    const fontReport = await page.evaluate(async (families) => {
-      await document.fonts.ready;
-      await Promise.all((families || []).flatMap(f => [
-        document.fonts.load(`16px "${f}"`, "AÉaé0").catch(() => null),
-        document.fonts.load(`italic 16px "${f}"`, "AÉaé0").catch(() => null),
-      ]));
-      await document.fonts.ready;
-      const faces = [...document.fonts];
-      return (families || []).map(f => ({ family: f, loaded: faces.some(x => x.family.replace(/["']/g, "") === f && x.status === "loaded") }));
-    }, cfg.fonts);
-    const missing = fontReport.filter(f => !f.loaded).map(f => f.family);
-    if (missing.length) {
-      const msg = "Police(s) non chargée(s) : " + missing.join(", ") + ". Vérifie l'accès réseau (Google Fonts / kit Adobe) ou les @font-face locaux.";
-      if (!args["allow-missing-fonts"]) throw new Error(msg);
-      console.warn("ATTENTION — " + msg);
-    }
+    // 2. Page de rendu à la taille exacte, polices vérifiées : on refuse un rendu avec police de secours
+    const openPage = async (warn) => {
+      const ctx = await browser.newContext({ viewport: { width: cfg.width, height: cfg.height }, deviceScaleFactor: scale });
+      const page = await ctx.newPage();
+      page.on("pageerror", e => console.error("Erreur JS dans la page :", e.message));
+      await page.goto(url, { waitUntil: "networkidle" });
+      await page.evaluate(() => { if (typeof window.__seek !== "function") throw new Error("window.__seek absent"); window.__seek(0); });
+      const fontReport = await page.evaluate(async (families) => {
+        await document.fonts.ready;
+        await Promise.all((families || []).flatMap(f => [
+          document.fonts.load(`16px "${f}"`, "AÉaé0").catch(() => null),
+          document.fonts.load(`italic 16px "${f}"`, "AÉaé0").catch(() => null),
+        ]));
+        await document.fonts.ready;
+        const faces = [...document.fonts];
+        return (families || []).map(f => ({ family: f, loaded: faces.some(x => x.family.replace(/["']/g, "") === f && x.status === "loaded") }));
+      }, cfg.fonts);
+      const missing = fontReport.filter(f => !f.loaded).map(f => f.family);
+      if (missing.length) {
+        const msg = "Police(s) non chargée(s) : " + missing.join(", ") + ". Vérifie l'accès réseau (Google Fonts / kit Adobe) ou les @font-face locaux.";
+        if (!args["allow-missing-fonts"]) throw new Error(msg);
+        if (warn) console.warn("ATTENTION — " + msg);
+      }
+      return { ctx, page };
+    };
+    const { ctx, page } = await openPage(true);
 
     const stage = await page.$("#stage, .stage");
     const shot = async (opts = {}) => stage
@@ -176,23 +182,32 @@ async function main() {
     const ffDone = new Promise((res, rej) => ff.on("close", c => c === 0 ? res() : rej(new Error("ffmpeg a échoué (code " + c + ")"))));
     const write = buf => new Promise(res => ff.stdin.write(buf) ? res() : ff.stdin.once("drain", res));
 
-    // Capture directe via CDP : nettement plus rapide que locator.screenshot pour des centaines d'images.
-    const cdp = await ctx.newCDPSession(page);
-    if (args.alpha) await cdp.send("Emulation.setDefaultBackgroundColorOverride", { color: { r: 0, g: 0, b: 0, a: 0 } });
+    // Capture directe via CDP (bien plus rapide que locator.screenshot), répartie sur plusieurs
+    // pages : chaque page est un processus de rendu Chromium distinct, donc les cœurs travaillent en parallèle.
     const box = await page.evaluate(() => { const s = document.querySelector("#stage, .stage"); const r = s ? s.getBoundingClientRect() : { x: 0, y: 0, width: innerWidth, height: innerHeight }; return { x: r.x, y: r.y, width: r.width, height: r.height }; });
-    const grab = async () => Buffer.from((await cdp.send("Page.captureScreenshot", {
-      format: "png", optimizeForSpeed: true, captureBeyondViewport: false, clip: Object.assign({ scale: 1 }, box),
-    })).data, "base64");
+    const makeWorker = async ({ ctx, page }) => {
+      const cdp = await ctx.newCDPSession(page);
+      if (args.alpha) await cdp.send("Emulation.setDefaultBackgroundColorOverride", { color: { r: 0, g: 0, b: 0, a: 0 } });
+      return async t => {
+        await page.evaluate(t => window.__seek(t), t);
+        const r = await cdp.send("Page.captureScreenshot", { format: "png", optimizeForSpeed: true, captureBeyondViewport: false, clip: Object.assign({ scale: 1 }, box) });
+        return Buffer.from(r.data, "base64");
+      };
+    };
+    const nWorkers = Math.max(1, Number(args.workers || Math.min(4, Math.max(1, require("os").cpus().length - 1))));
+    const workers = [await makeWorker({ ctx, page })];
+    for (let w = 1; w < nWorkers; w++) workers.push(await makeWorker(await openPage(false)));
 
     const shutter = 0.5; // obturateur 180°
+    const units = [];     // une unité = une capture (sous-image si flou de mouvement)
+    for (let i = 0; i < frames; i++) for (let k = 0; k < blur; k++) units.push((i + (blur > 1 ? (k / blur) * shutter : 0)) / fps);
     const started = Date.now();
-    for (let i = 0; i < frames; i++) {
-      for (let k = 0; k < blur; k++) {
-        const t = (i + (blur > 1 ? (k / blur) * shutter : 0)) / fps;
-        await page.evaluate(t => window.__seek(t), t);
-        await write(await grab());
-      }
-      if (i % fps === 0 || i === frames - 1) process.stdout.write(`\rImage ${i + 1}/${frames}`);
+    for (let u = 0; u < units.length; u += workers.length) {
+      const batch = units.slice(u, u + workers.length);
+      const bufs = await Promise.all(batch.map((t, j) => workers[j](t)));
+      for (const buf of bufs) await write(buf);
+      const done = Math.min(frames, Math.floor((u + batch.length) / blur));
+      if (done % fps < workers.length || done === frames) process.stdout.write(`\rImage ${done}/${frames}`);
     }
     ff.stdin.end();
     await ffDone;

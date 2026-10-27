@@ -10,7 +10,8 @@
   Contrat avec scripts/render.cjs :
     window.__config = { width, height, fps, duration, still, fonts }
     window.__seek(t)  -> met la scène exactement dans l'état du temps t (en secondes)
-  Paramètres d'URL : ?render=1 (pas de lecture auto, pas d'échelle), ?guides=1 (zones de sécurité).
+  Paramètres d'URL : ?render=1 (pas de lecture auto, pas d'échelle), ?guides=1 (zones de sécurité),
+  ?nograin=1 (sans grain — ajouté automatiquement pour les GIF).
 
   Remplace le contenu de .stage et la timeline (section TIMELINE). Le moteur au-dessus
   n'a normalement pas besoin d'être modifié.
@@ -240,6 +241,7 @@ window.__config = {
 (function () {
   const cfg = window.__config, c = document.getElementById("grain");
   if (!c) return;
+  if (new URLSearchParams(location.search).has("nograin")) { c.style.display = "none"; return; }  // GIF : le bruit ruine la compression
   c.width = cfg.width; c.height = cfg.height;
   const ctx = c.getContext("2d");
   const tiles = [];
