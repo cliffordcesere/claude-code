@@ -25,6 +25,11 @@ Passe ta composition au crible :
 - Cinq informations au même niveau de corps.
 - Majuscules partout avec interlettrage par défaut.
 - Coins arrondis « carte d'interface » sur un support éditorial.
+- Un seul mot en italique ou en couleur au milieu d'un titre romain (« La nuit *des* lumières ») :
+  devenu la signature des maquettes générées. Traite le titre d'un seul tenant, ou change de ligne et de corps.
+- Petits labels en capitales espacées au-dessus des titres et des infos (« DATE », « LIEU ») :
+  préférer la fonte de texte, un cran plus petite, en casse normale, sans interlettrage.
+- Badges, pastilles et coups de pinceau pour signaler une offre : l'offre est une ligne de la hiérarchie, pas un autocollant.
 
 Un élément de cette liste peut être justifié par le concept (un dégradé dans une
 direction rétro-futuriste assumée, par exemple). Dans ce cas, il est poussé à fond et

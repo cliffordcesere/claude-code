@@ -12,6 +12,7 @@ Passe chaque point. Signale à l'utilisateur ceux que tu n'as pas pu vérifier.
 - [ ] Lisible en miniature : regarder l'image réduite à ~25 % (`--still … --scale 0.25`).
 - [ ] Contraste suffisant des infos pratiques.
 - [ ] Aucune ligne de titre avec un mot isolé ; césures voulues.
+- [ ] Accents des capitales intacts (É, È, À, Ç) dans l'image finale : un masque de révélation trop serré les rogne.
 - [ ] Zones de sécurité respectées (rendre avec `?guides=1` pour vérifier, puis sans).
 - [ ] Aucun marqueur de rendu générique (liste dans `art-direction.md`), ou alors justifié par le concept.
 

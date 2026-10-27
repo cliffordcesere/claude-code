@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youmi Wings — feed 4:5</title>
+<!--
+  Direction A — « Vendredi ». Le rendez-vous de la semaine est l'idée : le jour en très grand,
+  le plat en pleine largeur juste dessous, puis l'offre et les infos. Brun laqué (la sauce),
+  crème, un seul accent or (les bananes pesées). Grotesque très condensée + grotesque de texte.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@500;600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --bg: #170D08;          /* brun laqué très sombre */
+    --cream: #F5E9D8;
+    --gold: #F2B640;        /* accent : < 10 % de la surface */
+    --muted: #B39C86;
+    --rule: rgba(245, 233, 216, .22);
+    --display: "Big Shoulders Display", sans-serif;
+    --text: "Hanken Grotesk", sans-serif;
+    --m: 64px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); overflow: clip; }
+  body { display: grid; place-items: center; min-height: 100vh; }
+  body.render { place-items: start; }
+
+  .stage {
+    position: relative; overflow: hidden; width: 1080px; height: 1350px;
+    background: var(--bg); color: var(--cream); font-family: var(--text);
+    transform-origin: center; -webkit-font-smoothing: antialiased;
+  }
+  .render .stage { transform: none !important; }
+
+  .brand { position: absolute; left: var(--m); top: 56px; font-weight: 600; font-size: 34px; letter-spacing: -.01em; }
+
+  .day { position: absolute; left: var(--m); right: var(--m); top: 112px; }
+  .day .pre { display: block; font-weight: 500; font-size: 40px; color: var(--gold); margin-bottom: 4px; }
+  .day .big {
+    display: inline-block; font-family: var(--display); font-weight: 900; text-transform: uppercase;
+    line-height: .8; letter-spacing: -.005em; white-space: nowrap;
+  }
+  /* Le masque déborde de la ligne (marge intérieure compensée) pour ne jamais rogner
+     les accents des capitales (È, É) ni les jambages, tout en cachant le texte avant l'entrée. */
+  .mask { display: block; overflow: hidden; padding: .22em 0 .08em; margin: -.22em 0 -.08em; }
+  .line { display: block; }
+
+  .photo {
+    position: absolute; left: 0; top: 424px; width: 1080px; height: 584px; overflow: hidden;
+  }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  .offers {
+    position: absolute; left: var(--m); right: var(--m); top: 1040px;
+    display: grid; grid-template-columns: 1.25fr 1fr; gap: 0 48px;
+  }
+  .offers dt { font-weight: 500; font-size: 30px; color: var(--gold); margin-bottom: 6px; }
+  .offers dd { font-family: var(--display); font-weight: 800; font-size: 70px; line-height: .92; text-transform: uppercase; white-space: nowrap; }
+  .offers dd .line { display: flex; align-items: baseline; gap: 14px; }
+  .offers dd small { font-family: var(--text); font-weight: 500; font-size: 30px; text-transform: none; color: var(--muted); }
+
+  .info {
+    position: absolute; left: var(--m); right: var(--m); top: 1162px; padding-top: 18px;
+    display: grid; grid-template-columns: .95fr .7fr 1.35fr; gap: 0 32px;
+    font-weight: 500; font-size: 26px; line-height: 1.3; font-variant-numeric: tabular-nums;
+  }
+  .info span { color: var(--muted); display: block; }
+  .rule { position: absolute; left: var(--m); right: var(--m); top: 1162px; height: 1px; background: var(--rule); transform-origin: left center; }
+
+  canvas.grain { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: overlay; opacity: .07; }
+
+  .guides { position: absolute; inset: 0; pointer-events: none; display: none; }
+  .show-guides .guides { display: block; }
+  .guides i { position: absolute; left: 0; right: 0; background: rgba(255,0,80,.18); }
+  .guides i.top { top: 0; height: 250px; } .guides i.bottom { bottom: 0; height: 340px; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <p class="brand">Youmi Wings</p>
+
+  <h1 class="day">
+    <span class="pre">Chaque</span>
+    <span class="mask"><span class="line big" id="fit">Vendredi</span></span>
+  </h1>
+
+  <div class="photo"><img src="assets/plat.jpg" alt="Barquette de wings laqués, bananes pesées, salade de chou et sauce"></div>
+
+  <dl class="offers">
+    <div><dt>Spécial bière</dt><dd><span class="mask"><span class="line">5 pour 1&nbsp;000 <small>gourdes</small></span></span></dd></div>
+    <div><dt>Wings</dt><dd><span class="mask"><span class="line">dès 750 <small>gourdes</small></span></span></dd></div>
+  </dl>
+
+  <div class="rule"></div>
+  <div class="info">
+    <p><span>Adresse</span>Delmas 75, Siloe M</p>
+    <p><span>Livraison</span>Disponible</p>
+    <p><span>Téléphone</span>3179 3416 / 4943 2244</p>
+  </div>
+
+  <canvas class="grain" id="grain" aria-hidden="true"></canvas>
+</div>
+
+<script>
+window.__config = { width: 1080, height: 1350, fps: 30, duration: 10, still: 9.5, fonts: ["Big Shoulders Display", "Hanken Grotesk"] };
+</script>
+<script src="engine.js"></script>
+<script>
+/* « Vendredi » occupe exactement la largeur de la grille, quelle que soit la fonte chargée. */
+window.onSeek(() => {
+  const el = document.getElementById("fit");
+  if (el.dataset.fitted === document.fonts.status) return;
+  const target = 1080 - 2 * 64;
+  el.style.fontSize = "100px";
+  el.style.fontSize = (100 * target / el.getBoundingClientRect().width) + "px";
+  el.dataset.fitted = document.fonts.status;
+});
+
+/* ============================== TIMELINE ==============================
+   Image 0 : marque + plat déjà en place (c'est la miniature). Puis une seule chose à la fois,
+   dans l'ordre de la hiérarchie : le jour, l'offre, les infos. Tenue finale ≈ 5 s pour la lecture. */
+tween(".photo img",          { scale: [1.0, 1.07] },               { at: 0,    dur: 10,  ease: "sineInOut" });
+tween(".day .pre",           { opacity: [0, 1], y: [18, 0] },      { at: 0.30, dur: 0.7, ease: "quartOut" });
+tween(".day .line",          { yp: [135, 0] },                     { at: 0.45, dur: 1.3 });
+tween(".offers dt",          { opacity: [0, 1], y: [14, 0] },      { at: 2.00, dur: 0.6, stagger: 0.18, ease: "quartOut" });
+tween(".offers dd .line",    { yp: [140, 0] },                     { at: 2.10, dur: 1.1, stagger: 0.18 });
+tween(".rule",               { sx: [0, 1] },                       { at: 3.10, dur: 1.0, ease: "quintInOut" });
+tween(".info p",             { opacity: [0, 1], y: [18, 0] },      { at: 3.50, dur: 0.7, stagger: 0.12, ease: "quartOut" });
+</script>
+</body>
+</html>
