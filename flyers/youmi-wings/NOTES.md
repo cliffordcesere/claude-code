@@ -17,6 +17,10 @@ Deux directions, trois formats chacune, chacune en PDF print et PNG de contrôle
 
 Chaque document inclut **3 mm de fond perdu sur les quatre côtés** : le format fini est le format nominal, le document papier est 6 mm plus grand.
 
+## Direction retenue
+
+**v4, fond noir** — le plat en grand, les bières en encart, le prix sur encre. Trois formats : A5, A6, 4:5.
+
 ## Les deux directions
 
 **v2 « Reprise »** — même architecture que l'original : wordmark en haut sur fond encre, photo produit en bande pleine largeur, prix en gros chiffres, barre d'informations en bas, bandeau accent en pied. Ce qui change :
@@ -31,7 +35,12 @@ Chaque document inclut **3 mm de fond perdu sur les quatre côtés** : le format
 
 ## Ce qui n'a pas été copié, volontairement
 
-L'original contient du **mobilier de marque tiers** : trois bouteilles **Prestige 50 ans** et un pictogramme de chope. Les bouteilles sont un produit identifiable, le pictogramme un emoji. Aucun des deux n'apparaît dans les nouvelles versions : l'offre « spécial bière » est nommée, pas illustrée par une marque qui n'a rien signé. Si Prestige est partenaire de l'opération, il faut leur accord écrit et leur logo vectoriel — et dans ce cas je l'intègre proprement.
+L'original contient du **mobilier de marque tiers** : trois bouteilles **Prestige 50 ans** et un pictogramme de chope.
+
+- Le **pictogramme de chope** (un emoji) n'a été repris dans aucune version.
+- Les **bouteilles** ont été retirées de v2 et v3, puis **réintroduites dans v4** à la demande du client. Elles restent la propriété de Prestige : pour une impression commerciale, il faut leur accord écrit, sinon il faudra retirer l'encart ou le remplacer par un visuel de bière neutre.
+
+Si Prestige est partenaire de l'opération, demande-leur leur **logo vectoriel** : l'encart sera refait avec leur fichier officiel au lieu d'une photo de produit prise dans le flyer d'origine.
 
 ## Limite à connaître : la photo
 

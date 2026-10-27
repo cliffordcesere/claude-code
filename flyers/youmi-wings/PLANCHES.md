@@ -6,9 +6,39 @@ Pour l'impression, prends les PDF du dossier [`out/`](out/) — ce sont eux qui 
 
 ---
 
-## Les deux directions côte à côte (A5)
+## La direction retenue — v4, fond noir (A5)
 
-![Comparaison A5 : reprise à gauche, studio à droite](out/preview/comparaison_A5.jpg)
+![v4 A5](out/preview/youmi_v4_A5.jpg)
+
+[PDF print A5](out/youmi_v4_A5.pdf)
+
+**A6 — 105 × 148 mm**
+
+![v4 A6](out/preview/youmi_v4_A6.jpg)
+
+[PDF print A6](out/youmi_v4_A6.pdf)
+
+**4:5 — social, 1080 × 1350**
+
+![v4 4:5](out/preview/youmi_v4_4x5.jpg)
+
+[PDF print 4:5](out/youmi_v4_4x5.pdf)
+
+### Ce qui a changé depuis le premier jet noir
+
+- **Le plat occupe 100 mm de haut** au lieu de 74 et garde tout le visible : ailes, plantains, salade, sauce.
+- **Les bières sont revenues**, en encart posé sur la photo avec un filet accent, pas en bloc flottant.
+- Le prix respire (`5 POU 1 000 GDS`), la phrase est sur une seule ligne, l'information est ancrée en bas.
+
+> ⚠️ Les bouteilles sont des **Prestige 50 ans**, une marque tierce. Elles apparaissent telles quelles dans la photo fournie. Pour une impression commerciale, il faut l'accord de Prestige, sinon il faudra les retirer ou les remplacer par un visuel de bière neutre. Dis-moi lequel et je refais l'encart.
+
+---
+
+## Les trois directions côte à côte (A5)
+
+v4 (noir, retenue) à gauche, v2 (reprise) à droite.
+
+![Comparaison A5](out/preview/comparaison_A5.jpg)
 
 ---
 
@@ -36,9 +66,9 @@ Même architecture que ton flyer d'origine : wordmark en haut, photo en bande, g
 
 ---
 
-## v3 — « Studio »
+## v3 — « Studio », version claire (conservée pour comparaison)
 
-Le chiffre fait tout le travail. Aucun badge, un seul filet accent, la photo en pleine largeur.
+Le chiffre fait tout le travail. Aucun badge, un seul filet accent.
 
 **A5 — 148 × 210 mm**
 

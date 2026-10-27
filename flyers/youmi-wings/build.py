@@ -411,7 +411,83 @@ def layout_v3(scene: Scene, P):
     scene.text(right, scene.h - 3 - 4.4 * k, "MINIMUM 750 GDS", "mono", 2.5 * k, P["ink"], tracking=0.28, align="right")
 
 
-LAYOUTS = {"v2": (layout_v2, V2), "v3": (layout_v3, V3)}
+def layout_v4(scene: Scene, P):
+    """Dark direction: the address the client picked, with the plate and the bucket."""
+    W = scene.w
+    tw, th = W - 6, scene.h - 6
+    m = 3 + tw * 0.046
+    right = 3 + tw - tw * 0.046
+    k = th / 210.0
+
+    y = 3.0
+    h_header, h_hero, h_price, h_bar, h_foot = 40 * k, 100 * k, 31 * k, 27 * k, 11 * k
+
+    scene.rect(0, 0, W, scene.h, P["paper"])
+
+    # ── 1. header
+    scene.text(m, y + 17 * k, COPY["brand"], "script", 20 * k, P["accent"])
+    scene.text(m, y + 27 * k, COPY["brand2"], "slab", 9.6 * k, P["ink"], tracking=1.4)
+    scene.text(m, y + 33.6 * k, COPY["tagline"], "italic", 3.8 * k, P["muted"])
+    scene.line(m, y + 37 * k, right, y + 37 * k, P["accent"], 0.45)
+
+    # ── 2. the plate, full bleed
+    scene.image(ASSETS / "tray_hero.png", 0, y + h_header, W, h_hero)
+    scene.gradient(0, y + h_header + h_hero - 10 * k, W, 10 * k, P["paper"], "up")
+
+    # ── 3. the bucket, sitting on the photo like an inset
+    bw = tw * 0.28
+    bh = bw * 1.00
+    bx = right - bw
+    by = y + h_header + 7 * k
+    scene.rect(bx - 1.2 * k, by - 1.2 * k, bw + 2.4 * k, bh + 2.4 * k, P["paper"])
+    scene.image(ASSETS / "beer_ice.png", bx, by, bw, bh)
+    for a, b, c, d in (
+        (bx - 0.4 * k, by - 0.4 * k, bx + bw + 0.4 * k, by - 0.4 * k),
+        (bx - 0.4 * k, by + bh + 0.4 * k, bx + bw + 0.4 * k, by + bh + 0.4 * k),
+        (bx - 0.4 * k, by - 0.4 * k, bx - 0.4 * k, by + bh + 0.4 * k),
+        (bx + bw + 0.4 * k, by - 0.4 * k, bx + bw + 0.4 * k, by + bh + 0.4 * k),
+    ):
+        scene.line(a, b, c, d, P["accent"], 0.35)
+    y += h_header + h_hero
+
+    # ── 4. price
+    scene.text(m, y + 4.6 * k, COPY["offer"], "mono", 2.6 * k, P["accent"], tracking=0.5)
+    x = m
+    scene.text(x, y + 18.5 * k, COPY["n1"], "condensed", 15.5 * k, P["ink"], tracking=-0.35)
+    x += scene.measure(COPY["n1"], "condensed", 15.5 * k) + 2.2 * k
+    scene.text(x, y + 18.5 * k, "POU", "condensed", 6.2 * k, P["muted"], tracking=0.3)
+    x += scene.measure("POU", "condensed", 6.2 * k) + 2.6 * k
+    scene.text(x, y + 18.5 * k, COPY["n2"], "condensed", 15.5 * k, P["accent"], tracking=-0.35)
+    x += scene.measure(COPY["n2"], "condensed", 15.5 * k) + 2.4 * k
+    scene.text(x, y + 18.5 * k, COPY["unit"], "mono", 3.2 * k, P["muted"])
+    scene.text(m, y + 25.5 * k, COPY["claim1"] + " " + COPY["claim2"], "italic", 3.8 * k, P["muted"])
+    y += h_price
+
+    # ── 5. information bar
+    bar_bottom = scene.h - 3 - h_foot
+    scene.rect(0, y, W, bar_bottom - y, P["paper"])
+    top = bar_bottom - 12.5 * k
+    scene.line(m, y + 3 * k, right, y + 3 * k, P["rule"], 0.2)
+    scene.text(m, top, COPY["special"], "condensed", 4.4 * k, P["ink"], tracking=0.3)
+    scene.text(m, top + 6.2 * k, COPY["day"], "italic", 3.6 * k, P["accent"])
+
+    c1, c2 = m + tw * 0.34, m + tw * 0.66
+    for cx in (c1 - 5, c2 - 5):
+        scene.line(cx, top - 3.6 * k, cx, top + 10 * k, P["rule"], 0.18)
+    scene.text(c1, top + 0.4 * k, COPY["addr1"], "sans", 4.0 * k, P["ink"])
+    scene.text(c1, top + 5.9 * k, COPY["addr2"], "sans", 4.0 * k, P["ink"])
+    scene.text(c2, top + 0.4 * k, COPY["tel1"], "mono", 3.4 * k, P["ink"])
+    scene.text(c2, top + 5.9 * k, COPY["tel2"], "mono", 3.4 * k, P["ink"])
+
+    # ── 6. footer strip
+    fy = scene.h - 3 - h_foot
+    scene.rect(0, fy, W, h_foot, P["accent"])
+    scene.text(m, fy + h_foot / 2 + 1.1 * k, COPY["minimum"], "monobold", 2.9 * k, P["paper"])
+    scene.text(right, fy + h_foot / 2 + 1.1 * k, "LIVRAISON DISPONIBLE", "mono", 2.5 * k,
+               P["paper"], tracking=0.25, align="right")
+
+
+LAYOUTS = {"v2": (layout_v2, V2), "v3": (layout_v3, V3), "v4": (layout_v4, V2)}
 FORMATS = {"A5": (148, 210), "A6": (105, 148), "4x5": (108, 135)}
 
 
