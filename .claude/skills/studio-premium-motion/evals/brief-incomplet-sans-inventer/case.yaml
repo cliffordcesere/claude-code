@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: brief-incomplet-sans-inventer
+expected_outcome: |
+  Un flyer 4:5 (1080×1350) animé. Les informations manquantes (adresse, date exacte) sont des placeholders visibles, pas des valeurs inventées. Les hypothèses prises sont listées. Le macron de Ōmi est conservé.

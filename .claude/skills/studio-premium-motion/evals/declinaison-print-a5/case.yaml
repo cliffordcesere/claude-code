@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: declinaison-print-a5
+expected_outcome: |
+  Un PDF vectoriel aux dimensions A5 + 3 mm de fonds perdus (154 × 216 mm), texte à au moins 5 mm du bord fini. La réponse signale que le PDF est en RVB et que la conversion CMJN avec le profil de l'imprimeur reste à faire.

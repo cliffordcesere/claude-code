@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flyer — template studio</title>
+<!--
+  Template de flyer animé, à copier dans le dossier du projet.
+
+  Contrat avec scripts/render.cjs :
+    window.__config = { width, height, fps, duration, still, fonts }
+    window.__seek(t)  -> met la scène exactement dans l'état du temps t (en secondes)
+  Paramètres d'URL : ?render=1 (pas de lecture auto, pas d'échelle), ?guides=1 (zones de sécurité).
+
+  Remplace le contenu de .stage et la timeline (section TIMELINE). Le moteur au-dessus
+  n'a normalement pas besoin d'être modifié.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E0D0B;        /* noir chaud */
+    --paper: #F3EEE4;      /* ivoire */
+    --muted: #A39C8E;
+    --accent: #B8925A;     /* laiton — < 10 % de la surface */
+    --margin: 84px;        /* ~8 % de 1080 */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #000; overflow: hidden; }
+  body { display: grid; place-items: center; min-height: 100vh; }
+
+  .stage {
+    position: relative; overflow: hidden;
+    width: 1080px; height: 1920px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Inter Tight", sans-serif;
+    transform-origin: center center;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+  .render .stage { transform: none !important; }
+  .render body, body.render { place-items: start; }
+
+  /* Lumière chaude très douce, dérive lente : de la profondeur sans « dégradé d'IA » */
+  .glow {
+    position: absolute; width: 1400px; height: 1400px; left: -260px; top: 240px;
+    /* Dégradé « adouci » à plusieurs paliers : un dégradé linéaire à 2 couleurs crée un cône visible */
+    background: radial-gradient(closest-side, rgba(184,146,90,.20) 0%, rgba(184,146,90,.15) 22%,
+      rgba(184,146,90,.09) 45%, rgba(184,146,90,.04) 68%, rgba(184,146,90,.01) 88%, rgba(184,146,90,0) 100%);
+  }
+
+  .label {
+    position: absolute; left: var(--margin); top: 290px;
+    font-size: 26px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .label b { color: var(--paper); font-weight: 500; }
+
+  .title {
+    position: absolute; left: var(--margin); top: 520px; right: var(--margin);
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: 238px; line-height: .9; letter-spacing: -.02em;
+  }
+  .title em { font-style: italic; color: var(--accent); }
+
+  /* Révélation par masque : la ligne glisse depuis l'intérieur de son conteneur */
+  .mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+  .line { display: block; will-change: transform; }
+
+  .rule {
+    position: absolute; left: var(--margin); top: 1300px; width: 912px; height: 2px;
+    background: var(--accent); transform-origin: left center;
+  }
+
+  .info {
+    position: absolute; left: var(--margin); bottom: 380px;
+    display: grid; grid-template-columns: auto auto; gap: 18px 72px;
+    font-size: 34px; line-height: 1.25; font-variant-numeric: tabular-nums;
+  }
+  .info dt { font-size: 22px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .info dd { font-weight: 400; }
+
+  .mark {
+    position: absolute; right: var(--margin); bottom: 380px;
+    font-family: "Instrument Serif", serif; font-style: italic; font-size: 44px; color: var(--paper);
+  }
+
+  canvas.grain {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; mix-blend-mode: overlay; opacity: .09;
+  }
+
+  /* Zones de sécurité 9:16 (affichées avec ?guides=1) */
+  .guides { position: absolute; inset: 0; pointer-events: none; display: none; }
+  .show-guides .guides { display: block; }
+  .guides i { position: absolute; left: 0; right: 0; background: rgba(255,0,80,.18); }
+  .guides i.top { top: 0; height: 250px; }
+  .guides i.bottom { bottom: 0; height: 340px; }
+  .guides i.side { top: 0; bottom: 0; width: 60px; right: auto; }
+  .guides i.side.r { left: auto; right: 0; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="glow"></div>
+
+  <p class="label"><b>Maison Éclat</b> — Soirée privée</p>
+
+  <h1 class="title">
+    <span class="mask"><span class="line">La nuit</span></span>
+    <span class="mask"><span class="line"><em>des</em></span></span>
+    <span class="mask"><span class="line">lumières</span></span>
+  </h1>
+
+  <div class="rule"></div>
+
+  <dl class="info">
+    <dt>Date</dt><dt>Lieu</dt>
+    <dd>Vendredi 14.11.2026<br>20 h 30</dd>
+    <dd>[ADRESSE]<br>Paris</dd>
+  </dl>
+
+  <p class="mark">Sur invitation</p>
+
+  <canvas class="grain" id="grain"></canvas>
+  <div class="guides"><i class="top"></i><i class="bottom"></i><i class="side"></i><i class="side r"></i></div>
+</div>
+
+<script>
+/* ============================== CONFIG ============================== */
+window.__config = {
+  width: 1080, height: 1920,
+  fps: 30,
+  duration: 8,          // secondes
+  still: 7.5,           // temps utilisé par défaut pour --still et --pdf (composition finale)
+  fonts: ["Instrument Serif", "Inter Tight"]  // le rendu échoue si l'une manque
+};
+
+/* ============================== MOTEUR ==============================
+   Timeline déterministe : chaque propriété d'un élément est une fonction pure de t.
+   Propriétés : x, y (px) · xp, yp (% de l'élément) · scale, sx, sy · rotate (deg) · opacity
+               blur (px) · clip [haut, droite, bas, gauche] en % (inset) · ls (letter-spacing, em)
+               toute variable CSS commençant par "--" (ex. "--wght" pour une fonte variable). */
+(function () {
+  function bezier(x1, y1, x2, y2) {
+    const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+    const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+    const sx = t => ((ax * t + bx) * t + cx) * t;
+    const sy = t => ((ay * t + by) * t + cy) * t;
+    const dx = t => (3 * ax * t + 2 * bx) * t + cx;
+    return x => {
+      if (x <= 0) return 0; if (x >= 1) return 1;
+      let t = x;
+      for (let i = 0; i < 8; i++) {
+        const e = sx(t) - x; if (Math.abs(e) < 1e-6) return sy(t);
+        const d = dx(t); if (Math.abs(d) < 1e-6) break; t -= e / d;
+      }
+      let lo = 0, hi = 1; t = x;
+      for (let i = 0; i < 40; i++) { const v = sx(t); if (Math.abs(v - x) < 1e-6) break; v < x ? lo = t : hi = t; t = (lo + hi) / 2; }
+      return sy(t);
+    };
+  }
+  const EASE = {
+    linear: t => t,
+    expoOut: bezier(0.16, 1, 0.3, 1),
+    quartOut: bezier(0.25, 1, 0.5, 1),
+    quintInOut: bezier(0.83, 0, 0.17, 1),
+    expoIn: bezier(0.7, 0, 0.84, 0),
+    sineInOut: bezier(0.37, 0, 0.63, 1),
+  };
+  const DEFAULTS = { x: 0, y: 0, xp: 0, yp: 0, scale: 1, sx: 1, sy: 1, rotate: 0, opacity: 1, blur: 0, ls: null, clip: null };
+  const tweens = [];
+  const elements = new Set();
+
+  /* tween(cible, { prop: [de, à], ... }, { at, dur, ease, stagger }) */
+  window.tween = function (target, props, opts) {
+    const els = typeof target === "string" ? [...document.querySelectorAll(target)] : [].concat(target);
+    if (!els.length) console.warn("tween : aucune cible pour", target);
+    const o = Object.assign({ at: 0, dur: 1, ease: "expoOut", stagger: 0 }, opts);
+    const ease = typeof o.ease === "function" ? o.ease : EASE[o.ease];
+    if (!ease) throw new Error("Courbe inconnue : " + o.ease);
+    els.forEach((el, i) => {
+      elements.add(el);
+      for (const p in props) tweens.push({ el, p, from: props[p][0], to: props[p][1], start: o.at + i * o.stagger, dur: o.dur, ease });
+    });
+  };
+
+  /* Découpe un élément en mots puis en lettres (span.word > span.char) pour les animations par lettre. */
+  window.splitChars = function (selector) {
+    document.querySelectorAll(selector).forEach(el => {
+      const words = el.textContent.split(/(\s+)/);
+      el.textContent = "";
+      words.forEach(w => {
+        if (/^\s+$/.test(w)) { el.appendChild(document.createTextNode(" ")); return; }
+        const ws = document.createElement("span"); ws.className = "word"; ws.style.display = "inline-block";
+        [...w].forEach(c => { const cs = document.createElement("span"); cs.className = "char"; cs.style.display = "inline-block"; cs.textContent = c; ws.appendChild(cs); });
+        el.appendChild(ws);
+      });
+    });
+  };
+
+  const lerp = (a, b, k) => Array.isArray(a) ? a.map((v, i) => v + (b[i] - v) * k) : a + (b - a) * k;
+
+  function apply(el, s) {
+    el.style.transform = `translate(${s.x}px, ${s.y}px) translate(${s.xp}%, ${s.yp}%) scale(${s.scale}) scale(${s.sx}, ${s.sy}) rotate(${s.rotate}deg)`;
+    el.style.opacity = s.opacity;
+    el.style.filter = s.blur > 0.01 ? `blur(${s.blur}px)` : "";
+    if (s.clip) el.style.clipPath = `inset(${s.clip.map(v => v + "%").join(" ")})`;
+    if (s.ls !== null) el.style.letterSpacing = s.ls + "em";
+    for (const k in s) if (k.startsWith("--")) el.style.setProperty(k, s[k]);
+  }
+
+  let sorted = null;
+  const hooks = [];
+  window.onSeek = fn => hooks.push(fn);   // pour des effets calculés (canvas, compteurs…)
+
+  window.__seek = function (t) {
+    if (!sorted) sorted = tweens.slice().sort((a, b) => a.start - b.start);
+    const state = new Map();
+    for (const el of elements) state.set(el, Object.assign({}, DEFAULTS));
+    const seen = new Set();
+    for (const tw of sorted) {                       // valeur initiale = « de » du premier tween de la propriété
+      const key = tw.p + "|" + [...elements].indexOf(tw.el);
+      if (!seen.has(key)) { seen.add(key); state.get(tw.el)[tw.p] = tw.from; }
+    }
+    for (const tw of sorted) {
+      if (t < tw.start) continue;
+      const k = tw.dur > 0 ? Math.min(1, (t - tw.start) / tw.dur) : 1;
+      state.get(tw.el)[tw.p] = lerp(tw.from, tw.to, tw.ease(k));
+    }
+    for (const [el, s] of state) apply(el, s);
+    hooks.forEach(fn => fn(t));
+  };
+  window.EASE = EASE;
+})();
+
+/* ============================== GRAIN ==============================
+   Bruit déterministe (même t = même image), renouvelé à 12 i/s comme un grain de pellicule. */
+(function () {
+  const cfg = window.__config, c = document.getElementById("grain");
+  if (!c) return;
+  c.width = cfg.width; c.height = cfg.height;
+  const ctx = c.getContext("2d");
+  const tiles = [];
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let n = 0; n < 6; n++) {
+    const tc = document.createElement("canvas"); tc.width = tc.height = 256;
+    const tx = tc.getContext("2d"), img = tx.createImageData(256, 256);
+    for (let i = 0; i < img.data.length; i += 4) { const v = rnd() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+    tx.putImageData(img, 0, 0); tiles.push(ctx.createPattern(tc, "repeat"));
+  }
+  window.onSeek(t => {
+    const f = Math.floor(t * 12);
+    ctx.save(); ctx.fillStyle = tiles[f % tiles.length];
+    ctx.translate((f * 97) % 256, (f * 61) % 256);
+    ctx.fillRect(-256, -256, cfg.width + 512, cfg.height + 512); ctx.restore();
+  });
+})();
+
+/* ============================== TIMELINE ==============================
+   Une chose à la fois, l'ordre suit la hiérarchie, longue tenue finale.
+   La signature (.label) n'est pas animée : elle est présente dès la première image,
+   qui sert souvent de miniature — une première image vide donne un aperçu mort. */
+tween(".glow",          { x: [0, 120], y: [0, -80], scale: [1, 1.08] }, { at: 0, dur: 8, ease: "sineInOut" });
+tween(".title .line",   { yp: [105, 0] },                                 { at: 0.35, dur: 1.3, stagger: 0.12 });
+tween(".rule",          { sx: [0, 1] },                                  { at: 1.6, dur: 1.2, ease: "quintInOut" });
+tween(".info dt, .info dd", { opacity: [0, 1], y: [24, 0] },              { at: 2.3, dur: 0.8, stagger: 0.07, ease: "quartOut" });
+tween(".mark",          { opacity: [0, 1], blur: [8, 0] },                { at: 3.0, dur: 1.0, ease: "quartOut" });
+
+/* ============================== LECTURE ============================== */
+(function () {
+  const q = new URLSearchParams(location.search), cfg = window.__config;
+  const stage = document.getElementById("stage");
+  if (q.has("guides")) document.documentElement.classList.add("show-guides");
+  if (q.has("render")) { document.documentElement.classList.add("render"); document.body.classList.add("render"); window.__seek(0); return; }
+  const fit = () => { const s = Math.min(innerWidth / cfg.width, innerHeight / cfg.height) * 0.96; stage.style.transform = `scale(${s})`; };
+  addEventListener("resize", fit); fit();
+  let t0 = performance.now(), paused = false, t = 0;
+  addEventListener("keydown", e => {
+    if (e.code === "Space") { paused = !paused; t0 = performance.now() - t * 1000; }
+    if (e.code === "ArrowRight") { paused = true; t = Math.min(cfg.duration, t + 1 / cfg.fps); window.__seek(t); }
+    if (e.code === "ArrowLeft") { paused = true; t = Math.max(0, t - 1 / cfg.fps); window.__seek(t); }
+  });
+  (function loop(now) {
+    if (!paused) { t = ((now - t0) / 1000) % cfg.duration; window.__seek(t); }
+    requestAnimationFrame(loop);
+  })(performance.now());
+})();
+</script>
+</body>
+</html>

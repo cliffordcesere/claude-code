@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: story-gala-brief-complet
+expected_outcome: |
+  Une vidéo MP4 1080×1920 d'environ 8 s et une image PNG de la composition finale. Toutes les informations du brief apparaissent exactement, sans ajout inventé. La première image n'est pas vide. Typographie française soignée. Livraison accompagnée d'une note (formats, hypothèses, points à valider).
