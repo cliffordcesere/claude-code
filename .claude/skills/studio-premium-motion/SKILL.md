@@ -81,7 +81,10 @@ node <skill>/scripts/render.cjs flyer.html --still 6.5 --out frame.png --scale 2
 node <skill>/scripts/render.cjs print.html --pdf --out print.pdf            # PDF vectoriel (RVB)
 ```
 
-`node render.cjs --help` détaille toutes les options. Le script refuse de rendre si
+`node render.cjs --help` détaille toutes les options. Ordre de grandeur mesuré (conteneur 4 cœurs,
+1080 × 1920) : ~0,2 s par image, soit ~45 s pour 8 s de vidéo, et ~3 min avec `--motion-blur 4`.
+Itère sur des `--still` (quelques secondes) et ne lance la vidéo complète qu'une fois l'animation
+réglée. Le script refuse de rendre si
 une police déclarée dans `__config.fonts` n'est pas chargée : un rendu avec une police
 de secours est le défaut le plus fréquent et le plus visible, mieux vaut un échec net.
 

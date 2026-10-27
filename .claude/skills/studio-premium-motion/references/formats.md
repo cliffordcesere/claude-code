@@ -12,7 +12,7 @@ En cas de doute pour un canal précis (écran d'affichage, régie), demander la 
 | Carré | 1080 × 1080 | 1:1 | |
 | Paysage, écran, site | 1920 × 1080 | 16:9 | 3840 × 2160 pour écrans 4K |
 | Écran vertical (affichage) | 1080 × 1920 ou 2160 × 3840 | 9:16 | Vérifier codec et durée imposés par la régie |
-| GIF e-mail | 600 px de large | libre | 12–15 i/s, viser < 2 Mo, peu de couleurs, durée courte |
+| GIF e-mail | 600 px de large | libre | 12 i/s, viser < 2 Mo — voir « GIF » ci-dessous |
 
 **Zones de sécurité 9:16** (approximatives, interface des applications par-dessus) :
 garder textes et logo hors des ~250 px du haut et des ~340 px du bas, et à ~60 px des bords latéraux.
@@ -24,6 +24,12 @@ Le template affiche ces zones avec `?guides=1`.
 - WebM VP9 : pour le web si demandé.
 - Cadence : 30 i/s par défaut ; 25 i/s pour une diffusion européenne broadcast ; 24 pour un rendu « cinéma ».
 - Durée : 6–12 s pour un flyer animé ; 15 s max en story.
+
+**GIF.** Le format compresse très mal tout ce qui change sur toute l'image. Mesuré sur le template
+(600 px, 8 s) : 33 Mo avec grain et halo mobile, 6 Mo sans grain, **0,6 Mo** avec un fond fixe à 12 i/s.
+Pour un GIF : fond immobile (pas de dérive, pas de grain — le script coupe le grain automatiquement),
+seuls les éléments qui entrent bougent, 12 i/s, `--gif-colors 64` si le poids dépasse encore la cible.
+Faire une version dédiée du HTML plutôt que réduire la vidéo.
 
 ## Print
 

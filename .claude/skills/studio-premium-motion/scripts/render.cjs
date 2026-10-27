@@ -28,6 +28,7 @@ Réglages
   --motion-blur <n>       Flou de mouvement : n sous-images moyennées par image (4 conseillé ; obturateur 180°)
   --crf <n>               Qualité H.264 / VP9 (défaut 16 / 24 ; plus bas = meilleur)
   --gif-width <px>        Largeur du GIF (défaut 600). Le grain est coupé pour les GIF (poids) ; --keep-grain pour le garder
+  --gif-colors <n>        Couleurs de la palette GIF (défaut 128 ; 64 pour alléger)
   --alpha                 Fond transparent (ProRes 4444 / WebM) : la scène doit avoir un fond transparent
   --query <k=v&...>       Paramètres d'URL ajoutés (ex. "guides=1")
   --allow-missing-fonts   Ne pas échouer si une police déclarée manque (déconseillé)
@@ -175,7 +176,9 @@ async function main() {
     else if (format === "webm") enc = ["-vf", [...filters, even].join(","), "-r", String(fps), "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", String(args.crf || 24), "-row-mt", "1", "-pix_fmt", args.alpha ? "yuva420p" : "yuv420p", out];
     else if (format === "gif") {
       const w = Number(args["gif-width"] || 600);
-      enc = ["-filter_complex", [...filters, `scale=${w}:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4`].join(","), "-r", String(fps), "-loop", "0", out];
+      const colors = Number(args["gif-colors"] || 128);
+      // diff_mode=rectangle : seule la zone qui change est réencodée d'une image à l'autre.
+      enc = ["-filter_complex", [...filters, `scale=${w}:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=diff:max_colors=${colors}[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle`].join(","), "-r", String(fps), "-loop", "0", out];
     } else throw new Error("Format inconnu : " + format);
 
     const ff = spawn("ffmpeg", [...pre, ...enc], { stdio: ["pipe", "inherit", "inherit"] });
