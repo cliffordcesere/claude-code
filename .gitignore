@@ -1,2 +1,6 @@
 .DS_Store
 
+
+# Youmi Wings build workspace
+.tmp-fonts/
+flyers/youmi-wings/out/*.png
