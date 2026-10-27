@@ -10,6 +10,7 @@ Passe chaque point. Signale à l'utilisateur ceux que tu n'as pas pu vérifier.
 ## Image fixe (composition finale, `--still`)
 - [ ] Un héros clair ; l'information principale se lit en 1 seconde.
 - [ ] Lisible en miniature : regarder l'image réduite à ~25 % (`--still … --scale 0.25`).
+- [ ] Infos pratiques ≥ 36 px et nom de marque ≥ 56 px sur un format 1080 de large (≈ 13 pt et 20 pt sur téléphone).
 - [ ] Contraste suffisant des infos pratiques.
 - [ ] Aucune ligne de titre avec un mot isolé ; césures voulues.
 - [ ] Accents des capitales intacts (É, È, À, Ç) dans l'image finale : un masque de révélation trop serré les rogne.

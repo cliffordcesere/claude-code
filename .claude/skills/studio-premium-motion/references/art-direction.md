@@ -53,6 +53,13 @@ expliqué, pas laissé par défaut.
 les infos secondaires sur un format story. Une hiérarchie timide (titre 1,5× le texte)
 est l'un des défauts les plus « amateurs ».
 
+**Tailles minimales sur téléphone.** Un format de 1080 px de large s'affiche sur ~390 pt d'écran :
+1 px ≈ 0,36 pt. Les informations sur lesquelles on agit (téléphone, adresse, date, prix) doivent faire
+**≥ 36–40 px** (≈ 13–14 pt) ; jamais moins de 32 px pour du texte à lire. Le **nom de la marque**
+doit faire ≥ 56 px : un client qui ne retient pas le nom n'appellera pas. Le héros peut être
+énorme, mais ce sont ces deux catégories que le client vérifie en premier — l'erreur classique d'une
+composition « élégante » est de les réduire en notes de bas de page.
+
 **Réglages display :**
 - Interlignage 0,85–1,0 pour les titres sur plusieurs lignes.
 - Approche (letter-spacing) légèrement négative en grand corps : -0,01 à -0,04 em.
