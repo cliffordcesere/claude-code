@@ -23,6 +23,12 @@ Passe chaque point. Signale à l'utilisateur ceux que tu n'as pas pu vérifier.
 - [ ] Pas de saccade, pas de saut d'un élément entre deux images (vérifier 3–4 images clés autour des transitions).
 - [ ] Boucle propre si le format boucle.
 
+## Son (si présent)
+- [ ] Chaque impact tombe sur l'arrivée visuelle de l'élément (± 1 image).
+- [ ] Sonie ≈ -14 LUFS, crête < 0 dBFS (`ffmpeg -af ebur128=peak=true`).
+- [ ] Équilibre vérifié aussi à travers un passe-haut 180 Hz (haut-parleur de téléphone).
+- [ ] Droits : musique fournie par le client ou générée ; jamais une piste du commerce sans licence.
+
 ## Technique
 - [ ] Le rendu n'a pas signalé de police manquante.
 - [ ] Dimensions, cadence et durée conformes au canal (`ffprobe` sur le fichier).

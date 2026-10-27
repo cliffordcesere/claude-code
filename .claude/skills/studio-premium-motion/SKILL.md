@@ -30,6 +30,7 @@ Récupère ou demande (questions groupées, une seule fois) :
 - **Infos obligatoires exactes** : date, heure, lieu, prix, URL, mentions légales. Ne jamais les inventer ; utiliser des placeholders visibles `[DATE]` s'ils manquent.
 - **Assets de marque** : logo vectoriel, polices, couleurs, photos. Leur qualité plafonne celle du résultat.
 - **Formats et canaux** (voir `references/formats.md`).
+- **Son** : sound design, musique fournie par le client, ou muet. Ne pas décider à sa place : une story ou un TikTok se regardent souvent avec le son.
 - **Références et anti-références** : « on aime / on ne veut surtout pas ».
 
 Si l'utilisateur veut avancer sans répondre, pose des hypothèses explicites,
@@ -87,6 +88,22 @@ Itère sur des `--still` (quelques secondes) et ne lance la vidéo complète qu'
 réglée. Le script refuse de rendre si
 une police déclarée dans `__config.fonts` n'est pas chargée : un rendu avec une police
 de secours est le défaut le plus fréquent et le plus visible, mieux vaut un échec net.
+
+### 5 bis. Son
+
+`scripts/sfx.py` synthétise un sound design calé sur la timeline (fond d'ambiance, souffles,
+impacts, « tocs »), sans échantillon externe donc sans question de droits, normalisé à ~-14 LUFS :
+
+```bash
+python3 <skill>/scripts/sfx.py cues.json --out son.wav --video flyer.mp4 --mux flyer_son.mp4
+```
+
+Cale chaque `at` sur l'instant où l'élément *arrive* visuellement (≈ 80 % de son mouvement,
+pas son départ) : calcule-le depuis la courbe et la durée du tween. Un haut-parleur de téléphone
+ne reproduit presque rien sous ~150 Hz : vérifie l'équilibre aussi à travers un passe-haut 180 Hz.
+Tu ne peux pas écouter : contrôle niveaux, spectre et synchronisation, et dis clairement à
+l'utilisateur que le jugement à l'oreille lui revient. Pour de la musique, demander une piste
+dont le client a les droits, ou proposer de l'ajouter via la bibliothèque musicale de la plateforme.
 
 ### 6. Contrôle qualité puis livraison
 
