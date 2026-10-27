@@ -4,3 +4,4 @@
 # Youmi Wings build workspace
 .tmp-fonts/
 flyers/youmi-wings/out/*.png
+flyers/youmi-wings/out/_proof/
