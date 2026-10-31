@@ -64,11 +64,15 @@ un ZIP, le plus fiable est la version navigateur :
    interrupteur apparaît souvent **grisé avec un rond gris**, ce qui ne veut pas dire
    « éteint ». **Rond à droite = activé.** Un rond gris signifie « verrouillé en marche ».
    S'il est à gauche sur piste grise, là seulement il faut l'activer.
-4. Ferme les paramètres (✕). **« Compétences » n'est pas dans cette fenêtre.**
-   Les compétences vivent dans le menu principal → **« Personnaliser »** (*Customize*)
-   → **« Compétences »** (*Skills*).
-5. Bouton **+** → **Importer une compétence** → choisis `free-llm-apis.zip`.
-   Puis vérifie que son interrupteur est bien activé.
+4. Va directement à l'adresse **claude.ai/customize/skills** (ou menu → **Personnaliser**
+   → **Compétences**). La page s'appelle « Personnalisation ».
+5. En haut à droite, appuie sur le **carré blanc avec un « + »** → **Importer une
+   compétence** → choisis `free-llm-apis.zip`.
+6. Bascule sur l'onglet **« Les vôtres »** : la compétence doit y apparaître.
+   Vérifie que son interrupteur est activé.
+
+> **Bonus sans fichier :** dans l'onglet **« Découvrir »**, les compétences marquées
+> *par Anthropic* s'ajoutent d'un simple appui sur **« Ajouter »**. Aucun ZIP à gérer.
 
 Si l'envoi du fichier ne passe pas depuis le téléphone, fais-le depuis un ordinateur
 (même un ordinateur d'ami ou de cybercafé) : le skill reste attaché **à ton compte**, donc
