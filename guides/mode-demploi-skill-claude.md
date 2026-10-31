@@ -45,13 +45,27 @@ gratuite chez Groq »* et il saura exactement quoi te faire faire.
 
 ### Cas A bis — Tu n'as que l'application sur téléphone
 
+**D'abord, les mots français / anglais** (tous les guides en ligne sont en anglais) :
+
+| Sur ton écran (FR) | Dans les guides (EN) |
+|---|---|
+| Capacités | Capabilities |
+| Artéfacts | Artifacts |
+| Compétences | Skills |
+| Importer une compétence | Upload a skill |
+| Personnaliser | Customize |
+
 L'application mobile sert surtout à *utiliser* les skills déjà présents. Pour **envoyer**
 un ZIP, le plus fiable est la version navigateur :
 
 1. Ouvre **claude.ai** dans le navigateur de ton téléphone (Safari / Chrome), connecte-toi.
-2. Menu (les trois barres) → **Settings** → **Capabilities** → active « Create and edit files ».
-3. Toujours dans le menu → **Customize** → **Skills** → le bouton **+** → **Upload a skill**.
-4. Choisis `free-llm-apis.zip`. Il apparaît dans la liste, avec un interrupteur pour l'activer.
+2. Menu (les trois barres) → **Paramètres** → onglet **Capacités**.
+3. Active l'interrupteur **« Artéfacts »**. C'est l'étape que tout le monde rate : sans lui,
+   la rubrique « Compétences » n'apparaît pas (le texte le dit : *requis pour l'exécution de
+   code et la création de fichiers*).
+4. Ferme et rouvre les paramètres, reviens dans **Capacités**, fais défiler vers le bas
+   jusqu'à **« Compétences »** → bouton **+** → **Importer une compétence**.
+5. Choisis `free-llm-apis.zip`. Puis vérifie que son interrupteur est bien activé.
 
 Si l'envoi du fichier ne passe pas depuis le téléphone, fais-le depuis un ordinateur
 (même un ordinateur d'ami ou de cybercafé) : le skill reste attaché **à ton compte**, donc
