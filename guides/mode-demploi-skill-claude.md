@@ -136,12 +136,21 @@ Puis **ferme et rouvre** Claude Code. Tape `/skills` pour vérifier qu'il appara
 
 ## Comment savoir que ça a marché
 
-Pose la question à Claude, en langage normal :
+**Sur la page de la compétence**, trois signes que l'envoi a réussi :
 
-> « Quels skills as-tu ? »
+- l'interrupteur est **bleu**, rond à **droite** (activé) ;
+- la mention **« v1 · mis à jour maintenant »** ;
+- l'onglet **« Contenu · 3 »** : le `SKILL.md` et les 2 fichiers de `references/`.
 
-Il doit citer `free-llm-apis`. Ensuite, au lieu de taper une commande bizarre, tu écris
-simplement : *« je veux une IA gratuite pour mon projet »* — et il se sert du skill tout seul.
+**Puis en conversation**, écris simplement :
+
+> « Je veux une clé API gratuite pour un petit projet. »
+
+Si la réponse te propose un tableau comparatif (Groq, Gemini, OpenRouter…) avec les
+quotas, c'est que la compétence est bien utilisée. Si la réponse reste vague, la
+compétence n'a pas été prise en compte : vérifie l'interrupteur, puis ouvre une
+** nouvelle conversation** (une compétence s'applique aux conversations démarrées après
+son activation).
 
 ---
 
