@@ -39,8 +39,27 @@ gratuite chez Groq »* et il saura exactement quoi te faire faire.
 6. C'est fini. Ouvre une nouvelle conversation et écris :
    *« Je veux une clé API gratuite pour utiliser une IA dans mes scripts. »*
 
-> Si tu ne vois pas « Skills » dans les paramètres : c'est que ton compte n'a pas encore
-> cette fonction. Dans ce cas, utilise le Cas B, ou demande-moi — on trouvera un plan B.
+> **Bonne nouvelle : c'est possible avec le compte gratuit.** Depuis février 2026, les skills
+> (y compris l'envoi de ton propre ZIP) font partie du plan Free. Il faut juste activer
+> l'exécution de code, sinon la rubrique Skills est grisée.
+
+### Cas A bis — Tu n'as que l'application sur téléphone
+
+L'application mobile sert surtout à *utiliser* les skills déjà présents. Pour **envoyer**
+un ZIP, le plus fiable est la version navigateur :
+
+1. Ouvre **claude.ai** dans le navigateur de ton téléphone (Safari / Chrome), connecte-toi.
+2. Menu (les trois barres) → **Settings** → **Capabilities** → active « Create and edit files ».
+3. Toujours dans le menu → **Customize** → **Skills** → le bouton **+** → **Upload a skill**.
+4. Choisis `free-llm-apis.zip`. Il apparaît dans la liste, avec un interrupteur pour l'activer.
+
+Si l'envoi du fichier ne passe pas depuis le téléphone, fais-le depuis un ordinateur
+(même un ordinateur d'ami ou de cybercafé) : le skill reste attaché **à ton compte**, donc
+tu le retrouveras ensuite dans l'application mobile.
+
+> À savoir : un skill n'est **pas obligatoire**. C'est un confort — il évite de réexpliquer
+> le contexte à chaque fois. Sans lui, tu peux simplement coller le texte de la fiche dans
+> la conversation.
 
 ### Cas B — Tu utilises Claude dans une fenêtre noire (Claude Code)
 
@@ -81,3 +100,40 @@ de confiance (ou par moi). Celui-ci, je l'ai ouvert et lu : ce sont des notes et
 il ne fait rien tourner tout seul.
 
 Règle simple : avant d'installer, demande-toi *« qui a écrit ça, et est-ce que quelqu'un l'a vérifié ? »*
+
+---
+
+## Et sur les autres plateformes (Arena, ChatGPT, Gemini…) ?
+
+Le format `SKILL.md` est une convention **propre à Claude**. Ailleurs, il n'y a pas
+d'« installation » : un skill n'est qu'un fichier texte, donc on peut toujours s'en servir,
+mais autrement.
+
+| Plateforme | Ce que tu peux faire |
+|---|---|
+| **Arena** | Rien à installer : joins le fichier `SKILL.md` à ta conversation et je l'utilise. Il n'est pas mémorisé d'une conversation à l'autre. |
+| **Claude** (app / site) | Envoi du ZIP dans Customize > Skills, comme décrit plus haut. |
+| **ChatGPT / Gemini** | Pas de skills au même sens : on met les consignes dans un « projet » ou des « instructions personnalisées ». |
+| **Autres outils pour développeurs** | Beaucoup acceptent le même dossier de consignes (Cursor, Codex…), avec des noms différents. |
+
+Conclusion : le ZIP est fait pour Claude. Ailleurs, le texte reste réutilisable — c'est
+juste une question de copier-coller.
+
+---
+
+## À quoi sert VRAIMENT une clé API gratuite
+
+Point important, souvent mal compris : une clé API n'est pas une application. C'est une
+**clé d'accès** que l'on donne à un logiciel pour qu'il puisse parler à une IA.
+
+- Si tu veux **discuter avec une IA** → tu n'as besoin d'aucune clé : l'application Claude
+  gratuite (ou Gemini, ou ChatGPT) suffit.
+- Si tu veux **qu'un logiciel utilise une IA** (un site, une application, un automatisme) →
+  là, il faut une clé.
+- Cas intermédiaire, sans coder : certains logiciels de discussion acceptent une clé et une
+  adresse (« base URL »), et affichent ensuite une interface de chat classique. On y colle
+  une clé gratuite, et on utilise des modèles gratuits.
+
+Donc avant de créer un compte quelque part, la bonne question est : **quel est le projet
+exact ?** La réponse détermine s'il faut une clé, et laquelle.
+
