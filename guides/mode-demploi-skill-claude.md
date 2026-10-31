@@ -27,8 +27,40 @@ gratuite chez Groq »* et il saura exactement quoi te faire faire.
 
 ---
 
-## Installation — choisis TON cas
+## Où récupérer le fichier `free-llm-apis.zip`
 
+Un `.zip` est une archive : le visualiseur de fichiers ne sait pas la livrer (il n'affiche
+que du texte et des images). Trois façons de l'obtenir :
+
+**A. Lien direct (le plus fiable, une fois le fichier gardé sur ton téléphone)**
+
+```
+https://github.com/cliffordcesere/claude-code/raw/arena/d02126c2-claude-code/guides/free-llm-apis.zip
+```
+
+1. Appui long sur le lien → **Copier**.
+2. Navigateur → barre d'adresse → effacer → coller → valider.
+3. Une fenêtre propose **Télécharger** → accepter. (Rien ne s'affiche à l'écran : c'est normal.)
+4. Vérifier dans l'application **Fichiers** → **Téléchargements** : `free-llm-apis.zip`, 11 Ko.
+
+| Ce qui arrive | Quoi faire |
+|---|---|
+| « Ouvrir avec… » | Annuler — un ZIP se télécharge, il ne s'ouvre pas |
+| Page de texte bizarre | Menu ⋮ du navigateur → **Télécharger** |
+| Rien du tout | Menu ⋮ → **Téléchargements** |
+
+⚠️ Ce lien pointe vers une branche de travail **temporaire**. Télécharge le fichier
+maintenant et garde-le : une fois sur ton téléphone, il ne dépend plus de rien.
+
+**B. Créer la compétence sans fichier** — sur la page Compétences, le **+** propose parfois
+« Créer une compétence » : on y colle du texte au lieu d'envoyer un ZIP.
+
+**C. Depuis un ordinateur** — même lien, puis transférer le fichier sur le téléphone
+(par e-mail à toi-même, par exemple).
+
+---
+
+## Installation — choisis TON cas
 ### Cas A — Tu utilises Claude sur le site claude.ai (le plus simple)
 
 1. Va sur **claude.ai** et connecte-toi.
