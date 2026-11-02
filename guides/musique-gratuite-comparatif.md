@@ -1,116 +1,134 @@
-# Une appli de musique gratuite, vraiment — comparatif 2026
+# Musique gratuite : le catalogue international, sans payer
 
-Recherche faite pour un usage réel : **Android, Haïti, data coûteuse**. Le critère qui
-compte le plus n'est donc pas « gratuit », c'est **« gratuit ET utilisable hors connexion »**.
-
----
-
-## D'abord, la mauvaise nouvelle sur Spotify
-
-Spotify **est** disponible en Haïti, et il y a bien une offre gratuite. Mais elle est
-sabrée volontairement, sur téléphone :
-
-| Sur Spotify gratuit (mobile) | Disponibilité |
-|---|---|
-| Choisir une chanson précise | ❌ Non — lecture en aléatoire seulement |
-| Sauter des morceaux | 6 par heure |
-| Écouter hors connexion | ❌ Non — réservé au Premium |
-| Écouter en arrière-plan | ❌ Non |
-| Publicités | Oui |
-
-Autrement dit : Spotify gratuit n'est pas une version gratuite de Spotify, c'est une
-**démonstration**. Ce que tu cherches n'est pas là.
+> **Correction de la version précédente de ce guide.** Elle recommandait Audiomack en
+> supposant un répertoire caribéen. C'était une déduction abusive. Ce guide-ci part du bon
+> problème : **le catalogue mainstream (pop, rap, R&B, afro, latin, électro…), celui que
+> les plateformes font payer.**
 
 ---
 
-## Le comparatif
+## 1. Pourquoi ton problème est structurel
 
-| Application | Gratuit ? | Choix des titres | Hors connexion | Pub | Catalogue | Verdict |
-|---|---|---|---|---|---|---|
-| **Audiomack** | Oui, en permanence | ✅ Oui | ✅ **Illimité, gratuit** | Oui | 40 M, très fort en kompa, dancehall, reggae, afrobeats | **Le meilleur choix** |
-| **Audius** | Oui | ✅ Oui | ✅ Oui | ❌ **Aucune** | ~1 M, indépendants | Excellent, mais catalogue étroit |
-| **Boomplay** | Oui | ✅ Oui | ✅ Oui | Oui | Axé Afrique | Correct, moins pertinent ici |
-| **YouTube Music** | Oui | ✅ Oui | ❌ Non | Oui | Le plus grand | Inutilisable sans Premium |
-| **Spotify** | Oui | ❌ Non (aléatoire) | ❌ Non | Oui | Le plus grand | Une démo |
-| **SimpMusic / Metrolist** | Oui (libre) | ✅ Oui | ✅ Oui | ❌ Aucune | = YouTube Music | Puissant, mais voir l'avertissement |
+Sur Audiomack, 90 % de tes titres sont payants pour une raison simple : ce ne sont pas des
+artistes indépendants qui publient eux-mêmes, ce sont des **ayants droit sous licence**. Les
+gros catalogues sont cédés à Spotify, Apple, Amazon, YouTube — et facturés.
 
----
+Il n'existe donc que deux portes d'accès au catalogue mainstream complet :
 
-## Ma recommandation : Audiomack
+1. **Payer** un abonnement (Spotify, Amazon Unlimited, Apple, Tidal, Deezer…).
+2. **Passer par YouTube**, qui a déjà payé les licences pour toi.
 
-**Pourquoi c'est le bon choix pour toi :**
-
-- **Téléchargement hors connexion gratuit et illimité.** C'est rarissime : ni Spotify, ni
-  YouTube Music, ni Deezer ne l'autorisent sans payer. Pour toi, c'est ce qui change tout :
-  tu télécharges en Wi-Fi, tu écoutes ensuite sans consommer de data.
-- **Lecture en arrière-plan** incluse (tu peux éteindre l'écran).
-- **Le catalogue caribéen y est réellement bon** : kompa, dancehall, bouyon, reggae. Les
-  artistes haïtiens et antillais y publient souvent en premier.
-- **Application légère** : ~39 Mo, contre 100 Mo et plus pour Spotify.
-
-**Ses limites, pour être honnête :**
-
-- Certains titres sont réservés à « Audiomack+ » (payant). Ils sont marqués comme tels.
-- La pop et le rock internationaux sont plus pauvres que sur Spotify.
-- Il y a des publicités (elles financent la gratuité).
-
-### Installation
-
-1. **Play Store** → cherche **« Audiomack »**.
-2. Installe, ouvre, crée un compte gratuit (e-mail suffit) — ou passe l'inscription, la
-   lecture marche aussi sans compte.
-3. Descends un titre : appuie sur la **flèche vers le bas** ⬇ à côté du morceau.
-4. Vérification : passe en **mode avion**, relance le morceau téléchargé. S'il joue, c'est bon.
+Tout le reste — « Spotify gratuit », « Deezer gratuit » — est un teaser : aléatoire, pub,
+pas de hors-connexion. C'est vrai de **toutes** les plateformes officielles, y compris
+Amazon Music.
 
 ---
 
-## Le plan B : Audius
+## 2. Ce que te donne vraiment Amazon Music
 
-**100 % gratuit, zéro publicité, 320 kbps, et hors connexion dans l'appli mobile.**
-C'est la seule grande plateforme sans aucune pub. Le défaut est le catalogue : environ
-1 million de titres, surtout des indépendants et de l'électro/rap. Quelques contenus
-d'artistes sont payants.
+Tu l'utilises déjà, donc autant savoir où tu te situes :
 
-À installer en complément si tu veux de la musique sans aucune coupure publicitaire.
+| Formule | Prix | Choix des titres | Hors connexion | Pub |
+|---|---|---|---|---|
+| **Amazon Music Free** | 0 | Limité, sélections imposées | ❌ Non | ✅ Oui |
+| **Prime Music** (avec Prime) | inclus | **Aléatoire** sur le catalogue | ❌ Sauf « All-Access Playlists » | Non |
+| **Unlimited** | ~11 $/mois | ✅ Oui | ✅ Oui | Non |
 
----
-
-## L'option « catalogue Spotify » sans payer — avec un avertissement
-
-Il existe des applications libres (open source) qui lisent le **catalogue public de
-YouTube Music** : **SimpMusic**, **Metrolist**, **InnerTune**, **Musify**, **Spotube**.
-Elles offrent lecture sans pub, en arrière-plan, et téléchargement hors connexion.
-
-**Ce que tu dois savoir avant :**
-
-- Elles ne sont **pas sur le Play Store**. Il faut les télécharger sur **GitHub** (page
-  *Releases*) ou **F-Droid**. **Jamais** sur un site d'APK au hasard.
-- Elles utilisent YouTube d'une manière que **les conditions d'utilisation de YouTube
-  n'autorisent pas**. Ce n'est pas du vol de compte, mais YouTube peut bloquer ces clients
-  du jour au lendemain, et le risque existe que ton compte Google soit restreint.
-- Ça casse parfois après une mise à jour de YouTube. C'est de la débrouille, pas un service.
-
-**Mon avis :** commence par Audiomack. Si le catalogue te frustre, ces applis sont un
-recours sérieux — mais garde en tête que ce n'est pas un service officiel.
+Autrement dit : si tu es sur Free, tu as le même problème que Spotify gratuit. Si tu as
+Prime, tu as 100 millions de titres… mais en lecture aléatoire. Le libre choix est réservé
+à Unlimited.
 
 ---
 
-## ⚠️ Ce qu'il ne faut PAS installer
+## 3. La vraie solution gratuite : les clients YouTube Music libres
 
-En cherchant « Spotify Premium gratuit » ou « Spotify mod », on tombe sur des **APK
-modifiés**. Deux risques concrets :
+Ce sont des applications **open source** qui utilisent le catalogue public de YouTube Music
+(le plus grand du monde) comme source. Résultat : catalogue mainstream complet, sans pub,
+en arrière-plan, avec **téléchargement hors connexion** — pour 0 €.
 
-1. **Ce sont très souvent des malwares** : accès à tes SMS, tes contacts, tes comptes.
-2. **Un compte Spotify modifié est un compte qui sera banni**, souvent avec l'e-mail perdu.
+**Vérifié à l'instant sur GitHub (1er novembre 2026)** — ces trois projets sont vivants,
+licenciés, et publient leurs propres APK :
 
-Règle simple : une application qui n'est pas sur le Play Store, F-Droid ou GitHub officiel
-ne s'installe pas. Aucune exception.
+| Application | Étoiles | Licence | Dernière version | Taille APK | Atout |
+|---|---|---|---|---|---|
+| **Metrolist** | 13 900 | GPL-3.0 | v13.7.0 | 25 Mo | Le plus sobre, Android Auto, Cast |
+| **SimpMusic** | 12 600 | GPL-3.0 | **v2.5.0 — aujourd'hui** | 27 Mo | Le plus complet : paroles traduites, Canvas Spotify, + versions Windows/Mac/Linux |
+| **Spotube** | 50 500 | AGPL-3.0 | v6.0.0 — 30 oct. | ~30 Mo | Importe tes **playlists Spotify** et lit l'audio via YouTube |
+
+**Lequel prendre ?** Metrolist si tu veux simple et stable. SimpMusic si tu veux la totale
+(et l'équivalent sur PC). Spotube si tu as déjà des playlists Spotify à récupérer.
+
+---
+
+## 4. Installation (Android)
+
+1. Ouvre **github.com** et cherche le dépôt : `MetrolistGroup/Metrolist` ou
+   `maxrave-dev/SimpMusic` ou `KRTirtho/spotube`.
+2. Onglet **Releases** (à droite), puis la dernière version.
+3. Télécharge le fichier **`.apk`** :
+   - Metrolist → `Metrolist.apk`
+   - SimpMusic → `SimpMusic-foss-arm64-v8a-release.apk` (99 % des téléphones récents) ;
+     en cas de doute, `SimpMusic-foss-universal-release.apk` (53 Mo, marche partout)
+   - Spotube → `Spotube-android-all-arch.apk`
+4. Android affiche « Installation d'applications inconnues » → autorise **ton navigateur**
+   à installer, puis valide.
+5. Ouvre l'appli, cherche un titre mainstream, lance-le. Puis **télécharge-le** (icône ⬇)
+   et teste en mode avion.
+
+---
+
+## 5. ⚠️ Les faux sites — le vrai danger
+
+En cherchant ces applis, on tombe sur des sites qui usurpent leur nom. Constaté pendant
+cette recherche :
+
+- **`simpmusic.us`** se présente comme le site officiel et affirme que l'appli « n'est pas
+  open source » et s'installe « uniquement depuis le Play Store », avec un identifiant
+  `com.simpmusic.offlinemusicplayerr`. **Le vrai SimpMusic est `com.maxrave.simpmusic`**,
+  sur GitHub. Ce site n'est pas celui du développeur.
+- Des miroirs d'APK (`appteka`, `moddoom`, `malavida`…) republient des versions modifiées.
+
+**La règle, sans exception :** l'APK se télécharge **uniquement** depuis
+`github.com/<auteur-officiel>/<projet>/releases`. Jamais un site d'APK, jamais un lien
+envoyé par message.
+
+---
+
+## 6. Ce que je te dois en toute franchise
+
+Ces clients ne sont **pas** des outils de piratage au sens strict : ils lisent un catalogue
+public via une interface libre, comme NewPipe pour YouTube. Mais :
+
+- ils utilisent YouTube d'une manière que **ses conditions d'utilisation n'autorisent pas** ;
+- **ils peuvent cesser de fonctionner** après une mise à jour de YouTube — c'est déjà arrivé ;
+- il n'y a **pas de mises à jour automatiques** : il faut revenir sur GitHub de temps en temps ;
+- le risque pour ton compte Google est faible mais non nul.
+
+Si un jour tu veux zéro friction et zéro risque : c'est l'abonnement. Les applis libres sont
+le compromis gratuit.
+
+---
+
+## 7. Et les applis « interdites en Haïti » ?
+
+Tu m'as dit que ça ne te dérangeait pas. Je te réponds franchement : **ça ne résout pas ton
+problème.**
+
+Les services géo-bloqués (Pandora, iHeartRadio, Deezer dans certains marchés, offres Amazon
+localisées) sont soit **payants**, soit **verrouillés par carte bancaire locale**. Contourner
+le blocage demande un VPN — ce qui viole leurs conditions — et ne débloque pas le paiement.
+
+En revanche, les trois applis libres ci-dessus **fonctionnent en Haïti sans VPN**, sans
+compte, sans carte. C'est précisément ce que tu cherchais, et c'est pour ça qu'elles sont
+la bonne réponse — pas un détour par un service étranger.
 
 ---
 
 ## En résumé
 
-1. **Audiomack** — installe-le ce soir, télécharge 20 titres en Wi-Fi.
-2. **Audius** — ajoute-le si les pubs te gênent.
-3. **SimpMusic** — seulement si le catalogue te limite, et en connaissance de cause.
-4. **Spotify gratuit** — tu peux le garder pour découvrir, pas pour écouter.
+1. **Metrolist** ou **SimpMusic** depuis GitHub → catalogue mainstream complet, gratuit,
+   hors connexion.
+2. **Spotube** si tu veux récupérer tes playlists Spotify.
+3. **Audiomack** reste utile pour découvrir, pas pour retrouver tes titres.
+4. **Amazon Music** : garde-le pour ce qu'il fait bien, mais sache que le libre choix est
+   derrière Unlimited.
