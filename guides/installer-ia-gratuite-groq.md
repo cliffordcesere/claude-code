@@ -31,8 +31,13 @@ et appuie sur la corbeille pour la supprimer, puis crées-en une neuve.
 
 ## Étape 2 — Installer l'application
 
-1. Ouvre le **Play Store**.
-2. Cherche **« Chatbox »** — l'application de discussion IA (éditeur : Chatbox AI).
+1. Ouvre le **Play Store**, ou va directement sur le lien officiel :
+   `https://play.google.com/store/apps/details?id=xyz.chatboxapp.chatbox`
+2. **Vérifie que tu es sur la bonne application** — il existe plusieurs clones :
+   - identifiant dans l'URL : **`xyz.chatboxapp.chatbox`** (le seul critère fiable) ;
+   - nom affiché : « Chatbox AI: Powerful AI Client » ;
+   - éditeur : **Mediocre Company** (oui, c'est vraiment son nom) ;
+   - 100 K+ téléchargements.
 3. Installe-la et ouvre-la.
 4. **Ignore les écrans qui proposent un abonnement.** Tu n'en as pas besoin : tu vas
    utiliser ta propre clé, gratuitement.
