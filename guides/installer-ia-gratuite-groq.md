@@ -115,3 +115,61 @@ Chatbox et tu continues. Tu ne perds plus 5 heures.
 
 Et un bénéfice inattendu : en cas de panne de Claude, tu as un plan B qui ne dépend pas
 d'Anthropic.
+
+---
+
+## Étape 5 (bonus) — Ajouter Gemini, plus puissant que Groq
+
+Groq est rapide, mais ses modèles sont des modèles ouverts (gpt-oss-120b). Pour de la
+**qualité de raisonnement**, le meilleur gratuit aujourd'hui est **Gemini**, via une clé
+Google AI Studio. Gratuit, sans carte bancaire.
+
+**Pourquoi ça vaut le coup :** les modèles `gemini-3.8-flash` ont une fenêtre de **1 million
+de tokens** et lisent texte, image, audio et vidéo. C'est plusieurs crans au-dessus de Groq
+pour analyser un document ou une capture d'écran.
+
+### Obtenir la clé
+
+1. Va sur **aistudio.google.com/app/apikey**
+2. Connecte-toi avec un compte Google.
+3. **Create API key** → copie-la (elle ressemble à `AIza...`).
+
+### L'ajouter dans Chatbox
+
+Même écran que pour Groq : *Paramètres → Fournisseur d'IA → Ajouter un fournisseur*.
+
+| Champ | Valeur |
+|---|---|
+| Nom | `Gemini` |
+| Mode API | **OpenAI API Compatible** |
+| Hôte / Host | `https://generativelanguage.googleapis.com` |
+| Chemin / Path | `/v1beta/openai/chat/completions` |
+| Clé API | ta clé `AIza...` |
+
+> Un seul champ « Base URL » ? Mets :
+> `https://generativelanguage.googleapis.com/v1beta/openai/`
+
+Modèles à saisir, du plus récent au plus léger :
+
+```
+gemini-3.8-flash
+gemini-3.6-flash
+gemini-2.5-flash
+```
+
+### ⚠️ Vie privée — important
+
+Sur le **palier gratuit** de l'API Gemini, Google peut utiliser tes échanges pour améliorer
+ses produits (sauf si tu es dans l'EEE, en Suisse ou au Royaume-Uni). Donc : **pas de
+données personnelles, pas de mots de passe, pas de documents confidentiels** dans cette
+appli. Pour ça, garde Claude ou un modèle local.
+
+### Ce que tu as maintenant
+
+| Fournisseur | Force | Quota |
+|---|---|---|
+| Claude (app) | Le plus fin | ~15-40 messages / 5 h |
+| **Gemini (Chatbox)** | **Raisonnement, 1 M de contexte, images** | Généreux, gratuit |
+| Groq (Chatbox) | Vitesse | ~1 000 messages/jour |
+
+Trois quotas séparés. Tu ne peux plus être bloqué.
