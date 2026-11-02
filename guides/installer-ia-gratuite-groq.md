@@ -17,7 +17,12 @@ en finesse. Les deux ensemble, c'est ça la solution.
 2. **Sign up** (inscription) avec Google ou ton e-mail. Aucune carte n'est demandée.
 3. Vérifie ton e-mail si on te le demande, puis reconnecte-toi.
 4. Dans le menu de gauche, cherche **« API Keys »**.
-5. Appuie sur **« Create API Key »**, donne-lui un nom simple : `telephone`.
+5. Appuie sur **« Create API Key »**. Deux champs :
+   - **Display Name** : un nom parlant, par exemple `chatbox-android` (50 caractères max).
+     Évite ton nom ou ton e-mail : ce nom est visible dans la console.
+   - **Expiration** : si le menu propose des durées (30 / 60 / 90 jours), prends-en une.
+     « No expiration » est pratique mais, si la clé fuite, elle reste valable indéfiniment.
+     Une clé qui expire se recrée en 20 secondes.
 6. Une clé apparaît, elle ressemble à ça : `gsk_xxxxxxxxxxxxxxxxxxxx`
 
 > ⚠️ **Groq ≠ Grok.** Une lettre d'écart, deux entreprises sans rapport :
