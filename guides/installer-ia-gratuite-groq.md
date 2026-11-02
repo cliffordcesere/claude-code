@@ -128,6 +128,31 @@ Google AI Studio. Gratuit, sans carte bancaire.
 de tokens** et lisent texte, image, audio et vidéo. C'est plusieurs crans au-dessus de Groq
 pour analyser un document ou une capture d'écran.
 
+### Le plus simple : sans rien installer
+
+**Google AI Studio** est un site. Tu y discutes avec `gemini-3.8-flash` directement, sans
+application, sans clé, sans carte bancaire.
+
+1. Ouvre **aistudio.google.com** dans ton navigateur.
+2. Connecte-toi avec ton compte Google.
+3. En haut, dans le sélecteur de modèle, choisis **Gemini 3.8 Flash**.
+4. Écris dans le champ du bas. C'est tout.
+
+Tu y gagnes en plus deux réglages invisibles dans l'application grand public :
+
+- le **niveau de réflexion** (*thinking level*) : `low`, `medium` (défaut) ou `high` —
+  mets `high` pour un problème difficile, `low` pour une réponse rapide ;
+- le **compteur de tokens**, pour voir ce que tu consommes.
+
+> ⚠️ **Piège à connaître :** l'application mobile **Gemini** (celle du Play Store) **n'inclut
+> pas** 3.8 Flash sur son palier gratuit — depuis le 9 octobre 2026, elle route la plupart
+> des questions vers Flash-Lite, sans choix du modèle. Si tu veux 3.8 gratuitement, c'est
+> AI Studio ou l'API. Pas l'appli.
+
+**Quand préférer Chatbox alors ?** Si tu veux **une seule application** sur ton téléphone,
+qui garde l'historique et où tu peux brancher plusieurs fournisseurs (Gemini, Groq, autre
+clé) et basculer de l'un à l'autre. Sinon, AI Studio suffit.
+
 ### Obtenir la clé
 
 1. Va sur **aistudio.google.com/app/apikey**
