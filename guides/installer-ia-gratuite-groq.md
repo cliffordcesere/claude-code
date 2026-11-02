@@ -20,6 +20,18 @@ en finesse. Les deux ensemble, c'est ça la solution.
 5. Appuie sur **« Create API Key »**, donne-lui un nom simple : `telephone`.
 6. Une clé apparaît, elle ressemble à ça : `gsk_xxxxxxxxxxxxxxxxxxxx`
 
+> ⚠️ **Groq ≠ Grok.** Une lettre d'écart, deux entreprises sans rapport :
+>
+> | | **Groq** (avec un q) | **Grok** (avec un k) |
+> |---|---|---|
+> | Qui | Plateforme d'inférence (matériel LPU) | Modèle d'IA de xAI |
+> | Site | `groq.com` / `console.groq.com` | `grok.com` / `console.x.ai` |
+> | Clé | commence par **`gsk_`** | commence par **`xai-`** |
+> | Adresse | `https://api.groq.com/openai/v1` | `https://api.x.ai/v1` |
+>
+> Les deux sont « compatibles OpenAI », donc une erreur de clé ne donne pas un message clair :
+> juste un `401`. Vérifie le préfixe avant de coller.
+
 > ⚠️ **Copie-la immédiatement.** Groq ne la réaffichera plus jamais. Si tu la perds,
 > tu en crées une autre — ce n'est pas grave, mais c'est une perte de temps.
 
