@@ -1,0 +1,74 @@
+/* ORA — jetons de charte v3.1 (§5). Aucune autre couleur. */
+@font-face {
+  font-family: "Jost";
+  src: url("../fonts/Jost-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  --noir: #0A0A0A;        /* fond, ~80 % */
+  --blanc: #FAFAFA;       /* texte principal, ~15 % */
+  --cuivre: #B87333;      /* accent, logo, CTA — ≤ 5 %, jamais en aplat */
+  --gris: #8A8A8A;        /* texte secondaire, sur noir uniquement */
+  --voile-4: #141414;     /* blanc cassé 4 % sur noir */
+  --voile-8: #1D1D1D;     /* blanc cassé 8 % sur noir */
+}
+
+/* Chaque gabarit pose --W et --H (nombres, en px) sur .canvas.
+   marge 6 % largeur · titre 6–9 % hauteur · sous-texte 2,5–3,5 % · CTA 1,8–2,2 %
+   logo 5–8 % largeur, 80 px minimum pour l'assemblage horizontal (fiche logo). */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--noir); }
+
+.canvas {
+  position: relative;
+  width: calc(var(--W) * 1px);
+  height: calc(var(--H) * 1px);
+  overflow: hidden;
+  background: var(--noir);
+  color: var(--blanc);
+  font-family: "Jost", "Montserrat", sans-serif;
+  --marge: calc(var(--W) * 0.06px);
+  --titre: calc(var(--H) * 0.065px);
+  --sous: calc(var(--H) * 0.028px);
+  --cta: calc(var(--H) * 0.019px);
+  --logo-w: calc(var(--W) * 0.08px);
+}
+
+.titre {
+  font-size: var(--titre);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.sous {
+  font-size: var(--sous);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--gris);
+}
+.cta {
+  font-size: var(--cta);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--cuivre);
+}
+.label { /* micro-label capitales : 2 mots max, corps ≤ 2 % */
+  font-size: calc(var(--cta) * 0.95);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* Logo : coin inférieur droit, dans la marge de 6 %. */
+.logo {
+  position: absolute;
+  right: var(--marge);
+  bottom: var(--marge);
+  width: var(--logo-w);
+  min-width: 80px;
+  display: block;
+}

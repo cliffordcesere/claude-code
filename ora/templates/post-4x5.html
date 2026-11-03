@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — post 4:5</title>
+<link rel="stylesheet" href="ora.css">
+<style>
+  /* Instagram feed 1080 × 1350. Alignement unique : gauche. */
+  .canvas { --W: 1080; --H: 1350; }
+  .haut { position: absolute; left: var(--marge); right: var(--marge); top: var(--marge); }
+  .haut .label { margin-bottom: calc(var(--H) * 0.018px); }
+  .produit {
+    position: absolute; left: 50%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: 62%; aspect-ratio: 1; display: grid; place-items: center;
+  }
+  .produit img { width: 100%; height: 100%; object-fit: contain; }
+  .produit .vide { font-size: var(--cta); letter-spacing: .08em; color: var(--gris); }
+  .bas { position: absolute; left: var(--marge); bottom: var(--marge); }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div class="haut">
+    <div class="label">[LABEL]</div>
+    <h1 class="titre">Le silence<br>a un design.</h1>
+  </div>
+  <div class="produit">
+    <!-- Remplacer par : <img src="produit.png" alt="[PRODUIT]"> (détouré, fond transparent ou noir mat) -->
+    <span class="vide">[PHOTO PRODUIT]</span>
+  </div>
+  <div class="bas">
+    <p class="sous">[PRODUIT]</p>
+    <p class="cta">Disponible.</p>
+  </div>
+  <img class="logo" src="../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+</div>
+</body>
+</html>

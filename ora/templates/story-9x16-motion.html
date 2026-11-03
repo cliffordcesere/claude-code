@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — story animée 9:16</title>
+<link rel="stylesheet" href="ora.css">
+<style>
+  /* Story / Reels / TikTok 1080 × 1920. Zone sûre : 250 px en haut, 320 px en bas. */
+  .canvas { --W: 1080; --H: 1920; }
+  .texte {
+    position: absolute; left: var(--marge); right: var(--marge);
+    top: 250px; bottom: 320px;
+    display: flex; flex-direction: column; justify-content: center; gap: 28px;
+  }
+  .titre { font-size: calc(var(--H) * 0.06px); }  /* 6 % → 115 px, 2 lignes max */
+  .sous { font-size: calc(var(--H) * 0.035px); }  /* 3,5 % */
+  .l { opacity: 0; will-change: opacity, transform; }
+  .logo { bottom: 320px; opacity: 0; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div class="texte">
+    <h1 class="titre l" id="l1">Chaque détail compte.</h1>
+    <p class="sous l" id="l2">Surtout ceux qu'on ne voit pas.</p>
+  </div>
+  <img class="logo" id="logo" src="../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+</div>
+<script>
+  // Timeline déterministe : oraSeek(t) dessine l'image à l'instant t (s).
+  // tools/render.mjs l'appelle image par image pour exporter le MP4.
+  window.ORA_DURATION = 6;
+  const ease = x => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 3);
+  const fade = (el, t, start, dur, rise = 14) => {
+    const p = ease((t - start) / dur);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - p) * rise}px)`;
+  };
+  window.oraSeek = t => {
+    fade(l1, t, 0.6, 1.0);
+    fade(l2, t, 2.2, 1.0);
+    fade(logo, t, 4.0, 0.4, 0); // logo : fondu simple, aucune animation décorative (§5)
+  };
+  if (!new URLSearchParams(location.search).has('render')) {
+    const t0 = performance.now();
+    const loop = () => { oraSeek(((performance.now() - t0) / 1000) % (ORA_DURATION + 1)); requestAnimationFrame(loop); };
+    document.fonts.ready.then(loop);
+  } else { oraSeek(0); }
+</script>
+</body>
+</html>
