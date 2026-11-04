@@ -22,11 +22,12 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 | Canal | Compte | Base au 2026-11-04 |
 |---|---|---|
 | TikTok | @ora_haiti (nom affiché « ORA 📲📡 ») | 63 abonnés (+60 récents), 404 j'aime, 7 abonnements |
-| Instagram | @oratechofficial | 211 abonnés, 11 publications, 13 vues sur 30 jours |
+| Instagram | @oratechofficial | 211 abonnés, 11 publications, 13 vues sur 30 jours ; compte quasi inactif pendant ~1 an |
 | Chaîne WhatsApp | ORA | 93 abonnés |
 | Facebook | « Oratech » | non consulté |
-| Site | oratechhaiti.vercel.app | — |
+| Site | ora-haiti.vercel.app (officiel selon le propriétaire) | La bio Instagram pointe encore vers oratechhaiti.vercel.app |
 
+Identifiants : « ora » et « oraofficial » sont pris sur les autres plateformes, d'où « oratech » et « haiti ».
 WhatsApp : +509 4630 2424 · Adresse : Carr Gerald Bataille, Delmas, Ouest.
 Hashtags déjà utilisés (non validés comme set officiel) : #ORA #Hydrogel #PortauPrince.
 
