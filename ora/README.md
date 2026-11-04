@@ -19,6 +19,9 @@ Seul le propriétaire de la marque la modifie (§21) : nouvelle version = nouvea
 | `produits/` | Photos produit : source + version détourée (PNG transparent). |
 | `tools/render.mjs` | Rendu HTML → PNG, HTML → MP4, SVG → PNG. |
 | `tools/extract_logo.py` | Régénère les SVG depuis la fiche PDF. |
+| `tools/detourer_ia.py` | Détourage IA local (rembg, modèle `birefnet-general`) pour une photo sur fond chargé : `python3 ora/tools/detourer_ia.py birefnet-general photo.jpg sortie.png`. |
+| `tools/nettoyer_detourage.py` | Nettoie un détourage : taches isolées, bords, bruit. |
+| `tools/son.py` | Habillage sonore synthétisé, appelé par `render.mjs` quand la page expose `window.ORA_SONS` (`--muet` pour s'en passer). |
 | `tools/detourer.py` | Détoure un produit photographié sur fond blanc : `python3 ora/tools/detourer.py photo.jpg sortie.png 2` (nécessite numpy, scipy, Pillow). |
 | `contenus/` | Livrables produits, nommés selon §10. |
 | `memoire.md` | Mémoire de marque (§17) : slogans, décisions, informations manquantes. |

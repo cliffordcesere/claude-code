@@ -2,13 +2,14 @@
 // ORA — rendu des gabarits HTML en PNG (image) ou MP4 (motion).
 //
 //   node ora/tools/render.mjs <page.html> <sortie.png>
-//   node ora/tools/render.mjs <page.html> <sortie.mp4> [--fps 30]
+//   node ora/tools/render.mjs <page.html> <sortie.mp4> [--fps 30] [--muet]
 //   node ora/tools/render.mjs <logo.svg>  <sortie.png> --width 1024
 //
 // La page doit contenir un élément #canvas (taille du visuel).
 // Pour la vidéo, la page expose window.ORA_DURATION (s) et window.oraSeek(t) ;
 // elle est chargée avec ?render pour couper la lecture automatique.
 // Une page animée rendue en PNG est figée sur sa dernière image.
+// Si la page expose window.ORA_SONS, le son est généré par tools/son.py et mixé (sauf --muet).
 // Sortie : sRGB, PNG ; MP4 H.264 yuv420p (compatible Instagram/TikTok/WhatsApp).
 
 import { createRequire } from 'node:module';
@@ -65,11 +66,15 @@ try {
       const duration = await page.evaluate(() => window.ORA_DURATION);
       if (!duration) throw new Error('window.ORA_DURATION absent : la page n’est pas animable.');
       const frames = Math.round(duration * fps);
+      // Habillage sonore : si la page expose window.ORA_SONS (et sans --muet),
+      // la vidéo muette est rendue à part puis mixée avec tools/son.py.
+      const sons = rest.includes('--muet') ? null : await page.evaluate(() => window.ORA_SONS || null);
+      const muette = sons ? output.replace(/\.mp4$/, '.muet.tmp.mp4') : output;
       const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error',
         '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'png', '-i', '-',
         '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '16', '-preset', 'slow',
         '-movflags', '+faststart', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
-        output], { stdio: ['pipe', 'inherit', 'inherit'] });
+        muette], { stdio: ['pipe', 'inherit', 'inherit'] });
       for (let i = 0; i < frames; i++) {
         await page.evaluate(t => window.oraSeek(t), i / fps);
         const buf = await canvas.screenshot({ type: 'png' });
@@ -78,6 +83,17 @@ try {
       ff.stdin.end();
       const code = await new Promise(r => ff.on('close', r));
       if (code !== 0) throw new Error(`ffmpeg a échoué (code ${code})`);
+      if (sons) {
+        const dir = path.dirname(new URL(import.meta.url).pathname);
+        const json = output.replace(/\.mp4$/, '.sons.tmp.json'), wav = output.replace(/\.mp4$/, '.son.tmp.wav');
+        fs.writeFileSync(json, JSON.stringify(sons));
+        const run = (cmd, args) => new Promise((ok, ko) => spawn(cmd, args, { stdio: 'inherit' })
+          .on('close', c => c === 0 ? ok() : ko(new Error(`${cmd} a échoué (code ${c})`))));
+        await run('python3', [path.join(dir, 'son.py'), json, String(duration), wav]);
+        await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', muette, '-i', wav,
+          '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', output]);
+        for (const f of [json, wav, muette]) fs.rmSync(f, { force: true });
+      }
     }
   }
   console.log('OK', output);

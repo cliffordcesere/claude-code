@@ -21,12 +21,15 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
 - 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
+- 2026-11-04 : vidéo produit animée (v1) = « un bon début » ; risque perçu : « un bout de câble » → toujours rendre la taille ou la longueur lisible.
+- 2026-11-04 : le son est souhaité. Habillage synthétisé par défaut (`tools/son.py`), version muette livrée à côté.
+- 2026-11-04 : la photo maison est préférée à l'image fournisseur ; la plaque perforée et le désordre sont retirés au détourage.
 
 ## Produits en stock (2026-11-04)
 
 | Produit | Données confirmées | À confirmer |
 |---|---|---|
-| Câble USB-C ↔ USB-C, un embout coudé 90° | 100 W, 1 m | Photo = modèle exact ? |
+| Câble USB-C ↔ USB-C, un embout coudé 90° | 100 W, 1 m, photos maison (2026-11-04) | — |
 | Chargeur sans fil à support | — | 15 W, Verizon d'origine, prix (ancien visuel : 2 000 HTG) |
 | Films hydrogel (pose sur machine Rich) | — | Modèles couverts, prix de pose, durée |
 

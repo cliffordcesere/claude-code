@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — câble USB-C 90°, reel v2</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Reel 9:16, 15,5 s, photos maison détourées (pas d'image fournisseur).
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/cable-reel-v2.html sortie.mp4
+  Son : ora/tools/son.py (événements dans window.ORA_SONS).
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  #flaque { position: absolute; inset: 0; }
+  .img { position: absolute; transform-origin: 0 0; will-change: transform, opacity; opacity: 0; }
+  .img img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+  .img .reflet {
+    filter: brightness(1.8) contrast(1.2); mix-blend-mode: screen; opacity: 0;
+    -webkit-mask-image: linear-gradient(105deg, transparent 0%, transparent 44%, #000 50%, transparent 56%, transparent 100%);
+    -webkit-mask-size: 300% 100%; -webkit-mask-repeat: no-repeat;
+  }
+  /* Photo maison d'un câble noir : rester noir (pas d'argenté), liseré froid + cuivre côté lumière. */
+  .img .vrai { filter: brightness(.8) contrast(1.25) drop-shadow(0 0 1px rgba(250,250,250,.16)); }
+  /* Compteur + règle (scènes « 1 mètre » et « 100 W ») */
+  .mesure { position: absolute; left: var(--marge); right: var(--marge); top: 560px; opacity: 0; }
+  .compteur { font-size: 250px; font-weight: 300; letter-spacing: -0.04em; line-height: 1; color: var(--blanc); }
+  .compteur small { font-size: 96px; letter-spacing: -0.01em; margin-left: 18px; color: var(--gris); }
+  .regle { position: relative; height: 40px; margin-top: 70px; }
+  .regle .piste { position: absolute; left: 0; right: 0; top: 19px; height: 2px; background: rgba(250,250,250,.16); }
+  .regle .plein { position: absolute; left: 0; top: 18px; height: 4px; background: var(--cuivre); width: 0; }
+  .regle .cran { position: absolute; top: 8px; width: 2px; height: 24px; background: rgba(250,250,250,.35); opacity: 0; }
+  .regle .cran.grand { top: 0; height: 40px; background: rgba(250,250,250,.6); }
+  /* Textes */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 1230px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 22px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: calc(var(--H) * 0.03px); margin-top: 18px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .logo { bottom: 320px; opacity: 0; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="flaque"></div>
+
+  <div class="img" id="coude"><img class="vrai" src="../../produits/cable-usbc-90/cable-usbc-90_coude_reel.png" alt="Câble USB-C, embout coudé à 90°"><img class="reflet" src="../../produits/cable-usbc-90/cable-usbc-90_coude_reel.png" alt=""></div>
+  <div class="img" id="droit"><img class="vrai" src="../../produits/cable-usbc-90/cable-usbc-90_droit_reel.png" alt="Câble USB-C, embout droit"><img class="reflet" src="../../produits/cable-usbc-90/cable-usbc-90_droit_reel.png" alt=""></div>
+
+  <div class="mesure" id="mesure">
+    <div class="compteur"><span id="nombre">0</span><small id="unite">cm</small></div>
+    <div class="regle" id="regle"><div class="piste"></div><div class="plein" id="plein"></div></div>
+  </div>
+
+  <div class="texte" id="textes"></div>
+  <img class="logo" id="logo" src="../../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+  <div id="noir"></div>
+</div>
+<script>
+window.ORA_READY = false;
+window.ORA_DURATION = 15.5;
+
+// Scènes : [début, fin]
+const S = { coude: [0, 3.2], droit: [3.2, 6.2], metre: [6.2, 9.4], watt: [9.4, 12.4], fin: [12.4, 15.5] };
+const TEXTES = [
+  { s: 'coude', label: 'USB-C', titre: 'Coudé à 90°.' },
+  { s: 'droit', titre: 'USB-C des deux côtés.' },
+  { s: 'metre', titre: 'Un mètre.', sous: 'Pas un bout de câble.' },
+  { s: 'watt',  titre: 'Assez pour un ordinateur.', sous: 'Si votre chargeur suit.' },
+  { s: 'fin',   titre: 'Disponible.', sous: 'Delmas · WhatsApp +509 4630 2424' },
+];
+// Événements sonores lus par tools/son.py (secondes)
+const COMPTE = { debut: 0.45, duree: 1.5, pas: 10 };
+window.ORA_SONS = {
+  souffles: [S.droit[0], S.metre[0], S.watt[0], S.fin[0]],
+  crans: [S.metre[0], S.watt[0]].flatMap(t0 => Array.from({ length: COMPTE.pas + 1 }, (_, i) => t0 + COMPTE.debut + COMPTE.duree * i / COMPTE.pas)),
+  impact: S.fin[0] + 0.8,
+};
+
+const clamp = x => Math.min(Math.max(x, 0), 1);
+const out = x => 1 - Math.pow(1 - clamp(x), 4);
+const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
+
+// Crans de la règle : 11 graduations
+for (let i = 0; i <= 10; i++) {
+  const c = document.createElement('div'); c.className = 'cran' + (i % 5 === 0 ? ' grand' : '');
+  c.style.left = `calc(${i * 10}% - 1px)`; regle.append(c);
+}
+const crans = [...regle.querySelectorAll('.cran')];
+
+const blocs = TEXTES.map(p => {
+  const b = document.createElement('div'); b.className = 'bloc';
+  const l = (cls, txt) => `<span class="ligne ${cls}"><span>${txt}</span></span>`;
+  b.innerHTML = (p.label ? l('label', p.label) : '') + l('titre', p.titre) + (p.sous ? l('sous', p.sous) : '');
+  textes.append(b); return b;
+});
+
+// Placement d'une image : largeur, position du coin haut-gauche, zoom autour d'un point d'ancrage
+function place(el, w, x, y, z, ax, ay, op) {
+  el.style.width = w + 'px';
+  el.style.opacity = op;
+  el.style.transform = `translate(${ax}px, ${ay}px) scale(${z}) translate(${x - ax}px, ${y - ay}px)`;
+}
+function reflet(el, g) {
+  const r = el.querySelector('.reflet');
+  r.style.opacity = g > 0 && g < 1 ? 0.5 * Math.sin(Math.PI * g) : 0;
+  r.style.webkitMaskPosition = `${lerp(100, 0, g)}% 0`;
+}
+
+window.oraSeek = t => {
+  noir.style.opacity = 1 - out(t / 0.8);
+  flaque.style.background = `radial-gradient(ellipse 72% 40% at 52% 40%, rgba(250,250,250,${0.11 * out(t / 1.4)}) 0%, rgba(250,250,250,.03) 48%, transparent 76%)`;
+
+  // 1. Coude : entre par la droite, poussée lente ; revient en petit sur la fin.
+  {
+    const [a, b] = S.coude, k = (t - a) / (b - a);
+    let op = out((t - 0.1) / 0.8) * (1 - io((t - b + 0.35) / 0.45));
+    let x = -110 + 70 * (1 - out((t - 0.1) / 1.2)) - (t > b - 0.35 ? 260 * io((t - b + 0.35) / 0.45) : 0);
+    let z = 1 + 0.06 * clamp(k);
+    if (t >= S.fin[0]) { // retour final
+      const e = out((t - S.fin[0] - 0.2) / 1.0);
+      place(coude, 980, -120 + 60 * (1 - e), 690, 1 + 0.03 * clamp((t - S.fin[0]) / 3), 860, 820, e);
+      reflet(coude, clamp((t - S.fin[0] - 1.0) / 1.3));
+    } else {
+      place(coude, 1100, x, 640, z, 960, 820, t < b ? op : 0);
+      reflet(coude, clamp((t - 0.9) / 1.3));
+    }
+  }
+  // 2. Embout droit
+  {
+    const [a, b] = S.droit, k = (t - a) / (b - a);
+    const op = out((t - a - 0.15) / 0.6) * (1 - io((t - b + 0.35) / 0.45));
+    const x = -60 + 120 * (1 - out((t - a) / 1.1)) - (t > b - 0.35 ? 240 * io((t - b + 0.35) / 0.45) : 0);
+    place(droit, 1000, x, -40, 1 + 0.06 * clamp(k), 860, 760, t >= a && t < b ? op : 0);
+    reflet(droit, clamp((t - a - 0.8) / 1.3));
+  }
+  // 3 & 4. Compteur + règle
+  {
+    const scene = t >= S.watt[0] && t < S.watt[1] ? 'watt' : t >= S.metre[0] && t < S.metre[1] ? 'metre' : null;
+    if (!scene) { mesure.style.opacity = 0; }
+    else {
+      const [a, b] = S[scene];
+      mesure.style.opacity = out((t - a - 0.1) / 0.5) * (1 - clamp((t - b + 0.35) / 0.35));
+      mesure.style.transform = `translateY(${-14 * clamp((t - b + 0.35) / 0.35)}px)`;
+      const p = io((t - a - COMPTE.debut) / COMPTE.duree);
+      nombre.textContent = Math.round(100 * p);
+      unite.textContent = scene === 'metre' ? 'cm' : 'W';
+      plein.style.width = (100 * p) + '%';
+      plein.style.background = scene === 'metre' ? 'var(--blanc)' : 'var(--cuivre)';
+      crans.forEach((c, i) => { c.style.opacity = scene === 'metre' ? (p * 10 >= i - 0.01 ? 1 : 0.25) : 0; });
+    }
+  }
+  // Textes : entrée par masque, sortie par fondu montant
+  TEXTES.forEach((p, j) => {
+    const [a, b] = S[p.s], fin = p.s === 'fin' ? Infinity : b;
+    const tin = t - a - (j ? 0.55 : 0.9), tout = t - (fin - 0.35);
+    const b_ = blocs[j];
+    b_.style.opacity = t < a - 0.01 ? 0 : tout > 0 ? 1 - clamp(tout / 0.35) : 1;
+    b_.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
+    [...b_.querySelectorAll('.ligne > span')].forEach((sp, n) => {
+      sp.style.transform = `translateY(${(1 - out((tin - n * 0.12) / 0.7)) * 110}%)`;
+    });
+  });
+  // Logo : fondu simple, puis fixe (§5)
+  logo.style.opacity = out((t - S.fin[0] - 0.8) / 0.5);
+};
+
+Promise.all([...document.images].map(i => i.decode().catch(() => {}))).then(() => document.fonts.ready).then(() => {
+  const q = new URLSearchParams(location.search);
+  if (!q.has('render')) {
+    const t0 = performance.now();
+    const loop = () => { oraSeek(((performance.now() - t0) / 1000) % (ORA_DURATION + 1)); requestAnimationFrame(loop); };
+    loop();
+  } else oraSeek(0);
+  window.ORA_READY = true;
+});
+</script>
+</body>
+</html>
