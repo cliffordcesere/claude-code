@@ -49,13 +49,22 @@
   .row + .row::before { content: ""; position: absolute; left: 100px; right: 0; top: 0; height: 1px; background: #333; }
   .row.sans-icone + .row.sans-icone::before { left: 28px; }
   .row .icone { width: 52px; height: 52px; border-radius: 13px; background: #3a3a3a; display: grid; place-items: center; font-size: 26px; font-weight: 700; color: var(--blanc); flex: none; }
-  .row .nom { flex: 1; }
+  .row .nom { flex: 1; white-space: nowrap; }
+  .row .val { white-space: nowrap; }
   .row .val { color: var(--gris); }
   .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 8px; }
   .toggle { width: 96px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; }
   .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 50px; height: 50px; border-radius: 50%; background: var(--blanc); }
   .toggle.on { background: var(--blanc); } .toggle.on::after { left: 42px; background: #000; }
   .note { color: var(--gris); font-size: 26px; line-height: 1.35; padding: 0 58px 30px; margin-top: -20px; }
+  .graph { padding: 22px 26px 26px; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; background: #2a2a2a; border-radius: 16px; padding: 4px; font-size: 24px; text-align: center; }
+  .seg span { padding: 10px 0; border-radius: 12px; color: var(--blanc); }
+  .seg .on { background: #4a4a4a; }
+  .g-titre { font-size: 28px; font-weight: 600; margin: 22px 0 16px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 4px; height: 170px; }
+  .barres-g i { flex: 1; background: #6a6a6a; border-radius: 3px 3px 0 0; }
+  .note { margin-top: -26px; }
   .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 22px; }
   .flou { filter: blur(9px); }
 
@@ -97,28 +106,46 @@
         </div>
       </div>
 
-      <!-- Batterie -->
+      <!-- Batterie (structure iOS 18) -->
       <div class="page" id="p-batterie">
         <div class="nav"><span class="chev">‹</span>Réglages<span class="milieu">Batterie</span></div>
         <div class="groupe" style="margin-top:30px">
-          <div class="row sans-icone"><span class="nom">Pourcentage</span><span class="toggle on"></span></div>
-          <div class="row sans-icone"><span class="nom">Économie d'énergie</span><span class="toggle"></span></div>
+          <div class="row sans-icone"><span class="nom">Pourcentage de la batterie</span><span class="toggle on"></span></div>
+          <div class="row sans-icone"><span class="nom">Mode économie d'énergie</span><span class="toggle"></span></div>
         </div>
+        <div class="note">Le mode économie d'énergie réduit temporairement l'activité en arrière-plan.</div>
         <div class="groupe">
-          <div class="row sans-icone" id="r-etat"><span class="nom">État de la batterie</span><span class="fl">›</span></div>
+          <div class="row sans-icone" id="r-etat"><span class="nom">État de la batterie</span><span class="val">Normal</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Recharge</span><span class="fl">›</span></div>
+        </div>
+        <div class="groupe graph">
+          <div class="seg"><span class="on">Dernières 24 heures</span><span>10 derniers jours</span></div>
+          <div class="g-titre">Dernière recharge à 100 %</div>
+          <div class="barres-g"><i style="height:92%"></i><i style="height:90%"></i><i style="height:88%"></i><i style="height:85%"></i><i style="height:83%"></i><i style="height:80%"></i><i style="height:78%"></i><i style="height:76%"></i><i style="height:74%"></i><i style="height:71%"></i><i style="height:69%"></i><i style="height:66%"></i><i style="height:64%"></i><i style="height:100%"></i><i style="height:98%"></i><i style="height:96%"></i><i style="height:94%"></i><i style="height:92%"></i><i style="height:90%"></i><i style="height:88%"></i><i style="height:86%"></i><i style="height:84%"></i><i style="height:82%"></i><i style="height:80%"></i></div>
         </div>
       </div>
 
-      <!-- État de la batterie -->
+      <!-- État de la batterie (structure iOS 18, iPhone 15 et plus récents) -->
       <div class="page" id="p-etat">
         <div class="nav"><span class="chev">‹</span>Batterie<span class="milieu">État de la batterie</span></div>
         <div class="groupe" style="margin-top:30px">
-          <div class="row sans-icone"><span class="nom">État</span><span class="val">Normal</span></div>
+          <div class="row sans-icone"><span class="nom">État de la batterie</span><span class="val">Normal</span></div>
         </div>
-        <div class="groupe" id="r-capacite">
-          <div class="row sans-icone"><span class="nom">Capacité maximale</span><span class="val" style="color:var(--blanc);font-weight:600">87 %</span></div>
+        <div class="note">La batterie de cet iPhone fonctionne normalement.</div>
+        <div id="zone-sante">
+          <div class="groupe" id="r-capacite">
+            <div class="row sans-icone"><span class="nom">Capacité maximale</span><span class="val" style="color:var(--blanc);font-weight:600">87 %</span></div>
+          </div>
+          <div class="note">Mesure de la capacité de la batterie par rapport à une batterie neuve.</div>
+          <div class="groupe" id="r-cycles">
+            <div class="row sans-icone"><span class="nom">Nombre de cycles</span><span class="val" style="color:var(--blanc);font-weight:600">412</span></div>
+          </div>
+          <div class="note">Nombre de fois où l'iPhone a utilisé toute la capacité de sa batterie.</div>
         </div>
-        <div class="note">Mesure de la capacité de la batterie par rapport à une batterie neuve.</div>
+        <div class="groupe">
+          <div class="row sans-icone"><span class="nom">Date de fabrication</span><span class="val">Septembre 2023</span></div>
+          <div class="row sans-icone"><span class="nom">Première utilisation</span><span class="val">Octobre 2023</span></div>
+        </div>
       </div>
 
       <!-- Général -->
@@ -139,8 +166,8 @@
         <div class="nav"><span class="chev">‹</span>Général<span class="milieu">Informations</span></div>
         <div class="groupe" style="margin-top:30px">
           <div class="row sans-icone"><span class="nom">Nom</span><span class="val">iPhone</span></div>
-          <div class="row sans-icone"><span class="nom">Nom du modèle</span><span class="val">iPhone 13</span></div>
-          <div class="row sans-icone" id="r-modele"><span class="nom">Numéro de modèle</span><span class="val" id="v-modele">A2633</span></div>
+          <div class="row sans-icone"><span class="nom">Nom du modèle</span><span class="val">iPhone 15</span></div>
+          <div class="row sans-icone" id="r-modele"><span class="nom">Numéro de modèle</span><span class="val" id="v-modele">A3090</span></div>
           <div class="row sans-icone"><span class="nom">Numéro de série</span><span class="val flou">G7XK2LMN0Q</span></div>
         </div>
       </div>
@@ -181,7 +208,7 @@ pave.innerHTML = TOUCHES.map(([c, s]) => `<div class="touche" data-k="${c}"><div
 const T = { intro: 0, s1: 3.6, s2: 13.2, s3: 23.4, fin: 32.4 };
 const TEXTES = [
   { a: T.intro, b: T.s1,  label: 'Avant d’acheter', titre: 'Un iPhone|d’occasion.', sous: 'Trois vérifications.' },
-  { a: T.s1,    b: T.s2,  label: '1/3', titre: 'La batterie.', sous: 'Sous 80 %, elle est usée.' },
+  { a: T.s1,    b: T.s2,  label: '1/3', titre: 'La batterie.', sous: 'Capacité sous 80 % : usée.|Cycles : iPhone 15 et plus récents.' },
   { a: T.s2,    b: T.s3,  label: '2/3', titre: 'Neuf ou reconditionné.', sous: 'Référence en M : neuf.|En F : reconditionné. En N : remplacement.' },
   { a: T.s3,    b: T.fin, label: '3/3', titre: 'L’IMEI.', sous: 'Le même que sur la boîte|et la facture.' },
   { a: T.fin,   b: 99,    titre: 'Neuf ou occasion.', sous: 'Toujours dit clairement.|Delmas · WhatsApp +509 4630 2424' },
@@ -202,7 +229,7 @@ const TAPS = [
 const SAISIE = '*#06#';
 // Caméra : [instant, zoom, élément visé, hauteur où le ramener (px)] — sous le bloc de texte
 const CAM = [
-  [0, 1, null], [8.0, 1.45, '#r-capacite', 1320], [12.6, 1, null],
+  [0, 1, null], [8.0, 1.3, '#zone-sante', 1450], [12.6, 1, null],
   [18.2, 1.45, '#r-modele', 1480], [22.8, 1, null],
   [27.8, 1.3, '#feuille', 1540], [31.8, 1, null],
 ];
@@ -259,9 +286,10 @@ window.oraSeek = t => {
   }
 
   // Valeurs qui changent
-  document.getElementById('v-modele').textContent = t >= 17.75 ? 'MLPF3ZD/A' : 'A2633';
+  document.getElementById('v-modele').textContent = t >= 17.75 ? 'MTP03ZD/A' : 'A3090';
   document.getElementById('r-modele').classList.toggle('hl', t >= 18.0 && t < T.s3);
-  document.getElementById('r-capacite').classList.toggle('hl', t >= 8.0 && t < T.s2);
+  document.getElementById('r-capacite').classList.toggle('hl', t >= 8.4 && t < 10.6);
+  document.getElementById('r-cycles').classList.toggle('hl', t >= 10.6 && t < T.s2);
   const nb = TAPS.filter(x => x[1].startsWith('[data-k') && t >= x[0] + 0.12).length;
   saisie.textContent = SAISIE.slice(0, nb);
   const f = out((t - 27.3) / 0.4);
@@ -292,9 +320,12 @@ window.oraSeek = t => {
     el.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
     // le sous-texte arrive après l'action à l'écran
     const retard = [0.5, 4.6, 5.0, 4.4, 0.4][j];
+    let si = 0;
     el.querySelectorAll('.ligne > span').forEach((sp, n) => {
       const isSous = sp.parentElement.classList.contains('sous');
-      const e = out((tin - (isSous ? retard : 0) - n * 0.1) / 0.7);
+      // étape 1 : la 2e ligne (cycles) arrive avec la surbrillance des cycles
+      const extra = isSous && j === 1 && si === 1 ? 1.9 : 0; if (isSous) si++;
+      const e = out((tin - (isSous ? retard + extra : 0) - n * 0.1) / 0.7);
       sp.style.transform = `translateY(${(1 - e) * 110}%)`;
     });
   });
