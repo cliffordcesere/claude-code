@@ -23,6 +23,7 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 - 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
 - 2026-11-04 : vidéo produit animée (v1) = « un bon début » ; risque perçu : « un bout de câble » → toujours rendre la taille ou la longueur lisible.
 - 2026-11-04 : le son est souhaité. Habillage synthétisé par défaut (`tools/son.py`), version muette livrée à côté.
+- 2026-11-04 : version courante : iOS 27 (sortie avec l'iPhone 18, selon le propriétaire). Captures de référence : Réglages FR (bloc compte Apple en haut, recherche flottante), Informations iOS 27 (référence affichée directement, ex. MG1D4LL/A).
 - 2026-11-04 : le propriétaire n'a pas d'iPhone ; les tutos d'interface se font en écrans reconstruits (HTML), exactitude à faire vérifier sur un vrai appareil.
 - 2026-11-04 : la photo maison est préférée à l'image fournisseur ; la plaque perforée et le désordre sont retirés au détourage.
 

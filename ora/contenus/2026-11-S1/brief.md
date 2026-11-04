@@ -42,9 +42,9 @@ Non écouté avant livraison : vérifier au casque et sur le haut-parleur du té
 ## Tuto — « Avant d'acheter un iPhone d'occasion » (37 s)
 
 Fichiers : `ORA_EDUCATION_IPHONE-OCCASION_TUTO_261104_v01.mp4` (avec son), `…TUTO-MUET…` (sans son). Source : `tuto-iphone-occasion.html`.
-Écrans reconstruits sur la structure d'iOS 18 (capture fournie : Batterie › État de la batterie › Capacité maximale, Nombre de cycles), exemple d'un iPhone 15, palette ORA, IMEI et numéro de série floutés.
+Interface iOS 27 reconstruite d'après les captures du propriétaire (Réglages FR avec bloc compte Apple, bouton retour rond, recherche flottante ; Informations iOS 27 avec référence affichée directement). Compte « Jean M. » et valeurs fictifs ; IMEI et numéro de série floutés.
 
 TikTok : `Trois vérifications avant d'acheter un iPhone d'occasion.`
 Instagram : `Batterie, référence, IMEI. Trois écrans à regarder avant de payer un iPhone d'occasion. Chez ORA, l'état de chaque appareil est dit avant la vente. #ORA #PortauPrince #iPhone`
 
-À faire vérifier sur un vrai iPhone : noms des menus en français et leur place dans iOS 26 ; règle M / F / N ; seuil de 80 % ; cycles affichés à partir de l'iPhone 15.
+À faire vérifier sur un vrai iPhone : page Batterie d'iOS 27 (faite d'après iOS 26, aucune capture) ; règle M / F / N ; seuil de 80 % ; cycles affichés à partir de l'iPhone 15.

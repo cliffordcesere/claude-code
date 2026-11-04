@@ -7,7 +7,8 @@
 <!--
   Tuto 9:16, ~37 s. Interface iPhone reconstruite (illustration), dans la palette ORA.
   Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/tuto-iphone-occasion.html sortie.mp4
-  Les valeurs affichées (87 %, références, IMEI) sont des exemples ; l'IMEI est flouté.
+  Interface iOS 27 reconstruite d'après captures (Réglages FR iOS 26, Informations iOS 27).
+  Valeurs et compte « Jean M. » fictifs ; IMEI et numéro de série floutés.
 -->
 <style>
   .canvas { --W: 1080; --H: 1920; }
@@ -22,50 +23,58 @@
   .logo { bottom: 320px; opacity: 0; }
   #noir { position: absolute; inset: 0; background: var(--noir); }
 
-  /* ---------- Téléphone ---------- */
+  /* ---------- Téléphone : interface iOS 27 (captures fournies), palette ORA ---------- */
   #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
   .phone {
     position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
-    border-radius: 104px; background: #000; padding: 16px;
-    box-shadow: 0 0 0 2px #1D1D1D, 0 0 0 9px #141414, 0 0 0 10px #2a2a2a;
+    border-radius: 108px; background: #000; padding: 14px;
+    box-shadow: 0 0 0 2px #2a2a2a, 0 0 0 8px #141414, 0 0 0 9px #3a3a3a;
   }
-  .ecran { position: relative; width: 100%; height: 100%; border-radius: 90px; overflow: hidden; background: #000;
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 96px; overflow: hidden; background: #000;
            font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
-  .ilot { position: absolute; left: 50%; top: 22px; width: 190px; height: 54px; margin-left: -95px; border-radius: 30px; background: #000; z-index: 5; box-shadow: 0 0 0 1px #111; }
-  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 10px 62px 0 74px; font: 600 30px/1 "Jost", sans-serif; }
-  .statut .ic { display: flex; gap: 12px; align-items: center; }
+  .ilot { position: absolute; left: 50%; top: 24px; width: 180px; height: 52px; margin-left: -90px; border-radius: 30px; background: #000; z-index: 6; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 58px 0 76px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 10px; align-items: center; }
   .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
   .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
-  .pile { width: 46px; height: 22px; border: 2px solid rgba(250,250,250,.5); border-radius: 7px; padding: 2px; }
-  .pile b { display: block; height: 100%; width: 80%; background: var(--blanc); border-radius: 3px; }
+  .barres i.off { background: rgba(250,250,250,.35); }
+  .pct { min-width: 52px; height: 26px; padding: 0 6px; border-radius: 8px; background: var(--blanc); color: #000; font: 700 20px/26px "Jost", sans-serif; text-align: center; position: relative; }
+  .pct::after { content: ""; position: absolute; right: -6px; top: 8px; width: 3px; height: 10px; border-radius: 0 2px 2px 0; background: rgba(250,250,250,.5); }
 
-  .page { position: absolute; inset: 0; background: #000; padding-top: 110px; will-change: transform; }
-  .nav { height: 70px; display: flex; align-items: center; padding: 0 30px; font-size: 32px; color: var(--blanc); gap: 6px; }
-  .nav .chev { font-size: 44px; line-height: 1; margin-top: -4px; }
-  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-weight: 600; pointer-events: none; }
-  .grand-titre { font-size: 64px; font-weight: 700; letter-spacing: -.01em; padding: 6px 40px 26px; }
-  .groupe { margin: 0 30px 38px; background: #1C1C1C; border-radius: 26px; overflow: hidden; }
-  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 92px; padding: 0 28px; font-size: 32px; }
-  .row + .row::before { content: ""; position: absolute; left: 100px; right: 0; top: 0; height: 1px; background: #333; }
-  .row.sans-icone + .row.sans-icone::before { left: 28px; }
-  .row .icone { width: 52px; height: 52px; border-radius: 13px; background: #3a3a3a; display: grid; place-items: center; font-size: 26px; font-weight: 700; color: var(--blanc); flex: none; }
+  .page { position: absolute; inset: 0; background: #000; padding-top: 104px; will-change: transform; }
+  .nav { position: relative; height: 104px; display: flex; align-items: center; padding: 0 26px; }
+  .nav .rond { width: 78px; height: 78px; border-radius: 50%; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 66px; font-weight: 700; letter-spacing: -.01em; padding: 40px 40px 26px; }
+  .groupe { margin: 0 26px 30px; background: #1C1C1C; border-radius: 40px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 84px; padding: 0 30px; font-size: 30px; }
+  .row + .row::before { content: ""; position: absolute; left: 104px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 30px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 14px; background: #2e2e2e; display: grid; place-items: center; color: var(--blanc); flex: none; }
   .row .nom { flex: 1; white-space: nowrap; }
-  .row .val { white-space: nowrap; }
-  .row .val { color: var(--gris); }
-  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 8px; }
-  .toggle { width: 96px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; }
-  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 50px; height: 50px; border-radius: 50%; background: var(--blanc); }
-  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 42px; background: #000; }
-  .note { color: var(--gris); font-size: 26px; line-height: 1.35; padding: 0 58px 30px; margin-top: -20px; }
-  .graph { padding: 22px 26px 26px; }
-  .seg { display: grid; grid-template-columns: 1fr 1fr; background: #2a2a2a; border-radius: 16px; padding: 4px; font-size: 24px; text-align: center; }
-  .seg span { padding: 10px 0; border-radius: 12px; color: var(--blanc); }
-  .seg .on { background: #4a4a4a; }
-  .g-titre { font-size: 28px; font-weight: 600; margin: 22px 0 16px; }
-  .barres-g { display: flex; align-items: flex-end; gap: 4px; height: 170px; }
-  .barres-g i { flex: 1; background: #6a6a6a; border-radius: 3px 3px 0 0; }
-  .note { margin-top: -26px; }
-  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 22px; }
+  .row .val { color: var(--gris); white-space: nowrap; }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 6px; }
+  .compte { display: flex; align-items: center; gap: 24px; padding: 22px 30px; }
+  .avatar { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; display: grid; place-items: center; font-size: 36px; font-weight: 600; color: var(--blanc); flex: none; }
+  .compte .nom { font-size: 34px; font-weight: 600; }
+  .compte .sous-c { font-size: 25px; color: var(--gris); margin-top: 4px; }
+  .compte .fl { margin-left: auto; color: #5a5a5a; font-size: 38px; }
+  .toggle { width: 98px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 62px; height: 50px; border-radius: 26px; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 32px; background: #000; }
+  .note { color: var(--gris); font-size: 24px; line-height: 1.35; padding: 0 56px 26px; margin-top: -18px; }
+  .recherche { position: absolute; left: 34px; right: 34px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; align-items: center; gap: 16px; padding: 0 30px; color: var(--gris); font-size: 30px; z-index: 3; }
+  .recherche .m { margin-left: auto; color: var(--blanc); }
+  .carte { margin: 20px 26px 30px; background: #1C1C1C; border-radius: 40px; padding: 30px; }
+  .carte .gros { font-size: 72px; font-weight: 700; } .carte .gros small { font-size: 36px; }
+  .carte .info { font-size: 24px; color: var(--gris); margin-top: 4px; }
+  .jauge { height: 14px; border-radius: 7px; background: #333; margin-top: 20px; overflow: hidden; } .jauge b { display: block; height: 100%; width: 92%; background: var(--blanc); border-radius: 7px; }
+  .graph { padding: 26px 30px 30px; }
+  .g-titre { font-size: 26px; font-weight: 600; margin-bottom: 4px; } .g-sous { font-size: 22px; color: var(--gris); margin-bottom: 18px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+  .barres-g i { flex: 1; background: #555; border-radius: 6px 6px 0 0; } .barres-g i.auj { background: var(--blanc); }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
+  .row.hl { border-radius: 0; }
   .flou { filter: blur(9px); }
 
   /* clavier téléphone */
@@ -73,11 +82,11 @@
   .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
   .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
   .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
-  .feuille { position: absolute; left: 60px; right: 60px; top: 420px; background: #1C1C1C; border-radius: 34px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
-  .feuille h3 { margin: 0 0 26px; font-size: 36px; font-weight: 600; text-align: center; }
-  .feuille .l { font-size: 30px; color: var(--gris); margin-bottom: 6px; }
+  .feuille { position: absolute; left: 50px; right: 50px; top: 420px; background: #1C1C1C; border-radius: 44px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 34px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 28px; color: var(--gris); margin-bottom: 6px; }
   .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
-  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 34px; font-weight: 600; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 32px; font-weight: 600; }
 
   .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
 </style>
@@ -87,48 +96,48 @@
   <div id="camera">
     <div class="phone" id="phone"><div class="ecran" id="ecran">
       <div class="ilot"></div>
-      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:21px"></i></span><span class="pile"><b></b></span></span></div>
+      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i class="off" style="height:21px"></i></span><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><span class="pct">92</span></span></div>
 
-      <!-- Réglages -->
-      <div class="page" id="p-reglages">
-        <div class="nav"></div>
+      <!-- Réglages (iOS 26/27 : bloc compte en haut, recherche flottante) -->
+      <div class="page" id="p-reglages" style="padding-top:60px">
         <div class="grand-titre">Réglages</div>
         <div class="groupe">
-          <div class="row"><span class="icone">✈</span><span class="nom">Mode Avion</span><span class="toggle"></span></div>
-          <div class="row"><span class="icone">W</span><span class="nom">Wi-Fi</span><span class="val">Maison</span><span class="fl">›</span></div>
-          <div class="row"><span class="icone">B</span><span class="nom">Bluetooth</span><span class="val">Oui</span><span class="fl">›</span></div>
+          <div class="compte"><span class="avatar">JM</span><span><div class="nom">Jean M.</div><div class="sous-c">Compte Apple, iCloud et autres</div></span><span class="fl">›</span></div>
         </div>
         <div class="groupe">
-          <div class="row" id="r-general"><span class="icone">⚙</span><span class="nom">Général</span><span class="fl">›</span></div>
-          <div class="row"><span class="icone">A</span><span class="nom">Accessibilité</span><span class="fl">›</span></div>
-          <div class="row" id="r-batterie"><span class="icone">▮</span><span class="nom">Batterie</span><span class="fl">›</span></div>
-          <div class="row"><span class="icone">✋</span><span class="nom">Confidentialité</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span><span class="nom">Mode Avion</span><span class="toggle"></span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg></span><span class="nom">Wi-Fi</span><span class="val">Maison</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z"/></svg></span><span class="nom">Bluetooth</span><span class="val">Oui</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 5c-3.87 0-7 3.13-7 7h2c0-2.76 2.24-5 5-5s5 2.24 5 5h2c0-3.87-3.13-7-7-7zm1 9.29c.88-.39 1.5-1.26 1.5-2.29 0-1.38-1.12-2.5-2.5-2.5S9.5 10.62 9.5 12c0 1.02.62 1.9 1.5 2.29v3.3L7.59 21 9 22.41l3-3 3 3L16.41 21 13 17.59v-3.3zM12 1C5.93 1 1 5.93 1 12h2c0-4.97 4.03-9 9-9s9 4.03 9 9h2c0-6.07-4.93-11-11-11z"/></svg></span><span class="nom">Données cellulaires</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></span><span class="nom">Partage de connexion</span><span class="val">Non</span><span class="fl">›</span></div>
+          <div class="row" id="r-batterie"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M2 8.5A1.5 1.5 0 0 1 3.5 7h14A1.5 1.5 0 0 1 19 8.5v7a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 2 15.5zM4 9v6h13V9zM20 10h1.2a.8.8 0 0 1 .8.8v2.4a.8.8 0 0 1-.8.8H20zM5 10h9v4H5z"/></svg></span><span class="nom">Batterie</span><span class="fl">›</span></div>
         </div>
+        <div class="groupe">
+          <div class="row" id="r-general"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></span><span class="nom">Général</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M20.5 6c-2.61.7-5.67 1-8.5 1s-5.89-.3-8.5-1L3 8c1.86.5 4 .83 6 1v13h2v-6h2v6h2V9c2-.17 4.14-.5 6-1l-.5-2zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg></span><span class="nom">Accessibilité</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></span><span class="nom">Appareil photo</span><span class="fl">›</span></div>
+        </div>
+        <div class="recherche"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><span>Recherche</span><span class="m"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg></span></div>
       </div>
 
-      <!-- Batterie (structure iOS 18) -->
+      <!-- Batterie (forme iOS 26 d'après capture ; place exacte des lignes à confirmer sur iOS 27) -->
       <div class="page" id="p-batterie">
-        <div class="nav"><span class="chev">‹</span>Réglages<span class="milieu">Batterie</span></div>
-        <div class="groupe" style="margin-top:30px">
-          <div class="row sans-icone"><span class="nom">Pourcentage de la batterie</span><span class="toggle on"></span></div>
-          <div class="row sans-icone"><span class="nom">Mode économie d'énergie</span><span class="toggle"></span></div>
-        </div>
-        <div class="note">Le mode économie d'énergie réduit temporairement l'activité en arrière-plan.</div>
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Batterie</span></div>
+        <div class="carte"><div class="gros">92<small> %</small></div><div class="info">Dernière recharge à 100 % : il y a 3 h</div><div class="jauge"><b></b></div></div>
         <div class="groupe">
           <div class="row sans-icone" id="r-etat"><span class="nom">État de la batterie</span><span class="val">Normal</span><span class="fl">›</span></div>
           <div class="row sans-icone"><span class="nom">Recharge</span><span class="fl">›</span></div>
         </div>
         <div class="groupe graph">
-          <div class="seg"><span class="on">Dernières 24 heures</span><span>10 derniers jours</span></div>
-          <div class="g-titre">Dernière recharge à 100 %</div>
-          <div class="barres-g"><i style="height:92%"></i><i style="height:90%"></i><i style="height:88%"></i><i style="height:85%"></i><i style="height:83%"></i><i style="height:80%"></i><i style="height:78%"></i><i style="height:76%"></i><i style="height:74%"></i><i style="height:71%"></i><i style="height:69%"></i><i style="height:66%"></i><i style="height:64%"></i><i style="height:100%"></i><i style="height:98%"></i><i style="height:96%"></i><i style="height:94%"></i><i style="height:92%"></i><i style="height:90%"></i><i style="height:88%"></i><i style="height:86%"></i><i style="height:84%"></i><i style="height:82%"></i><i style="height:80%"></i></div>
+          <div class="g-titre">Utilisation quotidienne</div><div class="g-sous">Moyenne 53 % · Aujourd'hui 41 %</div>
+          <div class="barres-g"><i style="height:62%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:66%"></i><i style="height:74%"></i><i style="height:58%"></i><i class="auj" style="height:46%"></i></div>
         </div>
       </div>
 
-      <!-- État de la batterie (structure iOS 18, iPhone 15 et plus récents) -->
+      <!-- État de la batterie (iPhone 15 et plus récents) -->
       <div class="page" id="p-etat">
-        <div class="nav"><span class="chev">‹</span>Batterie<span class="milieu">État de la batterie</span></div>
-        <div class="groupe" style="margin-top:30px">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">État de la batterie</span></div>
+        <div class="groupe" style="margin-top:20px">
           <div class="row sans-icone"><span class="nom">État de la batterie</span><span class="val">Normal</span></div>
         </div>
         <div class="note">La batterie de cet iPhone fonctionne normalement.</div>
@@ -143,32 +152,41 @@
           <div class="note">Nombre de fois où l'iPhone a utilisé toute la capacité de sa batterie.</div>
         </div>
         <div class="groupe">
-          <div class="row sans-icone"><span class="nom">Date de fabrication</span><span class="val">Septembre 2023</span></div>
-          <div class="row sans-icone"><span class="nom">Première utilisation</span><span class="val">Octobre 2023</span></div>
+          <div class="row sans-icone"><span class="nom">Date de fabrication</span><span class="val">Septembre 2024</span></div>
+          <div class="row sans-icone"><span class="nom">Première utilisation</span><span class="val">Octobre 2024</span></div>
         </div>
       </div>
 
       <!-- Général -->
       <div class="page" id="p-general">
-        <div class="nav"><span class="chev">‹</span>Réglages<span class="milieu">Général</span></div>
-        <div class="groupe" style="margin-top:30px">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Général</span></div>
+        <div class="groupe" style="margin-top:20px">
           <div class="row sans-icone" id="r-infos"><span class="nom">Informations</span><span class="fl">›</span></div>
           <div class="row sans-icone"><span class="nom">Mise à jour logicielle</span><span class="fl">›</span></div>
         </div>
         <div class="groupe">
           <div class="row sans-icone"><span class="nom">Stockage</span><span class="fl">›</span></div>
           <div class="row sans-icone"><span class="nom">Date et heure</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Clavier</span><span class="fl">›</span></div>
         </div>
       </div>
 
-      <!-- Informations -->
+      <!-- Informations (structure iOS 27 d'après capture : référence affichée directement) -->
       <div class="page" id="p-infos">
-        <div class="nav"><span class="chev">‹</span>Général<span class="milieu">Informations</span></div>
-        <div class="groupe" style="margin-top:30px">
-          <div class="row sans-icone"><span class="nom">Nom</span><span class="val">iPhone</span></div>
-          <div class="row sans-icone"><span class="nom">Nom du modèle</span><span class="val">iPhone 15</span></div>
-          <div class="row sans-icone" id="r-modele"><span class="nom">Numéro de modèle</span><span class="val" id="v-modele">A3090</span></div>
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Informations</span></div>
+        <div class="groupe" style="margin-top:20px">
+          <div class="row sans-icone"><span class="nom">Nom</span><span class="val">iPhone</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Version d'iOS</span><span class="val">27.0</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Nom du modèle</span><span class="val">iPhone 16</span></div>
+          <div class="row sans-icone" id="r-modele"><span class="nom">Numéro de modèle</span><span class="val" id="v-modele">MYE73ZD/A</span></div>
           <div class="row sans-icone"><span class="nom">Numéro de série</span><span class="val flou">G7XK2LMN0Q</span></div>
+        </div>
+        <div class="groupe">
+          <div class="row sans-icone"><span class="nom">Services AppleCare</span><span class="fl">›</span></div>
+        </div>
+        <div class="groupe">
+          <div class="row sans-icone"><span class="nom">Capacité</span><span class="val">128 Go</span></div>
+          <div class="row sans-icone"><span class="nom">Disponible</span><span class="val">41,2 Go</span></div>
         </div>
       </div>
 
@@ -223,14 +241,14 @@ const NAV = [
 // Appuis : [instant, élément visé]
 const TAPS = [
   [4.9, '#r-batterie'], [6.6, '#r-etat'],
-  [14.6, '#r-general'], [15.9, '#r-infos'], [17.6, '#r-modele'],
+  [14.6, '#r-general'], [15.9, '#r-infos'],
   [25.0, '[data-k="*"]'], [25.45, '[data-k="#"]'], [25.9, '[data-k="0"]'], [26.35, '[data-k="6"]'], [26.8, '[data-k="#"]'],
 ];
 const SAISIE = '*#06#';
 // Caméra : [instant, zoom, élément visé, hauteur où le ramener (px)] — sous le bloc de texte
 const CAM = [
   [0, 1, null], [8.0, 1.3, '#zone-sante', 1450], [12.6, 1, null],
-  [18.2, 1.45, '#r-modele', 1480], [22.8, 1, null],
+  [17.4, 1.4, '#r-modele', 1640], [22.8, 1, null],
   [27.8, 1.3, '#feuille', 1540], [31.8, 1, null],
 ];
 
@@ -286,8 +304,7 @@ window.oraSeek = t => {
   }
 
   // Valeurs qui changent
-  document.getElementById('v-modele').textContent = t >= 17.75 ? 'MTP03ZD/A' : 'A3090';
-  document.getElementById('r-modele').classList.toggle('hl', t >= 18.0 && t < T.s3);
+  document.getElementById('r-modele').classList.toggle('hl', t >= 17.4 && t < T.s3);
   document.getElementById('r-capacite').classList.toggle('hl', t >= 8.4 && t < 10.6);
   document.getElementById('r-cycles').classList.toggle('hl', t >= 10.6 && t < T.s2);
   const nb = TAPS.filter(x => x[1].startsWith('[data-k') && t >= x[0] + 0.12).length;
@@ -319,7 +336,7 @@ window.oraSeek = t => {
     el.style.opacity = t < p.a - 0.01 ? 0 : tout > 0 ? 1 - clamp(tout / 0.35) : 1;
     el.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
     // le sous-texte arrive après l'action à l'écran
-    const retard = [0.5, 4.6, 5.0, 4.4, 0.4][j];
+    const retard = [0.5, 4.6, 3.9, 4.4, 0.4][j];
     let si = 0;
     el.querySelectorAll('.ligne > span').forEach((sp, n) => {
       const isSous = sp.parentElement.classList.contains('sous');
