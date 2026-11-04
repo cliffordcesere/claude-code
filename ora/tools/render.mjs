@@ -51,6 +51,7 @@ try {
     const video = output.endsWith('.mp4');
     await page.goto(url + '?' + query.toString());
     await page.evaluate(() => document.fonts.ready);
+    await page.waitForFunction(() => window.ORA_READY !== false); // pages à chargement asynchrone
     const canvas = page.locator('#canvas');
     const box = await canvas.boundingBox();
     await page.setViewportSize({ width: Math.ceil(box.width), height: Math.ceil(box.height) });

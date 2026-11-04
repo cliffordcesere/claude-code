@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — vidéo produit 9:16</title>
+<link rel="stylesheet" href="ora.css">
+<!--
+  Vidéo produit 9:16 (TikTok, Reels, statut WhatsApp) à partir d'une photo détourée (PNG transparent).
+  Configuration : ?cfg=<chemin vers un .js qui définit window.ORA_CFG>, relatif à ce dossier.
+  Voir ora/contenus/2026-11-S1/cable-usbc-90.js pour un exemple.
+
+  ORA_CFG = {
+    img: 'chemin/produit.png',          // relatif à ce dossier
+    largeur: 860,                        // largeur du produit à l'échelle 1 (px)
+    centre: [540, 800],                  // position du produit à l'échelle 1
+    plans: [                             // un plan = une caméra + un texte
+      { t: 0, zoom: 1.9, cible: [x, y], rot: -4, label: 'USB-C', titre: 'Coudé à 90°.', sous: '' },
+      ...                                // cible : point du produit au centre de l'image, en fraction (0–1) de l'image
+    ],
+    fin: 12                              // durée totale (s)
+  }
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  #lumiere { position: absolute; inset: 0; }
+  #scene { position: absolute; inset: 0; }
+  #prod { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  #prod img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+  #base {
+    /* Produit noir sur fond noir : éclairage studio simulé.
+       Relevé des tons + liseré froid + liseré cuivre côté lumière (§5 Photographie). */
+    filter: brightness(1.45) contrast(1.08)
+            drop-shadow(0 0 1.2px rgba(250,250,250,.28))
+            drop-shadow(2px -2px 3px rgba(184,115,51,.38));
+  }
+  #reflet {
+    filter: brightness(4) grayscale(1);
+    mix-blend-mode: screen;
+    -webkit-mask-image: linear-gradient(105deg, transparent 0%, transparent 42%, #000 50%, transparent 58%, transparent 100%);
+    -webkit-mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    opacity: 0;
+  }
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 1230px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 22px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: calc(var(--H) * 0.03px); margin-top: 18px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .logo { bottom: 320px; opacity: 0; }
+  #noir { position: absolute; inset: 0; background: var(--noir); pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="lumiere"></div>
+  <div id="scene"><div id="prod"><img id="base" alt=""><img id="reflet" alt=""></div></div>
+  <div class="texte" id="textes"></div>
+  <img class="logo" id="logo" src="../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+  <div id="noir"></div>
+</div>
+<script>
+window.ORA_READY = false; // tools/render.mjs attend true
+const q = new URLSearchParams(location.search);
+const s = document.createElement('script');
+s.src = q.get('cfg');
+s.onload = init;
+document.head.append(s);
+
+function init() {
+  const C = window.ORA_CFG;
+  window.ORA_DURATION = C.fin;
+  base.src = reflet.src = C.img;
+  const prod = document.getElementById('prod');
+
+  // Textes : un bloc par plan, lignes révélées par masque.
+  const blocs = C.plans.map(p => {
+    const b = document.createElement('div'); b.className = 'bloc';
+    const ligne = (cls, txt) => `<span class="ligne ${cls}"><span>${txt}</span></span>`;
+    b.innerHTML = (p.label ? ligne('label', p.label) : '') + ligne('titre', p.titre || '') + (p.sous ? ligne('sous', p.sous) : '');
+    textes.append(b); return b;
+  });
+
+  const clamp = x => Math.min(Math.max(x, 0), 1);
+  const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }; // easeInOutCubic
+  const out = x => 1 - Math.pow(1 - clamp(x), 4);                                                     // easeOutQuart
+  const lerp = (a, b, k) => a + (b - a) * k;
+
+  base.decode().then(() => {
+    const ratio = base.naturalHeight / base.naturalWidth;
+    const W = C.largeur, H = W * ratio;
+    prod.style.width = W + 'px'; prod.style.height = H + 'px';
+
+    // Caméra d'un plan : la cible du produit est placée au centre de cadrage.
+    const cam = p => {
+      const z = p.zoom || 1, cx = (p.cible || [.5, .5])[0] * W, cy = (p.cible || [.5, .5])[1] * H;
+      const [fx, fy] = p.cadre || C.centre;
+      return { z, x: fx - cx * z, y: fy - cy * z, r: p.rot || 0 };
+    };
+    const cams = C.plans.map(cam);
+    const TRANS = 1.4;      // durée d'un mouvement de caméra
+    const DERIVE = 0.035;   // poussée lente pendant un plan
+
+    window.oraSeek = t => {
+      // plan courant
+      let i = 0; while (i + 1 < C.plans.length && t >= C.plans[i + 1].t) i++;
+      const p = C.plans[i], c = cams[i];
+      const dt = t - p.t;
+      let k = { ...c };
+      if (i > 0 && dt < TRANS) {
+        const a = cams[i - 1], e = io(dt / TRANS), zp = a.z * (1 + DERIVE);
+        k = { z: lerp(zp, c.z, e), x: lerp(a.x - (zp - a.z) * (C.centre[0] - a.x) / a.z, c.x, e),
+              y: lerp(a.y - (zp - a.z) * (C.centre[1] - a.y) / a.z, c.y, e), r: lerp(a.r, c.r, e) };
+      } else {
+        const fin = (i + 1 < C.plans.length ? C.plans[i + 1].t : C.fin);
+        const d = clamp((t - p.t - (i ? TRANS : 0)) / (fin - p.t - (i ? TRANS : 0))) * DERIVE;
+        // poussée centrée sur le cadre
+        const z = c.z * (1 + d);
+        k = { z, x: c.x - (z - c.z) * (C.centre[0] - c.x) / c.z, y: c.y - (z - c.z) * (C.centre[1] - c.y) / c.z, r: c.r };
+      }
+      const [fx, fy] = p.cadre || C.centre; // rotation autour du point cadré
+      prod.style.transform = `translate(${fx}px, ${fy}px) rotate(${k.r}deg) translate(${-fx}px, ${-fy}px) translate(${k.x}px, ${k.y}px) scale(${k.z})`;
+
+      // Lumière : la flaque monte à l'ouverture et suit le produit.
+      const on = out(t / 1.6);
+      lumiere.style.background =
+        `radial-gradient(ellipse 70% 42% at 50% 44%, rgba(250,250,250,${0.11 * on}) 0%, rgba(250,250,250,${0.035 * on}) 45%, transparent 75%), #0A0A0A`;
+      noir.style.opacity = 1 - out(t / 0.9);
+
+      // Reflet : un balayage par plan, 0,5 s après son début.
+      const g = clamp((dt - (i ? TRANS : 0.5)) / 1.3);
+      reflet.style.opacity = g > 0 && g < 1 ? 0.55 * Math.sin(Math.PI * g) : 0;
+      reflet.style.webkitMaskPosition = `${lerp(100, 0, g)}% 0`;
+
+      // Textes : entrée par masque, sortie par fondu montant.
+      blocs.forEach((b, j) => {
+        const pj = C.plans[j], fin = j + 1 < C.plans.length ? C.plans[j + 1].t : Infinity;
+        const tin = t - pj.t - (j ? TRANS * 0.55 : 0.9);
+        const tout = t - (fin - 0.35);
+        b.style.opacity = tout > 0 ? 1 - clamp(tout / 0.35) : 1;
+        b.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
+        [...b.querySelectorAll('.ligne > span')].forEach((sp, n) => {
+          const e = out((tin - n * 0.12) / 0.7);
+          sp.style.transform = `translateY(${(1 - e) * 110}%)`;
+        });
+      });
+
+      // Logo : fondu simple sur le dernier plan, puis fixe (§5).
+      const last = C.plans[C.plans.length - 1].t;
+      logo.style.opacity = out((t - last - 0.8) / 0.5);
+    };
+
+    if (!q.has('render')) {
+      const t0 = performance.now();
+      const loop = () => { oraSeek(((performance.now() - t0) / 1000) % (C.fin + 1)); requestAnimationFrame(loop); };
+      document.fonts.ready.then(loop);
+    } else { oraSeek(0); }
+    window.ORA_READY = true;
+  });
+}
+</script>
+</body>
+</html>

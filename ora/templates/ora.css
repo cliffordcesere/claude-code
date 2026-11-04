@@ -72,3 +72,16 @@ html, body { background: var(--noir); }
   min-width: 80px;
   display: block;
 }
+
+/* Produit noir sur fond noir : éclairage studio simulé (relevé des tons,
+   liseré froid, liseré cuivre côté lumière). Pour une photo détourée. */
+.produit-eclaire {
+  filter: brightness(1.45) contrast(1.08)
+          drop-shadow(0 0 1.2px rgba(250,250,250,.28))
+          drop-shadow(2px -2px 3px rgba(184,115,51,.38));
+}
+/* Flaque de lumière derrière le produit : dégradé de lumière, pas de couleur (§5). */
+.flaque {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 42% at 50% 52%, rgba(250,250,250,.11) 0%, rgba(250,250,250,.035) 45%, transparent 75%);
+}

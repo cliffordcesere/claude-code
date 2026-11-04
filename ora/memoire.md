@@ -17,6 +17,19 @@ Tout nouveau slogan proposé est étiqueté **candidat**, jamais présenté comm
 Premiers **1 000 abonnés qui font confiance à ORA** (communauté fidèle, pas du volume brut).
 La charte évolue avec la pratique : chaque ajustement est proposé, puis versionné par le propriétaire (§21).
 
+## Retours du propriétaire
+
+- 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
+- 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
+
+## Produits en stock (2026-11-04)
+
+| Produit | Données confirmées | À confirmer |
+|---|---|---|
+| Câble USB-C ↔ USB-C, un embout coudé 90° | 100 W, 1 m | Photo = modèle exact ? |
+| Chargeur sans fil à support | — | 15 W, Verizon d'origine, prix (ancien visuel : 2 000 HTG) |
+| Films hydrogel (pose sur machine Rich) | — | Modèles couverts, prix de pose, durée |
+
 ## Comptes et coordonnées (constatés le 2026-11-04)
 
 | Canal | Compte | Base au 2026-11-04 |

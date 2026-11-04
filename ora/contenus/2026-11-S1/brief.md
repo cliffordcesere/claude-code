@@ -1,67 +1,49 @@
 # ORA — semaine 1 (à partir du 2026-11-04)
 
-Stock : câble USB-C coudé 90°, chargeur sans fil à support, films hydrogel.
+Règle du propriétaire (2026-11-04) : **toujours montrer le produit vendu.** Un visuel texte seul est du bruit.
 
-## À confirmer avant publication
+## Livré
 
-- Câble : USB-C des deux côtés ? Longueur `[LONGUEUR]`, puissance `[PUISSANCE]`.
-- Chargeur : 15 W confirmé ? Produit Verizon d'origine ? Prix actuel (ancien visuel : 2 000 gourdes).
-- Hydrogel : modèles couverts `[MODÈLES]`, prix de pose `[PRIX]`, délai `[DÉLAI]`.
+| Fichier | Canal | Contenu |
+|---|---|---|
+| `ORA_PRODUIT_CABLE-USBC-90_REEL_261104_v01.mp4` | TikTok, Reels, statut WhatsApp | 12,5 s : gros plan coude → câble entier → embout droit → fin |
+| `ORA_PRODUIT_CABLE-USBC-90_POST_261104_v01.png` | Instagram, chaîne WhatsApp | Câble éclairé, « Coudé à 90°. », 100 W · 1 mètre |
 
-## Calendrier
+Source : `cable-usbc-90.js` (configuration du gabarit `templates/produit-motion.html`).
 
-| Jour | Canal | Pièce | Statut |
-|---|---|---|---|
-| J1 | Instagram + chaîne WhatsApp | Index 01 — 90° (post) | Prêt |
-| J1 | Statut WhatsApp / story | Index 01 — 90° (animé) | Prêt |
-| J2 | TikTok + Reels | « Deux minutes » — pose hydrogel | À filmer |
-| J3 | Instagram + chaîne WhatsApp | Index 02 — 15 W (post) | Prêt, 15 W à confirmer |
-| J3 | Statut WhatsApp / story | Index 02 — 15 W (animé) | Prêt, 15 W à confirmer |
-| J4 | TikTok + Reels | « Détail » — le coude du câble en gros plan, 6 s | À filmer |
-| J5 | TikTok + Reels | « Nou pa pale anpil » — hydrogel posé, avant/après | À filmer |
+## À vérifier avant publication
+
+La photo vient d'un catalogue fournisseur. Sur l'image, le câble paraît plus court qu'un mètre.
+Si ce n'est pas exactement le modèle vendu, la publier est un visuel trompeur (§19). Dans le doute : photo maison (voir plus bas).
 
 ## Captions
 
-**Index 01 — 90° (Instagram)**
+**TikTok**
 ```
-Un câble droit dépasse et se plie à la sortie du port. Coudé à 90°, il se range le long du téléphone. USB-C. Disponible à Delmas.
+Coudé à 90°. 100 W. Disponible à Delmas.
+```
+
+**Instagram / Reels**
+```
+Le connecteur coudé garde le câble le long du téléphone. USB-C des deux côtés, 100 W, 1 mètre. Disponible à Delmas, réponse sur WhatsApp.
 #ORA #PortauPrince #USBC
 ```
 
-**Index 02 — 15 W (Instagram)**
-```
-15 W, c'est la puissance du chargeur. Votre téléphone en accepte peut-être moins. Avant d'acheter, écrivez-nous votre modèle : on vous dit ce qu'il supporte vraiment.
-#ORA #PortauPrince #ChargeSansFil
-```
+**Statut WhatsApp** : la vidéo seule, sans texte.
 
-**TikTok « Deux minutes » hydrogel (8 mots)**
-```
-Découpé à la mesure. Posé en deux minutes.
-```
-« Deux minutes » n'est pas une promesse de délai : vérifier la durée réelle filmée, sinon titre « Découpé à la mesure. Posé net. »
+Son : ajouter dans TikTok/Instagram un son de la bibliothèque commerciale, volume bas. Pas de musique tendance non licenciée sur un compte de marque.
 
-**TikTok « Nou pa pale anpil » (créole)**
-```
-Nou pa pale anpil. Nou poze.
-```
+## Photo produit maison (le plus simple)
 
-Hashtags provisoires : pas de set officiel encore (§17).
+Une feuille blanche suffit : le détourage est automatique (`tools/detourer.py`), l'éclairage noir ORA est ajouté au rendu.
 
-## Tournage au téléphone
+1. Feuille A3 blanche ou carton blanc, posé près d'une fenêtre, sans soleil direct.
+2. Produit seul, propre, sans étiquette.
+3. Téléphone tenu au-dessus, parallèle à la feuille, sans zoom numérique. Pas d'ombre de la main.
+4. Le produit entier dans l'image, avec de la marge blanche tout autour.
+5. Mode photo normal, résolution maximale. Envoyer le fichier d'origine (pas une capture WhatsApp, qui compresse).
 
-1. Fond : carton ou tissu noir mat, sans plis. Jamais la plaque perforée ni le comptoir.
-2. Lumière : une seule lampe, en haut à gauche, à 45°. Tout le reste éteint. Fenêtre fermée.
-3. Téléphone sur support, jamais à la main. Vertical, 1080p ou 4K, 30 i/s.
-4. Verrouiller la mise au point et l'exposition (appui long sur le sujet), puis baisser l'exposition d'un cran.
-5. Produit propre, sans poussière ni étiquette de prix.
-6. Plans de 3 à 6 s. Un geste par plan. Pas de musique forte, pas de voix.
-7. Pour la photo du catalogue : même cadrage pour tous les produits.
+## Suite
 
-## Ancien visuel « Chargez sans fil » — audit
-
-**Verdict : refaire.**
-1. Fautes visibles (« WIIL », « RAPITID », « UTILIZE », « DISAINBLE », « Contact-uus ») : elles détruisent la confiance plus qu'un mauvais design.
-2. Ancienne identité « Oratech », bleu néon, circuits, 3 badges, QR code : hors palette et surchargé.
-3. Prix en très grand comme argument principal ; « Qualité Verizon » non vérifiable.
-
-**Correction :** Index 02 (ci-dessus), puis une photo produit réelle avec le gabarit `post-4x5.html` quand elle existera. Le prix passe dans le DM ou le catalogue.
+- Chargeur sans fil : même traitement dès que la photo est là. Confirmer 15 W, Verizon d'origine, prix.
+- Hydrogel : la pose filmée reste le meilleur contenu de confiance. Le gabarit ne remplace pas une vraie vidéo de geste.

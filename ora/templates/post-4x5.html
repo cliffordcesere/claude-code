@@ -21,6 +21,7 @@
 </head>
 <body>
 <div class="canvas" id="canvas">
+  <div class="flaque"></div>
   <div class="haut">
     <div class="label">[LABEL]</div>
     <h1 class="titre">Le silence<br>a un design.</h1>
@@ -35,5 +36,18 @@
   </div>
   <img class="logo" src="../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
 </div>
+<script>
+  // Paramètres d'URL (option) : img (relatif à ce dossier), label, titre (« | » = retour à la ligne), sous, cta
+  const q = new URLSearchParams(location.search);
+  const set = (sel, v) => { if (v !== null) { const el = document.querySelector(sel); el.textContent = '';
+    v.split('|').forEach((t, i) => { if (i) el.append(document.createElement('br')); el.append(t.trim()); }); } };
+  set('.label', q.get('label')); set('.titre', q.get('titre')); set('.sous', q.get('sous')); set('.cta', q.get('cta'));
+  if (q.get('img')) {
+    window.ORA_READY = false; // tools/render.mjs attend l'image
+    document.querySelector('.produit').innerHTML =
+      `<img class="produit-eclaire" src="${q.get('img')}" alt="${q.get('alt') || ''}">`;
+    document.querySelector('.produit img').decode().finally(() => { window.ORA_READY = true; });
+  }
+</script>
 </body>
 </html>
