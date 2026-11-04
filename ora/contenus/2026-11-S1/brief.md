@@ -48,3 +48,15 @@ TikTok : `Trois vérifications avant d'acheter un iPhone d'occasion.`
 Instagram : `Batterie, référence, IMEI. Trois écrans à regarder avant de payer un iPhone d'occasion. Chez ORA, l'état de chaque appareil est dit avant la vente. #ORA #PortauPrince #iPhone`
 
 À faire vérifier sur un vrai iPhone : page Batterie d'iOS 27 (faite d'après iOS 26, aucune capture) ; règle M / F / N ; seuil de 80 % ; cycles affichés à partir de l'iPhone 15.
+
+### Écran de fin
+Logo vertical centré + WhatsApp en cuivre + « Delmas, Haïti ». Écart à la charte à valider (§5 : logo centré réservé au pilier MARQUE ; taille 5–8 %).
+
+### Voix off — texte à lire (~40 s)
+- [Intro] Avant d'acheter un iPhone d'occasion, faites ces trois vérifications.
+- [1] Un : la batterie. Réglages, Batterie, État de la batterie. Sous 80 % de capacité maximale, elle est usée. Sur iPhone 15 et plus récents, regardez aussi le nombre de cycles.
+- [2] Deux : neuf ou reconditionné. Réglages, Général, Informations. Regardez le numéro de modèle. M, c'est neuf. F, reconditionné. N, un appareil de remplacement.
+- [3] Trois : l'IMEI. Tapez étoile, dièse, zéro, six, dièse. Le numéro doit être le même que sur la boîte et sur la facture.
+- [Fin] Chez ORA, neuf ou occasion, c'est toujours dit clairement.
+
+Enregistrement : pièce calme, téléphone à 20 cm, une partie à la fois avec 2 s de silence, voix calme, fichier d'origine (pas de vocal WhatsApp). La vidéo sera recalée sur la voix.

@@ -87,6 +87,9 @@ Tant qu'elles manquent, placeholder obligatoire, jamais d'invention.
 
 ## Points de la charte à arbitrer (relevés le 2026-11-03)
 
+0. **Écran de fin des vidéos (2026-11-04).** Le propriétaire veut combler le vide de fin. *Provisoire :* signature centrée (titre, logo vertical ~25 % de largeur, WhatsApp en cuivre). Écart au §5 (logo centré réservé au pilier MARQUE, taille 5–8 %).
+4. **Voix off (2026-11-04).** Le propriétaire veut une voix off sur les tutos. La charte ne l'interdit que pour la franchise « Deux minutes ». *Provisoire :* voix du propriétaire, calme ; test à mesurer (enregistrements, partages) contre les vidéos sans voix.
+
 Ce sont des tensions entre règles, pas des décisions. Application provisoire indiquée ; seul le propriétaire tranche (§21).
 
 1. **Taille du logo vs taille minimale.** Logo à 5–8 % de la largeur (§5) = 54–86 px sur un visuel de 1080 px. Or l'assemblage horizontal exige 80 px minimum (fiche p. 6). Seule la plage 7,5–8 % est conforme.
