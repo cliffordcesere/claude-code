@@ -1,0 +1,122 @@
+<title>ORA · Semaine 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap">
+<style>
+  /* Charte ORA v3.1 : fond noir uniquement (§10 bis), Jost, cuivre ≤ 5 %. Une colonne, alignement à gauche. */
+  :root {
+    --noir: #0A0A0A; --blanc: #FAFAFA; --gris: #8A8A8A; --cuivre: #B87333;
+    --voile-4: #141414; --voile-8: #1D1D1D;
+    --f: "Jost", "Montserrat", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  body { background: var(--noir); color: var(--blanc); font: 400 17px/1.5 var(--f); }
+  main {
+    max-width: 680px; margin: 0 auto;
+    padding-block: 48px 72px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 56px;
+  }
+  .micro { font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gris); }
+  h1 { font-size: clamp(40px, 9vw, 64px); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; margin: 10px 0 0; text-wrap: balance; }
+  h2 { font-size: clamp(26px, 5vw, 32px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  .sec { display: grid; gap: 20px; }
+  .muted { color: var(--gris); font-size: 15px; }
+  .regle { font-size: 19px; font-weight: 300; max-width: 34ch; }
+  .regle b { font-weight: 500; }
+
+  .liste { display: grid; gap: 1px; background: var(--voile-8); border-radius: 12px; overflow: hidden; }
+  .ligne { background: var(--voile-4); padding: 16px 18px; display: grid; gap: 4px; min-width: 0; }
+  .ligne .t { font-weight: 500; }
+  .ligne .d { color: var(--gris); font-size: 15px; }
+  .ligne code { font-size: 12px; color: var(--gris); word-break: break-all; }
+
+  .cap { background: var(--voile-4); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+  .cap header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .cap pre { margin: 0; font: 400 17px/1.5 var(--f); white-space: pre-wrap; word-wrap: break-word; }
+  button {
+    font: 500 15px var(--f); letter-spacing: .02em; color: var(--blanc);
+    background: var(--voile-8); border: 0; border-radius: 999px; padding: 11px 18px; min-height: 44px; cursor: pointer;
+  }
+  button:focus-visible { outline: 2px solid var(--cuivre); outline-offset: 2px; }
+  button.ok { color: var(--cuivre); }
+
+  ol, ul { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; }
+  li::marker { color: var(--gris); }
+  .accent { color: var(--cuivre); }
+  footer { color: var(--gris); font-size: 14px; }
+</style>
+
+<main>
+  <header>
+    <div class="micro">Semaine 1 · 4 novembre 2026</div>
+    <h1>Câble USB-C coudé 90°</h1>
+    <p class="muted" style="margin-top:12px">100 W · 1 mètre · USB-C des deux côtés</p>
+  </header>
+
+  <section class="sec">
+    <p class="regle">Règle retenue : <b>toujours montrer le produit vendu</b>, de préférence en photo maison.</p>
+  </section>
+
+  <section class="sec">
+    <h2>Fichiers à publier</h2>
+    <div class="liste">
+      <div class="ligne"><span class="t">Vidéo avec son</span><span class="d">TikTok, Reels, statut WhatsApp · 15,5 s</span><code>ORA_PRODUIT_CABLE-USBC-90_REEL_261104_v02.mp4</code></div>
+      <div class="ligne"><span class="t">Vidéo sans son</span><span class="d">Si vous préférez un son choisi dans TikTok ou Instagram</span><code>ORA_PRODUIT_CABLE-USBC-90_REEL-MUET_261104_v02.mp4</code></div>
+      <div class="ligne"><span class="t">Post 4:5</span><span class="d">Instagram, chaîne WhatsApp</span><code>ORA_PRODUIT_CABLE-USBC-90_POST_261104_v02.png</code></div>
+    </div>
+    <p class="muted">Les fichiers ont été envoyés dans la conversation. La v1 (photo fournisseur) est retirée : elle faisait croire à un câble court.</p>
+  </section>
+
+  <section class="sec">
+    <h2>Légendes à copier</h2>
+
+    <div class="cap">
+      <header><span class="micro">TikTok</span><button type="button" id="c1" data-copie="t1">Copier</button></header>
+      <pre id="t1">Coudé à 90°. 100 W. Un mètre. Disponible à Delmas.</pre>
+    </div>
+
+    <div class="cap">
+      <header><span class="micro">Instagram · Reels</span><button type="button" id="c2" data-copie="t2">Copier</button></header>
+      <pre id="t2">Le connecteur coudé garde le câble le long du téléphone. USB-C des deux côtés, 100 W, un mètre. Disponible à Delmas, réponse sur WhatsApp.
+#ORA #PortauPrince #USBC</pre>
+    </div>
+
+    <div class="cap">
+      <header><span class="micro">Statut WhatsApp</span></header>
+      <p>La vidéo avec son, sans texte.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Avant de publier</h2>
+    <ul>
+      <li>Écouter le son au casque et sur le haut-parleur du téléphone. Il a été vérifié à l'image, pas à l'oreille.</li>
+      <li>Sur le post, le grain de l'embout métallique vient de la photo (lumière faible), pas du détourage.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2>Prochaines photos</h2>
+    <ol>
+      <li>Le câble <b>entier</b>, posé en S sur un fond uni : le mètre se voit pour de vrai.</li>
+      <li>Le coude <b>branché</b> dans un téléphone tenu à l'horizontale : l'usage se voit.</li>
+      <li>Lumière du jour, sans soleil direct, téléphone posé : moins de grain sur le métal.</li>
+    </ol>
+  </section>
+
+  <footer>ORA · <span class="accent">La tech, en clair.</span></footer>
+</main>
+
+<script>
+  document.querySelectorAll('button[data-copie]').forEach(b => {
+    b.addEventListener('click', () => {
+      const el = document.getElementById(b.dataset.copie);
+      const fait = () => { b.textContent = 'Copié'; b.classList.add('ok'); setTimeout(() => { b.textContent = 'Copier'; b.classList.remove('ok'); }, 1800); };
+      const select = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Texte sélectionné'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(el.textContent).then(fait, select);
+      else select();
+    });
+  });
+</script>
