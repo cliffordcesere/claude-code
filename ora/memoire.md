@@ -1,6 +1,6 @@
 # ORA — mémoire de marque (§17)
 
-Mise à jour : 2026-11-03 · Charte de référence : v3.1 (2026-10-24)
+Mise à jour : 2026-11-04 · Charte de référence : v3.1 (2026-10-24)
 
 ## Slogans figés vivants (5 max)
 
@@ -11,6 +11,34 @@ Mise à jour : 2026-11-03 · Charte de référence : v3.1 (2026-10-24)
 
 Retiré : « La tech que tu mérites » (v3.1). Ne pas réutiliser.
 Tout nouveau slogan proposé est étiqueté **candidat**, jamais présenté comme historique.
+
+## Objectif en cours
+
+Premiers **1 000 abonnés qui font confiance à ORA** (communauté fidèle, pas du volume brut).
+La charte évolue avec la pratique : chaque ajustement est proposé, puis versionné par le propriétaire (§21).
+
+## Comptes et coordonnées (constatés le 2026-11-04)
+
+| Canal | Compte | Base au 2026-11-04 |
+|---|---|---|
+| TikTok | @ora_haiti (nom affiché « ORA 📲📡 ») | 63 abonnés (+60 récents), 404 j'aime, 7 abonnements |
+| Instagram | @oratechofficial | 211 abonnés, 11 publications, 13 vues sur 30 jours |
+| Chaîne WhatsApp | ORA | 93 abonnés |
+| Facebook | « Oratech » | non consulté |
+| Site | oratechhaiti.vercel.app | — |
+
+WhatsApp : +509 4630 2424 · Adresse : Carr Gerald Bataille, Delmas, Ouest.
+Hashtags déjà utilisés (non validés comme set officiel) : #ORA #Hydrogel #PortauPrince.
+
+## Historique de contenu (constaté le 2026-11-04)
+
+Vues TikTok : WITV « Toutes vos chaînes. Un seul écran. » 5 937 · ventilateur Joker « Chaleur + délestage » 1 108 ·
+« 100 % n'est pas toujours 100 % » 410 · onduleur solaire EEKOO 377 · concept site restaurant 368 · tablette DIALN S10 340.
+Échantillon trop petit pour conclure ; tendance à vérifier : les problèmes locaux concrets (chaleur, délestage, TV) dépassent le contenu d'image de marque.
+
+Contenus antérieurs hors charte v3.1 : ancien logo et « La tech que tu mérites » sur plusieurs visuels et sur l'avatar de la chaîne WhatsApp ;
+bio Instagram au tutoiement avec « astuces IA » (hors offre) ; bio TikTok chargée d'emojis ; posts « services web » (offre retirée en v3.1) ;
+question rhétorique sur le visuel Joker ; police serif sur le visuel « 100 % ».
 
 ## Franchises récurrentes (§9)
 
