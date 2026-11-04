@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — tuto « Avant d'acheter un iPhone d'occasion »</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Tuto 9:16, ~37 s. Interface iPhone reconstruite (illustration), dans la palette ORA.
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/tuto-iphone-occasion.html sortie.mp4
+  Les valeurs affichées (87 %, références, IMEI) sont des exemples ; l'IMEI est flouté.
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  /* ---------- Textes ORA ---------- */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 262px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 20px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: 50px; font-weight: 300; line-height: 1.3; margin-top: 16px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .logo { bottom: 320px; opacity: 0; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+
+  /* ---------- Téléphone ---------- */
+  #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
+  .phone {
+    position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
+    border-radius: 104px; background: #000; padding: 16px;
+    box-shadow: 0 0 0 2px #1D1D1D, 0 0 0 9px #141414, 0 0 0 10px #2a2a2a;
+  }
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 90px; overflow: hidden; background: #000;
+           font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
+  .ilot { position: absolute; left: 50%; top: 22px; width: 190px; height: 54px; margin-left: -95px; border-radius: 30px; background: #000; z-index: 5; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 10px 62px 0 74px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 12px; align-items: center; }
+  .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+  .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
+  .pile { width: 46px; height: 22px; border: 2px solid rgba(250,250,250,.5); border-radius: 7px; padding: 2px; }
+  .pile b { display: block; height: 100%; width: 80%; background: var(--blanc); border-radius: 3px; }
+
+  .page { position: absolute; inset: 0; background: #000; padding-top: 110px; will-change: transform; }
+  .nav { height: 70px; display: flex; align-items: center; padding: 0 30px; font-size: 32px; color: var(--blanc); gap: 6px; }
+  .nav .chev { font-size: 44px; line-height: 1; margin-top: -4px; }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 64px; font-weight: 700; letter-spacing: -.01em; padding: 6px 40px 26px; }
+  .groupe { margin: 0 30px 38px; background: #1C1C1C; border-radius: 26px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 92px; padding: 0 28px; font-size: 32px; }
+  .row + .row::before { content: ""; position: absolute; left: 100px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 28px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 13px; background: #3a3a3a; display: grid; place-items: center; font-size: 26px; font-weight: 700; color: var(--blanc); flex: none; }
+  .row .nom { flex: 1; }
+  .row .val { color: var(--gris); }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 8px; }
+  .toggle { width: 96px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 50px; height: 50px; border-radius: 50%; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 42px; background: #000; }
+  .note { color: var(--gris); font-size: 26px; line-height: 1.35; padding: 0 58px 30px; margin-top: -20px; }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 22px; }
+  .flou { filter: blur(9px); }
+
+  /* clavier téléphone */
+  .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
+  .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
+  .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
+  .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
+  .feuille { position: absolute; left: 60px; right: 60px; top: 420px; background: #1C1C1C; border-radius: 34px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 36px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 30px; color: var(--gris); margin-bottom: 6px; }
+  .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 34px; font-weight: 600; }
+
+  .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="camera">
+    <div class="phone" id="phone"><div class="ecran" id="ecran">
+      <div class="ilot"></div>
+      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:21px"></i></span><span class="pile"><b></b></span></span></div>
+
+      <!-- Réglages -->
+      <div class="page" id="p-reglages">
+        <div class="nav"></div>
+        <div class="grand-titre">Réglages</div>
+        <div class="groupe">
+          <div class="row"><span class="icone">✈</span><span class="nom">Mode Avion</span><span class="toggle"></span></div>
+          <div class="row"><span class="icone">W</span><span class="nom">Wi-Fi</span><span class="val">Maison</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone">B</span><span class="nom">Bluetooth</span><span class="val">Oui</span><span class="fl">›</span></div>
+        </div>
+        <div class="groupe">
+          <div class="row" id="r-general"><span class="icone">⚙</span><span class="nom">Général</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone">A</span><span class="nom">Accessibilité</span><span class="fl">›</span></div>
+          <div class="row" id="r-batterie"><span class="icone">▮</span><span class="nom">Batterie</span><span class="fl">›</span></div>
+          <div class="row"><span class="icone">✋</span><span class="nom">Confidentialité</span><span class="fl">›</span></div>
+        </div>
+      </div>
+
+      <!-- Batterie -->
+      <div class="page" id="p-batterie">
+        <div class="nav"><span class="chev">‹</span>Réglages<span class="milieu">Batterie</span></div>
+        <div class="groupe" style="margin-top:30px">
+          <div class="row sans-icone"><span class="nom">Pourcentage</span><span class="toggle on"></span></div>
+          <div class="row sans-icone"><span class="nom">Économie d'énergie</span><span class="toggle"></span></div>
+        </div>
+        <div class="groupe">
+          <div class="row sans-icone" id="r-etat"><span class="nom">État de la batterie</span><span class="fl">›</span></div>
+        </div>
+      </div>
+
+      <!-- État de la batterie -->
+      <div class="page" id="p-etat">
+        <div class="nav"><span class="chev">‹</span>Batterie<span class="milieu">État de la batterie</span></div>
+        <div class="groupe" style="margin-top:30px">
+          <div class="row sans-icone"><span class="nom">État</span><span class="val">Normal</span></div>
+        </div>
+        <div class="groupe" id="r-capacite">
+          <div class="row sans-icone"><span class="nom">Capacité maximale</span><span class="val" style="color:var(--blanc);font-weight:600">87 %</span></div>
+        </div>
+        <div class="note">Mesure de la capacité de la batterie par rapport à une batterie neuve.</div>
+      </div>
+
+      <!-- Général -->
+      <div class="page" id="p-general">
+        <div class="nav"><span class="chev">‹</span>Réglages<span class="milieu">Général</span></div>
+        <div class="groupe" style="margin-top:30px">
+          <div class="row sans-icone" id="r-infos"><span class="nom">Informations</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Mise à jour logicielle</span><span class="fl">›</span></div>
+        </div>
+        <div class="groupe">
+          <div class="row sans-icone"><span class="nom">Stockage</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Date et heure</span><span class="fl">›</span></div>
+        </div>
+      </div>
+
+      <!-- Informations -->
+      <div class="page" id="p-infos">
+        <div class="nav"><span class="chev">‹</span>Général<span class="milieu">Informations</span></div>
+        <div class="groupe" style="margin-top:30px">
+          <div class="row sans-icone"><span class="nom">Nom</span><span class="val">iPhone</span></div>
+          <div class="row sans-icone"><span class="nom">Nom du modèle</span><span class="val">iPhone 13</span></div>
+          <div class="row sans-icone" id="r-modele"><span class="nom">Numéro de modèle</span><span class="val" id="v-modele">A2633</span></div>
+          <div class="row sans-icone"><span class="nom">Numéro de série</span><span class="val flou">G7XK2LMN0Q</span></div>
+        </div>
+      </div>
+
+      <!-- Téléphone -->
+      <div class="page" id="p-tel">
+        <div class="saisie" id="saisie"></div>
+        <div class="pave" id="pave"></div>
+        <div class="feuille" id="feuille">
+          <h3>Informations sur l'appareil</h3>
+          <div class="l">IMEI</div><div class="v"><span class="flou">35 482910 553871 4</span></div>
+          <div class="l">IMEI2</div><div class="v"><span class="flou">35 482910 553872 2</span></div>
+          <div class="ok">OK</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="doigt" id="doigt"></div>
+  </div>
+
+  <div class="texte" id="textes"></div>
+  <img class="logo" id="logo" src="../../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+  <div id="noir"></div>
+</div>
+<script>
+window.ORA_READY = false;
+window.ORA_DURATION = 37;
+
+const clamp = x => Math.min(Math.max(x, 0), 1);
+const out = x => 1 - Math.pow(1 - clamp(x), 4);
+const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
+
+// Pavé numérique
+const TOUCHES = [['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['*',''],['0','+'],['#','']];
+pave.innerHTML = TOUCHES.map(([c, s]) => `<div class="touche" data-k="${c}"><div>${c}${s ? `<small>${s}</small>` : ''}</div></div>`).join('');
+
+// ---------- Scénario ----------
+const T = { intro: 0, s1: 3.6, s2: 13.2, s3: 23.4, fin: 32.4 };
+const TEXTES = [
+  { a: T.intro, b: T.s1,  label: 'Avant d’acheter', titre: 'Un iPhone|d’occasion.', sous: 'Trois vérifications.' },
+  { a: T.s1,    b: T.s2,  label: '1/3', titre: 'La batterie.', sous: 'Sous 80 %, elle est usée.' },
+  { a: T.s2,    b: T.s3,  label: '2/3', titre: 'Neuf ou reconditionné.', sous: 'Référence en M : neuf.|En F : reconditionné. En N : remplacement.' },
+  { a: T.s3,    b: T.fin, label: '3/3', titre: 'L’IMEI.', sous: 'Le même que sur la boîte|et la facture.' },
+  { a: T.fin,   b: 99,    titre: 'Neuf ou occasion.', sous: 'Toujours dit clairement.|Delmas · WhatsApp +509 4630 2424' },
+];
+// Navigation : [instant, page entrante, sens] ; sens 1 = avancer, -1 = revenir, 0 = ouverture d'app
+const NAV = [
+  [0, 'p-reglages', 0],
+  [5.2, 'p-batterie', 1], [6.9, 'p-etat', 1],
+  [13.5, 'p-reglages', -1], [14.9, 'p-general', 1], [16.2, 'p-infos', 1],
+  [23.7, 'p-tel', 0],
+];
+// Appuis : [instant, élément visé]
+const TAPS = [
+  [4.9, '#r-batterie'], [6.6, '#r-etat'],
+  [14.6, '#r-general'], [15.9, '#r-infos'], [17.6, '#r-modele'],
+  [25.0, '[data-k="*"]'], [25.45, '[data-k="#"]'], [25.9, '[data-k="0"]'], [26.35, '[data-k="6"]'], [26.8, '[data-k="#"]'],
+];
+const SAISIE = '*#06#';
+// Caméra : [instant, zoom, élément visé, hauteur où le ramener (px)] — sous le bloc de texte
+const CAM = [
+  [0, 1, null], [8.0, 1.45, '#r-capacite', 1320], [12.6, 1, null],
+  [18.2, 1.45, '#r-modele', 1480], [22.8, 1, null],
+  [27.8, 1.3, '#feuille', 1540], [31.8, 1, null],
+];
+
+window.ORA_SONS = {
+  souffles: [T.s1, T.s2, T.s3, T.fin],
+  crans: TAPS.map(t => t[0] + 0.12),
+  impact: T.fin + 0.9,
+};
+
+// ---------- Construction ----------
+const blocs = TEXTES.map(p => {
+  const b = document.createElement('div'); b.className = 'bloc';
+  const l = (cls, txt) => txt.split('|').map(x => `<span class="ligne ${cls}"><span>${x}</span></span>`).join('');
+  b.innerHTML = (p.label ? l('label', p.label) : '') + l('titre', p.titre) + (p.sous ? `<div style="margin-top:16px">${l('sous', p.sous)}</div>` : '');
+  textes.append(b); return b;
+});
+blocs.forEach(b => b.querySelectorAll('.sous').forEach(s => s.style.marginTop = 0));
+
+const pages = [...document.querySelectorAll('.page')];
+// position d'un élément dans le repère du canevas, téléphone non zoomé
+function centre(sel) {
+  const el = document.querySelector(sel), cam = document.getElementById('camera');
+  const saved = cam.style.transform; cam.style.transform = 'none';
+  const p = el.closest('.page'), savedP = p ? p.style.transform : null; if (p) p.style.transform = 'none';
+  const r = el.getBoundingClientRect(), c = canvas.getBoundingClientRect();
+  if (p) p.style.transform = savedP; cam.style.transform = saved;
+  return [r.left - c.left + r.width / 2, r.top - c.top + r.height / 2];
+}
+let POS = {};
+
+window.oraSeek = t => {
+  noir.style.opacity = 1 - out(t / 0.7);
+
+  // Téléphone : monte à l'intro, descend à la fin
+  const monte = out((t - 1.6) / 1.2), descend = io((t - T.fin) / 0.9);
+  phone.style.transform = `translateY(${(1 - monte) * 900 + descend * 1100}px)`;
+  phone.style.opacity = monte * (1 - descend);
+
+  // Pages
+  let cur = 0; while (cur + 1 < NAV.length && t >= NAV[cur + 1][0]) cur++;
+  pages.forEach(p => { p.style.display = 'none'; p.style.transform = 'none'; p.style.opacity = 1; });
+  const [t0, id, sens] = NAV[cur], k = io((t - t0) / 0.45);
+  const entrante = document.getElementById(id); entrante.style.display = 'block';
+  if (cur > 0 && k < 1) {
+    const sortante = document.getElementById(NAV[cur - 1][1]); sortante.style.display = 'block';
+    if (sens === 0) { entrante.style.opacity = k; entrante.style.transform = `scale(${lerp(.9, 1, k)})`; sortante.style.opacity = 1 - k; }
+    else {
+      entrante.style.transform = `translateX(${sens * (1 - k) * 100}%)`;
+      sortante.style.transform = `translateX(${-sens * k * 30}%)`;
+      (sens > 0 ? entrante : sortante).style.zIndex = 2; (sens > 0 ? sortante : entrante).style.zIndex = 1;
+      (sens > 0 ? entrante : sortante).style.boxShadow = '-20px 0 40px rgba(0,0,0,.6)';
+    }
+  }
+
+  // Valeurs qui changent
+  document.getElementById('v-modele').textContent = t >= 17.75 ? 'MLPF3ZD/A' : 'A2633';
+  document.getElementById('r-modele').classList.toggle('hl', t >= 18.0 && t < T.s3);
+  document.getElementById('r-capacite').classList.toggle('hl', t >= 8.0 && t < T.s2);
+  const nb = TAPS.filter(x => x[1].startsWith('[data-k') && t >= x[0] + 0.12).length;
+  saisie.textContent = SAISIE.slice(0, nb);
+  const f = out((t - 27.3) / 0.4);
+  feuille.style.opacity = f; feuille.style.transform = `scale(${lerp(.94, 1, f)})`;
+  document.querySelectorAll('.touche').forEach(el => el.style.background = '#333');
+  TAPS.forEach(([ti, sel]) => { if (sel.startsWith('[data-k') && t >= ti && t < ti + 0.3) document.querySelector(sel).style.background = '#666'; });
+
+  // Doigt
+  const tap = TAPS.filter(x => t >= x[0] - 0.35 && t < x[0] + 0.35).pop();
+  if (tap) {
+    const [x, y] = POS[tap[1]], d = t - tap[0];
+    doigt.style.left = x + 'px'; doigt.style.top = y + 'px';
+    doigt.style.opacity = d < 0 ? out((d + 0.35) / 0.25) * 0.9 : 0.9 * (1 - clamp(d / 0.35));
+    doigt.style.transform = `scale(${d < 0 ? 1 : lerp(0.8, 1.3, clamp(d / 0.35))})`;
+  } else doigt.style.opacity = 0;
+
+  // Caméra : chaque clé = zoom + point visé ; le point visé est ramené en (540, 1150)
+  const etat = c => c[2] ? { z: c[1], x: 540 - POS[c[2]][0] * c[1], y: c[3] - POS[c[2]][1] * c[1] } : { z: 1, x: 0, y: 0 };
+  let i = 0; while (i + 1 < CAM.length && t >= CAM[i + 1][0]) i++;
+  const A = etat(CAM[Math.max(0, i - 1)]), B = etat(CAM[i]), ke = i ? io((t - CAM[i][0]) / 0.9) : 1;
+  camera.style.transform = `translate(${lerp(A.x, B.x, ke)}px, ${lerp(A.y, B.y, ke)}px) scale(${lerp(A.z, B.z, ke)})`;
+
+  // Textes
+  TEXTES.forEach((p, j) => {
+    const tin = t - p.a - (j ? 0.5 : 0.5), tout = t - (p.b - 0.35);
+    const el = blocs[j];
+    el.style.opacity = t < p.a - 0.01 ? 0 : tout > 0 ? 1 - clamp(tout / 0.35) : 1;
+    el.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
+    // le sous-texte arrive après l'action à l'écran
+    const retard = [0.5, 4.6, 5.0, 4.4, 0.4][j];
+    el.querySelectorAll('.ligne > span').forEach((sp, n) => {
+      const isSous = sp.parentElement.classList.contains('sous');
+      const e = out((tin - (isSous ? retard : 0) - n * 0.1) / 0.7);
+      sp.style.transform = `translateY(${(1 - e) * 110}%)`;
+    });
+  });
+  logo.style.opacity = out((t - T.fin - 1.2) / 0.5);
+};
+
+Promise.all([...document.images].map(i => i.decode().catch(() => {}))).then(() => document.fonts.ready).then(() => {
+  // positions des cibles (page affichée seule, téléphone en place)
+  phone.style.transform = 'none';
+  pages.forEach(p => p.style.display = 'block');
+  const sels = new Set([...TAPS.map(x => x[1]), ...CAM.filter(c => c[2]).map(c => c[2])]);
+  sels.forEach(s => { feuille.style.opacity = 1; POS[s] = centre(s); });
+  pages.forEach(p => p.style.display = 'none');
+  const q = new URLSearchParams(location.search);
+  if (!q.has('render')) {
+    const t0 = performance.now();
+    const loop = () => { oraSeek(((performance.now() - t0) / 1000) % (ORA_DURATION + 1)); requestAnimationFrame(loop); };
+    loop();
+  } else oraSeek(0);
+  window.ORA_READY = true;
+});
+</script>
+</body>
+</html>

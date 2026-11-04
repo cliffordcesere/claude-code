@@ -38,3 +38,13 @@ Non écouté avant livraison : vérifier au casque et sur le haut-parleur du té
 1. Le câble **entier**, posé en S sur une feuille ou un sol uni : montre le mètre pour de vrai.
 2. Le coude **branché** dans un téléphone tenu à l'horizontale : montre l'usage.
 3. Lumière du jour, sans soleil direct, appareil stable : moins de bruit sur le métal de l'embout.
+
+## Tuto — « Avant d'acheter un iPhone d'occasion » (37 s)
+
+Fichiers : `ORA_EDUCATION_IPHONE-OCCASION_TUTO_261104_v01.mp4` (avec son), `…TUTO-MUET…` (sans son). Source : `tuto-iphone-occasion.html`.
+Écrans iPhone reconstruits dans la palette ORA ; valeurs d'exemple ; IMEI et numéro de série floutés.
+
+TikTok : `Trois vérifications avant d'acheter un iPhone d'occasion.`
+Instagram : `Batterie, référence, IMEI. Trois écrans à regarder avant de payer un iPhone d'occasion. Chez ORA, l'état de chaque appareil est dit avant la vente. #ORA #PortauPrince #iPhone`
+
+À faire vérifier sur un vrai iPhone : noms des menus selon la version d'iOS ; règle M / F / N ; seuil de 80 %.
