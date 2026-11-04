@@ -8,6 +8,7 @@
 // La page doit contenir un élément #canvas (taille du visuel).
 // Pour la vidéo, la page expose window.ORA_DURATION (s) et window.oraSeek(t) ;
 // elle est chargée avec ?render pour couper la lecture automatique.
+// Une page animée rendue en PNG est figée sur sa dernière image.
 // Sortie : sRGB, PNG ; MP4 H.264 yuv420p (compatible Instagram/TikTok/WhatsApp).
 
 import { createRequire } from 'node:module';
@@ -28,14 +29,18 @@ const opt = (name, def) => {
   return i >= 0 ? Number(rest[i + 1]) : def;
 };
 
-const url = 'file://' + path.resolve(input);
+// L'entrée peut porter des paramètres : page.html?n=90°&l=...
+const [inFile, inQuery = ''] = input.split('?');
+const url = 'file://' + path.resolve(inFile);
+const query = new URLSearchParams(inQuery);
+query.set('render', '1');
 const browser = await chromium.launch();
 
 try {
-  if (input.endsWith('.svg')) {
+  if (inFile.endsWith('.svg')) {
     // Export PNG transparent d'un logo à une largeur donnée.
     const width = opt('width', 1024);
-    const svg = fs.readFileSync(input, 'utf8');
+    const svg = fs.readFileSync(inFile, 'utf8');
     const [, , , vw, vh] = svg.match(/viewBox="([-\d.]+) ([-\d.]+) ([\d.]+) ([\d.]+)"/);
     const height = Math.round(width * Number(vh) / Number(vw));
     const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
@@ -44,13 +49,15 @@ try {
   } else {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
     const video = output.endsWith('.mp4');
-    await page.goto(url + (video ? '?render' : ''));
+    await page.goto(url + '?' + query.toString());
     await page.evaluate(() => document.fonts.ready);
     const canvas = page.locator('#canvas');
     const box = await canvas.boundingBox();
     await page.setViewportSize({ width: Math.ceil(box.width), height: Math.ceil(box.height) });
 
     if (!video) {
+      // Page animée : on fige la dernière image.
+      await page.evaluate(() => window.oraSeek && window.oraSeek(window.ORA_DURATION || 0));
       await canvas.screenshot({ path: output });
     } else {
       const fps = opt('fps', 30);

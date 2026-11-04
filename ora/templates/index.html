@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — franchise « Index »</title>
+<link rel="stylesheet" href="ora.css">
+<!--
+  Franchise « Index » (§9) : un chiffre, un fond noir, une ligne.
+  Paramètres d'URL :
+    fmt   post (1080×1350, défaut) | story (1080×1920)
+    n     le chiffre            ex. 90°
+    l     la ligne (≤ 7 mots), « | » = retour à la ligne   ex. Le câble se range|le long du téléphone.
+    cta   CTA court (option)    ex. Disponible.
+    num   numéro de série       ex. 01
+  Exemple : node ora/tools/render.mjs "ora/templates/index.html?n=90°&l=...&num=01" sortie.png
+-->
+<style>
+  .canvas { --W: 1080; --H: 1350; }
+  .canvas.story { --H: 1920; }
+  .label { position: absolute; left: var(--marge); top: var(--marge); }
+  .story .label { top: 250px; }
+  .bloc { position: absolute; left: var(--marge); right: var(--marge); top: 21%; }
+  .story .bloc { top: 30%; }
+  .chiffre {
+    font-size: calc(var(--W) * 0.30px);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--blanc);
+  }
+  .ligne {
+    margin-top: calc(var(--W) * 0.05px);
+    max-width: 18ch;
+    text-wrap: balance;
+    font-size: calc(var(--W) * 0.052px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--blanc);
+  }
+  .bas { position: absolute; left: var(--marge); bottom: var(--marge); }
+  .story .bas, .story .logo { bottom: 320px; }
+  .a { opacity: 0; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div class="label a" id="lab">Index</div>
+  <div class="bloc">
+    <div class="chiffre a" id="n"></div>
+    <p class="ligne a" id="l"></p>
+  </div>
+  <div class="bas"><p class="cta a" id="cta"></p></div>
+  <img class="logo a" id="logo" src="../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.get('fmt') === 'story') canvas.classList.add('story');
+  n.textContent = q.get('n') || '[CHIFFRE]';
+  // « | » dans la ligne = retour à la ligne choisi à la main.
+  (q.get('l') || '[LIGNE]').split('|').forEach((t, i) => { if (i) l.append(document.createElement('br')); l.append(t.trim()); });
+  cta.textContent = q.get('cta') || '';
+  lab.textContent = 'Index' + (q.get('num') ? ' ' + q.get('num') : '');
+
+  window.ORA_DURATION = 5;
+  const ease = x => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 3);
+  const fade = (el, t, start, dur, rise = 12) => {
+    const p = ease((t - start) / dur);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - p) * rise}px)`;
+  };
+  window.oraSeek = t => {
+    fade(lab, t, 0.2, 0.6, 0);
+    fade(n, t, 0.5, 1.0, 18);
+    fade(l, t, 1.6, 0.9);
+    fade(cta, t, 2.6, 0.6, 0);
+    fade(logo, t, 3.0, 0.4, 0);
+  };
+  if (!q.has('render')) {
+    const t0 = performance.now();
+    const loop = () => { oraSeek(((performance.now() - t0) / 1000) % (ORA_DURATION + 1.5)); requestAnimationFrame(loop); };
+    document.fonts.ready.then(loop);
+  } else { oraSeek(0); }
+</script>
+</body>
+</html>
