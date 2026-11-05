@@ -34,8 +34,11 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 
 | Mot | Sens | Usage ORA |
 |---|---|---|
-| **blende** | film de protection d'écran (« blindé », comme une voiture blindée) | mot-clé des contenus hydrogel ; titre créole « Nou Blende Ekran Tout Telefòn » déjà utilisé |
+| **blende** | protection d'écran « blindée » (comme une voiture blindée). Chez ORA : **nano liquide d'abord, puis film hydrogel** | mot-clé des contenus protection d'écran ; titre créole « Nou Blende Ekran Tout Telefòn » déjà utilisé. Specs du nano liquide à confirmer avant toute affirmation |
 | **zaza** | iPhone en mauvais état mais fonctionnel : batterie ~72–78 %, Face ID HS, pas full unlock, pièces non d'origine | mot-clé de la série tutos « repérer un zaza » ; ORA dit l'état, toujours |
+
+Légende créole écrite par le propriétaire (en réserve, le français est préféré pour l'instant) :
+« Avan w achte yon iPhone okazyon ayiti, men 3 fason ou ka rekonèt si se yon zaza. »
 
 ## Série « Zaza » (proposée 2026-11-05)
 
@@ -43,7 +46,8 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 2. Full unlock — Réglages › Général › Informations, verrouillage opérateur. Captures iOS 27 FR à recevoir.
 3. Pièces d'origine et Face ID — historique des pièces et réparations. Captures iOS 27 FR à recevoir.
 
-Vidéo existante « Nou Blende Ekran Tout Telefòn » (06-06) : 260 vues, 12 j'aime, 1 enregistrement. Légende « Invisible. Impénétrable. Sur mesure. » : « blende » absent de la légende ; « Impénétrable » = promesse excessive (§1), proposer « Invisible. Résistant. Sur mesure. »
+Vidéo existante « Nou Blende Ekran Tout Telefòn » (06-06) : 260 vues, 12 j'aime, 1 enregistrement. Légende « Invisible. Impénétrable. Sur mesure. » : « blende » absent de la légende ; « Impénétrable » = promesse excessive (§1), proposer « Invisible. Résistant. Sur mesure. » Le propriétaire dit l'avoir corrigé par un post sur le canal et TikTok ; la légende de la vidéo reste à modifier si TikTok le permet.
+Post canal « La vérité sur l'hydrogel » (25 mai 2026) : bon fond (l'hydrogel ne remplace pas le verre trempé) ; forme pré-v3.1 (tutoiement, capitales, 3 emojis). Sujet à refaire en vidéo « En clair » avec le nano liquide.
 
 ## Mesures
 
