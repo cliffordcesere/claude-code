@@ -67,3 +67,7 @@ La voix et cette vidéo restent en local (exclues du dépôt via .gitignore) tan
 Écrans recalés sur la voix (repères `VOIX.reperes` dans la page), nappe baissée de 11 dB pendant la voix.
 À noter : « va dans Réglages » (0:06) tutoie ; vers 0:20, peut-être aussi (transcription incertaine).
 ElevenLabs en direct : bloqué par le réseau de la session (api.elevenlabs.io). Le Voice Changer d'ElevenLabs garde le minutage : la synchro resterait valable.
+
+### Voix off v02 (2026-11-05)
+`ORA_EDUCATION_IPHONE-OCCASION_TUTO-VOIX_261104_v02.mp4` — 37 s (43 s en v01). Voix v2 : pauses plafonnées à 0,26 s (0,5 s entre parties), +7 % sans changer la hauteur, égalisation (-4,5 dB à 250 Hz, +3,5 dB à 3,5 kHz), atténuation de la résonance entre les mots, -14 LUFS. Repères recalculés par `tools/resserrer_voix.py`.
+Retour propriétaire : voix trop lente, effet « chambre vide ». La résonance est atténuée, pas supprimée. Prochaine étape envisagée : ElevenLabs (clone de la voix du propriétaire ou Voice Changer).
