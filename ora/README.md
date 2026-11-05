@@ -60,6 +60,8 @@ Nécessite Node + Playwright (Chromium) et ffmpeg pour la vidéo. MP4 sortie : H
 
 ### Règles de motion (déduites de la charte, à valider)
 
+- **Accroche (constaté sur TikTok, 2026-11-05) :** la majorité décroche à 0:02. La 1re image est complète : produit ou écran visible, titre déjà affiché, mouvement dès 0 s. Jamais de fondu au noir d'ouverture.
+
 La charte ne fixe pas de règles vidéo détaillées. Celles-ci en sont déduites :
 
 - Logo : apparition par fondu simple, puis fixe. Jamais animé de façon décorative (§5).

@@ -123,10 +123,10 @@ function init() {
       prod.style.transform = `translate(${fx}px, ${fy}px) rotate(${k.r}deg) translate(${-fx}px, ${-fy}px) translate(${k.x}px, ${k.y}px) scale(${k.z})`;
 
       // Lumière : la flaque monte à l'ouverture et suit le produit.
-      const on = out(t / 1.6);
+      const on = 1;
       lumiere.style.background =
         `radial-gradient(ellipse 70% 42% at 50% 44%, rgba(250,250,250,${0.11 * on}) 0%, rgba(250,250,250,${0.035 * on}) 45%, transparent 75%), #0A0A0A`;
-      noir.style.opacity = 1 - out(t / 0.9);
+      noir.style.opacity = 0; // pas de fondu au noir : la 1re image est complète (décrochage à 0:02)
 
       // Reflet : un balayage par plan, 0,5 s après son début.
       const g = clamp((dt - (i ? TRANS : 0.5)) / 1.3);

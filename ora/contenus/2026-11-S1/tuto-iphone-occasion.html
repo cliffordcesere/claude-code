@@ -80,6 +80,7 @@
   .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
   .row.hl { border-radius: 0; }
   .flou { filter: blur(9px); }
+  .lettre { font-weight: 400; } .lettre.on { color: var(--cuivre); font-weight: 700; }
 
   /* clavier téléphone */
   .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
@@ -238,7 +239,7 @@ const TEXTES = [
 ];
 // Navigation : [instant, page entrante, sens] ; sens 1 = avancer, -1 = revenir, 0 = ouverture d'app
 const NAV = [
-  [0, 'p-reglages', 0],
+  [0, 'p-etat', 0], [3.6, 'p-reglages', 0],
   [5.2, 'p-batterie', 1], [6.9, 'p-etat', 1],
   [13.5, 'p-reglages', -1], [14.9, 'p-general', 1], [16.2, 'p-infos', 1],
   [23.7, 'p-tel', 0],
@@ -250,9 +251,11 @@ const TAPS = [
   [25.0, '[data-k="*"]'], [25.45, '[data-k="#"]'], [25.9, '[data-k="0"]'], [26.35, '[data-k="6"]'], [26.8, '[data-k="#"]'],
 ];
 const SAISIE = '*#06#';
+// Référence : la 1re lettre change avec la voix (M neuf, F reconditionné, N remplacement)
+let LETTRES = [[17.4, 'M'], [19.2, 'F'], [20.6, 'N']];
 // Caméra : [instant, zoom, élément visé, hauteur où le ramener (px)] — sous le bloc de texte
 const CAM = [
-  [0, 1, null], [8.0, 1.3, '#zone-sante', 1450], [12.6, 1, null],
+  [0, 1.25, '#zone-sante', 1450], [3.6, 1, null], [8.0, 1.3, '#zone-sante', 1450], [12.6, 1, null],
   [17.4, 1.4, '#r-modele', 1640], [22.8, 1, null],
   [27.8, 1.3, '#feuille', 1540], [31.8, 1, null],
 ];
@@ -285,10 +288,10 @@ function centre(sel) {
 let POS = {};
 
 window.oraSeek = t => {
-  noir.style.opacity = 1 - out(t / 0.7);
+  noir.style.opacity = 0; // accroche : la première image est complète (décrochage à 0:02 constaté sur TikTok)
 
   // Téléphone : monte à l'intro, descend à la fin
-  const monte = out((t - 1.6) / 1.2), descend = io((t - T.fin) / 0.9);
+  const monte = 1, descend = io((t - T.fin) / 0.9);
   phone.style.transform = `translateY(${(1 - monte) * 900 + descend * 1100}px)`;
   phone.style.opacity = monte * (1 - descend);
 
@@ -309,8 +312,10 @@ window.oraSeek = t => {
   }
 
   // Valeurs qui changent
+  { const L = LETTRES.filter(x => t >= x[0]).pop(), on = t >= LETTRES[0][0] && t < T.s3;
+    document.getElementById('v-modele').innerHTML = `<b class="lettre${on ? ' on' : ''}">${L ? L[1] : 'M'}</b>YE73ZD/A`; }
   document.getElementById('r-modele').classList.toggle('hl', t >= 17.4 && t < T.s3);
-  document.getElementById('r-capacite').classList.toggle('hl', t >= 8.4 && t < 10.6);
+  document.getElementById('r-capacite').classList.toggle('hl', t < T.s1 || (t >= 8.4 && t < 10.6));
   document.getElementById('r-cycles').classList.toggle('hl', t >= 10.6 && t < T.s2);
   const nb = TAPS.filter(x => x[1].startsWith('[data-k') && t >= x[0] + 0.12).length;
   saisie.textContent = SAISIE.slice(0, nb);
@@ -331,12 +336,14 @@ window.oraSeek = t => {
   // Caméra : chaque clé = zoom + point visé ; le point visé est ramené en (540, 1150)
   const etat = c => c[2] ? { z: c[1], x: 540 - POS[c[2]][0] * c[1], y: c[3] - POS[c[2]][1] * c[1] } : { z: 1, x: 0, y: 0 };
   let i = 0; while (i + 1 < CAM.length && t >= CAM[i + 1][0]) i++;
-  const A = etat(CAM[Math.max(0, i - 1)]), B = etat(CAM[i]), ke = i ? io((t - CAM[i][0]) / 0.9) : 1;
+  // ouverture : poussée lente (+6 %) sur la capacité pendant l'accroche
+  const cle = j => j === 0 ? [0, CAM[0][1] * (1 + 0.06 * clamp(t / T.s1)), CAM[0][2], CAM[0][3]] : CAM[j];
+  const A = etat(cle(Math.max(0, i - 1))), B = etat(cle(i)), ke = i ? io((t - CAM[i][0]) / 0.9) : 1;
   camera.style.transform = `translate(${lerp(A.x, B.x, ke)}px, ${lerp(A.y, B.y, ke)}px) scale(${lerp(A.z, B.z, ke)})`;
 
   // Textes
   TEXTES.forEach((p, j) => {
-    const tin = t - p.a - (j ? 0.5 : 0.5), tout = t - (p.b - 0.35);
+    const tin = j === 0 ? t + 2 : t - p.a - 0.5, tout = t - (p.b - 0.35); // titre d'accroche visible dès la 1re image
     const el = blocs[j];
     el.style.opacity = t < p.a - 0.01 ? 0 : tout > 0 ? 1 - clamp(tout / 0.35) : 1;
     el.style.transform = `translateY(${tout > 0 ? -16 * out(tout / 0.35) : 0}px)`;
@@ -360,7 +367,8 @@ window.oraSeek = t => {
 // ---------- Version voix off (?voix) : la vidéo est recalée sur la voix ----------
 // Repères [temps voix, temps vidéo] ; deux temps vidéo égaux = image figée pendant que la voix parle.
 const VOIX = {
-  src: 'voix/tuto-iphone_voix-proprietaire_v2.flac', // v2 : pauses resserrées, +7 %, égalisée (tools/resserrer)
+  src: 'voix/tuto-iphone_voix-proprietaire_v2.flac',
+  lettres: [[20.3, 'M'], [21.38, 'F'], [22.75, 'N']], // temps voix v2 de « M », « F », « N » // v2 : pauses resserrées, +7 %, égalisée (tools/resserrer)
   reperes: [
     [0, 0], [3.18, 3.6], [4.043, 4.75], [5.792, 4.75], [7.012, 6.6], [10.084, 10.5], [10.552, 10.5], [12.328, 12.4], [13.636, 12.4], [14.157, 13.2], [15.278, 14.4], [17.364, 14.4], [18.579, 15.9], [24.271, 22.7], [24.925, 23.4], [31.451, 30.75], [32.274, 32.4], [36.89, 37],
   ],
@@ -369,6 +377,7 @@ if (new URLSearchParams(location.search).has('voix')) {
   const R = VOIX.reperes, base = window.oraSeek;
   const versVideo = t => { for (let i = 1; i < R.length; i++) if (t <= R[i][0]) { const [a, va] = R[i - 1], [b, vb] = R[i]; return va + (vb - va) * (t - a) / (b - a); } return R[R.length - 1][1]; };
   const versVoix = v => { for (let i = 1; i < R.length; i++) { const [a, va] = R[i - 1], [b, vb] = R[i]; if (vb > va && v >= va && v <= vb) return a + (b - a) * (v - va) / (vb - va); } return v; };
+  LETTRES = VOIX.lettres.map(([tv, l]) => [versVideo(tv), l]);
   window.oraSeek = t => base(versVideo(t));
   window.ORA_DURATION = R[R.length - 1][0];
   const S0 = window.ORA_SONS;

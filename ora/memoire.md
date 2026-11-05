@@ -28,6 +28,13 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 - 2026-11-04 : le propriétaire n'a pas d'iPhone ; les tutos d'interface se font en écrans reconstruits (HTML), exactitude à faire vérifier sur un vrai appareil.
 - 2026-11-04 : la photo maison est préférée à l'image fournisseur ; la plaque perforée et le désordre sont retirés au détourage.
 
+## Mesures
+
+Reel câble USB-C 90° v2 (TikTok, publié le 2026-11-04 12:29, relevé le 2026-11-05) : 379 vues, 16 j'aime, 0 commentaire, 0 partage, **0 enregistrement**, 2 nouveaux abonnés.
+Visionnage moyen 6,2 s sur 15,5 s (40 %) ; vidéo complète 8,86 % ; **décrochage principal à 0:02**. Trafic : Pour toi 97,4 %. Spectateurs : 98 % non-abonnés ; hommes 54 %, femmes 45 % ; 18–24 ans 48 %, 25–34 ans 36 % ; Haïti 75,2 %, **Jamaïque 17,9 %**, États-Unis 3,9 %.
+Leçon appliquée : ouverture sans fondu au noir, 1re image complète.
+À suivre : part anglophone (Jamaïque) qui ne lit pas le français.
+
 ## Produits en stock (2026-11-04)
 
 | Produit | Données confirmées | À confirmer |

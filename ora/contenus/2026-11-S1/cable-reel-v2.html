@@ -111,7 +111,7 @@ function reflet(el, g) {
 }
 
 window.oraSeek = t => {
-  noir.style.opacity = 1 - out(t / 0.8);
+  noir.style.opacity = 0; // corrigé après publication : la v2 publiée ouvrait sur un fondu au noir
   flaque.style.background = `radial-gradient(ellipse 72% 40% at 52% 40%, rgba(250,250,250,${0.11 * out(t / 1.4)}) 0%, rgba(250,250,250,.03) 48%, transparent 76%)`;
 
   // 1. Coude : entre par la droite, poussée lente ; revient en petit sur la fin.

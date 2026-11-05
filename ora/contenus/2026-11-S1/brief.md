@@ -71,3 +71,8 @@ ElevenLabs en direct : bloqué par le réseau de la session (api.elevenlabs.io).
 ### Voix off v02 (2026-11-05)
 `ORA_EDUCATION_IPHONE-OCCASION_TUTO-VOIX_261104_v02.mp4` — 37 s (43 s en v01). Voix v2 : pauses plafonnées à 0,26 s (0,5 s entre parties), +7 % sans changer la hauteur, égalisation (-4,5 dB à 250 Hz, +3,5 dB à 3,5 kHz), atténuation de la résonance entre les mots, -14 LUFS. Repères recalculés par `tools/resserrer_voix.py`.
 Retour propriétaire : voix trop lente, effet « chambre vide ». La résonance est atténuée, pas supprimée. Prochaine étape envisagée : ElevenLabs (clone de la voix du propriétaire ou Voice Changer).
+
+### v03 (2026-11-05) — après les stats TikTok du reel câble (décrochage à 0:02)
+- Accroche : plus de fondu au noir ; 1re image = titre affiché + « Capacité maximale 87 % » en surbrillance, poussée lente ; passage à Réglages à 3,6 s.
+- Référence : la 1re lettre change avec la voix — **M**YE73ZD/A → **F**YE73ZD/A → **N**YE73ZD/A (lettre en cuivre).
+- Fichiers : `…TUTO-VOIX_261104_v03.mp4` (local, hors dépôt), `…TUTO_261104_v02.mp4` et `…TUTO-MUET_261104_v02.mp4` (sans voix, mêmes corrections).
