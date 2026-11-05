@@ -1,6 +1,4 @@
-"""Resserre une voix : pauses plafonnées + légère accélération ; transpose les repères voix→vidéo.
-"""ORA — resserre une voix off (pauses plafonnées, accélération sans changer la hauteur, égalisation)
-et transpose les repères voix→vidéo. Voir l'usage plus bas."""
+"""ORA — resserre une voix off : pauses plafonnées, accélération sans changer la hauteur, égalisation ; transpose les repères voix→vidéo.
 Usage : python3 resserrer.py voix.flac sortie.wav tempo pause_max pause_section t_sections(csv) reperes.json
 """
 import sys, json, re, subprocess
