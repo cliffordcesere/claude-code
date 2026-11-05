@@ -22,6 +22,7 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
 - 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
 - 2026-11-04 : vidéo produit animée (v1) = « un bon début » ; risque perçu : « un bout de câble » → toujours rendre la taille ou la longueur lisible.
+- 2026-11-05 : tuto iPhone publié avec « va dans Réglages » (tutoiement) par choix du propriétaire ; à l'avenir : « Allez dans Réglages ».
 - 2026-11-05 : **le public des tutos est débutant** : montrer chaque geste (écran d'accueil, appui sur l'icône de l'app), ne rien supposer connu.
 - 2026-11-05 : volume de sortie : -14 LUFS, crête -1 dBFS (le propriétaire trouvait sa voix trop basse ; Adobe Podcast utilisé pour le débruitage).
 - 2026-11-04 : le son est souhaité. Habillage synthétisé par défaut (`tools/son.py`), version muette livrée à côté.
@@ -35,6 +36,12 @@ Reel câble USB-C 90° v2 (TikTok, publié le 2026-11-04 12:29, relevé le 2026-
 Visionnage moyen 6,2 s sur 15,5 s (40 %) ; vidéo complète 8,86 % ; **décrochage principal à 0:02**. Trafic : Pour toi 97,4 %. Spectateurs : 98 % non-abonnés ; hommes 54 %, femmes 45 % ; 18–24 ans 48 %, 25–34 ans 36 % ; Haïti 75,2 %, **Jamaïque 17,9 %**, États-Unis 3,9 %.
 Leçon appliquée : ouverture sans fondu au noir, 1re image complète.
 À suivre : part anglophone (Jamaïque) qui ne lit pas le français.
+
+Compte TikTok, 28 jours (7 oct. – 3 nov., relevé le 2026-11-05) : 1,5 K vues de publication (+80,5 %), 25 vues du profil, 15 j'aime, 8 commentaires, 2 partages ; 1,1 K spectateurs (dont 1,1 K nouveaux) ; 124 abonnés au total, +2 nets. Spectateurs : 49 % hommes, 49 % femmes.
+**Sources de trafic : Recherche 48,4 %, Pour toi 48,2 %**, profil 3,4 %. Recherches qui mènent à ORA : « blende pou Haïti », « bleindè dos iphone », « Téléphone blender », « iphone xr zaza prix en haïti », « Wondel iphone ».
+Déduction : en Haïti, le film de protection se cherche sous le mot **« blende »** ; les légendes doivent reprendre les mots tapés (blende, iPhone, Haïti). Sens de « zaza » inconnu, à demander.
+Activité : spectateurs actifs de ~7 h à ~19 h (pic samedi 8–9 h) ; abonnés : pic le 3 nov. à 17 h (une seule journée, faible). Heures supposées locales (creux la nuit).
+Règle de publication provisoire : en journée (11 h–17 h, 16 h conseillé), jamais le soir ; programmer dans TikTok Studio.
 
 ## Produits en stock (2026-11-04)
 

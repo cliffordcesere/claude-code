@@ -83,3 +83,6 @@ Retour propriétaire : voix trop lente, effet « chambre vide ». La résonance 
 - Étape 2 inchangée : on est déjà dans Réglages, retour à sa page principale.
 - Accueil et clavier en zoom 0,72 : tout reste au-dessus des 320 px du bas (interface TikTok).
 - Fichiers : `…TUTO-VOIX_261104_v04.mp4` (local, hors dépôt) ; `…TUTO_261104_v03.mp4` et `…TUTO-MUET_261104_v03.mp4` (sans voix).
+
+### Publication du tuto
+TikTok : `Trois vérifications avant d'acheter un iPhone d'occasion en Haïti. #iphone #haiti #ora` — en journée (16 h conseillé), programmable dans TikTok Studio.
