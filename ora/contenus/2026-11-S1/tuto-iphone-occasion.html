@@ -357,6 +357,29 @@ window.oraSeek = t => {
   contact.style.transform = `translateY(${(1 - out((t - T.fin - 1.6) / 0.6)) * 12}px)`;
 };
 
+// ---------- Version voix off (?voix) : la vidéo est recalée sur la voix ----------
+// Repères [temps voix, temps vidéo] ; deux temps vidéo égaux = image figée pendant que la voix parle.
+const VOIX = {
+  src: 'voix/tuto-iphone_voix-proprietaire_v1.flac',
+  reperes: [
+    [0, 0], [3.45, 3.6], [4.6, 4.75], [6.9, 4.75], [8.3, 6.6], [12.2, 10.5], [13.4, 10.5],
+    [15.3, 12.4], [16.7, 12.4], [17.4, 13.2], [18.6, 14.4], [21.3, 14.4], [22.6, 15.9],
+    [29.4, 22.7], [30.1, 23.4], [37.35, 30.75], [38.35, 32.4], [42.95, 37],
+  ],
+};
+if (new URLSearchParams(location.search).has('voix')) {
+  const R = VOIX.reperes, base = window.oraSeek;
+  const versVideo = t => { for (let i = 1; i < R.length; i++) if (t <= R[i][0]) { const [a, va] = R[i - 1], [b, vb] = R[i]; return va + (vb - va) * (t - a) / (b - a); } return R[R.length - 1][1]; };
+  const versVoix = v => { for (let i = 1; i < R.length; i++) { const [a, va] = R[i - 1], [b, vb] = R[i]; if (vb > va && v >= va && v <= vb) return a + (b - a) * (v - va) / (vb - va); } return v; };
+  window.oraSeek = t => base(versVideo(t));
+  window.ORA_DURATION = R[R.length - 1][0];
+  const S0 = window.ORA_SONS;
+  window.ORA_SONS = {
+    souffles: S0.souffles.map(versVoix), crans: S0.crans.map(versVoix), impact: versVoix(S0.impact),
+    voix: decodeURIComponent(new URL(VOIX.src, location.href).pathname), voix_debut: 0,
+  };
+}
+
 Promise.all([...document.images].map(i => i.decode().catch(() => {}))).then(() => document.fonts.ready).then(() => {
   // positions des cibles (page affichée seule, téléphone en place)
   phone.style.transform = 'none';

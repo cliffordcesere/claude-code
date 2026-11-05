@@ -91,6 +91,7 @@ try {
           .on('close', c => c === 0 ? ok() : ko(new Error(`${cmd} a échoué (code ${c})`))));
         await run('python3', [path.join(dir, 'son.py'), json, String(duration), wav]);
         await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', muette, '-i', wav,
+          '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '48000',
           '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', output]);
         for (const f of [json, wav, muette]) fs.rmSync(f, { force: true });
       }

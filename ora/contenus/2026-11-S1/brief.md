@@ -60,3 +60,10 @@ Logo vertical centré + WhatsApp en cuivre + « Delmas, Haïti ». Écart à la 
 - [Fin] Chez ORA, neuf ou occasion, c'est toujours dit clairement.
 
 Enregistrement : pièce calme, téléphone à 20 cm, une partie à la fois avec 2 s de silence, voix calme, fichier d'origine (pas de vocal WhatsApp). La vidéo sera recalée sur la voix.
+
+### Version voix off (2026-11-05)
+`ORA_EDUCATION_IPHONE-OCCASION_TUTO-VOIX_261104_v01.mp4` — 43 s. Rendu : `tuto-iphone-occasion.html?voix`.
+La voix et cette vidéo restent en local (exclues du dépôt via .gitignore) tant que le propriétaire n'a pas dit qu'il veut les y mettre.
+Écrans recalés sur la voix (repères `VOIX.reperes` dans la page), nappe baissée de 11 dB pendant la voix.
+À noter : « va dans Réglages » (0:06) tutoie ; vers 0:20, peut-être aussi (transcription incertaine).
+ElevenLabs en direct : bloqué par le réseau de la session (api.elevenlabs.io). Le Voice Changer d'ElevenLabs garde le minutage : la synchro resterait valable.

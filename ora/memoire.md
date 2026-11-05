@@ -88,7 +88,7 @@ Tant qu'elles manquent, placeholder obligatoire, jamais d'invention.
 ## Points de la charte à arbitrer (relevés le 2026-11-03)
 
 0. **Écran de fin des vidéos (2026-11-04).** Le propriétaire veut combler le vide de fin. *Provisoire :* signature centrée (titre, logo vertical ~25 % de largeur, WhatsApp en cuivre). Écart au §5 (logo centré réservé au pilier MARQUE, taille 5–8 %).
-4. **Voix off (2026-11-04).** Le propriétaire veut une voix off sur les tutos. La charte ne l'interdit que pour la franchise « Deux minutes ». *Provisoire :* voix du propriétaire, calme ; test à mesurer (enregistrements, partages) contre les vidéos sans voix.
+4. **Voix off (2026-11-04, mis à jour 2026-11-05).** Enregistrement humain reçu le 2026-11-05 (gardé hors dépôt) ; le propriétaire préfère ElevenLabs à Flora (jugé « un peu robotique »). Le propriétaire veut une voix off sur les tutos. La charte ne l'interdit que pour la franchise « Deux minutes ». *Provisoire :* voix du propriétaire, calme ; test à mesurer (enregistrements, partages) contre les vidéos sans voix.
 
 Ce sont des tensions entre règles, pas des décisions. Application provisoire indiquée ; seul le propriétaire tranche (§21).
 

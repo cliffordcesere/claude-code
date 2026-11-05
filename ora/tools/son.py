@@ -5,7 +5,7 @@ Usage :
     ffmpeg -i video_muette.mp4 -i son.wav -c:v copy -c:a aac -b:a 192k -shortest sortie.mp4
 
 evenements.json (écrit par tools/render.mjs depuis window.ORA_SONS) :
-    { "souffles": [t, ...], "crans": [t, ...], "impact": t }
+    { "souffles": [t, ...], "crans": [t, ...], "impact": t, "voix": "/chemin/voix.flac" (option), "voix_debut": t }
 
 Esthétique : calme, jamais fort (§9 « sans musique forte »). Nappe en ré mineur,
 souffles filtrés sur les transitions, crans secs sur les compteurs, une note grave au logo.
@@ -94,7 +94,23 @@ def main():
     for t in ev.get('souffles', []): poser(piste, souffle(), max(0, t - 0.45))
     for t in ev.get('crans', []): poser(piste, cran(), t)
     if ev.get('impact') is not None: poser(piste, impact(), ev['impact'])
-    piste = np.tanh(piste * 1.2) / np.tanh(1.2)  # limiteur doux
+    if ev.get('voix'):
+        # Voix off : chargée telle quelle, nappe et effets baissés pendant qu'elle parle (ducking).
+        import subprocess
+        pcm = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', ev['voix'], '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True, check=True).stdout
+        v = np.frombuffer(pcm, np.float32).reshape(-1, 2).astype(np.float64)
+        voix = np.zeros_like(piste); poser(voix, v, float(ev.get('voix_debut', 0)))
+        e = np.abs(voix).max(axis=1); w = int(0.05 * SR)
+        e = np.convolve(e, np.ones(w) / w, mode='same')
+        parle = (e > db(-45)).astype(np.float64)
+        # attaque 60 ms, relâche 450 ms
+        g = np.empty_like(parle); s = 0.0; aa = np.exp(-1 / (0.06 * SR)); ar = np.exp(-1 / (0.45 * SR))
+        for i, x in enumerate(parle):
+            s = (aa if x > s else ar) * s + (1 - (aa if x > s else ar)) * x; g[i] = s
+        piste = piste * (1 - g * (1 - db(-11)))[:, None]
+        piste = piste / max(np.max(np.abs(piste)), 1e-9) * db(-8) + voix / max(np.max(np.abs(voix)), 1e-9) * db(-1.5)
+    if not ev.get('voix'):
+        piste = np.tanh(piste * 1.2) / np.tanh(1.2)  # limiteur doux (pas sur la voix : il la distordrait)
     piste = piste / np.max(np.abs(piste)) * db(-1.5)
     with wave.open(sortie, 'wb') as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)

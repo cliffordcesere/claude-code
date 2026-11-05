@@ -1,2 +1,6 @@
 .DS_Store
 
+
+# ORA : enregistrements de voix et vidéos qui les contiennent — gardés en local, pas publiés dans le dépôt sans accord explicite
+ora/contenus/*/voix/
+ora/contenus/*/*-VOIX_*.mp4
