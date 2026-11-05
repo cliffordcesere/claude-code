@@ -76,3 +76,10 @@ Retour propriétaire : voix trop lente, effet « chambre vide ». La résonance 
 - Accroche : plus de fondu au noir ; 1re image = titre affiché + « Capacité maximale 87 % » en surbrillance, poussée lente ; passage à Réglages à 3,6 s.
 - Référence : la 1re lettre change avec la voix — **M**YE73ZD/A → **F**YE73ZD/A → **N**YE73ZD/A (lettre en cuivre).
 - Fichiers : `…TUTO-VOIX_261104_v03.mp4` (local, hors dépôt), `…TUTO_261104_v02.mp4` et `…TUTO-MUET_261104_v02.mp4` (sans voix, mêmes corrections).
+
+### v04 (2026-11-05) — pour un public débutant
+- Étape 1 : écran d'accueil de l'iPhone, appui sur l'icône Réglages (entourée de cuivre) quand la voix dit « Réglages », puis ouverture de l'app.
+- Étape 3 : même chose avec l'app Téléphone dans le dock.
+- Étape 2 inchangée : on est déjà dans Réglages, retour à sa page principale.
+- Accueil et clavier en zoom 0,72 : tout reste au-dessus des 320 px du bas (interface TikTok).
+- Fichiers : `…TUTO-VOIX_261104_v04.mp4` (local, hors dépôt) ; `…TUTO_261104_v03.mp4` et `…TUTO-MUET_261104_v03.mp4` (sans voix).
