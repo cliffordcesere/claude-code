@@ -30,6 +30,21 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 - 2026-11-04 : le propriétaire n'a pas d'iPhone ; les tutos d'interface se font en écrans reconstruits (HTML), exactitude à faire vérifier sur un vrai appareil.
 - 2026-11-04 : la photo maison est préférée à l'image fournisseur ; la plaque perforée et le désordre sont retirés au détourage.
 
+## Lexique local (donné par le propriétaire, 2026-11-05)
+
+| Mot | Sens | Usage ORA |
+|---|---|---|
+| **blende** | film de protection d'écran (« blindé », comme une voiture blindée) | mot-clé des contenus hydrogel ; titre créole « Nou Blende Ekran Tout Telefòn » déjà utilisé |
+| **zaza** | iPhone en mauvais état mais fonctionnel : batterie ~72–78 %, Face ID HS, pas full unlock, pièces non d'origine | mot-clé de la série tutos « repérer un zaza » ; ORA dit l'état, toujours |
+
+## Série « Zaza » (proposée 2026-11-05)
+
+1. Batterie, référence, IMEI — fait (`tuto-iphone-occasion.html`).
+2. Full unlock — Réglages › Général › Informations, verrouillage opérateur. Captures iOS 27 FR à recevoir.
+3. Pièces d'origine et Face ID — historique des pièces et réparations. Captures iOS 27 FR à recevoir.
+
+Vidéo existante « Nou Blende Ekran Tout Telefòn » (06-06) : 260 vues, 12 j'aime, 1 enregistrement. Légende « Invisible. Impénétrable. Sur mesure. » : « blende » absent de la légende ; « Impénétrable » = promesse excessive (§1), proposer « Invisible. Résistant. Sur mesure. »
+
 ## Mesures
 
 Reel câble USB-C 90° v2 (TikTok, publié le 2026-11-04 12:29, relevé le 2026-11-05) : 379 vues, 16 j'aime, 0 commentaire, 0 partage, **0 enregistrement**, 2 nouveaux abonnés.
@@ -39,7 +54,7 @@ Leçon appliquée : ouverture sans fondu au noir, 1re image complète.
 
 Compte TikTok, 28 jours (7 oct. – 3 nov., relevé le 2026-11-05) : 1,5 K vues de publication (+80,5 %), 25 vues du profil, 15 j'aime, 8 commentaires, 2 partages ; 1,1 K spectateurs (dont 1,1 K nouveaux) ; 124 abonnés au total, +2 nets. Spectateurs : 49 % hommes, 49 % femmes.
 **Sources de trafic : Recherche 48,4 %, Pour toi 48,2 %**, profil 3,4 %. Recherches qui mènent à ORA : « blende pou Haïti », « bleindè dos iphone », « Téléphone blender », « iphone xr zaza prix en haïti », « Wondel iphone ».
-Déduction : en Haïti, le film de protection se cherche sous le mot **« blende »** ; les légendes doivent reprendre les mots tapés (blende, iPhone, Haïti). Sens de « zaza » inconnu, à demander.
+Déduction : en Haïti, le film de protection se cherche sous le mot **« blende »** ; les légendes doivent reprendre les mots tapés (blende, zaza, iPhone, Haïti).
 Activité : spectateurs actifs de ~7 h à ~19 h (pic samedi 8–9 h) ; abonnés : pic le 3 nov. à 17 h (une seule journée, faible). Heures supposées locales (creux la nuit).
 Règle de publication provisoire : en journée (11 h–17 h, 16 h conseillé), jamais le soir ; programmer dans TikTok Studio.
 
