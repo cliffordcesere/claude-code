@@ -40,6 +40,21 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 Légende créole écrite par le propriétaire (en réserve, le français est préféré pour l'instant) :
 « Avan w achte yon iPhone okazyon ayiti, men 3 fason ou ka rekonèt si se yon zaza. »
 
+## Règle éditoriale (propriétaire, 2026-11-06)
+
+**« Le succès est dans le geste banal expliqué enfin clairement. »**
+À éviter : comparatifs de flagships, astuces de développeur, raccourcis Android avancés (« ça fait plaisir à celui qui filme, ça n'intéresse personne »).
+Un sujet = un geste, un gain immédiat, 15–20 s.
+
+Constat du propriétaire : le stockage plein est un vrai problème, surtout sur iPhone (pas de nettoyage de cache comme sur Android).
+Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; écran cassé mais téléphone vivant (angle sûr : sauvegarder avant).
+
+## Série « iPhone plein » (proposée 2026-11-06)
+
+1. Supprimés récemment — Photos › Supprimés récemment › Sélectionner › Tout supprimer (photos gardées jusqu'à 30 jours). 15–18 s, « Partie 1 sur 3 ». Captures iOS 27 FR de Photos à recevoir.
+2. WhatsApp › Gérer le stockage.
+3. Réglages › Stockage iPhone.
+
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
 
 Critère du propriétaire : utile, apprend vraiment quelque chose, suscite partage, enregistrement, abonnement.
