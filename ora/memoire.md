@@ -17,11 +17,16 @@ Tout nouveau slogan proposé est étiqueté **candidat**, jamais présenté comm
 Premiers **1 000 abonnés qui font confiance à ORA** (communauté fidèle, pas du volume brut).
 La charte évolue avec la pratique : chaque ajustement est proposé, puis versionné par le propriétaire (§21).
 
+## Décision : la voix d'ORA (propriétaire, 2026-11-06)
+
+**Toutes les voix off sont la voix du propriétaire. Jamais de voix IA.** Raison : compte sans visage (faceless) ; la voix est le seul élément humain qui construit la confiance. Si la voix n'est pas disponible, on attend plutôt que de publier avec une voix IA.
+ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
+
 ## Façon de travailler (demandée par le propriétaire, 2026-11-06)
 
 - **Une question n'est pas un feu vert.** Quand le propriétaire pose une question de stratégie (« et si… ? », « on essaie… ? »), répondre avec un avis argumenté (pour, contre, recommandation), puis attendre sa validation avant d'agir.
 - **Pas de jargon technique.** Le propriétaire ne code pas : expliquer simplement (pas de « clé API », « environnement », « proxy » sans les traduire en mots courants), et privilégier la solution qui ne lui demande aucune manipulation technique.
-- Incident du 2026-11-06 : création d'un environnement « ORA (claude-code) » et demande d'une clé ElevenLabs sans accord explicite ; la clé saisie est refusée par ElevenLabs. Solution retenue par défaut : le propriétaire génère la voix dans l'app ElevenLabs et envoie le fichier audio.
+- Incident du 2026-11-06 : création d'un environnement « ORA (claude-code) » et demande d'une clé ElevenLabs sans accord explicite. Le propriétaire a saisi « xi-api-key » (le nom du champ, rien de sensible) ; aucun risque, rien à faire.
 
 ## Retours du propriétaire
 
@@ -178,7 +183,7 @@ Tant qu'elles manquent, placeholder obligatoire, jamais d'invention.
 ## Points de la charte à arbitrer (relevés le 2026-11-03)
 
 0. **Écran de fin des vidéos (2026-11-04).** Le propriétaire veut combler le vide de fin. *Provisoire :* signature centrée (titre, logo vertical ~25 % de largeur, WhatsApp en cuivre). Écart au §5 (logo centré réservé au pilier MARQUE, taille 5–8 %).
-4. **Voix off (2026-11-04, mis à jour 2026-11-05).** Enregistrement humain reçu le 2026-11-05 (gardé hors dépôt) ; le propriétaire préfère ElevenLabs à Flora (jugé « un peu robotique »). Le propriétaire veut une voix off sur les tutos. La charte ne l'interdit que pour la franchise « Deux minutes ». *Provisoire :* voix du propriétaire, calme ; test à mesurer (enregistrements, partages) contre les vidéos sans voix.
+4. **Voix off — TRANCHÉ le 2026-11-06 : voix du propriétaire, toujours (voir « Décision : la voix d'ORA »).** Historique : Enregistrement humain reçu le 2026-11-05 (gardé hors dépôt) ; le propriétaire préfère ElevenLabs à Flora (jugé « un peu robotique »). Le propriétaire veut une voix off sur les tutos. La charte ne l'interdit que pour la franchise « Deux minutes ». *Provisoire :* voix du propriétaire, calme ; test à mesurer (enregistrements, partages) contre les vidéos sans voix.
 
 Ce sont des tensions entre règles, pas des décisions. Application provisoire indiquée ; seul le propriétaire tranche (§21).
 
