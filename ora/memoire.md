@@ -46,7 +46,7 @@ Légende créole écrite par le propriétaire (en réserve, le français est pr�
 - Photos : onglets **Photothèque / Collections** + loupe en bas. Collections : sections Voyages, Types de média, **Autres** (grille 2 colonnes : Favorites, Mes captures, **Suppr. récemment** 🔒, Documents, Doublons, Reçus), Suggestions de fond d'écran.
 - Suppr. récemment : « Utilisez Face ID ou saisissez votre code pour afficher cet album. » / « Afficher l'album ». Dedans : « Sélect. », tri, « N élément(s) », vignettes « 9 jours ».
 - Sélection : pastille « ··· ✕ », « 1 photo sélectionnée » en bas ; menu « ··· » → **Supprimer** / Récupérer ; confirmation en haut : « Cette photo sera définitivement supprimée d'iCloud et de tous vos appareils. » → « Supprimer de tous les appareils ».
-- Inconnu : sélection de tout l'album d'un coup ; texte de confirmation au pluriel.
+- **Tout supprimer** (vidéo iOS 27.1, 2026-11-06) : Sélect. → rien coché, en bas « Sélectionner des éléments » → « ··· » → **Tout supprimer** / Tout récupérer → « Ces éléments seront définitivement supprimés d'iCloud et de tous vos appareils. » → « Supprimer de tous les appareils » → « 0 élément », « Aucune photo ou vidéo ». Face ID s'anime en haut, dans l'îlot.
 
 ## Voix off (2026-11-06)
 

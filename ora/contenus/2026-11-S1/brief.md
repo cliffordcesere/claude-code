@@ -102,3 +102,7 @@ Ne pas lire : 1re phrase, mots-clés (Photos, Supprimées récemment, Tout suppr
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v02.mp4` (+ MUET), 18,8 s. Parcours : Photos › Collections › Suppr. récemment (Face ID ou code) › Sélect. › glisser › « ··· » › Supprimer › Supprimer de tous les appareils.
 Voix off : … ouvrez Photos, touchez Collections, descendez jusqu'à Supprimées récemment. Il vous demande Face ID ou votre code, c'est normal. Touchez Sélectionner, glissez le doigt sur vos photos, puis les trois petits points, et Supprimer. …
 À confirmer : sélection de tout l'album ; confirmation au pluriel.
+
+### v03 (2026-11-06) — flux exact d'après une vidéo d'écran iOS 27.1
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v03.mp4` (+ MUET), 17,8 s. Sélect. → « ··· » → Tout supprimer → Supprimer de tous les appareils (sans cocher ni glisser).
+Voix off : … Touchez Sélectionner, puis les trois petits points, et Tout supprimer. …
