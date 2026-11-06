@@ -17,6 +17,12 @@ Tout nouveau slogan proposé est étiqueté **candidat**, jamais présenté comm
 Premiers **1 000 abonnés qui font confiance à ORA** (communauté fidèle, pas du volume brut).
 La charte évolue avec la pratique : chaque ajustement est proposé, puis versionné par le propriétaire (§21).
 
+## Façon de travailler (demandée par le propriétaire, 2026-11-06)
+
+- **Une question n'est pas un feu vert.** Quand le propriétaire pose une question de stratégie (« et si… ? », « on essaie… ? »), répondre avec un avis argumenté (pour, contre, recommandation), puis attendre sa validation avant d'agir.
+- **Pas de jargon technique.** Le propriétaire ne code pas : expliquer simplement (pas de « clé API », « environnement », « proxy » sans les traduire en mots courants), et privilégier la solution qui ne lui demande aucune manipulation technique.
+- Incident du 2026-11-06 : création d'un environnement « ORA (claude-code) » et demande d'une clé ElevenLabs sans accord explicite ; la clé saisie est refusée par ElevenLabs. Solution retenue par défaut : le propriétaire génère la voix dans l'app ElevenLabs et envoie le fichier audio.
+
 ## Retours du propriétaire
 
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
