@@ -67,17 +67,17 @@ Les captures doivent montrer **les gestes**, pas mes photos personnelles.
 ### Écran 4 — Les collections
 
 10. Appuie sur l'onglet **« Collections »** (en bas de l'écran).
-11. Fais défiler vers le bas jusqu'à la rubrique **« Utilitaires »**.
+11. Fais défiler vers le bas jusqu'à la rubrique **« Autres »**.
 12. **Capture.**
 
-> Ce qui doit être visible : la rubrique **Utilitaires** et la ligne
-> **« Récents supprimés »**.
+> Ce qui doit être visible : la rubrique **Autres** et la ligne
+> **« Supprimées récemment »**.
 
 ---
 
 ### Écran 5 — La corbeille
 
-13. Appuie sur **« Récents supprimés »** → **« Afficher l'album »**.
+13. Appuie sur **« Supprimées récemment »** → **« Afficher l'album »**.
 14. Déverrouille avec Face ID ou le code (c'est normal, l'album est protégé).
 15. **Capture.**
 
@@ -118,3 +118,38 @@ Format attendu : images en **PNG**, pleine résolution, non recadrées.
 - [ ] Rien à désinstaller : je n'ai installé aucune application
 
 Merci — 5 minutes de ton temps, et le tuto sera propre.
+
+
+---
+
+## Kit d'images officielles Apple (si personne ne peut filmer)
+
+Apple publie ces captures dans son guide iPhone. Liens directs :
+
+| Contenu | Lien |
+|---|---|
+| Grille de la photothèque | `https://ipcdn-web.apple.com/assets/v2/web/94175a9b-b500-4ff3-a606-7110088976a5` |
+| Écran **Collections** | `https://ipcdn-web.apple.com/assets/v2/web/98569bee-7ac8-4b7f-9bf6-0818a39a13da` |
+| Album **« Supprimées récemment »** (FR) | `https://ipcdn-web.apple.com/assets/v2/web/73eafdf4-6812-43a2-a473-13c1d8144441` |
+| Icône bouton **Supprimer** (corbeille) | `https://ipcdn-web.apple.com/assets/v2/web/8d96ccfc-c00e-4694-9535-7ff87bcd3f99` |
+| Icône bouton **Plus** (…) | `https://ipcdn-web.apple.com/assets/v2/web/2e39d3b6-6928-4bb9-b741-5edf75d21a92` |
+
+**Ce qui manque :** l'état « Sélectionner » avec plusieurs photos cochées, et la fenêtre de
+confirmation. Ces deux-là n'existent pas dans le guide Apple.
+
+**Usage :** ces images appartiennent à Apple. Pour un tutoriel, l'usage éditorial est
+courant, mais : cite « Source : Assistance Apple », ne suggère jamais un partenariat,
+et ajoute tes propres flèches et légendes.
+
+---
+
+## Libellés exacts en français (iOS 27)
+
+| Étape | Libellé à l'écran |
+|---|---|
+| Sélection | **Sélectionner** |
+| Corbeille | icône **Supprimer** |
+| Onglet du bas | **Collections** |
+| Rubrique | **Autres** |
+| Album | **Supprimées récemment** (féminin pluriel) |
+| Dans l'album | **Afficher l'album**, puis **Sélectionner**, **Récupérer**, **Supprimer** |
