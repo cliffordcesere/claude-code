@@ -40,6 +40,13 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 Légende créole écrite par le propriétaire (en réserve, le français est préféré pour l'instant) :
 « Avan w achte yon iPhone okazyon ayiti, men 3 fason ou ka rekonèt si se yon zaza. »
 
+## Voix off (2026-11-06)
+
+- Le texte de voix off s'écrit **pour être dit**, pas avec la cadence d'affiche : une situation vécue (« vous venez d'effacer 200 photos… »), le **pourquoi**, puis le geste. Le narrateur peut dire « je » (le propriétaire) ; vouvoiement maintenu.
+- Méthode : ne pas lire. Fixes : 1re phrase (accroche en < 2 s), mots-clés des écrans, dernière phrase. Entre les deux, parler comme au comptoir. Les écrans sont calés sur les mots-clés après transcription.
+- Durée : 25–30 s maximum.
+- À arbitrer (§6) : questions rhétoriques interdites à l'écrit ; les autoriser à l'oral ? Non tranché.
+
 ## Règle éditoriale (propriétaire, 2026-11-06)
 
 **« Le succès est dans le geste banal expliqué enfin clairement. »**

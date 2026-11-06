@@ -93,3 +93,7 @@ TikTok : `Avant d'acheter un iPhone en Haïti : comment repérer un zaza. #iphon
 - Libellés vérifiés (captures + recherche web) : « Supprimées récemment », verrouillage par code, Sélectionner, Tout supprimer / Tout récupérer, jusqu'à 30 jours. Non vérifiés : fenêtre de confirmation, album vide.
 - TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stockage #haiti`
 - Voix off : Vous supprimez vos photos. Votre iPhone, lui, les garde. / Jusqu'à trente jours, dans Supprimées récemment. / Ouvrez Photos. Descendez jusqu'à Supprimées récemment. Entrez votre code. / Touchez Sélectionner, puis Tout supprimer. / L'espace revient tout de suite. / Partie 1 sur 3. La suite : les doublons.
+
+### Voix off, version parlée (2026-11-06)
+Vous venez d'effacer deux cents photos, et votre iPhone affiche encore : stockage plein. / C'est normal : elles ne sont pas parties. L'iPhone les garde trente jours, au cas où vous changeriez d'avis. / Pour vraiment faire de la place : ouvrez Photos, descendez tout en bas, Supprimées récemment. / Il vous demande votre code, c'est normal. / Touchez Sélectionner, puis Tout supprimer. Et là, la place revient vraiment. / Dans la prochaine vidéo, je vous montre les doublons.
+Ne pas lire : 1re phrase, mots-clés (Photos, Supprimées récemment, Tout supprimer) et dernière phrase fixes ; le reste au naturel.
