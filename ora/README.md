@@ -15,7 +15,7 @@ Seul le propriétaire de la marque la modifie (§21) : nouvelle version = nouvea
 | `logo/svg/` | Logo vectoriel, extrait tel quel de la fiche. 4 formes × 3 versions officielles, avec ou sans fond (`_fond` = zone de sécurité 12u incluse). |
 | `logo/png/` | Exports PNG transparents + favicons (symbole renforcé 16–48 px) + avatar réseaux 1080 px. |
 | `fonts/` | Jost variable (100–900), licence OFL. |
-| `templates/` | `ora.css` (jetons de charte), `post-4x5.html`, `story-9x16-motion.html`, `index.html` (franchise « Index »), `produit-motion.html` (vidéo produit 9:16 : caméra, lumière, reflet, textes). |
+| `templates/` | `ora.css` (jetons de charte), `post-4x5.html`, `story-9x16-motion.html`, `index.html` (franchise « Index »), `produit-motion.html` (vidéo produit 9:16 : caméra, lumière, reflet, textes), `moteur-tuto-ios.js` (tutos « écran de téléphone » : pages, défilement, doigt, caméra, textes, voix off). |
 | `produits/` | Photos produit : source + version détourée (PNG transparent). |
 | `tools/render.mjs` | Rendu HTML → PNG, HTML → MP4, SVG → PNG. |
 | `tools/extract_logo.py` | Régénère les SVG depuis la fiche PDF. |

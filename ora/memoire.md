@@ -51,9 +51,9 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 
 ## Série « iPhone plein » (proposée 2026-11-06)
 
-1. Supprimés récemment — Photos › Supprimés récemment › Sélectionner › Tout supprimer (photos gardées jusqu'à 30 jours). 15–18 s, « Partie 1 sur 3 ». Captures iOS 27 FR de Photos à recevoir.
-2. WhatsApp › Gérer le stockage.
-3. Réglages › Stockage iPhone.
+1. Supprimées récemment (féminin, album verrouillé par code) — Photos › Autres › Supprimées récemment › Sélectionner › Tout supprimer. Vidéo faite le 2026-11-06 (17,6 s), voix off à enregistrer.
+2. Doublons — Photos › Autres › Doublons › Fusionner (vu sur capture : « Doublons 633 »).
+3. WhatsApp › Gérer le stockage.
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
 

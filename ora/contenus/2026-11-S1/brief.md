@@ -86,3 +86,10 @@ Retour propriétaire : voix trop lente, effet « chambre vide ». La résonance 
 
 ### Publication du tuto
 TikTok : `Avant d'acheter un iPhone en Haïti : comment repérer un zaza. #iphone #zaza #haiti` — en journée (16 h conseillé), programmable dans TikTok Studio.
+
+## Tuto « iPhone plein » 1/3 — Supprimées récemment (2026-11-06)
+- `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v01.mp4` (habillage sonore) et `…TUTO-MUET…` (base voix off). 17,6 s. Source : `stockage-supprimees.html` + moteur `templates/moteur-tuto-ios.js`.
+- Déroulé : jauge 61,2/64 Go → accueil, appui sur Photos → défilement jusqu'à « Autres » → Supprimées récemment (verrouillé, « Afficher l'album ») → Sélectionner → Tout supprimer → confirmation → album vide → jauge 55,8/64 Go → signature « La tech, en clair. » + Partie 1 sur 3.
+- Libellés vérifiés (captures + recherche web) : « Supprimées récemment », verrouillage par code, Sélectionner, Tout supprimer / Tout récupérer, jusqu'à 30 jours. Non vérifiés : fenêtre de confirmation, album vide.
+- TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stockage #haiti`
+- Voix off : Vous supprimez vos photos. Votre iPhone, lui, les garde. / Jusqu'à trente jours, dans Supprimées récemment. / Ouvrez Photos. Descendez jusqu'à Supprimées récemment. Entrez votre code. / Touchez Sélectionner, puis Tout supprimer. / L'espace revient tout de suite. / Partie 1 sur 3. La suite : les doublons.

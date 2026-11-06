@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — tuto « iPhone plein » 1/3 : Supprimées récemment</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Tuto 9:16, ~17,5 s. Série « iPhone plein », partie 1/3.
+  Interface iOS reconstruite d'après captures (Photos FR, Stockage iPhone), palette ORA, valeurs fictives.
+  Libellés vérifiés (recherche web + captures) : « Supprimées récemment », album verrouillé par code,
+  « Sélectionner », « Tout supprimer » / « Tout récupérer », conservation jusqu'à 30 jours.
+  Non vérifiés : texte exact de la fenêtre de confirmation et de l'album vide.
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-supprimees.html sortie.mp4
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  /* ---------- Textes ORA ---------- */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 262px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 20px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: 50px; font-weight: 300; line-height: 1.3; margin-top: 16px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .bloc.centre { top: 290px; text-align: center; }
+  #logoV { position: absolute; left: 50%; top: 880px; width: 260px; margin-left: -130px; opacity: 0; }
+  #contact { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #contact .cta { font-size: 40px; }
+  #contact .lieu { font-size: 30px; color: var(--gris); margin-top: 14px; font-weight: 300; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+
+  /* ---------- Téléphone : interface iOS 27 (captures fournies), palette ORA ---------- */
+  #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
+  .phone {
+    position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
+    border-radius: 108px; background: #000; padding: 14px;
+    box-shadow: 0 0 0 2px #2a2a2a, 0 0 0 8px #141414, 0 0 0 9px #3a3a3a;
+  }
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 96px; overflow: hidden; background: #000;
+           font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
+  .ilot { position: absolute; left: 50%; top: 24px; width: 180px; height: 52px; margin-left: -90px; border-radius: 30px; background: #000; z-index: 6; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 58px 0 76px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 10px; align-items: center; }
+  .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+  .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
+  .barres i.off { background: rgba(250,250,250,.35); }
+  .pct { min-width: 52px; height: 26px; padding: 0 6px; border-radius: 8px; background: var(--blanc); color: #000; font: 700 20px/26px "Jost", sans-serif; text-align: center; position: relative; }
+  .pct::after { content: ""; position: absolute; right: -6px; top: 8px; width: 3px; height: 10px; border-radius: 0 2px 2px 0; background: rgba(250,250,250,.5); }
+
+  .page { position: absolute; inset: 0; background: #000; padding-top: 104px; will-change: transform; }
+  .nav { position: relative; height: 104px; display: flex; align-items: center; padding: 0 26px; }
+  .nav .rond { width: 78px; height: 78px; border-radius: 50%; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 66px; font-weight: 700; letter-spacing: -.01em; padding: 40px 40px 26px; }
+  .groupe { margin: 0 26px 30px; background: #1C1C1C; border-radius: 40px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 84px; padding: 0 30px; font-size: 30px; }
+  .row + .row::before { content: ""; position: absolute; left: 104px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 30px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 14px; background: #2e2e2e; display: grid; place-items: center; color: var(--blanc); flex: none; }
+  .row .nom { flex: 1; white-space: nowrap; }
+  .row .val { color: var(--gris); white-space: nowrap; }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 6px; }
+  .compte { display: flex; align-items: center; gap: 24px; padding: 22px 30px; }
+  .avatar { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; display: grid; place-items: center; font-size: 36px; font-weight: 600; color: var(--blanc); flex: none; }
+  .compte .nom { font-size: 34px; font-weight: 600; }
+  .compte .sous-c { font-size: 25px; color: var(--gris); margin-top: 4px; }
+  .compte .fl { margin-left: auto; color: #5a5a5a; font-size: 38px; }
+  .toggle { width: 98px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 62px; height: 50px; border-radius: 26px; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 32px; background: #000; }
+  .note { color: var(--gris); font-size: 24px; line-height: 1.35; padding: 0 56px 26px; margin-top: -18px; }
+  .recherche { position: absolute; left: 34px; right: 34px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; align-items: center; gap: 16px; padding: 0 30px; color: var(--gris); font-size: 30px; z-index: 3; }
+  .recherche .m { margin-left: auto; color: var(--blanc); }
+  .carte { margin: 20px 26px 30px; background: #1C1C1C; border-radius: 40px; padding: 30px; }
+  .carte .gros { font-size: 72px; font-weight: 700; } .carte .gros small { font-size: 36px; }
+  .carte .info { font-size: 24px; color: var(--gris); margin-top: 4px; }
+  .jauge { height: 14px; border-radius: 7px; background: #333; margin-top: 20px; overflow: hidden; } .jauge b { display: block; height: 100%; width: 92%; background: var(--blanc); border-radius: 7px; }
+  .graph { padding: 26px 30px 30px; }
+  .g-titre { font-size: 26px; font-weight: 600; margin-bottom: 4px; } .g-sous { font-size: 22px; color: var(--gris); margin-bottom: 18px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+  .barres-g i { flex: 1; background: #555; border-radius: 6px 6px 0 0; } .barres-g i.auj { background: var(--blanc); }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
+  .row.hl { border-radius: 0; }
+  .flou { filter: blur(9px); }
+  .lettre { font-weight: 400; } .lettre.on { color: var(--cuivre); font-weight: 700; }
+
+  /* écran d'accueil */
+  .accueil { padding-top: 0; background: radial-gradient(ellipse 90% 60% at 30% 18%, #262626 0%, #121212 45%, #0A0A0A 75%); }
+  .widgets { position: absolute; left: 34px; right: 34px; top: 118px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .widget { display: grid; gap: 10px; justify-items: center; }
+  .widget em { font-style: normal; font-size: 22px; color: var(--blanc); }
+  .w-cal, .w-pile { width: 100%; aspect-ratio: 1; border-radius: 58px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); padding: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .w-cal small { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: var(--gris); }
+  .w-cal b { font-size: 76px; font-weight: 500; line-height: 1; }
+  .w-cal span { margin-top: auto; font-size: 22px; color: var(--gris); }
+  .w-pile b { font-size: 60px; font-weight: 600; margin-top: auto; } .w-pile span { font-size: 22px; color: var(--gris); }
+  .w-pile i { display: block; height: 12px; border-radius: 6px; background: #3a3a3a; margin-top: 12px; overflow: hidden; } .w-pile u { display: block; height: 100%; background: var(--blanc); }
+  .grille { position: absolute; left: 34px; right: 34px; top: 520px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 30px; justify-items: center; }
+  .app { display: grid; gap: 10px; justify-items: center; }
+  .app span { font-size: 21px; color: var(--blanc); white-space: nowrap; }
+  .tuile { width: 124px; height: 124px; border-radius: 30px; background: linear-gradient(160deg, #303030, #1a1a1a); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); display: grid; place-items: center; color: var(--blanc); position: relative; }
+  .tuile.cal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+  .tuile.cal small { font-size: 20px; font-weight: 700; color: var(--gris); } .tuile.cal b { font-size: 56px; font-weight: 400; line-height: 1; }
+  .tuile.hl-ic { box-shadow: 0 0 0 5px var(--cuivre), inset 0 1px 0 rgba(250,250,250,.16); }
+  .recherche-a { position: absolute; left: 50%; transform: translateX(-50%); bottom: 236px; height: 56px; padding: 0 26px; border-radius: 28px; background: rgba(40,40,40,.9); display: flex; align-items: center; gap: 10px; color: var(--blanc); font-size: 24px; }
+  .dock { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 172px; border-radius: 64px; background: rgba(38,38,38,.88); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; }
+  /* clavier téléphone */
+  .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
+  .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
+  .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
+  .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
+  .feuille { position: absolute; left: 50px; right: 50px; top: 420px; background: #1C1C1C; border-radius: 44px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 34px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 28px; color: var(--gris); margin-bottom: 6px; }
+  .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 32px; font-weight: 600; }
+
+  .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
+
+  /* ---------- Stockage iPhone ---------- */
+  .contenu { will-change: transform; }
+  .stock { margin-top: 20px; }
+  .st-haut { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; }
+  .st-haut span { color: var(--gris); font-size: 26px; }
+  .st-barre { display: flex; gap: 3px; height: 30px; margin: 22px 0 18px; border-radius: 8px; overflow: hidden; background: #2a2a2a; }
+  .seg { display: block; height: 100%; }
+  .s-photos { background: var(--blanc); } .s-apps { background: #8A8A8A; } .s-ios { background: #5a5a5a; } .s-sys { background: #3e3e3e; }
+  #seg-photos { width: 60%; } .seg.s-apps { width: 15%; } .seg.s-ios { width: 12%; } .seg.s-sys { width: 9%; }
+  .st-leg { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 22px; color: var(--gris); }
+  .st-leg .pt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+  .app-st { min-height: 100px; }
+  .app-st .icone b { font-size: 26px; }
+  .app-st .nom small { display: block; font-size: 22px; color: var(--gris); margin-top: 2px; }
+  /* ---------- Photos ---------- */
+  .ph-entete { display: flex; align-items: center; gap: 16px; padding: 124px 34px 24px; }
+  .ph-titre { font-size: 66px; font-weight: 700; flex: 1; }
+  .ph-rech { display: flex; align-items: center; gap: 8px; height: 62px; padding: 0 22px; border-radius: 31px; background: #2a2a2a; font-size: 26px; font-weight: 600; }
+  .ph-av { width: 62px; height: 62px; border-radius: 50%; background: #3a3a3a; }
+  .ph-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vig { display: block; aspect-ratio: 1; position: relative; }
+  .vig em { position: absolute; left: 8px; bottom: 6px; font-style: normal; font-size: 18px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .ph-sec { font-size: 40px; font-weight: 700; padding: 40px 40px 18px; }
+  .ph-sec span { color: var(--gris); }
+  .ph-row .pic { width: 46px; display: grid; place-items: center; color: var(--blanc); }
+  .ph-row .val svg { display: block; color: var(--gris); }
+  .ph-albums { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 26px; }
+  .ph-albums .vig { border-radius: 26px; }
+  .gt2 { font-size: 58px; font-weight: 700; line-height: 1.05; padding: 10px 40px 0; }
+  .verrou { display: grid; justify-items: center; gap: 26px; margin-top: 360px; text-align: center; padding: 0 60px; color: var(--gris); }
+  .verrou p { margin: 0; font-size: 36px; font-weight: 700; color: var(--blanc); line-height: 1.25; }
+  .verrou span { font-size: 30px; font-weight: 600; color: var(--blanc); text-decoration: underline; text-underline-offset: 6px; }
+  .nav .pill { position: absolute; right: 26px; height: 66px; padding: 0 26px; border-radius: 33px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
+  .alb-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vide { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 34px; font-weight: 600; color: var(--gris); opacity: 0; }
+  .barre-outils { position: absolute; left: 26px; right: 26px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.95); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; justify-content: space-between; align-items: center; padding: 0 36px; font-size: 28px; font-weight: 600; opacity: 0; z-index: 3; }
+  .barre-outils span { padding: 10px 6px; border-radius: 20px; }
+  .feuille-a { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #1f1f1f; border-radius: 44px; padding: 34px 30px 26px; display: grid; gap: 14px; text-align: center; transform: translateY(120%); z-index: 4; box-shadow: 0 -10px 40px rgba(0,0,0,.6); }
+  .feuille-a p { margin: 0 0 6px; font-size: 24px; color: var(--gris); }
+  .feuille-a span { height: 86px; border-radius: 43px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #2e2e2e; }
+  .feuille-a .danger { color: var(--blanc); font-weight: 700; }
+  .hl-txt { outline: 4px solid var(--cuivre); outline-offset: 4px; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="camera">
+    <div class="phone" id="phone"><div class="ecran" id="ecran">
+      <div class="ilot"></div>
+      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i class="off" style="height:21px"></i></span><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><span class="pct">92</span></span></div>
+
+      <!-- Réglages › Général › Stockage iPhone (structure des captures fournies) -->
+      <div class="page" id="p-stockage"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Stockage iPhone</span></div>
+        <div class="carte stock" id="r-barre">
+          <div class="st-haut"><b>iPhone</b><span id="st-txt">61,2 Go sur 64 Go utilisés</span></div>
+          <div class="st-barre"><i class="seg s-photos" id="seg-photos"></i><i class="seg s-apps"></i><i class="seg s-ios"></i><i class="seg s-sys"></i></div>
+          <div class="st-leg"><span><i class="pt s-photos"></i>Photos</span><span><i class="pt s-apps"></i>Applications</span><span><i class="pt s-ios"></i>iOS</span><span><i class="pt s-sys"></i>Données système</span></div>
+        </div>
+        <div class="groupe"><div class="row app-st" id="r-photos-st"><span class="icone"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg></span><span class="nom">Photos<small>Dernière utilisation : aujourd’hui</small></span><span class="val" id="v-photos">38,4 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone"><b>W</b></span><span class="nom">WhatsApp<small>Dernière utilisation : aujourd’hui</small></span><span class="val">6,9 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone"><b>T</b></span><span class="nom">TikTok<small>Dernière utilisation : aujourd’hui</small></span><span class="val">2,3 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone"><b>F</b></span><span class="nom">Facebook<small>Dernière utilisation : hier</small></span><span class="val">1,7 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone"><b>Y</b></span><span class="nom">YouTube<small>Dernière utilisation : aujourd’hui</small></span><span class="val">1,2 Go</span><span class="fl">›</span></div></div>
+      </div></div>
+
+      <div class="page accueil" id="p-accueil">
+        <div class="widgets">
+          <div class="widget"><div class="w-cal"><small>JEUDI</small><b>5</b><span>Aucun événement aujourd'hui</span></div><em>Calendrier</em></div>
+          <div class="widget"><div class="w-pile"><svg viewBox="0 0 24 24" width="0" height="0" style="display:none"><path fill="currentColor" d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><b>92 %</b><span>iPhone</span><i><u style="width:92%"></u></i></div><em>Batteries</em></div>
+        </div>
+        <div class="grille"><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></div><span>FaceTime</span></div><div class="app"><div class="tuile cal"><small>JEU.</small><b>5</b></div><span>Calendrier</span></div><div class="app"><div class="tuile" id="app-photos"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg></div><span>Photos</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div><span>Appareil photo</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><span>Mail</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M3 18h12v-2H3v2zM3 6v2h18V6H3zm0 7h18v-2H3v2z"/></svg></div><span>Notes</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div><span>Horloge</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg></div><span>Plans</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg></div><span>App Store</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div><span>Santé</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div><span>Cartes</span></div><div class="app"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></div><span>Réglages</span></div></div>
+        <div class="recherche-a"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><span>Recherche</span></div>
+        <div class="dock"><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"/></svg></div><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="tuile"><svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div></div>
+      </div>
+
+
+      <!-- Photos (structure iOS 18+ d'après capture FR) -->
+      <div class="page" id="p-photos" style="padding-top:0"><div class="contenu" id="c-photos">
+        <div class="ph-entete"><span class="ph-titre">Photos</span><span class="ph-rech"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>Recherche</span><span class="ph-av"></span></div>
+        <div class="ph-grille"><i class="vig" style="background: radial-gradient(circle at 45% 66%, rgb(74,74,74) 0%, rgb(48,48,48) 55%, rgb(36,36,36) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 72% 59%, rgb(64,64,64) 0%, rgb(31,31,31) 55%, rgb(19,19,19) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 57% 28%, rgb(101,101,101) 0%, rgb(34,34,34) 55%, rgb(22,22,22) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 22% 30%, rgb(82,82,82) 0%, rgb(60,60,60) 55%, rgb(48,48,48) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 24% 40%, rgb(108,108,108) 0%, rgb(55,55,55) 55%, rgb(43,43,43) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 23% 61%, rgb(109,109,109) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 60% 65%, rgb(83,83,83) 0%, rgb(35,35,35) 55%, rgb(23,23,23) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 56% 62%, rgb(62,62,62) 0%, rgb(65,65,65) 55%, rgb(53,53,53) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 34% 27%, rgb(61,61,61) 0%, rgb(53,53,53) 55%, rgb(41,41,41) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 38% 51%, rgb(72,72,72) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 56% 44%, rgb(70,70,70) 0%, rgb(37,37,37) 55%, rgb(25,25,25) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 26% 62%, rgb(78,78,78) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 43% 31%, rgb(79,79,79) 0%, rgb(64,64,64) 55%, rgb(52,52,52) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 56% 28%, rgb(63,63,63) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 51% 68%, rgb(81,81,81) 0%, rgb(67,67,67) 55%, rgb(55,55,55) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 69% 45%, rgb(109,109,109) 0%, rgb(62,62,62) 55%, rgb(50,50,50) 100%)"></i></div>
+        <div class="ph-sec">Types de média <span>›</span></div>
+        <div class="groupe">
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></span><span class="nom">Vidéos</span><span class="val">508</span></div>
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M3 5v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2zm12 4c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-9 8c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1H6v-1z"/></svg></span><span class="nom">Selfies</span><span class="val">95</span></div>
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg></span><span class="nom">Live Photos</span><span class="val">1 193</span></div>
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 12.25c1.24 0 2.25-1.01 2.25-2.25S13.24 7.75 12 7.75 9.75 8.76 9.75 10s1.01 2.25 2.25 2.25zm4.5 4c0-1.5-3-2.25-4.5-2.25s-4.5.75-4.5 2.25V17h9v-.75zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg></span><span class="nom">Portraits</span><span class="val">100</span></div>
+        </div>
+        <div class="ph-sec" id="sec-autres">Autres <span>›</span></div>
+        <div class="groupe">
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg></span><span class="nom">Favorites</span><span class="val">54</span></div>
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27z"/></svg></span><span class="nom">Masquées</span><span class="val"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span></div>
+          <div class="row ph-row" id="r-supp"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span><span class="nom">Supprimées récemment</span><span class="val"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span></div>
+          <div class="row ph-row"><span class="pic"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></span><span class="nom">Doublons</span><span class="val">633</span></div>
+        </div>
+        <div class="ph-sec">Albums <span>›</span></div>
+        <div class="ph-albums"><i class="vig" style="background: radial-gradient(circle at 43% 44%, rgb(113,113,113) 0%, rgb(57,57,57) 55%, rgb(45,45,45) 100%)"></i><i class="vig" style="background: radial-gradient(circle at 64% 74%, rgb(78,78,78) 0%, rgb(43,43,43) 55%, rgb(31,31,31) 100%)"></i></div>
+      </div></div>
+
+      <!-- Supprimées récemment, verrouillé (capture FR) -->
+      <div class="page" id="p-verrou"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu"></span></div>
+        <div class="gt2">Supprimées<br>récemment</div>
+        <div class="verrou"><svg viewBox="0 0 24 24" width="120" height="120"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg><p>Saisissez votre code pour afficher cet album.</p><span id="r-afficher">Afficher l’album</span></div>
+      </div></div>
+
+      <!-- Supprimées récemment, contenu -->
+      <div class="page" id="p-album"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu"></span><span class="pill" id="b-select">Sélectionner</span></div>
+        <div class="gt2" style="padding-bottom:20px">Supprimées<br>récemment</div>
+        <div class="alb-grille" id="alb-grille"><i class="vig" style="background: radial-gradient(circle at 53% 56%, rgb(93,93,93) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><em>24 jours</em></i><i class="vig" style="background: radial-gradient(circle at 58% 29%, rgb(91,91,91) 0%, rgb(56,56,56) 55%, rgb(44,44,44) 100%)"><em>17 jours</em></i><i class="vig" style="background: radial-gradient(circle at 30% 73%, rgb(108,108,108) 0%, rgb(60,60,60) 55%, rgb(48,48,48) 100%)"><em>28 jours</em></i><i class="vig" style="background: radial-gradient(circle at 46% 27%, rgb(117,117,117) 0%, rgb(37,37,37) 55%, rgb(25,25,25) 100%)"><em>17 jours</em></i><i class="vig" style="background: radial-gradient(circle at 41% 69%, rgb(95,95,95) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><em>28 jours</em></i><i class="vig" style="background: radial-gradient(circle at 57% 54%, rgb(118,118,118) 0%, rgb(66,66,66) 55%, rgb(54,54,54) 100%)"><em>17 jours</em></i><i class="vig" style="background: radial-gradient(circle at 50% 69%, rgb(89,89,89) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><em>28 jours</em></i><i class="vig" style="background: radial-gradient(circle at 61% 61%, rgb(94,94,94) 0%, rgb(31,31,31) 55%, rgb(19,19,19) 100%)"><em>28 jours</em></i><i class="vig" style="background: radial-gradient(circle at 76% 67%, rgb(104,104,104) 0%, rgb(46,46,46) 55%, rgb(34,34,34) 100%)"><em>9 jours</em></i><i class="vig" style="background: radial-gradient(circle at 42% 35%, rgb(114,114,114) 0%, rgb(29,29,29) 55%, rgb(17,17,17) 100%)"><em>17 jours</em></i><i class="vig" style="background: radial-gradient(circle at 23% 38%, rgb(118,118,118) 0%, rgb(35,35,35) 55%, rgb(23,23,23) 100%)"><em>3 jours</em></i><i class="vig" style="background: radial-gradient(circle at 45% 50%, rgb(86,86,86) 0%, rgb(36,36,36) 55%, rgb(24,24,24) 100%)"><em>21 jours</em></i><i class="vig" style="background: radial-gradient(circle at 48% 50%, rgb(76,76,76) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><em>9 jours</em></i><i class="vig" style="background: radial-gradient(circle at 72% 52%, rgb(72,72,72) 0%, rgb(45,45,45) 55%, rgb(33,33,33) 100%)"><em>6 jours</em></i><i class="vig" style="background: radial-gradient(circle at 42% 68%, rgb(108,108,108) 0%, rgb(45,45,45) 55%, rgb(33,33,33) 100%)"><em>6 jours</em></i><i class="vig" style="background: radial-gradient(circle at 25% 36%, rgb(74,74,74) 0%, rgb(42,42,42) 55%, rgb(30,30,30) 100%)"><em>12 jours</em></i><i class="vig" style="background: radial-gradient(circle at 20% 56%, rgb(84,84,84) 0%, rgb(42,42,42) 55%, rgb(30,30,30) 100%)"><em>27 jours</em></i><i class="vig" style="background: radial-gradient(circle at 38% 25%, rgb(88,88,88) 0%, rgb(39,39,39) 55%, rgb(27,27,27) 100%)"><em>3 jours</em></i><i class="vig" style="background: radial-gradient(circle at 59% 61%, rgb(102,102,102) 0%, rgb(54,54,54) 55%, rgb(42,42,42) 100%)"><em>27 jours</em></i><i class="vig" style="background: radial-gradient(circle at 80% 64%, rgb(120,120,120) 0%, rgb(36,36,36) 55%, rgb(24,24,24) 100%)"><em>17 jours</em></i></div>
+        <div class="vide" id="alb-vide">Aucune photo ni vidéo</div>
+      </div>
+        <div class="barre-outils" id="outils"><span id="b-tout">Tout supprimer</span><span>Tout récupérer</span></div>
+        <div class="feuille-a" id="feuille-a"><p>Ces éléments seront supprimés définitivement.</p><span class="danger" id="b-confirm">Supprimer 248 éléments</span><span class="annuler">Annuler</span></div>
+      </div>
+
+    </div></div>
+    <div class="doigt" id="doigt"></div>
+  </div>
+  <div class="texte" id="textes"></div>
+  <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
+  <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
+  <div id="noir"></div>
+</div>
+<script src="../../templates/moteur-tuto-ios.js"></script>
+<script>
+// ---------- Scénario ----------
+const T = { accroche: 0, s1: 2.6, s2: 8.4, s3: 12.0, fin: 14.6, duree: 17.6 };
+window.ORA_DURATION = T.duree;
+SCENE({
+  textes: [
+    { a: T.accroche, b: T.s1, label: 'iPhone plein', titre: 'Supprimées,|mais encore là.', sous: 'Jusqu’à 30 jours sur votre iPhone.', visible: true },
+    { a: T.s1, b: T.s2, label: 'Étape 1', titre: 'Supprimées|récemment.' },
+    { a: T.s2, b: T.s3, label: 'Étape 2', titre: 'Tout supprimer.', sous: 'Sélectionner, puis Tout supprimer.', retard: 0.8 },
+    { a: T.s3, b: T.fin, titre: 'L’espace|revient.', sous: 'Ici : 5,4 Go libérés.', retard: 1.4 },
+    { a: T.fin, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Partie 1 sur 3 · La suite : les doublons.', retard: 0.5 },
+  ],
+  nav: [[0, 'p-stockage', 0], [2.6, 'p-accueil', 0], [3.9, 'p-photos', 0], [6.4, 'p-verrou', 1], [7.6, 'p-album', 0], [12.2, 'p-stockage', 0]],
+  defil: [[0, 'p-photos', 0], [4.6, 'p-photos', 'sec-autres:300']],
+  taps: [[3.6, '#app-photos'], [6.1, '#r-supp'], [7.25, '#r-afficher'], [9.0, '#b-select'], [10.0, '#b-tout'], [11.0, '#b-confirm']],
+  surbrillance: [[0, 2.4, '#r-barre'], [3.4, 3.9, '#app-photos', 'hl-ic'], [5.5, 6.4, '#r-supp'], [9.7, 10.3, '#b-tout', 'hl-txt'], [10.7, 11.3, '#b-confirm', 'hl-txt'], [12.9, 14.4, '#r-barre']],
+  camera: [[0, 1.3, '#r-barre', 1230, 0.05], [2.6, 0.72, '#phone', 1200], [5.2, 1.0, '#r-supp', 1250], [6.4, 0.72, '#phone', 1200], [9.5, 0.62, '#phone', 1010], [12.2, 1.3, '#r-barre', 1230]],
+  fin: T.fin,
+  sons: { souffles: [T.s1, T.s2, T.s3, T.fin], impact: T.fin + 0.9 },
+  apres: t => {
+    // mode sélection, barre d'outils, feuille de confirmation, album vidé
+    const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
+    document.getElementById('b-select').textContent = t >= 9.1 ? 'Annuler' : 'Sélectionner';
+    document.getElementById('outils').style.opacity = out((t - 9.1) / 0.3) * (1 - out((t - 10.1) / 0.2));
+    const f = t < 11.1 ? out((t - 10.1) / 0.35) : 1 - out((t - 11.1) / 0.3);
+    document.getElementById('feuille-a').style.transform = `translateY(${(1 - f) * 120}%)`;
+    document.getElementById('alb-grille').style.opacity = 1 - out((t - 11.3) / 0.4);
+    document.getElementById('alb-vide').style.opacity = out((t - 11.6) / 0.4);
+    // stockage : 61,2 → 55,8 Go ; Photos 38,4 → 33,0 Go
+    const k = out((t - 12.9) / 1.0);
+    const v = (61.2 - 5.4 * k).toFixed(1).replace('.', ','), p = (38.4 - 5.4 * k).toFixed(1).replace('.', ',');
+    document.getElementById('st-txt').textContent = `${v} Go sur 64 Go utilisés`;
+    document.getElementById('v-photos').textContent = `${p} Go`;
+    document.getElementById('seg-photos').style.width = (60 - 8.4 * k) + '%';
+  },
+});
+</script>
+</body>
+</html>
