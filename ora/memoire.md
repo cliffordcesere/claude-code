@@ -40,6 +40,12 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 Légende créole écrite par le propriétaire (en réserve, le français est préféré pour l'instant) :
 « Avan w achte yon iPhone okazyon ayiti, men 3 fason ou ka rekonèt si se yon zaza. »
 
+## Série « Avant d'acheter » (proposée 2026-11-06)
+
+1. Zaza : batterie, référence, IMEI — publié le 2026-11-05.
+2. Compte Apple / iCloud : nom en haut de Réglages → le vendeur se déconnecte devant l'acheteur. Proposé pour le 2026-11-07, 22 s.
+3. Full unlock : verrouillage opérateur dans Informations.
+
 ## Série « Zaza » (proposée 2026-11-05)
 
 1. Batterie, référence, IMEI — fait (`tuto-iphone-occasion.html`).
@@ -61,6 +67,10 @@ Compte TikTok, 28 jours (7 oct. – 3 nov., relevé le 2026-11-05) : 1,5 K vues 
 Déduction : en Haïti, le film de protection se cherche sous le mot **« blende »** ; les légendes doivent reprendre les mots tapés (blende, zaza, iPhone, Haïti).
 Activité : spectateurs actifs de ~7 h à ~19 h (pic samedi 8–9 h) ; abonnés : pic le 3 nov. à 17 h (une seule journée, faible). Heures supposées locales (creux la nuit).
 Règle de publication provisoire : en journée (11 h–17 h, 16 h conseillé), jamais le soir ; programmer dans TikTok Studio.
+
+Tuto « iPhone d'occasion / zaza » (TikTok, publié le 2026-11-05 15:30, relevé le 2026-11-06) : 388 vues, 8 j'aime, 0 commentaire, 1 partage, **4 enregistrements**, **3 nouveaux abonnés**. Visionnage moyen 6,5 s sur 36,9 s (18 %), vidéo complète 2,83 %, décrochage principal à 0:02 malgré l'accroche. Trafic : Pour toi 98,4 %, Recherche 0 % (vidéo récente). 97 % non-abonnés ; 18–34 ans 87 % ; Haïti 75,7 %, Jamaïque 20 %.
+Leçons : le format éducatif produit des enregistrements (0 pour le reel produit) ; 37 s est trop long (viser 20–25 s) ; l'accroche visuelle seule ne suffit pas, la première phrase doit frapper.
+Objectif 1000 : 124 abonnés au 2026-11-05 ; à 2–3 abonnés par vidéo, ~290 vidéos ; à 10, ~88. Leviers : accroche (0:02), durée, régularité.
 
 ## Produits en stock (2026-11-04)
 
