@@ -40,10 +40,19 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 Légende créole écrite par le propriétaire (en réserve, le français est préféré pour l'instant) :
 « Avan w achte yon iPhone okazyon ayiti, men 3 fason ou ka rekonèt si se yon zaza. »
 
+## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
+
+Critère du propriétaire : utile, apprend vraiment quelque chose, suscite partage, enregistrement, abonnement.
+Hypothèse (non vérifiée) : public majoritairement Android → privilégier WhatsApp et les usages communs plutôt que les réglages iPhone.
+1. WhatsApp mange votre forfait — téléchargement automatique des médias → « Aucun média » sur données mobiles. 20 s, « Partie 1/3 ».
+2. WhatsApp remplit votre téléphone — Gérer le stockage.
+3. Tenir pendant le délestage — 4 réglages de batterie (lien avec l'offre énergie).
+Fabrication : captures d'écran réelles du téléphone du propriétaire, animées (contacts floutés).
+
 ## Série « Avant d'acheter » (proposée 2026-11-06)
 
 1. Zaza : batterie, référence, IMEI — publié le 2026-11-05.
-2. Compte Apple / iCloud : nom en haut de Réglages → le vendeur se déconnecte devant l'acheteur. Proposé pour le 2026-11-07, 22 s.
+2. ~~Compte Apple / iCloud~~ — écarté par le propriétaire (2026-11-06) : en Haïti, les iPhone se vendent rarement avec un compte Apple dessus.
 3. Full unlock : verrouillage opérateur dans Informations.
 
 ## Série « Zaza » (proposée 2026-11-05)
