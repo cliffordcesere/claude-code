@@ -97,3 +97,8 @@ TikTok : `Avant d'acheter un iPhone en Haïti : comment repérer un zaza. #iphon
 ### Voix off, version parlée (2026-11-06)
 Vous venez d'effacer deux cents photos, et votre iPhone affiche encore : stockage plein. / C'est normal : elles ne sont pas parties. L'iPhone les garde trente jours, au cas où vous changeriez d'avis. / Pour vraiment faire de la place : ouvrez Photos, descendez tout en bas, Supprimées récemment. / Il vous demande votre code, c'est normal. / Touchez Sélectionner, puis Tout supprimer. Et là, la place revient vraiment. / Dans la prochaine vidéo, je vous montre les doublons.
 Ne pas lire : 1re phrase, mots-clés (Photos, Supprimées récemment, Tout supprimer) et dernière phrase fixes ; le reste au naturel.
+
+### v02 (2026-11-06) — interface iOS 27.1 d'après captures réelles
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v02.mp4` (+ MUET), 18,8 s. Parcours : Photos › Collections › Suppr. récemment (Face ID ou code) › Sélect. › glisser › « ··· » › Supprimer › Supprimer de tous les appareils.
+Voix off : … ouvrez Photos, touchez Collections, descendez jusqu'à Supprimées récemment. Il vous demande Face ID ou votre code, c'est normal. Touchez Sélectionner, glissez le doigt sur vos photos, puis les trois petits points, et Supprimer. …
+À confirmer : sélection de tout l'album ; confirmation au pluriel.

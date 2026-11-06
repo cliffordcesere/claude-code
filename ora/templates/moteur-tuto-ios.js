@@ -6,6 +6,7 @@
 //   nav:          [[t, idPage, sens]]           sens 0 = ouverture (fondu), 1 = avancer, -1 = revenir
 //   defil:        [[t, idPage, y | 'idElement:hauteur']]   défilement vertical d'une page (.contenu)
 //   taps:         [[t, sélecteur]]              doigt + clic sonore
+//   glisser:      [[t0, t1, sélecteurDépart, sélecteurArrivée]]   doigt qui glisse
 //   surbrillance: [[t0, t1, sélecteur, classe='hl']]
 //   camera:       [[t, zoom, sélecteur|null, hauteurCible, poussée?]]
 //   fin:          t                             le téléphone descend, signature centrée
@@ -42,7 +43,7 @@
       phone.style.transform = 'none'; camera.style.transform = 'none';
       pages.forEach(p => { p.style.display = 'block'; p.style.transform = 'none'; p.style.opacity = 1; const c = p.querySelector(':scope > .contenu'); if (c) c.style.transform = 'none'; });
       const cr = canvas.getBoundingClientRect();
-      const sels = new Set([...C.taps.map(x => x[1]), ...C.camera.filter(c => c[2]).map(c => c[2]), ...(C.surbrillance || []).map(h => h[2])]);
+      const sels = new Set([...C.taps.map(x => x[1]), ...(C.glisser || []).flatMap(g => [g[2], g[3]]), ...C.camera.filter(c => c[2]).map(c => c[2]), ...(C.surbrillance || []).map(h => h[2])]);
       sels.forEach(s => { const r = $(s).getBoundingClientRect(); POS[s] = { x: r.left - cr.left + r.width / 2, y: r.top - cr.top + r.height / 2, page: $(s).closest('.page')?.id }; });
       (C.defil || []).forEach(([t, id, y]) => {
         if (typeof y === 'string') {
@@ -98,7 +99,13 @@
 
       // Doigt
       const tap = C.taps.filter(x => t >= x[0] - 0.35 && t < x[0] + 0.35).pop();
-      if (tap) {
+      const gl = (C.glisser || []).find(g => t >= g[0] - 0.3 && t < g[1] + 0.3);
+      if (gl) {
+        const a = pos(gl[2], gl[0]), b = pos(gl[3], gl[1]), k = io((t - gl[0]) / (gl[1] - gl[0]));
+        doigt.style.left = lerp(a.x, b.x, k) + 'px'; doigt.style.top = lerp(a.y, b.y, k) + 'px';
+        doigt.style.opacity = 0.9 * Math.min(out((t - gl[0] + 0.3) / 0.25), 1 - clamp((t - gl[1]) / 0.3));
+        doigt.style.transform = 'scale(0.9)';
+      } else if (tap) {
         const p = pos(tap[1], tap[0]), d = t - tap[0];
         doigt.style.left = p.x + 'px'; doigt.style.top = p.y + 'px';
         doigt.style.opacity = d < 0 ? out((d + 0.35) / 0.25) * 0.9 : 0.9 * (1 - clamp(d / 0.35));
