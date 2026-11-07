@@ -91,6 +91,9 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 
 1. Supprimées récemment (féminin, album verrouillé par code) — Photos › Autres › Supprimées récemment › Sélectionner › Tout supprimer. Vidéo faite le 2026-11-06 (17,6 s), voix off à enregistrer.
 2. Doublons — Photos › Autres › Doublons › Fusionner (vu sur capture : « Doublons 633 »).
+   Brouillon muet v01 (2026-11-07, `stockage-doublons.html`, 20 s) : ouverture « × 2 / × 3 », Collections › Doublons, Sélect. › Tout sélectionner › Fusionner › confirmation, fusion animée, renvoi vers Suppr. récemment (lien avec la partie 1).
+   Vérifié (sources web, iOS 16 à 18) : « Fusionner » par groupe ou après sélection ; garde la meilleure qualité + les données utiles ; les copies vont dans Supprimées récemment (l'espace revient seulement après les avoir vidées).
+   **Non vérifié sur iOS 27.1** : place et libellé de « Tout sélectionner », bouton du bas, texte de confirmation, disposition de l'album. À confirmer par un enregistrement d'écran **avant** d'enregistrer la voix (les mots dits doivent être ceux de l'écran).
 3. WhatsApp › Gérer le stockage.
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)

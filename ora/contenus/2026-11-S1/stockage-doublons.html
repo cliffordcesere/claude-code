@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — tuto « iPhone plein » 2/3 : Doublons</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Tuto 9:16, ~20 s (version muette ; la voix du propriétaire recalera les écrans). Série « iPhone plein », partie 2/3.
+  Écrans d'accueil, Photothèque et Collections : repris de la partie 1 (captures iOS 27.1, iPhone 17 Pro Max).
+  Vérifié (captures iOS 27.1) : Collections › Autres › « Doublons ».
+  Vérifié (sources web, iOS 16 à 18) : bouton « Fusionner » par groupe, sélection de plusieurs groupes puis « Fusionner » ;
+  la fusion garde la meilleure qualité et les données utiles ; les copies vont dans « Supprimées récemment ».
+  NON vérifié sur iOS 27.1 (à confirmer par un enregistrement d'écran) : place et libellé de « Tout sélectionner »,
+  bouton du bas « Fusionner », texte de confirmation « Fusionner 12 éléments », disposition de l'album Doublons.
+  Valeurs fictives (dates, tailles, 12 éléments).
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-doublons.html sortie.mp4
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  /* ---------- Textes ORA ---------- */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 262px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 20px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: 50px; font-weight: 300; line-height: 1.3; margin-top: 16px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .bloc.centre { top: 290px; text-align: center; }
+  #logoV { position: absolute; left: 50%; top: 880px; width: 260px; margin-left: -130px; opacity: 0; }
+  #contact { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #contact .cta { font-size: 40px; }
+  #contact .lieu { font-size: 30px; color: var(--gris); margin-top: 14px; font-weight: 300; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+
+  /* ---------- Téléphone : interface iOS 27 (captures fournies), palette ORA ---------- */
+  #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
+  .phone {
+    position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
+    border-radius: 108px; background: #000; padding: 14px;
+    box-shadow: 0 0 0 2px #2a2a2a, 0 0 0 8px #141414, 0 0 0 9px #3a3a3a;
+  }
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 96px; overflow: hidden; background: #000;
+           font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
+  .ilot { position: absolute; left: 50%; top: 24px; width: 180px; height: 52px; margin-left: -90px; border-radius: 30px; background: #000; z-index: 6; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 58px 0 76px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 10px; align-items: center; }
+  .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+  .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
+  .barres i.off { background: rgba(250,250,250,.35); }
+  .pct { min-width: 52px; height: 26px; padding: 0 6px; border-radius: 8px; background: var(--blanc); color: #000; font: 700 20px/26px "Jost", sans-serif; text-align: center; position: relative; }
+  .pct::after { content: ""; position: absolute; right: -6px; top: 8px; width: 3px; height: 10px; border-radius: 0 2px 2px 0; background: rgba(250,250,250,.5); }
+
+  .page { position: absolute; inset: 0; background: #000; padding-top: 104px; will-change: transform; }
+  .nav { position: relative; height: 104px; display: flex; align-items: center; padding: 0 26px; }
+  .nav .rond { width: 78px; height: 78px; border-radius: 50%; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 66px; font-weight: 700; letter-spacing: -.01em; padding: 40px 40px 26px; }
+  .groupe { margin: 0 26px 30px; background: #1C1C1C; border-radius: 40px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 84px; padding: 0 30px; font-size: 30px; }
+  .row + .row::before { content: ""; position: absolute; left: 104px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 30px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 14px; background: #2e2e2e; display: grid; place-items: center; color: var(--blanc); flex: none; }
+  .row .nom { flex: 1; white-space: nowrap; }
+  .row .val { color: var(--gris); white-space: nowrap; }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 6px; }
+  .compte { display: flex; align-items: center; gap: 24px; padding: 22px 30px; }
+  .avatar { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; display: grid; place-items: center; font-size: 36px; font-weight: 600; color: var(--blanc); flex: none; }
+  .compte .nom { font-size: 34px; font-weight: 600; }
+  .compte .sous-c { font-size: 25px; color: var(--gris); margin-top: 4px; }
+  .compte .fl { margin-left: auto; color: #5a5a5a; font-size: 38px; }
+  .toggle { width: 98px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 62px; height: 50px; border-radius: 26px; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 32px; background: #000; }
+  .note { color: var(--gris); font-size: 24px; line-height: 1.35; padding: 0 56px 26px; margin-top: -18px; }
+  .recherche { position: absolute; left: 34px; right: 34px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; align-items: center; gap: 16px; padding: 0 30px; color: var(--gris); font-size: 30px; z-index: 3; }
+  .recherche .m { margin-left: auto; color: var(--blanc); }
+  .carte { margin: 20px 26px 30px; background: #1C1C1C; border-radius: 40px; padding: 30px; }
+  .carte .gros { font-size: 72px; font-weight: 700; } .carte .gros small { font-size: 36px; }
+  .carte .info { font-size: 24px; color: var(--gris); margin-top: 4px; }
+  .jauge { height: 14px; border-radius: 7px; background: #333; margin-top: 20px; overflow: hidden; } .jauge b { display: block; height: 100%; width: 92%; background: var(--blanc); border-radius: 7px; }
+  .graph { padding: 26px 30px 30px; }
+  .g-titre { font-size: 26px; font-weight: 600; margin-bottom: 4px; } .g-sous { font-size: 22px; color: var(--gris); margin-bottom: 18px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+  .barres-g i { flex: 1; background: #555; border-radius: 6px 6px 0 0; } .barres-g i.auj { background: var(--blanc); }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
+  .row.hl { border-radius: 0; }
+  .flou { filter: blur(9px); }
+  .lettre { font-weight: 400; } .lettre.on { color: var(--cuivre); font-weight: 700; }
+
+  /* écran d'accueil */
+  .accueil { padding-top: 0; background: radial-gradient(ellipse 90% 60% at 30% 18%, #262626 0%, #121212 45%, #0A0A0A 75%); }
+  .widgets { position: absolute; left: 34px; right: 34px; top: 118px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .widget { display: grid; gap: 10px; justify-items: center; }
+  .widget em { font-style: normal; font-size: 22px; color: var(--blanc); }
+  .w-cal, .w-pile { width: 100%; aspect-ratio: 1; border-radius: 58px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); padding: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .w-cal small { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: var(--gris); }
+  .w-cal b { font-size: 76px; font-weight: 500; line-height: 1; }
+  .w-cal span { margin-top: auto; font-size: 22px; color: var(--gris); }
+  .w-pile b { font-size: 60px; font-weight: 600; margin-top: auto; } .w-pile span { font-size: 22px; color: var(--gris); }
+  .w-pile i { display: block; height: 12px; border-radius: 6px; background: #3a3a3a; margin-top: 12px; overflow: hidden; } .w-pile u { display: block; height: 100%; background: var(--blanc); }
+  .grille { position: absolute; left: 34px; right: 34px; top: 520px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 30px; justify-items: center; }
+  .app { display: grid; gap: 10px; justify-items: center; }
+  .app span { font-size: 21px; color: var(--blanc); white-space: nowrap; }
+  .tuile { width: 124px; height: 124px; border-radius: 30px; background: linear-gradient(160deg, #303030, #1a1a1a); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); display: grid; place-items: center; color: var(--blanc); position: relative; }
+  .tuile.cal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+  .tuile.cal small { font-size: 20px; font-weight: 700; color: var(--gris); } .tuile.cal b { font-size: 56px; font-weight: 400; line-height: 1; }
+  .tuile.hl-ic { box-shadow: 0 0 0 5px var(--cuivre), inset 0 1px 0 rgba(250,250,250,.16); }
+  .recherche-a { position: absolute; left: 50%; transform: translateX(-50%); bottom: 236px; height: 56px; padding: 0 26px; border-radius: 28px; background: rgba(40,40,40,.9); display: flex; align-items: center; gap: 10px; color: var(--blanc); font-size: 24px; }
+  .dock { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 172px; border-radius: 64px; background: rgba(38,38,38,.88); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; }
+  /* clavier téléphone */
+  .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
+  .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
+  .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
+  .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
+  .feuille { position: absolute; left: 50px; right: 50px; top: 420px; background: #1C1C1C; border-radius: 44px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 34px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 28px; color: var(--gris); margin-bottom: 6px; }
+  .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 32px; font-weight: 600; }
+
+  .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
+
+  /* ---------- Photos iOS 27.1 ---------- */
+  .onglets { position: absolute; left: 30px; right: 30px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; z-index: 3; }
+  .ong-g { display: flex; padding: 6px; border-radius: 60px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  .ong { width: 180px; height: 104px; border-radius: 52px; display: grid; justify-items: center; align-content: center; gap: 2px; color: var(--blanc); }
+  .ong small { font-size: 19px; font-weight: 600; }
+  .ong.on { background: #3a3a3a; }
+  .ong-r { width: 116px; height: 116px; border-radius: 50%; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; }
+  .rond-s { width: 78px; height: 78px; border-radius: 50%; background: #262626; display: grid; place-items: center; font-size: 30px; letter-spacing: 2px; }
+  .ph-sec { position: relative; }
+  .ph-sec .pli { position: absolute; right: 40px; top: 36px; width: 52px; height: 52px; border-radius: 50%; background: #1d1d1d; font-style: normal; display: grid; place-items: center; font-size: 26px; }
+  .ph-voy { position: relative; width: 240px; margin-left: 40px; } .ph-voy .vig { border-radius: 26px; } .ph-voy em { position: absolute; left: 18px; bottom: 14px; font-style: normal; font-size: 24px; }
+  .ph-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; padding: 0 34px 0 40px; }
+  .pil { position: relative; display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 20px; border-radius: 20px; background: #1d1d1d; font-size: 27px; white-space: nowrap; overflow: hidden; }
+  .pil svg { flex: none; color: var(--gris); }
+  .pil .cad { margin-left: auto; color: var(--gris); display: grid; }
+  .ph-fonds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 34px 0 40px; } .ph-fonds .vig { aspect-ratio: .56; border-radius: 26px; }
+  .faceid { position: absolute; left: 50%; top: 14px; width: 170px; height: 170px; margin: 0 0 0 -85px; border-radius: 60px; background: #000 !important; background: rgba(40,40,40,.95); display: grid; place-items: center; opacity: 0; z-index: 6; }
+  .alb-sous { display: flex; align-items: center; gap: 10px; padding: 6px 40px 26px; font-size: 30px; font-weight: 600; }
+  .alb-sous svg:last-child { color: var(--gris); }
+  .nav .tri { position: absolute; right: 190px; }
+  .pill-menu { opacity: 0; }
+  .vig .ck { position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 50%; background: var(--blanc); color: #000; display: grid; place-items: center; opacity: 0; }
+  .vig.coche .ck { opacity: 1; } .vig.coche { filter: brightness(.75); }
+  .onglets-wrap { position: absolute; inset: auto 0 0 0; height: 200px; }
+  .sel-pill { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); height: 84px; padding: 0 34px; border-radius: 42px; background: rgba(40,40,40,.95); display: grid; place-items: center; font-size: 30px; font-weight: 600; white-space: nowrap; opacity: 0; z-index: 4; }
+  .menu-g { position: absolute; right: 22px; top: 130px; width: 470px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 18px 0; display: grid; opacity: 0; transform: scale(.9); transform-origin: top right; z-index: 5; }
+  .menu-g span { display: flex; align-items: center; gap: 22px; height: 84px; padding: 0 38px; font-size: 32px; }
+  .menu-g .danger, .confirm-g .danger { color: var(--blanc); font-weight: 700; }
+  .confirm-g { position: absolute; left: 22px; right: 22px; top: 130px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 36px 30px 30px; display: grid; gap: 26px; opacity: 0; transform: translateY(-20px); z-index: 5; }
+  .confirm-g p { margin: 0; font-size: 28px; line-height: 1.35; color: var(--blanc); padding: 0 10px; }
+  .confirm-g span { height: 92px; border-radius: 46px; background: #3a3a3a; display: grid; place-items: center; font-size: 30px; }
+
+  /* ---------- Stockage iPhone ---------- */
+  .contenu { will-change: transform; }
+  .stock { margin-top: 20px; }
+  .st-haut { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; }
+  .st-haut span { color: var(--gris); font-size: 26px; }
+  .st-barre { display: flex; gap: 3px; height: 30px; margin: 22px 0 18px; border-radius: 8px; overflow: hidden; background: #2a2a2a; }
+  .seg { display: block; height: 100%; }
+  .s-photos { background: var(--blanc); } .s-apps { background: #8A8A8A; } .s-ios { background: #5a5a5a; } .s-sys { background: #3e3e3e; }
+  #seg-photos { width: 60%; } .seg.s-apps { width: 15%; } .seg.s-ios { width: 12%; } .seg.s-sys { width: 9%; }
+  .st-leg { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 22px; color: var(--gris); }
+  .st-leg .pt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+  .app-st { min-height: 100px; }
+  .app-st .icone b { font-size: 26px; }
+  .app-st .nom small { display: block; font-size: 22px; color: var(--gris); margin-top: 2px; }
+  /* ---------- Photos ---------- */
+  .ph-entete { display: flex; align-items: center; gap: 16px; padding: 124px 34px 24px; }
+  .ph-titre { font-size: 66px; font-weight: 700; flex: 1; }
+  .ph-rech { display: flex; align-items: center; gap: 8px; height: 62px; padding: 0 22px; border-radius: 31px; background: #2a2a2a; font-size: 26px; font-weight: 600; }
+  .ph-av { width: 62px; height: 62px; border-radius: 50%; background: #3a3a3a; }
+  .ph-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vig { display: block; aspect-ratio: 1; position: relative; }
+  .vig em { position: absolute; left: 8px; bottom: 6px; font-style: normal; font-size: 22px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .ph-sec { font-size: 40px; font-weight: 700; padding: 40px 40px 18px; }
+  .ph-sec span { color: var(--gris); }
+  .ph-row .pic { width: 46px; display: grid; place-items: center; color: var(--blanc); }
+  .ph-row .val svg { display: block; color: var(--gris); }
+  .ph-albums { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 26px; }
+  .ph-albums .vig { border-radius: 26px; }
+  .gt2 { font-size: 58px; font-weight: 700; line-height: 1.05; padding: 10px 40px 0; }
+  .verrou { display: grid; justify-items: center; gap: 26px; margin-top: 360px; text-align: center; padding: 0 60px; color: var(--gris); }
+  .verrou p { margin: 0; font-size: 36px; font-weight: 700; color: var(--blanc); line-height: 1.25; }
+  .verrou span { font-size: 30px; font-weight: 600; color: var(--blanc); text-decoration: underline; text-underline-offset: 6px; }
+  .nav .pill { position: absolute; right: 26px; height: 66px; padding: 0 26px; border-radius: 33px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
+  .alb-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vide { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 34px; font-weight: 600; color: var(--gris); opacity: 0; }
+  .barre-outils { position: absolute; left: 26px; right: 26px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.95); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; justify-content: space-between; align-items: center; padding: 0 36px; font-size: 28px; font-weight: 600; opacity: 0; z-index: 3; }
+  .barre-outils span { padding: 10px 6px; border-radius: 20px; }
+  .feuille-a { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #1f1f1f; border-radius: 44px; padding: 34px 30px 26px; display: grid; gap: 14px; text-align: center; transform: translateY(120%); z-index: 4; box-shadow: 0 -10px 40px rgba(0,0,0,.6); }
+  .feuille-a p { margin: 0 0 6px; font-size: 24px; color: var(--gris); }
+  .feuille-a span { height: 86px; border-radius: 43px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #2e2e2e; }
+  .feuille-a .danger { color: var(--blanc); font-weight: 700; }
+  .hl-txt { outline: 4px solid var(--cuivre); outline-offset: 4px; }
+
+  /* ---------- Écran d'accueil iOS 27.1 (d'après capture) ---------- */
+  #p-accueil .widgets { top: 112px; gap: 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #p-accueil .widget em { font-size: 22px; }
+  .w-meteo, .w-photo { width: 100%; aspect-ratio: 1; border-radius: 56px; }
+  .w-meteo { background: linear-gradient(170deg, #4a4a4a, #2c2c2c); padding: 26px 28px; display: flex; flex-direction: column; color: var(--blanc); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); }
+  .w-meteo b { font-size: 26px; font-weight: 600; } .w-meteo strong { font-size: 76px; font-weight: 300; line-height: 1; margin: 2px 0 auto; }
+  .w-meteo span { font-size: 24px; font-weight: 500; } .w-meteo svg { margin-bottom: 4px; }
+  .w-photo { background: radial-gradient(circle at 45% 40%, #7a7a7a 0%, #4a4a4a 45%, #262626 100%); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  #p-accueil .grille { top: 470px; row-gap: 22px; }
+  .tuile.i27 { background: linear-gradient(165deg, #2e2e2e, #121212); overflow: hidden; padding: 0; }
+  .tuile.i27 svg { display: block; }
+  .tuile.i27.cal small { color: var(--gris); font-size: 22px; font-weight: 600; margin-bottom: -2px; } .tuile.i27.cal b { font-size: 64px; font-weight: 400; }
+  #p-accueil .recherche-a { bottom: 190px; }
+  #p-accueil .dock { bottom: 24px; height: 150px; border-radius: 58px; }
+
+  /* ---------- Ouverture « poubelle » ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #poubelle { position: absolute; left: 540px; top: 1180px; width: 300px; height: 300px; margin: -150px 0 0 -150px; color: var(--blanc); transform-origin: 50% 80%; }
+  #vols .vol { position: absolute; left: 0; top: 0; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; }
+  #intro-jours { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #intro-jours b { display: block; font-size: 64px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
+  #intro-jours span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
+  .icone.logo-app { padding: 4px; } .icone.logo-app svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Album Doublons ---------- */
+  .grp { padding: 0 40px 34px; }
+  .grp-h { display: flex; align-items: center; justify-content: space-between; height: 70px; font-size: 28px; font-weight: 600; }
+  .grp-h .fus { height: 56px; padding: 0 24px; border-radius: 28px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
+  .grp-v { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .grp-v .case { display: grid; gap: 8px; will-change: transform; }
+  .grp-v .vig { border-radius: 18px; overflow: hidden; }
+  .grp-v .vig svg { display: block; width: 100%; height: 100%; }
+  .grp-v small { font-size: 22px; color: var(--gris); padding-left: 4px; }
+  .nav #b-toutsel { right: auto; left: 118px; opacity: 0; }
+  .nav #b-annul { position: absolute; right: 26px; opacity: 0; font-size: 34px; }
+  .conf-d { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #242424; border-radius: 44px; box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 26px 26px 22px; display: grid; gap: 14px; text-align: center; opacity: 0; z-index: 6; }
+  .conf-d span { height: 88px; border-radius: 44px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #3a3a3a; }
+  .conf-d .danger { color: var(--blanc); font-weight: 700; }
+  .conf-d .annul { background: transparent; color: var(--gris); }
+  .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
+  .vig.meilleure { box-shadow: 0 0 0 5px var(--cuivre); }
+
+  /* ---------- Ouverture « la même photo, trois fois » ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #intro .carte-i { position: absolute; left: 540px; top: 1130px; width: 320px; height: 320px; margin: -160px 0 0 -160px; border-radius: 40px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.6); will-change: transform; }
+  #intro .carte-i svg { display: block; width: 100%; height: 100%; }
+  #intro-n { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #intro-n b { display: block; font-size: 72px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
+  #intro-n span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="camera">
+    <div class="phone" id="phone"><div class="ecran" id="ecran">
+      <div class="ilot"></div>
+      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i class="off" style="height:21px"></i></span><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><span class="pct">92</span></span></div>
+
+      <div class="page accueil" id="p-accueil">
+        <!-- Écran d'accueil iOS 27.1 : disposition et dessins des icônes d'après capture (palette ORA) -->
+        <div class="widgets">
+          <div class="widget"><div class="w-meteo"><b>Delmas ➚</b><strong>31°</strong><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg><span>Nuageux</span><span>↑ 32° ↓ 24°</span></div><em>Météo</em></div>
+          <div class="widget"><div class="w-photo"></div><em>Photos</em></div>
+        </div>
+        <div class="grille"><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="13" y="31" width="47" height="38" rx="10" fill="#FAFAFA"/><path d="M63 44 L84 32.5 Q88 30.5 88 35 V65 Q88 69.5 84 67.5 L63 56 Z" fill="#FAFAFA"/></svg></div><span>FaceTime</span></div><div class="app"><div class="tuile i27 cal"><small>Sam.</small><b>7</b></div><span>Calendrier</span></div><div class="app"><div class="tuile i27" id="app-photos"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></div><span>Photos</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="36" fill="#a8a8a8"/><circle cx="50" cy="50" r="31" fill="#1c1c1c"/><circle cx="50" cy="50" r="24" fill="#2c2c2c"/><circle cx="50" cy="50" r="15" fill="#0c0c0c"/><circle cx="50" cy="50" r="9" fill="#262626"/><ellipse cx="42" cy="41" rx="6" ry="3.5" fill="#FAFAFA" fill-opacity=".7" transform="rotate(-35 42 41)"/><circle cx="58" cy="58" r="2.2" fill="#FAFAFA" fill-opacity=".4"/></svg></div><span>Caméra</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="14" y="27" width="72" height="47" rx="9" fill="#FAFAFA"/><path d="M17 31 L50 56 L83 31" fill="none" stroke="#9a9a9a" stroke-width="3.2" stroke-linejoin="round"/></svg></div><span>Mail</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="0" y="0" width="100" height="29" fill="#d6d6d6"/><circle cx="8" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="14" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="20" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="26" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="32" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="38" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="44" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="50" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="56" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="62" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="68" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="74" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="80" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="86" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="92" cy="34" r="1.6" fill="#7a7a7a"/><line x1="12" y1="56" x2="88" y2="56" stroke="#7a7a7a" stroke-width="3"/><line x1="12" y1="74" x2="88" y2="74" stroke="#7a7a7a" stroke-width="3"/></svg></div><span>Notes</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="25" cy="31" r="7.5" fill="#FAFAFA"/><line x1="40" y1="31" x2="84" y2="31" stroke="#7a7a7a" stroke-width="3"/><circle cx="25" cy="50" r="7.5" fill="#a8a8a8"/><line x1="40" y1="50" x2="84" y2="50" stroke="#7a7a7a" stroke-width="3"/><circle cx="25" cy="69" r="7.5" fill="#d6d6d6"/><line x1="40" y1="69" x2="84" y2="69" stroke="#7a7a7a" stroke-width="3"/></svg></div><span>Rappels</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="40" fill="#0b0b0b" stroke="#4a4a4a" stroke-width="1"/><line x1="50.0" y1="13.0" x2="50.0" y2="17.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="53.9" y1="13.2" x2="53.7" y2="15.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="57.7" y1="13.8" x2="57.3" y2="15.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="61.4" y1="14.8" x2="60.8" y2="16.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="65.0" y1="16.2" x2="64.2" y2="18.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="68.5" y1="18.0" x2="66.5" y2="21.4" stroke="#FAFAFA" stroke-width="1.6"/><line x1="71.7" y1="20.1" x2="70.6" y2="21.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="74.8" y1="22.5" x2="73.4" y2="24.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="77.5" y1="25.2" x2="76.0" y2="26.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="79.9" y1="28.3" x2="78.3" y2="29.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="82.0" y1="31.5" x2="78.6" y2="33.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="83.8" y1="35.0" x2="82.0" y2="35.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="85.2" y1="38.6" x2="83.3" y2="39.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.2" y1="42.3" x2="84.2" y2="42.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.8" y1="46.1" x2="84.8" y2="46.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="87.0" y1="50.0" x2="83.0" y2="50.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="86.8" y1="53.9" x2="84.8" y2="53.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.2" y1="57.7" x2="84.2" y2="57.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="85.2" y1="61.4" x2="83.3" y2="60.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="83.8" y1="65.0" x2="82.0" y2="64.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="82.0" y1="68.5" x2="78.6" y2="66.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="79.9" y1="71.7" x2="78.3" y2="70.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="77.5" y1="74.8" x2="76.0" y2="73.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="74.8" y1="77.5" x2="73.4" y2="76.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="71.7" y1="79.9" x2="70.6" y2="78.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="68.5" y1="82.0" x2="66.5" y2="78.6" stroke="#FAFAFA" stroke-width="1.6"/><line x1="65.0" y1="83.8" x2="64.2" y2="82.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="61.4" y1="85.2" x2="60.8" y2="83.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="57.7" y1="86.2" x2="57.3" y2="84.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="53.9" y1="86.8" x2="53.7" y2="84.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="50.0" y1="87.0" x2="50.0" y2="83.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="46.1" y1="86.8" x2="46.3" y2="84.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="42.3" y1="86.2" x2="42.7" y2="84.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="38.6" y1="85.2" x2="39.2" y2="83.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="35.0" y1="83.8" x2="35.8" y2="82.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="31.5" y1="82.0" x2="33.5" y2="78.6" stroke="#FAFAFA" stroke-width="1.6"/><line x1="28.3" y1="79.9" x2="29.4" y2="78.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="25.2" y1="77.5" x2="26.6" y2="76.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="22.5" y1="74.8" x2="24.0" y2="73.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="20.1" y1="71.7" x2="21.7" y2="70.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="18.0" y1="68.5" x2="21.4" y2="66.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="16.2" y1="65.0" x2="18.0" y2="64.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="14.8" y1="61.4" x2="16.7" y2="60.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.8" y1="57.7" x2="15.8" y2="57.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.2" y1="53.9" x2="15.2" y2="53.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.0" y1="50.0" x2="17.0" y2="50.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="13.2" y1="46.1" x2="15.2" y2="46.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.8" y1="42.3" x2="15.8" y2="42.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="14.8" y1="38.6" x2="16.7" y2="39.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="16.2" y1="35.0" x2="18.0" y2="35.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="18.0" y1="31.5" x2="21.4" y2="33.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="20.1" y1="28.3" x2="21.7" y2="29.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="22.5" y1="25.2" x2="24.0" y2="26.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="25.2" y1="22.5" x2="26.6" y2="24.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="28.3" y1="20.1" x2="29.4" y2="21.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="31.5" y1="18.0" x2="33.5" y2="21.4" stroke="#FAFAFA" stroke-width="1.6"/><line x1="35.0" y1="16.2" x2="35.8" y2="18.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="38.6" y1="14.8" x2="39.2" y2="16.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="42.3" y1="13.8" x2="42.7" y2="15.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="46.1" y1="13.2" x2="46.3" y2="15.2" stroke="#FAFAFA" stroke-width="0.8"/><text x="50.0" y="28.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">12</text><text x="76.0" y="54.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">3</text><text x="50.0" y="80.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">6</text><text x="24.0" y="54.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">9</text><line x1="50" y1="50" x2="38" y2="42" stroke="#FAFAFA" stroke-width="3.2" stroke-linecap="round"/><line x1="50" y1="50" x2="72" y2="48" stroke="#FAFAFA" stroke-width="2.4" stroke-linecap="round"/><line x1="44" y1="36" x2="58" y2="74" stroke="#a8a8a8" stroke-width="1.2"/><circle cx="50" cy="50" r="2.6" fill="#FAFAFA"/></svg></div><span>Horloge</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M30 39 C27 37.5 22.5 37 19.5 39.5 C15.5 43 15.5 51 18.5 57 C20.5 61 23 64 26 64 C27.5 64 28.5 63 30 63 C31.5 63 32.5 64 34 64 C37 64 39.5 60.5 41 57 C37.5 55 36.5 51 37.5 48 C38 46 39.5 44.5 40.5 43.5 C38.5 40.5 35.5 39 33 39 C31.5 39 31 39.5 30 39.5 Z M30.5 37 C30.5 33.5 32.5 31.5 35.5 31 C35.5 34 33.5 36.5 30.5 37 Z" fill="#FAFAFA"/><text x="45" y="62" font-size="30" font-weight="600" font-family="-apple-system,Jost,sans-serif" fill="#FAFAFA" letter-spacing="-1">tv</text></svg></div><span>TV</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="38" fill="#4a4a4a"/><path d="M30 60 A22 22 0 1 1 70 60" fill="none" stroke="#FAFAFA" stroke-width="5" stroke-linecap="round"/><path d="M39 56 A12 12 0 1 1 61 56" fill="none" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round"/><circle cx="50" cy="47" r="7" fill="#FAFAFA"/><rect x="45" y="57" width="10" height="24" rx="5" fill="#FAFAFA"/></svg></div><span>Podcasts</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><g stroke="#FAFAFA" stroke-width="7.5" stroke-linecap="round"><line x1="35" y1="74" x2="56" y2="30"/><line x1="65" y1="74" x2="44" y2="30"/><line x1="25" y1="61" x2="75" y2="61"/></g></svg></div><span>App Store</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="0" y="0" width="100" height="100" fill="#1d1d1d"/><path d="M66 -5 A40 40 0 0 1 105 30" fill="none" stroke="#4a4a4a" stroke-width="5"/><path d="M76 -5 A30 30 0 0 1 105 20" fill="none" stroke="#4a4a4a" stroke-width="4"/><rect x="40" y="-5" width="18" height="110" fill="#a8a8a8" transform="rotate(-8 50 50)"/><circle cx="50" cy="58" r="21" fill="#FAFAFA"/><circle cx="50" cy="58" r="16" fill="#d6d6d6"/><path d="M50 46 L59 68 L50 63 L41 68 Z" fill="#141414"/></svg></div><span>Plans</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 80 C24 63 16 50 16 38 C16 27 24 20 33 20 C41 20 47 25 50 31 C53 25 59 20 67 20 C76 20 84 27 84 38 C84 50 76 63 50 80 Z" fill="#FAFAFA"/></svg></div><span>Santé</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="16" y="20" width="68" height="22" rx="6" fill="#7a7a7a"/><rect x="16" y="28" width="68" height="22" rx="6" fill="#a8a8a8"/><rect x="16" y="36" width="68" height="22" rx="6" fill="#d6d6d6"/><path d="M14 46 H38 Q42 46 44 50 Q50 58 56 50 Q58 46 62 46 H86 V74 Q86 82 78 82 H22 Q14 82 14 74 Z" fill="#FAFAFA"/></svg></div><span>Cartes</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><polygon points="48.39,8.03 51.61,8.03 52.90,13.11 54.83,13.32 55.70,8.39 58.88,8.95 59.26,14.18 61.13,14.71 62.84,10.01 65.87,11.11 65.34,16.33 67.08,17.18 69.59,12.85 72.38,14.46 70.96,19.51 72.52,20.65 75.74,16.81 78.21,18.89 75.93,23.61 77.28,25.00 81.11,21.79 83.19,24.26 80.12,28.51 81.21,30.12 85.54,27.62 87.15,30.41 83.40,34.07 84.18,35.84 88.89,34.13 89.99,37.16 85.65,40.11 86.12,41.99 91.05,41.12 91.61,44.30 86.83,46.45 86.96,48.39 91.97,48.39 91.97,51.61 86.89,52.90 86.68,54.83 91.61,55.70 91.05,58.88 85.82,59.26 85.29,61.13 89.99,62.84 88.89,65.87 83.67,65.34 82.82,67.08 87.15,69.59 85.54,72.38 80.49,70.96 79.35,72.52 83.19,75.74 81.11,78.21 76.39,75.93 75.00,77.28 78.21,81.11 75.74,83.19 71.49,80.12 69.88,81.21 72.38,85.54 69.59,87.15 65.93,83.40 64.16,84.18 65.87,88.89 62.84,89.99 59.89,85.65 58.01,86.12 58.88,91.05 55.70,91.61 53.55,86.83 51.61,86.96 51.61,91.97 48.39,91.97 47.10,86.89 45.17,86.68 44.30,91.61 41.12,91.05 40.74,85.82 38.87,85.29 37.16,89.99 34.13,88.89 34.66,83.67 32.92,82.82 30.41,87.15 27.62,85.54 29.04,80.49 27.48,79.35 24.26,83.19 21.79,81.11 24.07,76.39 22.72,75.00 18.89,78.21 16.81,75.74 19.88,71.49 18.79,69.88 14.46,72.38 12.85,69.59 16.60,65.93 15.82,64.16 11.11,65.87 10.01,62.84 14.35,59.89 13.88,58.01 8.95,58.88 8.39,55.70 13.17,53.55 13.04,51.61 8.03,51.61 8.03,48.39 13.11,47.10 13.32,45.17 8.39,44.30 8.95,41.12 14.18,40.74 14.71,38.87 10.01,37.16 11.11,34.13 16.33,34.66 17.18,32.92 12.85,30.41 14.46,27.62 19.51,29.04 20.65,27.48 16.81,24.26 18.89,21.79 23.61,24.07 25.00,22.72 21.79,18.89 24.26,16.81 28.51,19.88 30.12,18.79 27.62,14.46 30.41,12.85 34.07,16.60 35.84,15.82 34.13,11.11 37.16,10.01 40.11,14.35 41.99,13.88 41.12,8.95 44.30,8.39 46.45,13.17 48.39,13.04" fill="#a8a8a8"/><circle cx="50" cy="50" r="31" fill="#2b2b2b"/><circle cx="50" cy="50" r="27" fill="none" stroke="#a8a8a8" stroke-width="3"/><path d="M50 50 L50.0 24.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><path d="M50 50 L72.5 63.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><path d="M50 50 L27.5 63.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><circle cx="50" cy="50" r="7" fill="#a8a8a8"/><circle cx="50" cy="50" r="3" fill="#2b2b2b"/></svg></div><span>Réglages</span></div></div>
+        <div class="recherche-a"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><span>Recherche</span></div>
+        <div class="dock"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M30 20 C26 20 22 24 22 30 C24 56 44 76 70 78 C76 78 80 74 80 70 V62 C80 59 78 57 75 56 L66 53 C63 52 61 53 59 55 L55 59 C46 54 41 49 36 40 L40 36 C42 34 43 32 42 29 L39 20 C38 17 36 15 33 15 Z" fill="#FAFAFA" transform="translate(0 4)"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="38" fill="#d6d6d6"/><circle cx="50" cy="50" r="35" fill="#e9e9e9"/><line x1="50.0" y1="16.0" x2="50.0" y2="20.0" stroke="#7a7a7a" stroke-width="1"/><line x1="55.3" y1="16.4" x2="55.0" y2="18.4" stroke="#7a7a7a" stroke-width="1"/><line x1="60.5" y1="17.7" x2="59.9" y2="19.6" stroke="#7a7a7a" stroke-width="1"/><line x1="65.4" y1="19.7" x2="64.5" y2="21.5" stroke="#7a7a7a" stroke-width="1"/><line x1="70.0" y1="22.5" x2="68.8" y2="24.1" stroke="#7a7a7a" stroke-width="1"/><line x1="74.0" y1="26.0" x2="71.2" y2="28.8" stroke="#7a7a7a" stroke-width="1"/><line x1="77.5" y1="30.0" x2="75.9" y2="31.2" stroke="#7a7a7a" stroke-width="1"/><line x1="80.3" y1="34.6" x2="78.5" y2="35.5" stroke="#7a7a7a" stroke-width="1"/><line x1="82.3" y1="39.5" x2="80.4" y2="40.1" stroke="#7a7a7a" stroke-width="1"/><line x1="83.6" y1="44.7" x2="81.6" y2="45.0" stroke="#7a7a7a" stroke-width="1"/><line x1="84.0" y1="50.0" x2="80.0" y2="50.0" stroke="#7a7a7a" stroke-width="1"/><line x1="83.6" y1="55.3" x2="81.6" y2="55.0" stroke="#7a7a7a" stroke-width="1"/><line x1="82.3" y1="60.5" x2="80.4" y2="59.9" stroke="#7a7a7a" stroke-width="1"/><line x1="80.3" y1="65.4" x2="78.5" y2="64.5" stroke="#7a7a7a" stroke-width="1"/><line x1="77.5" y1="70.0" x2="75.9" y2="68.8" stroke="#7a7a7a" stroke-width="1"/><line x1="74.0" y1="74.0" x2="71.2" y2="71.2" stroke="#7a7a7a" stroke-width="1"/><line x1="70.0" y1="77.5" x2="68.8" y2="75.9" stroke="#7a7a7a" stroke-width="1"/><line x1="65.4" y1="80.3" x2="64.5" y2="78.5" stroke="#7a7a7a" stroke-width="1"/><line x1="60.5" y1="82.3" x2="59.9" y2="80.4" stroke="#7a7a7a" stroke-width="1"/><line x1="55.3" y1="83.6" x2="55.0" y2="81.6" stroke="#7a7a7a" stroke-width="1"/><line x1="50.0" y1="84.0" x2="50.0" y2="80.0" stroke="#7a7a7a" stroke-width="1"/><line x1="44.7" y1="83.6" x2="45.0" y2="81.6" stroke="#7a7a7a" stroke-width="1"/><line x1="39.5" y1="82.3" x2="40.1" y2="80.4" stroke="#7a7a7a" stroke-width="1"/><line x1="34.6" y1="80.3" x2="35.5" y2="78.5" stroke="#7a7a7a" stroke-width="1"/><line x1="30.0" y1="77.5" x2="31.2" y2="75.9" stroke="#7a7a7a" stroke-width="1"/><line x1="26.0" y1="74.0" x2="28.8" y2="71.2" stroke="#7a7a7a" stroke-width="1"/><line x1="22.5" y1="70.0" x2="24.1" y2="68.8" stroke="#7a7a7a" stroke-width="1"/><line x1="19.7" y1="65.4" x2="21.5" y2="64.5" stroke="#7a7a7a" stroke-width="1"/><line x1="17.7" y1="60.5" x2="19.6" y2="59.9" stroke="#7a7a7a" stroke-width="1"/><line x1="16.4" y1="55.3" x2="18.4" y2="55.0" stroke="#7a7a7a" stroke-width="1"/><line x1="16.0" y1="50.0" x2="20.0" y2="50.0" stroke="#7a7a7a" stroke-width="1"/><line x1="16.4" y1="44.7" x2="18.4" y2="45.0" stroke="#7a7a7a" stroke-width="1"/><line x1="17.7" y1="39.5" x2="19.6" y2="40.1" stroke="#7a7a7a" stroke-width="1"/><line x1="19.7" y1="34.6" x2="21.5" y2="35.5" stroke="#7a7a7a" stroke-width="1"/><line x1="22.5" y1="30.0" x2="24.1" y2="31.2" stroke="#7a7a7a" stroke-width="1"/><line x1="26.0" y1="26.0" x2="28.8" y2="28.8" stroke="#7a7a7a" stroke-width="1"/><line x1="30.0" y1="22.5" x2="31.2" y2="24.1" stroke="#7a7a7a" stroke-width="1"/><line x1="34.6" y1="19.7" x2="35.5" y2="21.5" stroke="#7a7a7a" stroke-width="1"/><line x1="39.5" y1="17.7" x2="40.1" y2="19.6" stroke="#7a7a7a" stroke-width="1"/><line x1="44.7" y1="16.4" x2="45.0" y2="18.4" stroke="#7a7a7a" stroke-width="1"/><path d="M50 50 L73 27 L54 54 Z" fill="#141414"/><path d="M50 50 L27 73 L46 46 Z" fill="#a8a8a8"/><circle cx="50" cy="50" r="2.4" fill="#FAFAFA"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 20 C27 20 14 34 14 48 C14 57 19 64 27 69 C26 75 22 79 18 81 C26 81 33 78 37 74 C41 75 45 76 50 76 C73 76 86 62 86 48 C86 34 73 20 50 20 Z" fill="#FAFAFA"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M40 30 L72 22 V62" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><line x1="40" y1="30" x2="40" y2="70" stroke="#FAFAFA" stroke-width="6"/><ellipse cx="32" cy="70" rx="9" ry="7" fill="#FAFAFA" transform="rotate(-18 32 70)"/><ellipse cx="64" cy="62" rx="9" ry="7" fill="#FAFAFA" transform="rotate(-18 64 62)"/></svg></div></div>
+      </div>
+
+      <!-- Photos › Photothèque (iOS 27.1) -->
+      <div class="page" id="p-phototheque" style="padding-top:0"><div class="contenu">
+        <div class="ph-grille" style="padding-top:104px"><i class="vig" style="background: radial-gradient(circle at 45% 66%, rgb(74,74,74) 0%, rgb(48,48,48) 55%, rgb(36,36,36) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 72% 59%, rgb(64,64,64) 0%, rgb(31,31,31) 55%, rgb(19,19,19) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 57% 28%, rgb(101,101,101) 0%, rgb(34,34,34) 55%, rgb(22,22,22) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 22% 30%, rgb(82,82,82) 0%, rgb(60,60,60) 55%, rgb(48,48,48) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 24% 40%, rgb(108,108,108) 0%, rgb(55,55,55) 55%, rgb(43,43,43) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 23% 61%, rgb(109,109,109) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 60% 65%, rgb(83,83,83) 0%, rgb(35,35,35) 55%, rgb(23,23,23) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 56% 62%, rgb(62,62,62) 0%, rgb(65,65,65) 55%, rgb(53,53,53) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 34% 27%, rgb(61,61,61) 0%, rgb(53,53,53) 55%, rgb(41,41,41) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 38% 51%, rgb(72,72,72) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 56% 44%, rgb(70,70,70) 0%, rgb(37,37,37) 55%, rgb(25,25,25) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 26% 62%, rgb(78,78,78) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 43% 31%, rgb(79,79,79) 0%, rgb(64,64,64) 55%, rgb(52,52,52) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 56% 28%, rgb(63,63,63) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 51% 68%, rgb(81,81,81) 0%, rgb(67,67,67) 55%, rgb(55,55,55) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 69% 45%, rgb(109,109,109) 0%, rgb(62,62,62) 55%, rgb(50,50,50) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 43% 44%, rgb(113,113,113) 0%, rgb(57,57,57) 55%, rgb(45,45,45) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 64% 74%, rgb(78,78,78) 0%, rgb(43,43,43) 55%, rgb(31,31,31) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 56% 44%, rgb(65,65,65) 0%, rgb(43,43,43) 55%, rgb(31,31,31) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 76% 46%, rgb(118,118,118) 0%, rgb(61,61,61) 55%, rgb(49,49,49) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 58% 29%, rgb(91,91,91) 0%, rgb(56,56,56) 55%, rgb(44,44,44) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 46% 35%, rgb(120,120,120) 0%, rgb(35,35,35) 55%, rgb(23,23,23) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 79% 56%, rgb(74,74,74) 0%, rgb(49,49,49) 55%, rgb(37,37,37) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 62% 29%, rgb(60,60,60) 0%, rgb(54,54,54) 55%, rgb(42,42,42) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 41% 69%, rgb(95,95,95) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 57% 54%, rgb(118,118,118) 0%, rgb(50,50,50) 55%, rgb(38,38,38) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 80% 42%, rgb(66,66,66) 0%, rgb(32,32,32) 55%, rgb(20,20,20) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 23% 71%, rgb(63,63,63) 0%, rgb(58,58,58) 55%, rgb(46,46,46) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 38% 70%, rgb(112,112,112) 0%, rgb(47,47,47) 55%, rgb(35,35,35) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 21% 54%, rgb(99,99,99) 0%, rgb(52,52,52) 55%, rgb(40,40,40) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 59% 32%, rgb(76,76,76) 0%, rgb(50,50,50) 55%, rgb(38,38,38) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 33% 74%, rgb(62,62,62) 0%, rgb(59,59,59) 55%, rgb(47,47,47) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 67% 40%, rgb(71,71,71) 0%, rgb(46,46,46) 55%, rgb(34,34,34) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 78% 56%, rgb(105,105,105) 0%, rgb(53,53,53) 55%, rgb(41,41,41) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 48% 50%, rgb(76,76,76) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 76% 33%, rgb(90,90,90) 0%, rgb(63,63,63) 55%, rgb(51,51,51) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 65% 51%, rgb(90,90,90) 0%, rgb(55,55,55) 55%, rgb(43,43,43) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 34% 34%, rgb(103,103,103) 0%, rgb(50,50,50) 55%, rgb(38,38,38) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 29% 39%, rgb(77,77,77) 0%, rgb(33,33,33) 55%, rgb(21,21,21) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 20% 56%, rgb(84,84,84) 0%, rgb(70,70,70) 55%, rgb(58,58,58) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i></div>
+      </div><div class="onglets"><div class="ong-g"><span class="ong on" id="tab-lib"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong" id="tab-col-lib"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div></div>
+
+      <!-- Photos › Collections (iOS 27.1, capture FR) -->
+      <div class="page" id="p-collections" style="padding-top:0"><div class="contenu">
+        <div class="ph-entete"><span class="ph-titre">Collections</span><span class="rond-s">···</span><span class="ph-av"></span></div>
+        <div class="ph-sec">Voyages <span>›</span><i class="pli">⌄</i></div>
+        <div class="ph-voy"><i class="vig" style="background: radial-gradient(circle at 36% 43%, rgb(78,78,78) 0%, rgb(65,65,65) 55%, rgb(53,53,53) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><em>Gonaïves</em></div>
+        <div class="ph-sec">Types de média <span>›</span><i class="pli">⌄</i></div>
+        <div class="ph-2col">
+          <span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>Vidéos</span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 12.25c1.24 0 2.25-1.01 2.25-2.25S13.24 7.75 12 7.75 9.75 8.76 9.75 10s1.01 2.25 2.25 2.25zm4.5 4c0-1.5-3-2.25-4.5-2.25s-4.5.75-4.5 2.25V17h9v-.75zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>Portraits</span>
+          <span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M3 5v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2zm12 4c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-9 8c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1H6v-1z"/></svg>Selfies</span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M21 6.5v11c0 .55-.45 1-1 1-.13 0-.25-.02-.38-.07C17.81 17.77 14.91 17.4 12 17.4s-5.81.37-7.62 1.03c-.13.05-.25.07-.38.07-.55 0-1-.45-1-1v-11c0-.55.45-1 1-1 .13 0 .25.02.38.07C6.19 6.23 9.09 6.6 12 6.6s5.81-.37 7.62-1.03c.13-.05.25-.07.38-.07.55 0 1 .45 1 1z"/></svg>Panoramas</span>
+          <span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Live Photos</span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Accélérés</span>
+        </div>
+        <div class="ph-sec" id="sec-autres">Autres <span>›</span><i class="pli">⌄</i></div>
+        <div class="ph-2col">
+          <span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>Favorites</span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M3 5v4h2V5h4V3H5c-1.1 0-2 .9-2 2zm2 10H3v4c0 1.1.9 2 2 2h4v-2H5v-4zm14 4h-4v2h4c1.1 0 2-.9 2-2v-4h-2v4zm0-16h-4v2h4v4h2V5c0-1.1-.9-2-2-2z"/></svg>Mes captures</span>
+          <span class="pil" id="r-supp"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg>Suppr. récemment<b class="cad"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></b></span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20z"/></svg>Documents d’i…</span>
+          <span class="pil" id="r-doub"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>Doublons</span><span class="pil"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20z"/></svg>Reçus</span>
+        </div>
+        <div class="ph-sec">Suggestions de fond d’écran <span>›</span></div>
+        <div class="ph-fonds"><i class="vig" style="background: radial-gradient(circle at 46% 59%, rgb(73,73,73) 0%, rgb(28,28,28) 55%, rgb(16,16,16) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 80% 33%, rgb(95,95,95) 0%, rgb(51,51,51) 55%, rgb(39,39,39) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i><i class="vig" style="background: radial-gradient(circle at 49% 74%, rgb(61,61,61) 0%, rgb(60,60,60) 55%, rgb(48,48,48) 100%)"><b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i></div>
+      </div><div class="onglets"><div class="ong-g"><span class="ong" id="tab-lib"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong on" id="tab-col-col"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div></div>
+
+      <div class="voile-haut"></div>
+      <!-- Photos › Collections › Doublons (disposition d'après iOS 16 à 18, à confirmer sur iOS 27.1) -->
+      <div class="page" id="p-doublons"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="pill" id="b-toutsel">Tout sélectionner</span><span class="pill" id="b-select">Sélect.</span><span class="rond" id="b-annul">✕</span></div>
+        <div class="gt2" style="padding-bottom:22px">Doublons</div>
+        <div id="groupes"></div>
+      </div>
+        <div class="onglets"><div class="ong-g"><span class="ong" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong on" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div>
+        <div class="sel-pill" id="b-fusion">Fusionner</div>
+        <div class="conf-d" id="d-confirm"><span class="danger" id="b-fus-ok">Fusionner 12 éléments</span><span class="annul">Annuler</span></div>
+      </div>
+
+    </div></div>
+    <div class="doigt" id="doigt"></div>
+  </div>
+  <!-- Ouverture : la même photo se copie, deux fois -->
+  <div id="intro"><div id="cartes-i"></div><div id="intro-n"><b id="intro-x">× 2</b><span>la même photo, la place en double</span></div></div>
+  <div class="texte" id="textes"></div>
+  <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
+  <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
+  <div id="noir"></div>
+</div>
+<script src="../../templates/moteur-tuto-ios.js"></script>
+<script>
+// ---------- Vignettes : motifs simples, monochromes (aucune vraie photo) ----------
+const MOTIF = {
+  montagne: '<rect width="100" height="100" fill="#3c3c3c"/><circle cx="72" cy="27" r="10" fill="#a8a8a8"/><path d="M0 78 L28 44 L47 64 L63 48 L100 84 V100 H0Z" fill="#6e6e6e"/><path d="M0 90 L38 72 L100 92 V100 H0Z" fill="#545454"/>',
+  portrait: '<rect width="100" height="100" fill="#4a4a4a"/><circle cx="50" cy="40" r="17" fill="#8c8c8c"/><path d="M16 100 C18 70 82 70 84 100Z" fill="#8c8c8c"/>',
+  palmier: '<rect width="100" height="100" fill="#5a5a5a"/><rect y="70" width="100" height="30" fill="#3a3a3a"/><path d="M52 100 C54 80 58 60 64 44" stroke="#1e1e1e" stroke-width="5" fill="none"/><path d="M64 44 C54 34 40 34 32 40 C44 38 54 40 64 44 C60 30 50 22 40 22 C52 26 60 34 64 44 C72 32 84 30 92 34 C82 34 72 38 64 44 C76 42 86 48 90 58 C82 50 72 46 64 44Z" fill="#1e1e1e"/>',
+  plat: '<rect width="100" height="100" fill="#2e2e2e"/><circle cx="50" cy="52" r="34" fill="#8a8a8a"/><circle cx="50" cy="52" r="24" fill="#b0b0b0"/><circle cx="44" cy="48" r="8" fill="#6a6a6a"/><circle cx="58" cy="58" r="6" fill="#6a6a6a"/>',
+  ville: '<rect width="100" height="100" fill="#4e4e4e"/><path d="M0 100 V62 H14 V48 H30 V66 H40 V38 H58 V58 H70 V52 H84 V70 H100 V100Z" fill="#262626"/>',
+};
+const svgMotif = m => `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${MOTIF[m]}</svg>`;
+const COCHE = '<b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b>';
+const GROUPES = [
+  { date: '12 oct. 2026', motif: 'montagne', tailles: ['3,4 Mo', '3,4 Mo', '3,4 Mo'] },
+  { date: '28 sept. 2026', motif: 'portrait', tailles: ['2,9 Mo', '2,9 Mo'] },
+  { date: '3 sept. 2026', motif: 'palmier', tailles: ['4,1 Mo', '4,1 Mo'] },
+  { date: '17 août 2026', motif: 'plat', tailles: ['2,2 Mo', '2,2 Mo', '2,2 Mo'] },
+  { date: '2 août 2026', motif: 'ville', tailles: ['3,0 Mo', '3,0 Mo'] },
+];
+document.getElementById('groupes').innerHTML = GROUPES.map((g, i) =>
+  `<div class="grp" id="grp-${i + 1}"><div class="grp-h"><span>${g.date}</span><span class="fus">Fusionner</span></div>` +
+  `<div class="grp-v">${g.tailles.map(t => `<div class="case"><i class="vig">${svgMotif(g.motif)}${COCHE}</i><small>${t}</small></div>`).join('')}</div></div>`).join('');
+document.getElementById('cartes-i').innerHTML = [0, 1, 2].map(() => `<div class="carte-i">${svgMotif('montagne')}</div>`).join('');
+
+// ---------- Scénario (temps de la version muette) ----------
+const I = 2.4;            // ouverture
+const M0 = 10.9;          // début de la fusion
+const FIN = 17.0;
+window.ORA_DURATION = 20.0;
+const CFG = {
+  textes: [
+    { a: 0, b: 3.0, label: 'iPhone plein · 2/3', titre: 'La même photo,|en double.', sous: 'Parfois en triple.', visible: true },
+    { a: 3.0, b: 7.2, label: 'Étape 1', titre: 'Collections ›|Doublons' },
+    { a: 7.2, b: 11.0, label: 'Étape 2', titre: 'Sélect., tout,|puis Fusionner.' },
+    { a: 11.0, b: 13.8, titre: 'Une photo|reste.', sous: 'La meilleure version.', retard: 0.8 },
+    { a: 13.8, b: FIN, label: 'Les copies', titre: 'Partent dans|Suppr. récemment', sous: 'Videz-le pour libérer l’espace.', retard: 0.9 },
+    { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Partie 2 sur 3 · La suite : WhatsApp.', retard: 0.5 },
+  ],
+  nav: [[0, 'p-accueil', 0], [3.5, 'p-phototheque', 0], [4.4, 'p-collections', 0], [6.45, 'p-doublons', 1], [13.8, 'p-collections', -1]],
+  defil: [[0, 'p-collections', 0], [4.8, 'p-collections', 'sec-autres:330']],
+  taps: [[3.3, '#app-photos'], [4.2, '#tab-col-lib'], [6.2, '#r-doub'], [7.8, '#b-select'], [8.8, '#b-toutsel'], [9.7, '#b-fusion'], [10.5, '#b-fus-ok']],
+  surbrillance: [[2.9, 3.4, '#app-photos', 'hl-ic'], [5.7, 6.45, '#r-doub', 'hl-txt'], [7.5, 7.9, '#b-select', 'hl-txt'], [8.5, 8.9, '#b-toutsel', 'hl-txt'],
+                 [9.4, 9.8, '#b-fusion', 'hl-txt'], [10.2, 10.6, '#b-fus-ok', 'hl-txt'], [14.4, 16.9, '#r-supp', 'hl-txt']],
+  camera: [[0, 0.72, '#phone', 1200], [3.5, 0.62, '#phone', 1060], [5.2, 1.0, '#r-doub', 1260], [6.45, 0.62, '#phone', 1060],
+           [M0, 1.1, '#grp-1', 1330], [13.8, 1.0, '#r-supp', 1420]],
+  fin: FIN,
+  sons: { souffles: [3.0, 7.2, 11.0, 13.8, FIN], crans: [0.55, 1.05].concat(GROUPES.map((g, i) => M0 + i * 0.12 + 0.45)), impact: FIN + 0.9 },
+  apres: t => {
+    const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
+    const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+    const $ = s => document.querySelector(s);
+
+    // --- ouverture : une photo, puis sa copie, puis une troisième ---
+    const cartes = [...document.querySelectorAll('#intro .carte-i')];
+    const cible = [[0, 0], [190, 6], [-190, -6]];
+    cartes.forEach((c, i) => {
+      const k = i === 0 ? 1 : out((t - (i === 1 ? 0.3 : 0.8)) / 0.45);
+      c.style.opacity = i === 0 || t >= (i === 1 ? 0.3 : 0.8) ? 1 : 0;
+      c.style.zIndex = 3 - i;
+      c.style.transform = `translateX(${cible[i][0] * k}px) rotate(${cible[i][1] * k}deg) scale(${i === 0 ? 1 : 0.92 + 0.08 * k})`;
+    });
+    const n = out((t - 0.5) / 0.35), ni = $('#intro-n');
+    ni.style.opacity = n; ni.style.transform = `translateY(${(1 - n) * 16}px)`;
+    $('#intro-x').textContent = t >= 0.95 ? '× 3' : '× 2';
+    ni.querySelector('span').textContent = t >= 0.95 ? 'la même photo, la place en triple' : 'la même photo, la place en double';
+    const f = out((t - (I - 0.35)) / 0.45);
+    $('#intro').style.opacity = 1 - f;
+    const ph = $('#phone');
+    if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
+
+    // --- mode sélection ---
+    const sel = t >= 7.95 && t < M0;
+    $('#b-select').style.opacity = sel ? 0 : 1;
+    $('#b-toutsel').style.opacity = sel ? 1 : 0;
+    $('#b-annul').style.opacity = sel ? 1 : 0;
+    document.querySelectorAll('#p-doublons .onglets').forEach(o => o.style.opacity = sel ? 0 : 1);
+    const coche = t >= 8.9 && t < M0;
+    document.querySelectorAll('#groupes .grp').forEach((g, i) => g.querySelectorAll('.vig').forEach(v => v.classList.toggle('coche', coche && t >= 8.9 + i * 0.04)));
+    $('#b-fusion').style.opacity = sel && !(t >= 9.8 && t < 10.6) ? 1 : 0;
+    $('#b-fusion').textContent = coche ? 'Fusionner' : 'Sélectionner des éléments';
+    // confirmation (en bas, au-dessus du bouton)
+    const c = t >= 9.8 && t < 10.6 ? out((t - 9.8) / 0.25) : 0;
+    const cf = $('#d-confirm'); cf.style.opacity = c; cf.style.transform = `translateY(${(1 - c) * 40}px)`;
+
+    // --- fusion : les copies glissent dans la première, qui reste ---
+    document.querySelectorAll('#groupes .grp').forEach((g, i) => {
+      const k = io((t - (M0 + i * 0.12)) / 0.45);
+      g.querySelectorAll('.case').forEach((cs, j) => {
+        if (j === 0) { cs.querySelector('.vig').classList.toggle('meilleure', k > 0.9 && t < 13.3); return; }
+        cs.style.transform = `translateX(${-j * 201 * k}px) scale(${1 - 0.12 * k})`;
+        cs.style.opacity = 1 - clamp((k - 0.55) / 0.45);
+        cs.style.zIndex = 0;
+      });
+      g.querySelector('.fus').style.opacity = 1 - clamp((t - M0) / 0.3);
+      // l'album se vide : plus de doublons
+      g.style.opacity = 1 - out((t - (13.25 + i * 0.06)) / 0.3);
+    });
+  },
+};
+SCENE(CFG);
+</script>
+</body>
+</html>
