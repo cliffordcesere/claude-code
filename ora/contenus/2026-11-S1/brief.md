@@ -120,3 +120,6 @@ TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stocka
 
 ### Version avec voix v03 (2026-11-07) — À PUBLIER
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v03.mp4` — 25,6 s. Ouverture « poubelle » (0–2,4 s) : 8 photos tombent dans la corbeille, « 29 jours · avant la suppression définitive », puis le téléphone monte sur « iPhone ». Sans voix : `…TUTO_261107_v07.mp4` (+ MUET).
+
+### v04 voix / v08 sans voix (2026-11-07) — logos des apps
+Liste « Stockage iPhone » : logos Photos (fleur), WhatsApp, TikTok, Facebook, YouTube en monochrome. `…TUTO-VOIX_261107_v04.mp4` (hors dépôt), `…TUTO_261107_v08.mp4` (+ MUET).

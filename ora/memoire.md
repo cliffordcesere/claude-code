@@ -26,10 +26,11 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
 - Ouverture « poubelle » — **VALIDÉE (2026-11-07)** : des photos tombent dans la corbeille d'iOS, puis « 29 jours · avant la suppression définitive » (sans personnage). Faite dans « iPhone plein » 1/3 v03.
 - **Projet mascotte ORA** — validé sur le principe par le propriétaire (2026-11-07), à concevoir dans une séance dédiée (pas improvisé dans un tuto). Contraintes : charte premium et calme, palette ORA, déclinable en série.
-- Logos des apps tierces (WhatsApp, TikTok, Facebook, YouTube) dans les écrans iOS : possibles (usage descriptif ; jamais à côté du logo ORA, §5). En attente.
+- Logos des apps tierces (WhatsApp, TikTok, Facebook, YouTube) — **FAIT (2026-11-07)**, demandé par le propriétaire : redessinés en monochrome dans `tools/icones_ios.py` (usage descriptif ; jamais à côté du logo ORA, §5).
 
 ## Façon de travailler (demandée par le propriétaire, 2026-11-06)
 
+- **Précision (2026-11-07) :** un « pourquoi ne pas… ? » qui corrige un défaut visible (ex. « pourquoi ne pas utiliser leurs logos ? ») est une **demande** : l'exécuter. Ne s'arrêter pour discuter que sur les vraies questions de stratégie ou de marque.
 - **Une question n'est pas un feu vert.** Quand le propriétaire pose une question de stratégie (« et si… ? », « on essaie… ? »), répondre avec un avis argumenté (pour, contre, recommandation), puis attendre sa validation avant d'agir.
 - **Pas de jargon technique.** Le propriétaire ne code pas : expliquer simplement (pas de « clé API », « environnement », « proxy » sans les traduire en mots courants), et privilégier la solution qui ne lui demande aucune manipulation technique.
 - Incident du 2026-11-06 : création d'un environnement « ORA (claude-code) » et demande d'une clé ElevenLabs sans accord explicite. Le propriétaire a saisi « xi-api-key » (le nom du champ, rien de sensible) ; aucun risque, rien à faire.
