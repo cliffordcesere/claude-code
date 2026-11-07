@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeux d’espions — couverture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+<style>
+  :root {
+    --night: #0a0a0c;
+    --paper: #efe9e1;
+    --glow: #4f8cff;
+    --cherry: #b3122e;
+    --w: 1600px;
+    --h: 2500px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #050506; color: var(--paper); font-family: "Inter", sans-serif; }
+  body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 16px 16px 24px; gap: 18px; }
+
+  /* La couverture garde sa taille réelle ; seul ce cadre est réduit à l'écran. */
+  .viewport { position: relative; overflow: hidden; }
+  .scaler { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+
+  .cover {
+    position: relative; width: var(--w); height: var(--h); overflow: hidden;
+    background: var(--night);
+  }
+  .layer { position: absolute; inset: 0; pointer-events: none; }
+
+  /* Lueur de l'écran projetée sur le fond */
+  .spill {
+    background:
+      radial-gradient(ellipse 620px 900px at 50% 61%, rgba(79,140,255,.30), rgba(79,140,255,.10) 55%, rgba(79,140,255,0) 100%),
+      radial-gradient(ellipse 1100px 1400px at 50% 61%, rgba(79,140,255,.07), rgba(79,140,255,0) 70%);
+  }
+
+  /* Téléphone vu de dessus, incliné */
+  .phone {
+    position: absolute; left: 50%; top: 61%; width: 620px; height: 1240px;
+    transform: translate(-50%, -50%) rotate(-6deg);
+    border-radius: 104px; padding: 3px;
+    /* La tranche : un reflet fin qui accroche la lumière en haut à gauche et en bas à droite */
+    background: linear-gradient(140deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.06) 16%, rgba(255,255,255,0) 40%,
+                rgba(255,255,255,0) 72%, rgba(170,195,255,.20) 92%, rgba(255,255,255,.30) 100%);
+    box-shadow: 0 0 140px 10px rgba(79,140,255,.22), 0 60px 120px rgba(0,0,0,.9);
+  }
+  .body {
+    position: relative; width: 100%; height: 100%; border-radius: 101px; padding: 20px;
+    background: linear-gradient(160deg, #111114, #060607 45%, #09090b);
+  }
+  .screen {
+    position: relative; width: 100%; height: 100%; border-radius: 82px; overflow: hidden;
+    background: radial-gradient(ellipse 120% 70% at 50% 42%, #16284c 0%, #0d172d 55%, #080e1b 100%);
+    box-shadow: inset 0 0 0 1px rgba(120,160,255,.10), 0 0 60px rgba(79,140,255,.35);
+    font-family: "Inter", sans-serif;
+  }
+  .screen::after { /* reflet très léger sur la vitre */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(118deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 34%);
+  }
+  .cam { position: absolute; left: 50%; top: 26px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: #020203; box-shadow: 0 0 0 2px rgba(255,255,255,.04); }
+  .time { position: absolute; left: 50px; top: 22px; font-weight: 600; font-size: 28px; color: #d9e2f2; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+  .progress { position: absolute; left: 34px; right: 34px; top: 84px; display: flex; gap: 8px; }
+  .progress i { flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,.26); overflow: hidden; }
+  .progress i b { display: block; height: 100%; background: rgba(255,255,255,.92); }
+
+  .thread { position: absolute; left: 40px; right: 50px; top: 440px; }
+  .from { font-weight: 500; font-size: 27px; color: #8fa2c6; margin: 0 0 12px 8px; }
+  .bubble {
+    display: inline-block; max-width: 470px; padding: 26px 32px 28px;
+    border-radius: 38px 38px 38px 12px;
+    background: rgba(36,50,80,.92); color: #eef2fa;
+    font-size: 38px; line-height: 1.3; font-weight: 400;
+    box-shadow: 0 0 40px rgba(79,140,255,.15);
+  }
+  .bubble .hidden { display: inline-block; filter: blur(6px); }
+  .seen { margin: 14px 0 0 8px; font-weight: 500; font-size: 25px; color: var(--cherry); }
+
+  /* Vignettage */
+  .vignette { background: radial-gradient(ellipse 78% 62% at 50% 52%, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.9) 100%); }
+
+  /* Titre */
+  .title {
+    position: absolute; left: 0; right: 0; top: 150px; text-align: center;
+    font-family: "Anton", sans-serif; font-weight: 400; color: var(--paper);
+    line-height: .9; letter-spacing: .005em; text-transform: uppercase; white-space: nowrap;
+    font-size: 300px; /* ajusté au chargement pour que « D’ESPIONS » couvre 88 % de la largeur */
+  }
+  .title span { display: table; margin: 0 auto; } /* largeur au plus juste, pour la mesure */
+  /* Bande décalée le long de la ligne de balayage : le titre « saute » comme une image de caméra */
+  .title.slice { clip-path: inset(var(--slice-top, 64%) 0 var(--slice-bottom, 32%) 0); transform: translateX(12px); opacity: .9; }
+  .scanline {
+    position: absolute; left: 4%; right: 4%; height: 3px; top: var(--scan-y, 520px);
+    background: linear-gradient(90deg, rgba(239,233,225,0), rgba(239,233,225,.75) 12%, rgba(239,233,225,.75) 88%, rgba(239,233,225,0));
+    box-shadow: 0 0 14px rgba(79,140,255,.55), 0 0 2px rgba(239,233,225,.6);
+  }
+  .rasters { /* lignes de trame très légères sur la zone du titre */
+    position: absolute; left: 0; right: 0; top: 130px; height: var(--title-h, 600px);
+    background: repeating-linear-gradient(0deg, rgba(10,10,12,.32) 0 2px, rgba(10,10,12,0) 2px 7px);
+  }
+
+  .tagline {
+    position: absolute; left: 0; right: 0; top: 2236px; text-align: center;
+    font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500;
+    font-size: 84px; line-height: 1; color: rgba(239,233,225,.92);
+  }
+  .author {
+    position: absolute; left: 0; right: 0; top: 2368px; text-align: center;
+    font-family: "Inter", sans-serif; font-weight: 500; font-size: 38px;
+    text-transform: uppercase; letter-spacing: .35em; text-indent: .35em; /* recentre malgré l'espace ajouté après la dernière lettre */
+    color: rgba(239,233,225,.82);
+  }
+
+  .grain { opacity: .07; }
+
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .actions button {
+    font: 500 15px/1 "Inter", sans-serif; color: var(--paper); background: #17171b;
+    border: 1px solid rgba(239,233,225,.18); border-radius: 8px; padding: 12px 16px; cursor: pointer;
+  }
+  .actions button:hover { border-color: rgba(239,233,225,.45); }
+  .actions button:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+  .actions button[disabled] { opacity: .5; cursor: progress; }
+  .status { font-size: 13px; color: rgba(239,233,225,.6); min-height: 1em; }
+</style>
+</head>
+<body>
+
+<div class="viewport" id="viewport">
+  <div class="scaler" id="scaler">
+    <div class="cover" id="cover">
+      <div class="layer spill"></div>
+
+      <div class="phone">
+        <div class="body">
+          <div class="screen">
+            <div class="cam"></div>
+            <div class="time">03:10</div>
+            <div class="progress"><i><b style="width:100%"></b></i><i><b style="width:50%"></b></i><i></i><i></i><i></i></div>
+            <div class="thread">
+              <p class="from">César.v</p>
+              <p class="bubble">14 rue des <span class="hidden">Envierges</span>. C’est bien ça&#8239;?</p>
+              <p class="seen">Vu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer vignette"></div>
+
+      <div class="rasters" id="rasters"></div>
+      <h1 class="title" id="title"><span>Jeux</span><span id="fitline">D’espions</span></h1>
+      <div class="title slice" id="slice" aria-hidden="true"><span>Jeux</span><span>D’espions</span></div>
+      <div class="scanline" id="scanline"></div>
+
+      <p class="tagline">Tout le monde regarde quelqu’un.</p>
+      <p class="author">Clifford Césère</p>
+
+      <svg class="layer grain" width="1600" height="2500" viewBox="0 0 1600 2500" aria-hidden="true">
+        <filter id="film-grain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="1600" height="2500" filter="url(#film-grain)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button id="dl-full" type="button" disabled>Télécharger PNG 1600 × 2500</button>
+  <button id="dl-small" type="button" disabled>Télécharger PNG 512 × 800</button>
+</div>
+<p class="status" id="status">Chargement des polices…</p>
+
+<script>
+(function () {
+  const W = 1600, H = 2500;
+  const cover = document.getElementById("cover");
+  const viewport = document.getElementById("viewport");
+  const scaler = document.getElementById("scaler");
+  const status = document.getElementById("status");
+  const buttons = [document.getElementById("dl-full"), document.getElementById("dl-small")];
+
+  function fit() {
+    const s = Math.min((window.innerWidth - 32) / W, (window.innerHeight - 110) / H, 1);
+    scaler.style.transform = `scale(${s})`;
+    viewport.style.width = W * s + "px";
+    viewport.style.height = H * s + "px";
+  }
+  window.addEventListener("resize", fit);
+  fit();
+
+  /* « D’ESPIONS » occupe 88 % de la largeur ; « JEUX » prend la même taille. La ligne de balayage
+     et la bande décalée sont placées dans la seconde ligne, à partir des mesures réelles. */
+  function layoutTitle() {
+    const title = document.getElementById("title");
+    const line = document.getElementById("fitline");
+    const slice = document.getElementById("slice");
+    title.style.fontSize = "300px";
+    const size = 300 * (W * 0.88) / line.offsetWidth;   // offsetWidth ignore la réduction d'écran
+    title.style.fontSize = slice.style.fontSize = size + "px";
+    const t = title.offsetTop, h = title.offsetHeight;
+    const scanY = t + h * 0.70;
+    document.getElementById("scanline").style.setProperty("--scan-y", scanY + "px");
+    slice.style.setProperty("--slice-top", "66%");
+    slice.style.setProperty("--slice-bottom", "29%");
+    const r = document.getElementById("rasters");
+    r.style.top = t - 20 + "px";
+    r.style.height = h + 40 + "px";
+  }
+
+  async function ready() {
+    await Promise.all([
+      document.fonts.load('400 300px "Anton"'),
+      document.fonts.load('italic 500 84px "Cormorant Garamond"'),
+      document.fonts.load('500 38px "Inter"'),
+      document.fonts.load('400 38px "Inter"'),
+      document.fonts.load('600 28px "Inter"'),
+    ]);
+    await document.fonts.ready;
+  }
+
+  let fontCSS = null;
+  async function renderFull() {
+    await ready();
+    if (fontCSS === null && window.htmlToImage.getFontEmbedCSS) {
+      fontCSS = await htmlToImage.getFontEmbedCSS(cover);
+    }
+    return htmlToImage.toPng(cover, {
+      width: W, height: H, pixelRatio: 1, backgroundColor: "#0a0a0c",
+      fontEmbedCSS: fontCSS || undefined,
+      style: { transform: "none", margin: "0" },
+    });
+  }
+
+  /* Réduction en plusieurs étapes : un seul drawImage de 1600 à 512 px crénelerait le grain et le texte. */
+  async function downscale(dataUrl, w, h) {
+    const img = new Image();
+    img.src = dataUrl;
+    await img.decode();
+    let cw = img.width, ch = img.height, src = img;
+    while (cw / 2 >= w) {
+      const c = document.createElement("canvas");
+      c.width = Math.round(cw / 2); c.height = Math.round(ch / 2);
+      const x = c.getContext("2d"); x.imageSmoothingQuality = "high";
+      x.drawImage(src, 0, 0, c.width, c.height);
+      src = c; cw = c.width; ch = c.height;
+    }
+    const out = document.createElement("canvas");
+    out.width = w; out.height = h;
+    const ctx = out.getContext("2d"); ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(src, 0, 0, w, h);
+    return out.toDataURL("image/png");
+  }
+
+  function save(dataUrl, name) {
+    const a = document.createElement("a");
+    a.href = dataUrl; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  async function exportPng(small) {
+    buttons.forEach(b => b.disabled = true);
+    status.textContent = "Export en cours…";
+    try {
+      const full = await renderFull();
+      if (small) save(await downscale(full, 512, 800), "jeux-d-espions_512x800.png");
+      else save(full, "jeux-d-espions_1600x2500.png");
+      status.textContent = "";
+    } catch (e) {
+      status.textContent = "L’export a échoué : " + (e && e.message ? e.message : e);
+      console.error(e);
+    } finally {
+      buttons.forEach(b => b.disabled = false);
+    }
+  }
+
+  buttons[0].addEventListener("click", () => exportPng(false));
+  buttons[1].addEventListener("click", () => exportPng(true));
+
+  ready().then(() => {
+    layoutTitle();
+    buttons.forEach(b => b.disabled = false);
+    status.textContent = "";
+    document.documentElement.dataset.ready = "1";
+  });
+  window.addEventListener("resize", () => document.fonts.status === "loaded" && layoutTitle());
+})();
+</script>
+</body>
+</html>
