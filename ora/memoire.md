@@ -53,7 +53,8 @@ Légende créole écrite par le propriétaire (en réserve, le français est pr�
 
 ## Interface iOS 27.1 (captures FR, iPhone 17 Pro Max, 2026-11-06)
 
-- Écran d'accueil : icônes sombres, « Caméra » (pas « Appareil photo »), widgets, Recherche, dock Téléphone/Safari/Messages/Musique.
+- Écran d'accueil : icônes sombres, « Caméra » (pas « Appareil photo »), widgets Météo + Photos, 4 rangées, Recherche, dock Téléphone/Safari/Messages/Musique.
+- **Règle du propriétaire (2026-11-07) : le dessin des icônes doit être identique à iOS** ; la couleur peut rester dans la palette ORA. Icônes redessinées dans `tools/icones_ios.py` (FaceTime, Photos, Caméra, Mail, Notes, Rappels, Horloge, Podcasts, App Store, Plans, Santé, Cartes, Réglages, Téléphone, Safari, Messages, Musique). Le logo Apple (app TV) n'est pas reproduit.
 - Photos : onglets **Photothèque / Collections** + loupe en bas. Collections : sections Voyages, Types de média, **Autres** (grille 2 colonnes : Favorites, Mes captures, **Suppr. récemment** 🔒, Documents, Doublons, Reçus), Suggestions de fond d'écran.
 - Suppr. récemment : « Utilisez Face ID ou saisissez votre code pour afficher cet album. » / « Afficher l'album ». Dedans : « Sélect. », tri, « N élément(s) », vignettes « 9 jours ».
 - Sélection : pastille « ··· ✕ », « 1 photo sélectionnée » en bas ; menu « ··· » → **Supprimer** / Récupérer ; confirmation en haut : « Cette photo sera définitivement supprimée d'iCloud et de tous vos appareils. » → « Supprimer de tous les appareils ».

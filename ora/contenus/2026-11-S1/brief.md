@@ -106,3 +106,6 @@ Voix off : … ouvrez Photos, touchez Collections, descendez jusqu'à Supprimée
 ### v03 (2026-11-06) — flux exact d'après une vidéo d'écran iOS 27.1
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v03.mp4` (+ MUET), 17,8 s. Sélect. → « ··· » → Tout supprimer → Supprimer de tous les appareils (sans cocher ni glisser).
 Voix off : … Touchez Sélectionner, puis les trois petits points, et Tout supprimer. …
+
+### v04 (2026-11-07) — icônes iOS redessinées à l'identique (monochrome)
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261107_v04.mp4` (+ MUET). Écran d'accueil d'après la capture iOS 27.1 : widgets Météo/Photos, 4 rangées, dessins fidèles ; TV remplacée par Calculette (pas de logo Apple).
