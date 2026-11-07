@@ -1,4 +1,4 @@
-"""ORA — icônes iOS 26/27 redessinées d'après capture (formes fidèles, palette ORA monochrome, sans logo Apple). Dict I : nom -> <svg>."""
+"""ORA — icônes iOS 26/27 redessinées d'après capture (formes fidèles, palette ORA monochrome ; logo Apple affiché dans les tutos qui montrent un iPhone). Dict I : nom -> <svg>."""
 import math
 B='#FAFAFA'; G1='#d6d6d6'; G2='#a8a8a8'; G3='#7a7a7a'; G4='#4a4a4a'; N='#141414'
 def svg(inner): return f'<svg viewBox="0 0 100 100" width="100%" height="100%">{inner}</svg>'
@@ -24,6 +24,7 @@ for k in range(36):
     for r,da in [(42,-2.2),(42,2.2),(37,4.5),(37,7.5)]:
         a=math.radians(k*10+da); teeth.append(f'{50+r*math.sin(a):.2f},{50-r*math.cos(a):.2f}')
 I['reglages']=svg(f'<polygon points="{" ".join(teeth)}" fill="{G2}"/><circle cx="50" cy="50" r="31" fill="#2b2b2b"/><circle cx="50" cy="50" r="27" fill="none" stroke="{G2}" stroke-width="3"/>'+''.join(f'<path d="M50 50 L{50+26*math.sin(math.radians(a)):.1f} {50-26*math.cos(math.radians(a)):.1f}" stroke="{G2}" stroke-width="4.5" stroke-linecap="round"/>' for a in (0,120,240))+f'<circle cx="50" cy="50" r="7" fill="{G2}"/><circle cx="50" cy="50" r="3" fill="#2b2b2b"/>')
+I['tv']=svg(f'<path d="M30 39 C27 37.5 22.5 37 19.5 39.5 C15.5 43 15.5 51 18.5 57 C20.5 61 23 64 26 64 C27.5 64 28.5 63 30 63 C31.5 63 32.5 64 34 64 C37 64 39.5 60.5 41 57 C37.5 55 36.5 51 37.5 48 C38 46 39.5 44.5 40.5 43.5 C38.5 40.5 35.5 39 33 39 C31.5 39 31 39.5 30 39.5 Z M30.5 37 C30.5 33.5 32.5 31.5 35.5 31 C35.5 34 33.5 36.5 30.5 37 Z" fill="{B}"/><text x="45" y="62" font-size="30" font-weight="600" font-family="-apple-system,Jost,sans-serif" fill="{B}" letter-spacing="-1">tv</text>')
 I['calculette']=svg(''.join(f'<circle cx="{26+16*c}" cy="{24+16*r}" r="6" fill="{B if c==3 else (G2 if r==0 else G3)}"/>' for r in range(5) for c in range(4)))
 I['tel']=svg(f'<path d="M30 20 C26 20 22 24 22 30 C24 56 44 76 70 78 C76 78 80 74 80 70 V62 C80 59 78 57 75 56 L66 53 C63 52 61 53 59 55 L55 59 C46 54 41 49 36 40 L40 36 C42 34 43 32 42 29 L39 20 C38 17 36 15 33 15 Z" fill="{B}" transform="translate(0 4)"/>')
 st=''.join(f'<line x1="{50+34*math.sin(math.radians(a)):.1f}" y1="{50-34*math.cos(math.radians(a)):.1f}" x2="{50+(30 if a%45==0 else 32)*math.sin(math.radians(a)):.1f}" y2="{50-(30 if a%45==0 else 32)*math.cos(math.radians(a)):.1f}" stroke="{G3}" stroke-width="1"/>' for a in range(0,360,9))

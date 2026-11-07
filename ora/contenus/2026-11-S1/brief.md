@@ -109,3 +109,8 @@ Voix off : … Touchez Sélectionner, puis les trois petits points, et Tout supp
 
 ### v04 (2026-11-07) — icônes iOS redessinées à l'identique (monochrome)
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261107_v04.mp4` (+ MUET). Écran d'accueil d'après la capture iOS 27.1 : widgets Météo/Photos, 4 rangées, dessins fidèles ; TV remplacée par Calculette (pas de logo Apple).
+
+### Version avec voix (2026-11-07) — À PUBLIER
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v01.mp4` — 28,4 s, voix du propriétaire, écrans calés sur les mots-clés ; icône TV avec la pomme remise. Hors dépôt (voix).
+Rendu : `stockage-supprimees.html?voix` (repères dans `voix.reperes`). Sans voix : `…TUTO_261107_v05.mp4` (+ MUET).
+TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stockage #haiti`

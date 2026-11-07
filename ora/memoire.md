@@ -54,11 +54,15 @@ Légende créole écrite par le propriétaire (en réserve, le français est pr�
 ## Interface iOS 27.1 (captures FR, iPhone 17 Pro Max, 2026-11-06)
 
 - Écran d'accueil : icônes sombres, « Caméra » (pas « Appareil photo »), widgets Météo + Photos, 4 rangées, Recherche, dock Téléphone/Safari/Messages/Musique.
-- **Règle du propriétaire (2026-11-07) : le dessin des icônes doit être identique à iOS** ; la couleur peut rester dans la palette ORA. Icônes redessinées dans `tools/icones_ios.py` (FaceTime, Photos, Caméra, Mail, Notes, Rappels, Horloge, Podcasts, App Store, Plans, Santé, Cartes, Réglages, Téléphone, Safari, Messages, Musique). Le logo Apple (app TV) n'est pas reproduit.
+- **Règle du propriétaire (2026-11-07) : le dessin des icônes doit être identique à iOS** ; la couleur peut rester dans la palette ORA. Icônes redessinées dans `tools/icones_ios.py` (FaceTime, Photos, Caméra, Mail, Notes, Rappels, Horloge, Podcasts, App Store, Plans, Santé, Cartes, Réglages, Téléphone, Safari, Messages, Musique). Logo Apple : **affiché** dans les tutos qui montrent un iPhone (usage descriptif, icône TV comprise). Interdit : pomme à côté du logo ORA, pomme comme décor de marque, « agréé / certifié Apple » si ce n'est pas vrai (§5).
 - Photos : onglets **Photothèque / Collections** + loupe en bas. Collections : sections Voyages, Types de média, **Autres** (grille 2 colonnes : Favorites, Mes captures, **Suppr. récemment** 🔒, Documents, Doublons, Reçus), Suggestions de fond d'écran.
 - Suppr. récemment : « Utilisez Face ID ou saisissez votre code pour afficher cet album. » / « Afficher l'album ». Dedans : « Sélect. », tri, « N élément(s) », vignettes « 9 jours ».
 - Sélection : pastille « ··· ✕ », « 1 photo sélectionnée » en bas ; menu « ··· » → **Supprimer** / Récupérer ; confirmation en haut : « Cette photo sera définitivement supprimée d'iCloud et de tous vos appareils. » → « Supprimer de tous les appareils ».
 - **Tout supprimer** (vidéo iOS 27.1, 2026-11-06) : Sélect. → rien coché, en bas « Sélectionner des éléments » → « ··· » → **Tout supprimer** / Tout récupérer → « Ces éléments seront définitivement supprimés d'iCloud et de tous vos appareils. » → « Supprimer de tous les appareils » → « 0 élément », « Aucune photo ou vidéo ». Face ID s'anime en haut, dans l'îlot.
+
+## Voix off — prise du 2026-11-07 (« iPhone plein » 1/3)
+
+27,5 s, rythme naturel, texte suivi (méthode « ne pas lire » efficace). Débruitée par le propriétaire (Adobe Podcast) ; ici : égalisation légère, niveau -14 LUFS au mixage, **vitesse non modifiée**. Écrans calés sur les mots-clés (Photos, Collections, Supprimées récemment, Face ID, Sélectionner, points, Tout supprimer). Vidéo finale 28,4 s, gardée hors dépôt.
 
 ## Voix off (2026-11-06)
 
