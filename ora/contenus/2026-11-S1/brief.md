@@ -117,3 +117,6 @@ TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stocka
 
 ### Version avec voix v02 (2026-11-07) — À PUBLIER
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v02.mp4` — 25,6 s. Voix +8 % (24,6 s), début animé : jauge qui se remplit (0–4 s), ligne Photos (4–6 s), « Pourquoi · Gardées 30 jours » sur l'album avec « 29 jours » (6–9 s), puis le parcours. Sans voix : `…TUTO_261107_v06.mp4` (+ MUET).
+
+### Version avec voix v03 (2026-11-07) — À PUBLIER
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v03.mp4` — 25,6 s. Ouverture « poubelle » (0–2,4 s) : 8 photos tombent dans la corbeille, « 29 jours · avant la suppression définitive », puis le téléphone monte sur « iPhone ». Sans voix : `…TUTO_261107_v07.mp4` (+ MUET).

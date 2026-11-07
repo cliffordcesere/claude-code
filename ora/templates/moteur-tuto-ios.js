@@ -10,7 +10,7 @@
 //   surbrillance: [[t0, t1, sélecteur, classe='hl']]
 //   camera:       [[t, zoom, sélecteur|null, hauteurCible, poussée?]]
 //   fin:          t                             le téléphone descend, signature centrée
-//   sons:         { souffles: [t...], impact: t }
+//   sons:         { souffles: [t...], crans: [t...] (en plus des taps), impact: t }
 //   voix:         { src, reperes: [[tVoix, tVideo]...] }   activé par ?voix
 //   apres:        t => {}                       états propres à la scène
 // })
@@ -64,7 +64,7 @@
     const pos = (s, t) => { const p = POS[s]; return { x: p.x, y: p.y - (p.page ? defil(p.page, t) : 0) }; };
 
     // Sons
-    window.ORA_SONS = { souffles: (C.sons && C.sons.souffles) || [], crans: C.taps.map(x => x[0] + 0.12), impact: C.sons && C.sons.impact };
+    window.ORA_SONS = { souffles: (C.sons && C.sons.souffles) || [], crans: C.taps.map(x => x[0] + 0.12).concat((C.sons && C.sons.crans) || []), impact: C.sons && C.sons.impact };
 
     function seek(t) {
       noir.style.opacity = 0; // la 1re image est complète (décrochage à 0:02 constaté)

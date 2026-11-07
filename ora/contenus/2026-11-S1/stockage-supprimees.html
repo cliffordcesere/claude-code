@@ -206,6 +206,14 @@
   .tuile.i27.cal small { color: var(--gris); font-size: 22px; font-weight: 600; margin-bottom: -2px; } .tuile.i27.cal b { font-size: 64px; font-weight: 400; }
   #p-accueil .recherche-a { bottom: 190px; }
   #p-accueil .dock { bottom: 24px; height: 150px; border-radius: 58px; }
+
+  /* ---------- Ouverture « poubelle » ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #poubelle { position: absolute; left: 540px; top: 1180px; width: 300px; height: 300px; margin: -150px 0 0 -150px; color: var(--blanc); transform-origin: 50% 80%; }
+  #vols .vol { position: absolute; left: 0; top: 0; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; }
+  #intro-jours { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #intro-jours b { display: block; font-size: 64px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
+  #intro-jours span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -287,6 +295,8 @@
     </div></div>
     <div class="doigt" id="doigt"></div>
   </div>
+  <!-- Ouverture « poubelle » : des photos tombent dans la corbeille, qui garde « 29 jours » -->
+  <div id="intro"><div id="poubelle"><svg viewBox="0 0 24 24" width="300" height="300"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></div><div id="vols"><i class="vol" style="background: radial-gradient(circle at 57% 62%, rgb(118,118,118) 0%, rgb(59,59,59) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 37% 36%, rgb(145,145,145) 0%, rgb(72,72,72) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 57% 55%, rgb(125,125,125) 0%, rgb(62,62,62) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 65% 64%, rgb(144,144,144) 0%, rgb(72,72,72) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 75% 36%, rgb(149,149,149) 0%, rgb(74,74,74) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 31% 53%, rgb(139,139,139) 0%, rgb(69,69,69) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 44% 34%, rgb(119,119,119) 0%, rgb(59,59,59) 70%)"></i><i class="vol" style="background: radial-gradient(circle at 30% 59%, rgb(118,118,118) 0%, rgb(59,59,59) 70%)"></i></div><div id="intro-jours"><b>29 jours</b><span>avant la suppression définitive</span></div></div>
   <div class="texte" id="textes"></div>
   <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
   <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
@@ -356,14 +366,55 @@ CFG.sons.souffles = CFG.sons.souffles.map(dec).concat([A]); CFG.sons.impact = de
 CFG.fin = dec(CFG.fin);
 const apres0 = CFG.apres; CFG.apres = t => apres0(t >= A + D ? t - D : Math.min(t, A));
 window.ORA_DURATION = T.duree + D;
+
+// ---------- Ouverture « poubelle » (0 → 2,4 s) : tout le reste est décalé de I ----------
+const I = 2.4, decI = x => x + I;
+CFG.textes.forEach((p, j) => { if (j === 0) { p.a = 0; p.b = decI(p.b); } else { p.a = decI(p.a); if (p.b < 90) p.b = decI(p.b); } });
+CFG.nav.forEach(n => n[0] = decI(n[0])); CFG.nav[0][0] = 0;
+CFG.defil.forEach(d => d[0] = decI(d[0]));
+CFG.taps.forEach(x => x[0] = decI(x[0]));
+CFG.surbrillance.forEach(h => { h[0] = decI(h[0]); h[1] = decI(h[1]); });
+CFG.camera.forEach(c => c[0] = decI(c[0])); CFG.camera[0][0] = 0;
+const ATTERRIT = [0, 1, 2, 3, 4, 5, 6, 7].map(i => 0.15 + i * 0.16 + 0.55);
+CFG.sons.souffles = CFG.sons.souffles.map(decI); CFG.sons.impact = decI(CFG.sons.impact);
+CFG.sons.crans = ATTERRIT;
+CFG.fin = decI(CFG.fin);
+window.ORA_DURATION += I;
+const apres1 = CFG.apres;
+CFG.apres = t => {
+  apres1(Math.max(0, t - I));
+  const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4), inq = x => Math.pow(clamp(x), 2);
+  // photos qui tombent dans la corbeille
+  const vols = [...document.querySelectorAll('#vols .vol')];
+  const dep = [[150, 760], [930, 720], [260, 900], [820, 880], [120, 1000], [960, 980], [400, 740], [680, 760]];
+  vols.forEach((v, i) => {
+    const t0 = 0.15 + i * 0.16, k = clamp((t - t0) / 0.55), e = inq(k);
+    const [x0, y0] = dep[i], x1 = 540, y1 = 1080;
+    const x = x0 + (x1 - x0) * e, y = y0 + (y1 - y0) * e - Math.sin(Math.PI * k) * 120;
+    v.style.opacity = t < t0 ? 0 : k < 1 ? 1 : 0;
+    v.style.transform = `translate(${x}px, ${y}px) rotate(${(1 - k) * (i % 2 ? 22 : -22)}deg) scale(${1 - 0.65 * e})`;
+  });
+  // la corbeille encaisse chaque photo
+  const choc = ATTERRIT.reduce((m, a) => Math.max(m, t >= a && t < a + 0.18 ? Math.sin(Math.PI * (t - a) / 0.18) : 0), 0);
+  document.getElementById('poubelle').style.transform = `scale(${1 + 0.06 * choc}) rotate(${-3 * choc}deg)`;
+  // « 29 jours » : elles ne sont pas parties
+  const j = out((t - 1.55) / 0.4);
+  const ij = document.getElementById('intro-jours'); ij.style.opacity = j; ij.style.transform = `translateY(${(1 - j) * 16}px)`;
+  // sortie de l'ouverture, montée du téléphone
+  const f = out((t - (I - 0.35)) / 0.45);
+  document.getElementById('intro').style.opacity = 1 - f;
+  const ph = document.getElementById('phone');
+  if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
+};
 // Voix v2 (+8 %, pauses resserrées) : repères [temps voix, temps vidéo]
 CFG.voix = {
   src: 'voix/iphone-plein-1_voix-proprietaire_v2.flac',
   // normal 4,2 · garde 30 jours 6,1 · Photos 10,8 · Collections 11,8 · Suppr. récemment 13,9 · Face ID 15,2 · Sélectionner 17,9 · points 19,1 · Tout supprimer 19,9
-  reperes: [[0, 0], [4.229, 1.0], [6.124, 2.6], [9.022, 5.0], [9.577, 5.35], [10.781, 5.95], [11.8, 6.95], [12.355, 7.5], [13.929, 8.9],
+  reperes: [[0, 0], [2.3, 0], [4.229, 1.0], [6.124, 2.6], [9.022, 5.0], [9.577, 5.35], [10.781, 5.95], [11.8, 6.95], [12.355, 7.5], [13.929, 8.9],
             [15.158, 9.95], [16.176, 10.6], [17.195, 11.6], [17.936, 11.7], [19.139, 12.6], [19.926, 13.25], [20.482, 13.95], [20.713, 14.4],
             [20.899, 14.8], [22.102, 16.5], [22.421, 17.4], [25.6, 20.4]],
 };
+CFG.voix.reperes = CFG.voix.reperes.map(([v, w], i) => [v, i === 0 ? 0 : w + I]);
 SCENE(CFG);
 </script>
 </body>

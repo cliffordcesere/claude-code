@@ -24,7 +24,8 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
 ## Idées en attente de décision (2026-11-07)
 
-- Ouverture « poubelle » : le propriétaire propose un petit avatar qui jette quelque chose à la poubelle. Avis : bonne idée de mouvement ; une mascotte est une décision de marque (risque d'effet enfantin). Contre-proposition : des photos qui s'envolent dans l'icône corbeille d'iOS + compteur « 29 jours ». En attente.
+- Ouverture « poubelle » — **VALIDÉE (2026-11-07)** : des photos tombent dans la corbeille d'iOS, puis « 29 jours · avant la suppression définitive » (sans personnage). Faite dans « iPhone plein » 1/3 v03.
+- **Projet mascotte ORA** — validé sur le principe par le propriétaire (2026-11-07), à concevoir dans une séance dédiée (pas improvisé dans un tuto). Contraintes : charte premium et calme, palette ORA, déclinable en série.
 - Logos des apps tierces (WhatsApp, TikTok, Facebook, YouTube) dans les écrans iOS : possibles (usage descriptif ; jamais à côté du logo ORA, §5). En attente.
 
 ## Façon de travailler (demandée par le propriétaire, 2026-11-06)
