@@ -5,14 +5,15 @@
 <title>ORA — tuto « iPhone plein » 2/3 : Doublons</title>
 <link rel="stylesheet" href="../../templates/ora.css">
 <!--
-  Tuto 9:16, ~20 s (version muette ; la voix du propriétaire recalera les écrans). Série « iPhone plein », partie 2/3.
+  Tuto 9:16, ~21 s (version muette ; la voix du propriétaire recalera les écrans). Série « iPhone plein », partie 2/3.
   Écrans d'accueil, Photothèque et Collections : repris de la partie 1 (captures iOS 27.1, iPhone 17 Pro Max).
-  Vérifié (captures iOS 27.1) : Collections › Autres › « Doublons ».
-  Vérifié (sources web, iOS 16 à 18) : bouton « Fusionner » par groupe, sélection de plusieurs groupes puis « Fusionner » ;
-  la fusion garde la meilleure qualité et les données utiles ; les copies vont dans « Supprimées récemment ».
-  NON vérifié sur iOS 27.1 (à confirmer par un enregistrement d'écran) : place et libellé de « Tout sélectionner »,
-  bouton du bas « Fusionner », texte de confirmation « Fusionner 12 éléments », disposition de l'album Doublons.
-  Valeurs fictives (dates, tailles, 12 éléments).
+  Album Doublons : d'après une vidéo d'écran iOS 27.1 (2026-11-07). Vérifié :
+    « Sélect. » → « Tout sélectionner » / ✕ ; groupes « Fusionner » → « Sélectionner » → « Désélectionner » ;
+    bas : partage · « Sélectionner des éléments » → « Fusionner (N) » · corbeille ;
+    1re bulle : « Les doublons comprennent… » → « Fusionner N copies exactes uniquement… » / « Fusionner N éléments… » ;
+    2e bulle : « La fusion permettra de conserver une version… vers l'album « Supprimés récemment ». » → « Fusionner N éléments » ;
+    « Fusion des doublons… N éléments », compteur qui descend, « 0 élément », « Aucune photo ou vidéo », « Fusionner les doublons · Terminé ».
+  Valeurs fictives (dates, tailles, 186 éléments dont 132 copies exactes).
   Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-doublons.html sortie.mp4
 -->
 <style>
@@ -219,23 +220,46 @@
   #intro-jours span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
   .icone.logo-app { padding: 4px; } .icone.logo-app svg { width: 100%; height: 100%; display: block; }
 
-  /* ---------- Album Doublons ---------- */
-  .grp { padding: 0 40px 34px; }
-  .grp-h { display: flex; align-items: center; justify-content: space-between; height: 70px; font-size: 28px; font-weight: 600; }
-  .grp-h .fus { height: 56px; padding: 0 24px; border-radius: 28px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
-  .grp-v { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .grp-v .case { display: grid; gap: 8px; will-change: transform; }
-  .grp-v .vig { border-radius: 18px; overflow: hidden; }
+  /* ---------- Album Doublons (vidéo d'écran iOS 27.1) ---------- */
+  .d-sous { display: flex; align-items: center; gap: 10px; padding: 0 30px 18px; font-size: 28px; font-weight: 600; }
+  .d-sous svg:last-child { color: var(--gris); }
+  .grp { padding: 0 0 18px; }
+  .grp-h { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 22px 0 30px; font-size: 31px; font-weight: 700; }
+  .grp-h .fus { height: 54px; padding: 0 22px; border-radius: 27px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 25px; font-weight: 600; }
+  .grp-v { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .grp-v .case { position: relative; will-change: transform; }
+  .grp-v .vig { overflow: hidden; }
   .grp-v .vig svg { display: block; width: 100%; height: 100%; }
-  .grp-v small { font-size: 22px; color: var(--gris); padding-left: 4px; }
-  .nav #b-toutsel { right: auto; left: 118px; opacity: 0; }
-  .nav #b-annul { position: absolute; right: 26px; opacity: 0; font-size: 34px; }
-  .conf-d { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #242424; border-radius: 44px; box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 26px 26px 22px; display: grid; gap: 14px; text-align: center; opacity: 0; z-index: 6; }
-  .conf-d span { height: 88px; border-radius: 44px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #3a3a3a; }
-  .conf-d .danger { color: var(--blanc); font-weight: 700; }
-  .conf-d .annul { background: transparent; color: var(--gris); }
-  .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
-  .vig.meilleure { box-shadow: 0 0 0 5px var(--cuivre); }
+  .grp-v small { position: absolute; right: 10px; bottom: 8px; font-size: 22px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .grp-v .vig.coche + small { opacity: 0; }
+  .vig .ck { background: transparent; color: var(--blanc); box-shadow: 0 0 0 2px var(--blanc); }
+  .vig.coche .ck { background: var(--blanc); color: #000; }
+  .vig.coche { filter: none; }
+  .vig.meilleure { box-shadow: inset 0 0 0 5px var(--cuivre); }
+  #p-doublons .nav .pill { font-weight: 600; }
+  #b-outils { right: 170px !important; gap: 26px; display: flex !important; align-items: center; }
+  #b-toutsel { right: auto !important; left: 26px; opacity: 0; }
+  #b-annul { opacity: 0; display: flex !important; align-items: center; gap: 26px; }
+  #b-pts { position: absolute; right: 26px; opacity: 0; font-size: 30px; letter-spacing: 2px; }
+  .barre-sel { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 96px; display: flex; align-items: center; justify-content: space-between; opacity: 0; z-index: 4; }
+  .barre-sel .r { width: 96px; height: 96px; border-radius: 50%; background: rgba(40,40,40,.95); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .barre-sel .mil { position: relative; height: 84px; display: grid; place-items: center; }
+  .barre-sel .mil span { grid-area: 1 / 1; white-space: nowrap; }
+  #b-vide { font-size: 28px; color: #6a6a6a; }
+  #b-fusion { height: 84px; padding: 0 34px; border-radius: 42px; background: rgba(46,46,46,.97); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); display: grid; place-items: center; font-size: 30px; font-weight: 600; opacity: 0; }
+  .barre-sel.vide-sel .r { color: #6a6a6a; }
+  .bulle { position: absolute; background: #2a2a2a; border-radius: 44px; box-shadow: 0 20px 60px rgba(0,0,0,.7); opacity: 0; z-index: 6; }
+  .bulle p { margin: 0; font-size: 25px; line-height: 1.36; color: var(--blanc); }
+  .bulle > span { display: grid; place-items: center; height: 76px; border-radius: 38px; background: #3a3a3a; font-size: 25px; font-weight: 500; white-space: nowrap; }
+  #pop1 { left: 18px; right: 18px; bottom: 150px; padding: 30px 22px 22px; display: grid; gap: 14px; }
+  #pop1 p { padding: 0 12px 6px; }
+  #pop2 { left: 120px; right: 150px; bottom: 150px; padding: 30px 26px 22px; display: grid; gap: 22px; }
+  #pop2 > span { font-weight: 700; }
+  .cle { transition: none; }
+  .cle.on-c { color: var(--cuivre); font-weight: 700; }
+  .toast { position: absolute; left: 50%; bottom: 168px; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; padding: 14px 30px; border-radius: 40px; background: rgba(40,40,40,.96); box-shadow: 0 10px 30px rgba(0,0,0,.5); white-space: nowrap; opacity: 0; z-index: 5; }
+  .toast b { display: block; font-size: 26px; font-weight: 600; } .toast em { display: block; font-style: normal; font-size: 22px; color: var(--gris); }
+  #d-vide { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 34px; font-weight: 700; color: var(--blanc); opacity: 0; }
 
   /* ---------- Ouverture « la même photo, trois fois » ---------- */
   #intro { position: absolute; inset: 0; pointer-events: none; }
@@ -244,6 +268,7 @@
   #intro-n { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
   #intro-n b { display: block; font-size: 72px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
   #intro-n span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
+  .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -291,15 +316,30 @@
       </div><div class="onglets"><div class="ong-g"><span class="ong" id="tab-lib"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong on" id="tab-col-col"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div></div>
 
       <div class="voile-haut"></div>
-      <!-- Photos › Collections › Doublons (disposition d'après iOS 16 à 18, à confirmer sur iOS 27.1) -->
+      <!-- Photos › Collections › Doublons (vidéo d'écran iOS 27.1) -->
       <div class="page" id="p-doublons"><div class="contenu">
-        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="pill" id="b-toutsel">Tout sélectionner</span><span class="pill" id="b-select">Sélect.</span><span class="rond" id="b-annul">✕</span></div>
-        <div class="gt2" style="padding-bottom:22px">Doublons</div>
+        <div class="nav">
+          <span class="rond" id="b-retour"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span>
+          <span class="pill" id="b-toutsel">Tout sélectionner</span>
+          <span class="pill" id="b-outils"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M3 6h18v2H3zm3 5h12v2H6zm3 5h6v2H9z"/></svg><span style="font-size:30px;letter-spacing:2px">···</span></span>
+          <span class="pill" id="b-select">Sélect.</span>
+          <span class="pill" id="b-annul"><span id="b-annul-pts" style="font-size:30px;letter-spacing:2px">···</span><span style="font-size:32px">✕</span></span>
+          <span class="rond" id="b-pts">···</span>
+        </div>
+        <div class="gt2" style="padding-top:4px">Doublons</div>
+        <div class="d-sous"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span id="d-n">186 éléments</span><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div>
         <div id="groupes"></div>
       </div>
-        <div class="onglets"><div class="ong-g"><span class="ong" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong on" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div>
-        <div class="sel-pill" id="b-fusion">Fusionner</div>
-        <div class="conf-d" id="d-confirm"><span class="danger" id="b-fus-ok">Fusionner 12 éléments</span><span class="annul">Annuler</span></div>
+        <div class="vide" id="d-vide">Aucune photo ou vidéo</div>
+        <div id="d-onglets"><div class="onglets"><div class="ong-g"><span class="ong" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg><small>Photothèque</small></span><span class="ong on" ><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M4 6h16V4H4v2zm2-4h12V0H6v2zm14 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg><small>Collections</small></span></div><span class="ong-r"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div></div>
+        <div class="barre-sel" id="barre-sel">
+          <span class="r"><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/></svg></span>
+          <span class="mil"><span id="b-vide">Sélectionner des éléments</span><span id="b-fusion">Fusionner (186)</span></span>
+          <span class="r"><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span>
+        </div>
+        <div class="bulle" id="pop1"><p>Les doublons comprennent à la fois des copies exactes dont les métadonnées peuvent être différentes de celles des photos originales, et des photos d’apparence similaire comportant quelques légères différences, notamment en termes de résolution et de format.</p><span>Fusionner 132 copies exactes uniquement…</span><span id="b-fus-tous">Fusionner 186 éléments…</span></div>
+        <div class="bulle" id="pop2"><p>La fusion permettra de conserver une version de chaque ensemble de doublons, qui associe la meilleure qualité d’image et les données pertinentes tout en déplaçant le reste vers l’album <span class="cle" id="cle">« Supprimés récemment »</span>.</p><span id="b-fus-ok">Fusionner 186 éléments</span></div>
+        <div class="toast" id="toast"><svg id="spin" viewBox="0 0 24 24" width="34" height="34"><g fill="currentColor"><rect x="11" y="1" width="2" height="6" rx="1"/><rect x="11" y="17" width="2" height="6" rx="1" opacity=".4"/><rect x="1" y="11" width="6" height="2" rx="1" opacity=".7"/><rect x="17" y="11" width="6" height="2" rx="1" opacity=".25"/><rect x="11" y="1" width="2" height="6" rx="1" transform="rotate(45 12 12)" opacity=".85"/><rect x="11" y="1" width="2" height="6" rx="1" transform="rotate(135 12 12)" opacity=".3"/><rect x="11" y="1" width="2" height="6" rx="1" transform="rotate(225 12 12)" opacity=".55"/><rect x="11" y="1" width="2" height="6" rx="1" transform="rotate(315 12 12)" opacity=".95"/></g></svg><svg id="fait" viewBox="0 0 24 24" width="34" height="34" style="display:none;color:var(--gris)"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span><b id="toast-t">Fusion des doublons…</b><em id="toast-n">186 éléments</em></span></div>
       </div>
 
     </div></div>
@@ -325,11 +365,11 @@ const MOTIF = {
 const svgMotif = m => `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${MOTIF[m]}</svg>`;
 const COCHE = '<b class="ck"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b>';
 const GROUPES = [
-  { date: '12 oct. 2026', motif: 'montagne', tailles: ['3,4 Mo', '3,4 Mo', '3,4 Mo'] },
-  { date: '28 sept. 2026', motif: 'portrait', tailles: ['2,9 Mo', '2,9 Mo'] },
-  { date: '3 sept. 2026', motif: 'palmier', tailles: ['4,1 Mo', '4,1 Mo'] },
-  { date: '17 août 2026', motif: 'plat', tailles: ['2,2 Mo', '2,2 Mo', '2,2 Mo'] },
-  { date: '2 août 2026', motif: 'ville', tailles: ['3,0 Mo', '3,0 Mo'] },
+  { date: '5 nov. 2026', motif: 'montagne', tailles: ['3,4 Mo', '3,4 Mo', '3,4 Mo'] },
+  { date: '1 nov. 2026', motif: 'portrait', tailles: ['2,9 Mo', '2,9 Mo'] },
+  { date: '29 oct. 2026', motif: 'palmier', tailles: ['148 ko', '148 ko'] },
+  { date: '24 oct. 2026 et 25 oct. 2026', motif: 'plat', tailles: ['2,2 Mo', '2,2 Mo', '2,2 Mo'] },
+  { date: '20 oct. 2026 et autres dates', motif: 'ville', tailles: ['96 ko', '96 ko'] },
 ];
 document.getElementById('groupes').innerHTML = GROUPES.map((g, i) =>
   `<div class="grp" id="grp-${i + 1}"><div class="grp-h"><span>${g.date}</span><span class="fus">Fusionner</span></div>` +
@@ -338,38 +378,39 @@ document.getElementById('cartes-i').innerHTML = [0, 1, 2].map(() => `<div class=
 
 // ---------- Scénario (temps de la version muette) ----------
 const I = 2.4;            // ouverture
-const M0 = 10.9;          // début de la fusion
-const FIN = 17.0;
-window.ORA_DURATION = 20.0;
+const SEL = 7.95, TOUT = 8.8, P1 = 9.7, P2 = 10.6, M0 = 12.5, VIDE = 14.6, RETOUR = 15.6;
+const FIN = 18.8;
+window.ORA_DURATION = 21.8;
 const CFG = {
   textes: [
     { a: 0, b: 3.0, label: 'iPhone plein · 2/3', titre: 'La même photo,|en double.', sous: 'Parfois en triple.', visible: true },
     { a: 3.0, b: 7.2, label: 'Étape 1', titre: 'Collections ›|Doublons' },
-    { a: 7.2, b: 11.0, label: 'Étape 2', titre: 'Sélect., tout,|puis Fusionner.' },
-    { a: 11.0, b: 13.8, titre: 'Une photo|reste.', sous: 'La meilleure version.', retard: 0.8 },
-    { a: 13.8, b: FIN, label: 'Les copies', titre: 'Partent dans|Suppr. récemment', sous: 'Videz-le pour libérer l’espace.', retard: 0.9 },
+    { a: 7.2, b: P2, label: 'Étape 2', titre: 'Sélect., tout,|puis Fusionner.' },
+    { a: M0, b: RETOUR, titre: 'Une photo|reste.', sous: 'La meilleure version.', retard: 0.8 },
+    { a: RETOUR, b: FIN, label: 'Les copies', titre: 'Partent dans|Suppr. récemment', sous: 'Videz-le pour libérer l’espace.', retard: 0.9 },
     { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Partie 2 sur 3 · La suite : WhatsApp.', retard: 0.5 },
   ],
-  nav: [[0, 'p-accueil', 0], [3.5, 'p-phototheque', 0], [4.4, 'p-collections', 0], [6.45, 'p-doublons', 1], [13.8, 'p-collections', -1]],
+  nav: [[0, 'p-accueil', 0], [3.5, 'p-phototheque', 0], [4.4, 'p-collections', 0], [6.45, 'p-doublons', 1], [RETOUR, 'p-collections', -1]],
   defil: [[0, 'p-collections', 0], [4.8, 'p-collections', 'sec-autres:330']],
-  taps: [[3.3, '#app-photos'], [4.2, '#tab-col-lib'], [6.2, '#r-doub'], [7.8, '#b-select'], [8.8, '#b-toutsel'], [9.7, '#b-fusion'], [10.5, '#b-fus-ok']],
-  surbrillance: [[2.9, 3.4, '#app-photos', 'hl-ic'], [5.7, 6.45, '#r-doub', 'hl-txt'], [7.5, 7.9, '#b-select', 'hl-txt'], [8.5, 8.9, '#b-toutsel', 'hl-txt'],
-                 [9.4, 9.8, '#b-fusion', 'hl-txt'], [10.2, 10.6, '#b-fus-ok', 'hl-txt'], [14.4, 16.9, '#r-supp', 'hl-txt']],
+  taps: [[3.3, '#app-photos'], [4.2, '#tab-col-lib'], [6.2, '#r-doub'], [7.8, '#b-select'], [8.7, '#b-toutsel'], [9.6, '#b-fusion'], [10.5, '#b-fus-tous'], [12.3, '#b-fus-ok']],
+  surbrillance: [[2.9, 3.4, '#app-photos', 'hl-ic'], [5.7, 6.45, '#r-doub', 'hl-txt'], [7.5, 7.9, '#b-select', 'hl-txt'], [8.4, 8.8, '#b-toutsel', 'hl-txt'],
+                 [9.3, 9.7, '#b-fusion', 'hl-txt'], [10.1, 10.6, '#b-fus-tous', 'hl-txt'], [11.0, 12.45, '#cle', 'on-c'], [11.95, 12.4, '#b-fus-ok', 'hl-txt'],
+                 [RETOUR + 0.6, FIN - 0.1, '#r-supp', 'hl-txt']],
   camera: [[0, 0.72, '#phone', 1200], [3.5, 0.62, '#phone', 1060], [5.2, 1.0, '#r-doub', 1260], [6.45, 0.62, '#phone', 1060],
-           [M0, 1.1, '#grp-1', 1330], [13.8, 1.0, '#r-supp', 1420]],
+           [P2, 1.25, '#pop2', 1180], [12.45, 1.1, '#grp-1', 1330], [13.9, 0.62, '#phone', 1130], [RETOUR, 1.0, '#r-supp', 1420]],
   fin: FIN,
-  sons: { souffles: [3.0, 7.2, 11.0, 13.8, FIN], crans: [0.55, 1.05].concat(GROUPES.map((g, i) => M0 + i * 0.12 + 0.45)), impact: FIN + 0.9 },
+  sons: { souffles: [3.0, 7.2, M0, RETOUR, FIN], crans: [0.55, 1.05].concat(GROUPES.map((g, i) => M0 + 0.45 + i * 0.12 + 0.45)), impact: FIN + 0.9 },
   apres: t => {
     const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
     const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
-    const $ = s => document.querySelector(s);
+    const $ = s => document.querySelector(s), show = (s, v) => { $(s).style.opacity = v; };
 
     // --- ouverture : une photo, puis sa copie, puis une troisième ---
     const cartes = [...document.querySelectorAll('#intro .carte-i')];
     const cible = [[0, 0], [190, 6], [-190, -6]];
     cartes.forEach((c, i) => {
-      const k = i === 0 ? 1 : out((t - (i === 1 ? 0.3 : 0.8)) / 0.45);
-      c.style.opacity = i === 0 || t >= (i === 1 ? 0.3 : 0.8) ? 1 : 0;
+      const t0 = i === 1 ? 0.3 : 0.8, k = i === 0 ? 1 : out((t - t0) / 0.45);
+      c.style.opacity = i === 0 || t >= t0 ? 1 : 0;
       c.style.zIndex = 3 - i;
       c.style.transform = `translateX(${cible[i][0] * k}px) rotate(${cible[i][1] * k}deg) scale(${i === 0 ? 1 : 0.92 + 0.08 * k})`;
     });
@@ -382,33 +423,51 @@ const CFG = {
     const ph = $('#phone');
     if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
 
-    // --- mode sélection ---
-    const sel = t >= 7.95 && t < M0;
-    $('#b-select').style.opacity = sel ? 0 : 1;
-    $('#b-toutsel').style.opacity = sel ? 1 : 0;
-    $('#b-annul').style.opacity = sel ? 1 : 0;
-    document.querySelectorAll('#p-doublons .onglets').forEach(o => o.style.opacity = sel ? 0 : 1);
-    const coche = t >= 8.9 && t < M0;
-    document.querySelectorAll('#groupes .grp').forEach((g, i) => g.querySelectorAll('.vig').forEach(v => v.classList.toggle('coche', coche && t >= 8.9 + i * 0.04)));
-    $('#b-fusion').style.opacity = sel && !(t >= 9.8 && t < 10.6) ? 1 : 0;
-    $('#b-fusion').textContent = coche ? 'Fusionner' : 'Sélectionner des éléments';
-    // confirmation (en bas, au-dessus du bouton)
-    const c = t >= 9.8 && t < 10.6 ? out((t - 9.8) / 0.25) : 0;
-    const cf = $('#d-confirm'); cf.style.opacity = c; cf.style.transform = `translateY(${(1 - c) * 40}px)`;
+    // --- album Doublons : barre du haut, boutons des groupes, barre du bas ---
+    const sel = t >= SEL && t < M0, tout = t >= TOUT + 0.1 && t < M0, apres = t >= VIDE;
+    show('#b-retour', sel ? 0 : 1);
+    show('#b-outils', sel || apres ? 0 : 1);
+    show('#b-select', sel || apres ? 0 : 1);
+    show('#b-pts', apres ? 1 : 0);
+    show('#b-toutsel', sel ? 1 : 0);
+    $('#b-toutsel').textContent = tout ? 'Tout désélectionner' : 'Tout sélectionner';
+    show('#b-annul', sel ? 1 : 0);
+    $('#b-annul-pts').style.display = tout ? '' : 'none';
+    document.querySelectorAll('#groupes .fus').forEach(b => b.textContent = tout ? 'Désélectionner' : sel ? 'Sélectionner' : 'Fusionner');
+    document.querySelectorAll('#groupes .grp').forEach(g => g.querySelectorAll('.ck').forEach(c => c.style.opacity = sel ? 1 : 0));
+    document.querySelectorAll('#groupes .vig').forEach(v => v.classList.toggle('coche', tout));
+    show('#d-onglets', sel ? 0 : 1);
+    show('#barre-sel', sel ? 1 : 0);
+    $('#barre-sel').classList.toggle('vide-sel', !tout);
+    show('#b-vide', tout ? 0 : 1); show('#b-fusion', tout ? 1 : 0);
+    // bulles de confirmation (au-dessus de « Fusionner »)
+    const b1 = t >= P1 && t < P2 ? out((t - P1) / 0.2) : 0;
+    show('#pop1', b1); $('#pop1').style.transform = `scale(${0.94 + 0.06 * b1})`; $('#pop1').style.transformOrigin = '50% 100%';
+    const b2 = t >= P2 && t < 12.45 ? out((t - P2) / 0.2) : 0;
+    show('#pop2', b2); $('#pop2').style.transform = `scale(${0.94 + 0.06 * b2})`; $('#pop2').style.transformOrigin = '50% 100%';
 
-    // --- fusion : les copies glissent dans la première, qui reste ---
-    document.querySelectorAll('#groupes .grp').forEach((g, i) => {
-      const k = io((t - (M0 + i * 0.12)) / 0.45);
+    // --- fusion : chaque groupe se réduit à une photo, puis quitte l'album ---
+    const grs = [...document.querySelectorAll('#groupes .grp')];
+    grs.forEach((g, i) => {
+      const k = io((t - (M0 + 0.45 + i * 0.12)) / 0.45);
       g.querySelectorAll('.case').forEach((cs, j) => {
-        if (j === 0) { cs.querySelector('.vig').classList.toggle('meilleure', k > 0.9 && t < 13.3); return; }
-        cs.style.transform = `translateX(${-j * 201 * k}px) scale(${1 - 0.12 * k})`;
+        if (j === 0) { cs.querySelector('.vig').classList.toggle('meilleure', k > 0.9 && t < 13.85); return; }
+        cs.style.transform = `translateX(${-j * (cs.offsetWidth + 3) * k}px) scale(${1 - 0.12 * k})`;
         cs.style.opacity = 1 - clamp((k - 0.55) / 0.45);
-        cs.style.zIndex = 0;
       });
-      g.querySelector('.fus').style.opacity = 1 - clamp((t - M0) / 0.3);
-      // l'album se vide : plus de doublons
-      g.style.opacity = 1 - out((t - (13.25 + i * 0.06)) / 0.3);
+      g.style.opacity = 1 - out((t - (13.85 + i * 0.1)) / 0.25);
     });
+    const reste = Math.round(186 * (1 - clamp((t - 12.6) / (VIDE - 12.7))));
+    $('#d-n').textContent = reste > 1 ? `${reste} éléments` : `${reste} élément`;
+    show('#d-vide', out((t - VIDE) / 0.3));
+    const to = t >= M0 + 0.05 ? out((t - M0 - 0.05) / 0.2) * (1 - clamp((t - (VIDE + 1.2)) / 0.3)) : 0;
+    show('#toast', to);
+    const fini = t >= VIDE;
+    $('#spin').style.display = fini ? 'none' : ''; $('#fait').style.display = fini ? '' : 'none';
+    $('#spin').style.transform = `rotate(${Math.floor(t * 12) * 45}deg)`;
+    $('#toast-t').textContent = fini ? 'Fusionner les doublons' : 'Fusion des doublons…';
+    $('#toast-n').textContent = fini ? 'Terminé' : `${Math.max(reste, 1)} éléments`;
+    $('#toast').style.color = fini ? 'var(--gris)' : '';
   },
 };
 SCENE(CFG);

@@ -37,6 +37,7 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
 ## Retours du propriétaire
 
+- 2026-11-07 : consigne de voix off : ne plus écrire « Ne pas lire » (compris comme « ne pas dire »). Écrire : **tout se dit, avec vos mots** ; seuls les mots-clés de l'écran, la 1re et la dernière phrase restent exacts.
 - 2026-11-07 : **toute légende, tout texte de voix off proposé va aussitôt dans le brief de la semaine** (`brief.md` + page « ORA • Semaine 1 »), même à l'état de proposition : c'est là que le propriétaire copie.
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
 - 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
@@ -92,9 +93,9 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 
 1. Supprimées récemment (féminin, album verrouillé par code) — Photos › Autres › Supprimées récemment › Sélectionner › Tout supprimer. Vidéo faite le 2026-11-06 (17,6 s), voix off à enregistrer.
 2. Doublons — Photos › Autres › Doublons › Fusionner (vu sur capture : « Doublons 633 »).
-   Brouillon muet v01 (2026-11-07, `stockage-doublons.html`, 20 s) : ouverture « × 2 / × 3 », Collections › Doublons, Sélect. › Tout sélectionner › Fusionner › confirmation, fusion animée, renvoi vers Suppr. récemment (lien avec la partie 1).
-   Vérifié (sources web, iOS 16 à 18) : « Fusionner » par groupe ou après sélection ; garde la meilleure qualité + les données utiles ; les copies vont dans Supprimées récemment (l'espace revient seulement après les avoir vidées).
-   **Non vérifié sur iOS 27.1** : place et libellé de « Tout sélectionner », bouton du bas, texte de confirmation, disposition de l'album. À confirmer par un enregistrement d'écran **avant** d'enregistrer la voix (les mots dits doivent être ceux de l'écran).
+   **Vérifié sur vidéo d'écran iOS 27.1 (2026-11-07)** : Doublons (« N éléments ⓘ », groupes datés avec « Fusionner », vignettes bord à bord avec taille « 161 ko ») ; en haut ‹ · ≡ ··· · « Sélect. » ; Sélect. → « Tout sélectionner » / ✕, groupes « Sélectionner » ; tout coché → « Tout désélectionner » / « ··· ✕ », groupes « Désélectionner » ; en bas partage · « Fusionner (N) » · corbeille ; 1re bulle « Les doublons comprennent… » → « Fusionner N copies exactes uniquement… » / « Fusionner N éléments… » ; 2e bulle « La fusion permettra de conserver une version de chaque ensemble de doublons, qui associe la meilleure qualité d'image et les données pertinentes tout en déplaçant le reste vers l'album « Supprimés récemment ». » → « Fusionner N éléments » ; « Fusion des doublons… N éléments », compteur jusqu'à « 0 élément », « Aucune photo ou vidéo », « Fusionner les doublons · Terminé ».
+   Nom officiel de l'album à l'écrit : **« Supprimés récemment »** (masculin, vu dans la bulle iOS 27.1) ; abrégé « Suppr. récemment » dans Collections.
+   v02 sans voix (21,8 s) faite sur ces écrans ; voix à enregistrer (texte dans le brief).
 3. WhatsApp › Gérer le stockage.
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)

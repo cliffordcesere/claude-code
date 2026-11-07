@@ -96,7 +96,7 @@ TikTok : `Avant d'acheter un iPhone en Haïti : comment repérer un zaza. #iphon
 
 ### Voix off, version parlée (2026-11-06)
 Vous venez d'effacer deux cents photos, et votre iPhone affiche encore : stockage plein. / C'est normal : elles ne sont pas parties. L'iPhone les garde trente jours, au cas où vous changeriez d'avis. / Pour vraiment faire de la place : ouvrez Photos, descendez tout en bas, Supprimées récemment. / Il vous demande votre code, c'est normal. / Touchez Sélectionner, puis Tout supprimer. Et là, la place revient vraiment. / Dans la prochaine vidéo, je vous montre les doublons.
-Ne pas lire : 1re phrase, mots-clés (Photos, Supprimées récemment, Tout supprimer) et dernière phrase fixes ; le reste au naturel.
+Tout se dit, avec vos mots. Seuls les mots-clés (Photos, Supprimées récemment, Tout supprimer), la 1re et la dernière phrase restent exacts.
 
 ### v02 (2026-11-06) — interface iOS 27.1 d'après captures réelles
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO_261106_v02.mp4` (+ MUET), 18,8 s. Parcours : Photos › Collections › Suppr. récemment (Face ID ou code) › Sélect. › glisser › « ··· » › Supprimer › Supprimer de tous les appareils.
@@ -126,23 +126,24 @@ Liste « Stockage iPhone » : logos Photos (fleur), WhatsApp, TikTok, Facebook, 
 
 ## Tuto « iPhone plein » 2/3 — Doublons (2026-11-07)
 
-Brouillon sans voix, 20 s : `ORA_EDUCATION_IPHONE-PLEIN-2_TUTO_261107_v01.mp4` (pas à publier : à valider, puis à recaler sur la voix).
-Photos › Collections › Doublons › Sélect. › Tout sélectionner › Fusionner, puis renvoi vers Supprimées récemment (partie 1). Valeurs fictives.
+v02 sans voix, 21,8 s : `ORA_EDUCATION_IPHONE-PLEIN-2_TUTO_261107_v02.mp4` (sera recalée sur la voix).
+Écrans d'après la vidéo d'écran iOS 27.1 (2026-11-07) : Photos › Collections › Doublons › Sélect. › Tout sélectionner › Fusionner (186) › « Fusionner 186 éléments… » › « Fusionner 186 éléments », puis « 0 élément », « Aucune photo ou vidéo ». Valeurs fictives.
 
 - TikTok : `iPhone plein : la même photo, en double. Partie 2/3. #iphone #stockage #haiti`
 - Commentaire à épingler :
-  > Photos › Collections › Doublons › Sélectionner › Fusionner.
-  > L'iPhone garde la meilleure version. Les copies vont dans Supprimées récemment : videz-le pour libérer l'espace (partie 1).
+  > Photos › Collections › Doublons › Sélect. › Tout sélectionner › Fusionner.
+  > Deux choix s'affichent : « Fusionner … éléments » fusionne tout ; « … copies exactes uniquement » ne touche qu'aux photos identiques (plus prudent).
+  > L'iPhone garde la meilleure version de chaque photo. Le reste va dans Supprimés récemment : videz-le pour libérer l'espace (partie 1).
   > Album Doublons absent : votre iPhone n'en a pas trouvé, ou il les cherche encore.
 
-### Voix off, version parlée
+### Voix off — à dire avec vos mots
 
 > Votre iPhone garde souvent la même photo en double. Parfois en triple.
 > Ouvrez Photos, touchez Collections, puis Doublons.
-> Touchez Sélectionner, Tout sélectionner, puis Fusionner.
+> Touchez Sélectionner, puis Tout sélectionner.
+> En bas, touchez Fusionner. Il vous propose deux choix : prenez celui du bas, puis confirmez.
 > L'iPhone garde la meilleure version de chaque photo.
-> Les copies, elles, partent dans Supprimées récemment : videz-le, comme dans la partie 1, sinon l'espace ne revient pas.
+> Le reste part dans Supprimés récemment : videz-le, comme dans la partie 1, sinon l'espace ne revient pas.
 > Partie 2 sur 3. La suite : WhatsApp.
 
-Ne pas lire. Fixes : première phrase, mots-clés (Photos, Collections, Doublons, Sélectionner, Tout sélectionner, Fusionner, Supprimées récemment), dernière phrase.
-**Avant d'enregistrer** : enregistrement d'écran iOS 27.1 (Doublons › Sélect. › Tout sélectionner › Fusionner, puis Annuler). Si un bouton porte un autre nom, le texte change avec lui.
+Tout se dit, avec vos mots. Restent exacts (l'écran change dessus) : Photos, Collections, Doublons, Sélectionner, Tout sélectionner, Fusionner, Supprimés récemment ; et la 1re et la dernière phrase.
