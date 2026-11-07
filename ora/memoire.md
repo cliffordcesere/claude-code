@@ -22,6 +22,11 @@ La charte évolue avec la pratique : chaque ajustement est proposé, puis versio
 **Toutes les voix off sont la voix du propriétaire. Jamais de voix IA.** Raison : compte sans visage (faceless) ; la voix est le seul élément humain qui construit la confiance. Si la voix n'est pas disponible, on attend plutôt que de publier avec une voix IA.
 ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
+## Idées en attente de décision (2026-11-07)
+
+- Ouverture « poubelle » : le propriétaire propose un petit avatar qui jette quelque chose à la poubelle. Avis : bonne idée de mouvement ; une mascotte est une décision de marque (risque d'effet enfantin). Contre-proposition : des photos qui s'envolent dans l'icône corbeille d'iOS + compteur « 29 jours ». En attente.
+- Logos des apps tierces (WhatsApp, TikTok, Facebook, YouTube) dans les écrans iOS : possibles (usage descriptif ; jamais à côté du logo ORA, §5). En attente.
+
 ## Façon de travailler (demandée par le propriétaire, 2026-11-06)
 
 - **Une question n'est pas un feu vert.** Quand le propriétaire pose une question de stratégie (« et si… ? », « on essaie… ? »), répondre avec un avis argumenté (pour, contre, recommandation), puis attendre sa validation avant d'agir.
@@ -62,7 +67,7 @@ Légende créole écrite par le propriétaire (en réserve, le français est pr�
 
 ## Voix off — prise du 2026-11-07 (« iPhone plein » 1/3)
 
-27,5 s, rythme naturel, texte suivi (méthode « ne pas lire » efficace). Débruitée par le propriétaire (Adobe Podcast) ; ici : égalisation légère, niveau -14 LUFS au mixage, **vitesse non modifiée**. Écrans calés sur les mots-clés (Photos, Collections, Supprimées récemment, Face ID, Sélectionner, points, Tout supprimer). Vidéo finale 28,4 s, gardée hors dépôt.
+27,5 s, rythme naturel, texte suivi (méthode « ne pas lire » efficace). Débruitée par le propriétaire (Adobe Podcast) ; ici : égalisation légère, niveau -14 LUFS au mixage, **vitesse non modifiée**. Écrans calés sur les mots-clés (Photos, Collections, Supprimées récemment, Face ID, Sélectionner, points, Tout supprimer). Vidéo v01 28,4 s ; retour : 10 premières secondes statiques, vidéo un peu longue. v02 : voix +8 % et pauses resserrées (24,6 s), début animé (jauge qui se remplit, ligne Photos, scène « Gardées 30 jours » sur l'album), 25,6 s. **Règle : jamais plus de ~3 s sur un écran fixe, surtout dans les 10 premières secondes ; par défaut, voix accélérée de ~8 % sans changer la hauteur.**
 
 ## Voix off (2026-11-06)
 

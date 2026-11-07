@@ -114,3 +114,6 @@ Voix off : … Touchez Sélectionner, puis les trois petits points, et Tout supp
 `ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v01.mp4` — 28,4 s, voix du propriétaire, écrans calés sur les mots-clés ; icône TV avec la pomme remise. Hors dépôt (voix).
 Rendu : `stockage-supprimees.html?voix` (repères dans `voix.reperes`). Sans voix : `…TUTO_261107_v05.mp4` (+ MUET).
 TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stockage #haiti`
+
+### Version avec voix v02 (2026-11-07) — À PUBLIER
+`ORA_EDUCATION_IPHONE-PLEIN-1_TUTO-VOIX_261107_v02.mp4` — 25,6 s. Voix +8 % (24,6 s), début animé : jauge qui se remplit (0–4 s), ligne Photos (4–6 s), « Pourquoi · Gardées 30 jours » sur l'album avec « 29 jours » (6–9 s), puis le parcours. Sans voix : `…TUTO_261107_v06.mp4` (+ MUET).
