@@ -123,3 +123,26 @@ TikTok : `iPhone plein : vos photos supprimées sont encore là. #iphone #stocka
 
 ### v04 voix / v08 sans voix (2026-11-07) — logos des apps
 Liste « Stockage iPhone » : logos Photos (fleur), WhatsApp, TikTok, Facebook, YouTube en monochrome. `…TUTO-VOIX_261107_v04.mp4` (hors dépôt), `…TUTO_261107_v08.mp4` (+ MUET).
+
+## Tuto « iPhone plein » 2/3 — Doublons (2026-11-07)
+
+Brouillon sans voix, 20 s : `ORA_EDUCATION_IPHONE-PLEIN-2_TUTO_261107_v01.mp4` (pas à publier : à valider, puis à recaler sur la voix).
+Photos › Collections › Doublons › Sélect. › Tout sélectionner › Fusionner, puis renvoi vers Supprimées récemment (partie 1). Valeurs fictives.
+
+- TikTok : `iPhone plein : la même photo, en double. Partie 2/3. #iphone #stockage #haiti`
+- Commentaire à épingler :
+  > Photos › Collections › Doublons › Sélectionner › Fusionner.
+  > L'iPhone garde la meilleure version. Les copies vont dans Supprimées récemment : videz-le pour libérer l'espace (partie 1).
+  > Album Doublons absent : votre iPhone n'en a pas trouvé, ou il les cherche encore.
+
+### Voix off, version parlée
+
+> Votre iPhone garde souvent la même photo en double. Parfois en triple.
+> Ouvrez Photos, touchez Collections, puis Doublons.
+> Touchez Sélectionner, Tout sélectionner, puis Fusionner.
+> L'iPhone garde la meilleure version de chaque photo.
+> Les copies, elles, partent dans Supprimées récemment : videz-le, comme dans la partie 1, sinon l'espace ne revient pas.
+> Partie 2 sur 3. La suite : WhatsApp.
+
+Ne pas lire. Fixes : première phrase, mots-clés (Photos, Collections, Doublons, Sélectionner, Tout sélectionner, Fusionner, Supprimées récemment), dernière phrase.
+**Avant d'enregistrer** : enregistrement d'écran iOS 27.1 (Doublons › Sélect. › Tout sélectionner › Fusionner, puis Annuler). Si un bouton porte un autre nom, le texte change avec lui.

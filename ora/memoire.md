@@ -37,6 +37,7 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
 ## Retours du propriétaire
 
+- 2026-11-07 : **toute légende, tout texte de voix off proposé va aussitôt dans le brief de la semaine** (`brief.md` + page « ORA • Semaine 1 »), même à l'état de proposition : c'est là que le propriétaire copie.
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
 - 2026-11-04 : le motion doit aller plus loin que des fondus de texte.
 - 2026-11-04 : vidéo produit animée (v1) = « un bon début » ; risque perçu : « un bout de câble » → toujours rendre la taille ou la longueur lisible.
