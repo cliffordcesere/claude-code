@@ -470,6 +470,12 @@ const CFG = {
     $('#toast').style.color = fini ? 'var(--gris)' : '';
   },
 };
+// Voix du propriétaire (2026-11-08), +8 %, pauses resserrées : repères [temps voix, temps vidéo]
+// en double 2,0 · triple 3,2 · Photos 5,6 · Collections 6,2 · Doublons 7,4 · Sélectionner 8,6 · tout 9,4 · Fusionner 11,3 · celui du bas 13,8 · confirmez 14,8 · meilleure version 16,9 · Supprimés récemment 18,5
+CFG.voix = {
+  src: 'voix/iphone-plein-2_voix-proprietaire_v1.flac',
+  reperes: [[0.0, 0], [1.991, 0.3], [3.194, 0.8], [3.981, 1.9], [4.339, 2.6], [5.172, 2.9], [5.589, 3.3], [6.19, 4.2], [7.394, 6.2], [8.645, 7.8], [9.432, 8.7], [10.878, 9.25], [11.341, 9.6], [11.48, 9.75], [13.378, 10.1], [13.794, 10.5], [14.813, 12.3], [15.044, 12.5], [16.891, 13.85], [17.262, 14.6], [17.834, 15.6], [18.482, 16.2], [22.278, 18.8], [25.278, 21.8]],
+};
 SCENE(CFG);
 </script>
 </body>

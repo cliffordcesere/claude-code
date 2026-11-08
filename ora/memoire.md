@@ -95,7 +95,7 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 2. Doublons — Photos › Autres › Doublons › Fusionner (vu sur capture : « Doublons 633 »).
    **Vérifié sur vidéo d'écran iOS 27.1 (2026-11-07)** : Doublons (« N éléments ⓘ », groupes datés avec « Fusionner », vignettes bord à bord avec taille « 161 ko ») ; en haut ‹ · ≡ ··· · « Sélect. » ; Sélect. → « Tout sélectionner » / ✕, groupes « Sélectionner » ; tout coché → « Tout désélectionner » / « ··· ✕ », groupes « Désélectionner » ; en bas partage · « Fusionner (N) » · corbeille ; 1re bulle « Les doublons comprennent… » → « Fusionner N copies exactes uniquement… » / « Fusionner N éléments… » ; 2e bulle « La fusion permettra de conserver une version de chaque ensemble de doublons, qui associe la meilleure qualité d'image et les données pertinentes tout en déplaçant le reste vers l'album « Supprimés récemment ». » → « Fusionner N éléments » ; « Fusion des doublons… N éléments », compteur jusqu'à « 0 élément », « Aucune photo ou vidéo », « Fusionner les doublons · Terminé ».
    Nom officiel de l'album à l'écrit : **« Supprimés récemment »** (masculin, vu dans la bulle iOS 27.1) ; abrégé « Suppr. récemment » dans Collections.
-   v02 sans voix (21,8 s) faite sur ces écrans ; voix à enregistrer (texte dans le brief).
+   v02 sans voix (21,8 s) faite sur ces écrans. **Voix du propriétaire reçue le 2026-11-08** (25,5 s, déjà débruitée, -25,6 LUFS) : +8 %, pauses plafonnées → 22,7 s ; vidéo avec voix 25,3 s, -14,5 LUFS (rendu à -15,8 : +3 dB et limiteur ajoutés après coup). Phrase de fin non enregistrée (affichée à l'écran).
 3. WhatsApp › Gérer le stockage.
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)

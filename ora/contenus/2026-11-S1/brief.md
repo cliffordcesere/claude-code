@@ -147,3 +147,8 @@ v02 sans voix, 21,8 s : `ORA_EDUCATION_IPHONE-PLEIN-2_TUTO_261107_v02.mp4` (sera
 > Partie 2 sur 3. La suite : WhatsApp.
 
 Tout se dit, avec vos mots. Restent exacts (l'écran change dessus) : Photos, Collections, Doublons, Sélectionner, Tout sélectionner, Fusionner, Supprimés récemment ; et la 1re et la dernière phrase.
+
+### Version avec voix (2026-11-08) — À PUBLIER
+
+`ORA_EDUCATION_IPHONE-PLEIN-2_TUTO-VOIX_261108_v01.mp4` (25,3 s, hors dépôt). Voix +8 %, pauses resserrées, -14,5 LUFS. Écrans calés sur : en double, triple, Photos, Collections, Doublons, Sélectionner, tout, Fusionner, celui du bas, confirmez, meilleure version, Supprimés récemment.
+La dernière phrase (« Partie 2 sur 3. La suite : WhatsApp. ») n'est pas dans la prise ; l'écran de fin l'affiche en texte.
