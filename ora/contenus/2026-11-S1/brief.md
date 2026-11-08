@@ -150,5 +150,5 @@ Tout se dit, avec vos mots. Restent exacts (l'écran change dessus) : Photos, Co
 
 ### Version avec voix (2026-11-08) — À PUBLIER
 
-`ORA_EDUCATION_IPHONE-PLEIN-2_TUTO-VOIX_261108_v01.mp4` (25,3 s, hors dépôt). Voix +8 %, pauses resserrées, -14,5 LUFS. Écrans calés sur : en double, triple, Photos, Collections, Doublons, Sélectionner, tout, Fusionner, celui du bas, confirmez, meilleure version, Supprimés récemment.
+`ORA_EDUCATION_IPHONE-PLEIN-2_TUTO-VOIX_261108_v02.mp4` (24,7 s, hors dépôt) — fichier Adobe Podcast « optimisé v2 » (la v01 avait été faite sur le mauvais fichier, supprimée). Voix +8 %, pauses resserrées, traitement « pièce vide », -14,7 LUFS. Écrans calés sur : en double, triple, Photos, Collections, Doublons, Sélectionner, tout, Fusionner, celui du bas, confirmez, meilleure version, Supprimés récemment.
 La dernière phrase (« Partie 2 sur 3. La suite : WhatsApp. ») n'est pas dans la prise ; l'écran de fin l'affiche en texte.

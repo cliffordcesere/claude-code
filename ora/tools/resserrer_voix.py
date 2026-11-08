@@ -23,11 +23,14 @@ def carte(t):
     return acc / tempo
 filt = ''.join(f'[0:a]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS[s{i}];' for i, (a, b) in enumerate(keep))
 filt += ''.join(f'[s{i}]' for i in range(len(keep))) + f'concat=n={len(keep)}:v=0:a=1,atempo={tempo},'
-filt += ('highpass=f=90,equalizer=f=250:t=o:w=1.4:g=-4.5,equalizer=f=500:t=o:w=1:g=-1.5,'
-         'equalizer=f=3500:t=o:w=1.6:g=3.5,highshelf=f=9000:g=2,'
+# Traitement « pièce vide » (2026-11-08) : queues de réverbération raccourcies (expandeur avant l'égalisation),
+# son de boîte retiré (190, 380, 650 Hz), clarté rendue (2,2 et 4 kHz, aigus), sifflantes tenues.
+filt += ('highpass=f=85,'
          'agate=threshold=0.018:ratio=2.5:attack=4:range=0.25:release=140,'
+         'equalizer=f=190:t=o:w=1:g=-4,equalizer=f=380:t=o:w=0.8:g=-6,equalizer=f=650:t=o:w=1:g=-2.5,'
+         'equalizer=f=2200:t=o:w=1.2:g=3,equalizer=f=4000:t=o:w=1.2:g=2,highshelf=f=8000:g=2.5,deesser=i=0.35,'
          'acompressor=threshold=-20dB:ratio=2.5:attack=6:release=110:makeup=2,'
-         'loudnorm=I=-14:TP=-1.2:LRA=7,aresample=48000[o]')
+         'loudnorm=I=-14:TP=-1.5:LRA=7,aresample=48000[o]')
 subprocess.run(['ffmpeg','-loglevel','error','-y','-i',src,'-filter_complex',filt,'-map','[o]',out], check=True)
 new = []; last = -1
 for tv, tvid in rep[:-1]:
