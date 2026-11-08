@@ -170,7 +170,15 @@ En préparation : écrans WhatsApp d'après une vidéo d'écran à recevoir. Ouv
 > Commencez par Plus de 5 Mo : ce sont les grosses vidéos qu'on vous a envoyées.
 > Touchez Sélectionner, choisissez ce que vous ne voulez plus, puis supprimez.
 > Et regardez la liste en dessous : les groupes sont souvent les plus lourds.
-> Fin de la série. Enregistrez-la : un jour, votre iPhone sera encore plein.
+> Fin de la série. Demain, le bonus : le réglage qui remplit votre iPhone en cachette.
 
 Libellés à confirmer par la vidéo d'écran (Vous ou Réglages, Plus de 5 Mo, Supprimer) avant l'enregistrement.
-Vidéo d'écran demandée : accueil › WhatsApp › onglet bas droite › Stockage et données › Gérer le stockage › Plus de 5 Mo › Sélectionner › 1–2 fichiers › corbeille › Annuler ; puis une discussion de la liste.
+Brouillon v01 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261108_v01.mp4`, écrans WhatsApp reconstruits d'après la presse. Vérification : la copine compare le brouillon avec son WhatsApp (capture de l'écran qui diffère).
+
+## Bonus « iPhone plein » — le réglage qui le remplit en cachette (validé le 2026-11-08)
+
+WhatsApp › Vous › Discussions › « Enregistrer dans Pellicule » désactivé. À faire après la partie 3.
+- TikTok : `iPhone plein, le bonus : le réglage WhatsApp qui le remplit en cachette. #iphone #stockage #whatsapp #haiti`
+- Commentaire : WhatsApp › Vous › Discussions › Enregistrer dans Pellicule : désactivé. / Les photos reçues restent dans WhatsApp. Celles que vous voulez garder, enregistrez-les vous-même. / La série complète : Supprimés récemment, Doublons, WhatsApp.
+- Voix provisoire : Chaque photo qu'on vous envoie sur WhatsApp, votre iPhone la copie dans Photos. Sans rien vous dire. / Ouvrez WhatsApp, touchez Vous, puis Discussions. / Désactivez Enregistrer dans Pellicule. / Les photos restent dans WhatsApp. Celles que vous voulez garder, enregistrez-les vous-même. / Votre iPhone se remplira beaucoup moins vite.
+- À vérifier : libellé et état par défaut de l'option.

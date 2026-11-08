@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — tuto « iPhone plein » 3/3 : WhatsApp</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Tuto 9:16, ~20 s (brouillon sans voix). Série « iPhone plein », partie 3/3.
+  Stockage iPhone et écran d'accueil : repris de la partie 1 (iOS 27.1). La tuile WhatsApp occupe la place de Chrome.
+  WhatsApp (iPhone) : reconstruit d'après la presse 2025–2026, PAS d'après une vidéo d'écran :
+    onglet « Vous » (photo de profil, depuis mars 2026 ; libellé FR à confirmer) › Stockage et données › Gérer le stockage ›
+    « Plus de 5 Mo » › Sélectionner › corbeille › confirmation (texte à confirmer).
+  Valeurs et noms fictifs.
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-whatsapp.html sortie.mp4
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  /* ---------- Textes ORA ---------- */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 262px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 20px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: 50px; font-weight: 300; line-height: 1.3; margin-top: 16px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .bloc.centre { top: 290px; text-align: center; }
+  #logoV { position: absolute; left: 50%; top: 880px; width: 260px; margin-left: -130px; opacity: 0; }
+  #contact { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #contact .cta { font-size: 40px; }
+  #contact .lieu { font-size: 30px; color: var(--gris); margin-top: 14px; font-weight: 300; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+
+  /* ---------- Téléphone : interface iOS 27 (captures fournies), palette ORA ---------- */
+  #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
+  .phone {
+    position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
+    border-radius: 108px; background: #000; padding: 14px;
+    box-shadow: 0 0 0 2px #2a2a2a, 0 0 0 8px #141414, 0 0 0 9px #3a3a3a;
+  }
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 96px; overflow: hidden; background: #000;
+           font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
+  .ilot { position: absolute; left: 50%; top: 24px; width: 180px; height: 52px; margin-left: -90px; border-radius: 30px; background: #000; z-index: 6; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 58px 0 76px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 10px; align-items: center; }
+  .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+  .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
+  .barres i.off { background: rgba(250,250,250,.35); }
+  .pct { min-width: 52px; height: 26px; padding: 0 6px; border-radius: 8px; background: var(--blanc); color: #000; font: 700 20px/26px "Jost", sans-serif; text-align: center; position: relative; }
+  .pct::after { content: ""; position: absolute; right: -6px; top: 8px; width: 3px; height: 10px; border-radius: 0 2px 2px 0; background: rgba(250,250,250,.5); }
+
+  .page { position: absolute; inset: 0; background: #000; padding-top: 104px; will-change: transform; }
+  .nav { position: relative; height: 104px; display: flex; align-items: center; padding: 0 26px; }
+  .nav .rond { width: 78px; height: 78px; border-radius: 50%; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 66px; font-weight: 700; letter-spacing: -.01em; padding: 40px 40px 26px; }
+  .groupe { margin: 0 26px 30px; background: #1C1C1C; border-radius: 40px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 84px; padding: 0 30px; font-size: 30px; }
+  .row + .row::before { content: ""; position: absolute; left: 104px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 30px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 14px; background: #2e2e2e; display: grid; place-items: center; color: var(--blanc); flex: none; }
+  .row .nom { flex: 1; white-space: nowrap; }
+  .row .val { color: var(--gris); white-space: nowrap; }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 6px; }
+  .compte { display: flex; align-items: center; gap: 24px; padding: 22px 30px; }
+  .avatar { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; display: grid; place-items: center; font-size: 36px; font-weight: 600; color: var(--blanc); flex: none; }
+  .compte .nom { font-size: 34px; font-weight: 600; }
+  .compte .sous-c { font-size: 25px; color: var(--gris); margin-top: 4px; }
+  .compte .fl { margin-left: auto; color: #5a5a5a; font-size: 38px; }
+  .toggle { width: 98px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 62px; height: 50px; border-radius: 26px; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 32px; background: #000; }
+  .note { color: var(--gris); font-size: 24px; line-height: 1.35; padding: 0 56px 26px; margin-top: -18px; }
+  .recherche { position: absolute; left: 34px; right: 34px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; align-items: center; gap: 16px; padding: 0 30px; color: var(--gris); font-size: 30px; z-index: 3; }
+  .recherche .m { margin-left: auto; color: var(--blanc); }
+  .carte { margin: 20px 26px 30px; background: #1C1C1C; border-radius: 40px; padding: 30px; }
+  .carte .gros { font-size: 72px; font-weight: 700; } .carte .gros small { font-size: 36px; }
+  .carte .info { font-size: 24px; color: var(--gris); margin-top: 4px; }
+  .jauge { height: 14px; border-radius: 7px; background: #333; margin-top: 20px; overflow: hidden; } .jauge b { display: block; height: 100%; width: 92%; background: var(--blanc); border-radius: 7px; }
+  .graph { padding: 26px 30px 30px; }
+  .g-titre { font-size: 26px; font-weight: 600; margin-bottom: 4px; } .g-sous { font-size: 22px; color: var(--gris); margin-bottom: 18px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+  .barres-g i { flex: 1; background: #555; border-radius: 6px 6px 0 0; } .barres-g i.auj { background: var(--blanc); }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
+  .row.hl { border-radius: 0; }
+  .flou { filter: blur(9px); }
+  .lettre { font-weight: 400; } .lettre.on { color: var(--cuivre); font-weight: 700; }
+
+  /* écran d'accueil */
+  .accueil { padding-top: 0; background: radial-gradient(ellipse 90% 60% at 30% 18%, #262626 0%, #121212 45%, #0A0A0A 75%); }
+  .widgets { position: absolute; left: 34px; right: 34px; top: 118px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .widget { display: grid; gap: 10px; justify-items: center; }
+  .widget em { font-style: normal; font-size: 22px; color: var(--blanc); }
+  .w-cal, .w-pile { width: 100%; aspect-ratio: 1; border-radius: 58px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); padding: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .w-cal small { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: var(--gris); }
+  .w-cal b { font-size: 76px; font-weight: 500; line-height: 1; }
+  .w-cal span { margin-top: auto; font-size: 22px; color: var(--gris); }
+  .w-pile b { font-size: 60px; font-weight: 600; margin-top: auto; } .w-pile span { font-size: 22px; color: var(--gris); }
+  .w-pile i { display: block; height: 12px; border-radius: 6px; background: #3a3a3a; margin-top: 12px; overflow: hidden; } .w-pile u { display: block; height: 100%; background: var(--blanc); }
+  .grille { position: absolute; left: 34px; right: 34px; top: 520px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 30px; justify-items: center; }
+  .app { display: grid; gap: 10px; justify-items: center; }
+  .app span { font-size: 21px; color: var(--blanc); white-space: nowrap; }
+  .tuile { width: 124px; height: 124px; border-radius: 30px; background: linear-gradient(160deg, #303030, #1a1a1a); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); display: grid; place-items: center; color: var(--blanc); position: relative; }
+  .tuile.cal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+  .tuile.cal small { font-size: 20px; font-weight: 700; color: var(--gris); } .tuile.cal b { font-size: 56px; font-weight: 400; line-height: 1; }
+  .tuile.hl-ic { box-shadow: 0 0 0 5px var(--cuivre), inset 0 1px 0 rgba(250,250,250,.16); }
+  .recherche-a { position: absolute; left: 50%; transform: translateX(-50%); bottom: 236px; height: 56px; padding: 0 26px; border-radius: 28px; background: rgba(40,40,40,.9); display: flex; align-items: center; gap: 10px; color: var(--blanc); font-size: 24px; }
+  .dock { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 172px; border-radius: 64px; background: rgba(38,38,38,.88); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; }
+  /* clavier téléphone */
+  .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
+  .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
+  .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
+  .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
+  .feuille { position: absolute; left: 50px; right: 50px; top: 420px; background: #1C1C1C; border-radius: 44px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 34px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 28px; color: var(--gris); margin-bottom: 6px; }
+  .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 32px; font-weight: 600; }
+
+  .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
+
+  /* ---------- Photos iOS 27.1 ---------- */
+  .onglets { position: absolute; left: 30px; right: 30px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; z-index: 3; }
+  .ong-g { display: flex; padding: 6px; border-radius: 60px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  .ong { width: 180px; height: 104px; border-radius: 52px; display: grid; justify-items: center; align-content: center; gap: 2px; color: var(--blanc); }
+  .ong small { font-size: 19px; font-weight: 600; }
+  .ong.on { background: #3a3a3a; }
+  .ong-r { width: 116px; height: 116px; border-radius: 50%; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; }
+  .rond-s { width: 78px; height: 78px; border-radius: 50%; background: #262626; display: grid; place-items: center; font-size: 30px; letter-spacing: 2px; }
+  .ph-sec { position: relative; }
+  .ph-sec .pli { position: absolute; right: 40px; top: 36px; width: 52px; height: 52px; border-radius: 50%; background: #1d1d1d; font-style: normal; display: grid; place-items: center; font-size: 26px; }
+  .ph-voy { position: relative; width: 240px; margin-left: 40px; } .ph-voy .vig { border-radius: 26px; } .ph-voy em { position: absolute; left: 18px; bottom: 14px; font-style: normal; font-size: 24px; }
+  .ph-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; padding: 0 34px 0 40px; }
+  .pil { position: relative; display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 20px; border-radius: 20px; background: #1d1d1d; font-size: 27px; white-space: nowrap; overflow: hidden; }
+  .pil svg { flex: none; color: var(--gris); }
+  .pil .cad { margin-left: auto; color: var(--gris); display: grid; }
+  .ph-fonds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 34px 0 40px; } .ph-fonds .vig { aspect-ratio: .56; border-radius: 26px; }
+  .faceid { position: absolute; left: 50%; top: 14px; width: 170px; height: 170px; margin: 0 0 0 -85px; border-radius: 60px; background: #000 !important; background: rgba(40,40,40,.95); display: grid; place-items: center; opacity: 0; z-index: 6; }
+  .alb-sous { display: flex; align-items: center; gap: 10px; padding: 6px 40px 26px; font-size: 30px; font-weight: 600; }
+  .alb-sous svg:last-child { color: var(--gris); }
+  .nav .tri { position: absolute; right: 190px; }
+  .pill-menu { opacity: 0; }
+  .vig .ck { position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 50%; background: var(--blanc); color: #000; display: grid; place-items: center; opacity: 0; }
+  .vig.coche .ck { opacity: 1; } .vig.coche { filter: brightness(.75); }
+  .onglets-wrap { position: absolute; inset: auto 0 0 0; height: 200px; }
+  .sel-pill { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); height: 84px; padding: 0 34px; border-radius: 42px; background: rgba(40,40,40,.95); display: grid; place-items: center; font-size: 30px; font-weight: 600; white-space: nowrap; opacity: 0; z-index: 4; }
+  .menu-g { position: absolute; right: 22px; top: 130px; width: 470px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 18px 0; display: grid; opacity: 0; transform: scale(.9); transform-origin: top right; z-index: 5; }
+  .menu-g span { display: flex; align-items: center; gap: 22px; height: 84px; padding: 0 38px; font-size: 32px; }
+  .menu-g .danger, .confirm-g .danger { color: var(--blanc); font-weight: 700; }
+  .confirm-g { position: absolute; left: 22px; right: 22px; top: 130px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 36px 30px 30px; display: grid; gap: 26px; opacity: 0; transform: translateY(-20px); z-index: 5; }
+  .confirm-g p { margin: 0; font-size: 28px; line-height: 1.35; color: var(--blanc); padding: 0 10px; }
+  .confirm-g span { height: 92px; border-radius: 46px; background: #3a3a3a; display: grid; place-items: center; font-size: 30px; }
+
+  /* ---------- Stockage iPhone ---------- */
+  .contenu { will-change: transform; }
+  .stock { margin-top: 20px; }
+  .st-haut { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; }
+  .st-haut span { color: var(--gris); font-size: 26px; }
+  .st-barre { display: flex; gap: 3px; height: 30px; margin: 22px 0 18px; border-radius: 8px; overflow: hidden; background: #2a2a2a; }
+  .seg { display: block; height: 100%; }
+  .s-photos { background: var(--blanc); } .s-apps { background: #8A8A8A; } .s-ios { background: #5a5a5a; } .s-sys { background: #3e3e3e; }
+  #seg-photos { width: 60%; } .seg.s-apps { width: 15%; } .seg.s-ios { width: 12%; } .seg.s-sys { width: 9%; }
+  .st-leg { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 22px; color: var(--gris); }
+  .st-leg .pt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+  .app-st { min-height: 100px; }
+  .app-st .icone b { font-size: 26px; }
+  .app-st .nom small { display: block; font-size: 22px; color: var(--gris); margin-top: 2px; }
+  /* ---------- Photos ---------- */
+  .ph-entete { display: flex; align-items: center; gap: 16px; padding: 124px 34px 24px; }
+  .ph-titre { font-size: 66px; font-weight: 700; flex: 1; }
+  .ph-rech { display: flex; align-items: center; gap: 8px; height: 62px; padding: 0 22px; border-radius: 31px; background: #2a2a2a; font-size: 26px; font-weight: 600; }
+  .ph-av { width: 62px; height: 62px; border-radius: 50%; background: #3a3a3a; }
+  .ph-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vig { display: block; aspect-ratio: 1; position: relative; }
+  .vig em { position: absolute; left: 8px; bottom: 6px; font-style: normal; font-size: 22px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .ph-sec { font-size: 40px; font-weight: 700; padding: 40px 40px 18px; }
+  .ph-sec span { color: var(--gris); }
+  .ph-row .pic { width: 46px; display: grid; place-items: center; color: var(--blanc); }
+  .ph-row .val svg { display: block; color: var(--gris); }
+  .ph-albums { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 26px; }
+  .ph-albums .vig { border-radius: 26px; }
+  .gt2 { font-size: 58px; font-weight: 700; line-height: 1.05; padding: 10px 40px 0; }
+  .verrou { display: grid; justify-items: center; gap: 26px; margin-top: 360px; text-align: center; padding: 0 60px; color: var(--gris); }
+  .verrou p { margin: 0; font-size: 36px; font-weight: 700; color: var(--blanc); line-height: 1.25; }
+  .verrou span { font-size: 30px; font-weight: 600; color: var(--blanc); text-decoration: underline; text-underline-offset: 6px; }
+  .nav .pill { position: absolute; right: 26px; height: 66px; padding: 0 26px; border-radius: 33px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
+  .alb-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vide { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 34px; font-weight: 600; color: var(--gris); opacity: 0; }
+  .barre-outils { position: absolute; left: 26px; right: 26px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.95); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; justify-content: space-between; align-items: center; padding: 0 36px; font-size: 28px; font-weight: 600; opacity: 0; z-index: 3; }
+  .barre-outils span { padding: 10px 6px; border-radius: 20px; }
+  .feuille-a { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #1f1f1f; border-radius: 44px; padding: 34px 30px 26px; display: grid; gap: 14px; text-align: center; transform: translateY(120%); z-index: 4; box-shadow: 0 -10px 40px rgba(0,0,0,.6); }
+  .feuille-a p { margin: 0 0 6px; font-size: 24px; color: var(--gris); }
+  .feuille-a span { height: 86px; border-radius: 43px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #2e2e2e; }
+  .feuille-a .danger { color: var(--blanc); font-weight: 700; }
+  .hl-txt { outline: 4px solid var(--cuivre); outline-offset: 4px; }
+
+  /* ---------- Écran d'accueil iOS 27.1 (d'après capture) ---------- */
+  #p-accueil .widgets { top: 112px; gap: 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #p-accueil .widget em { font-size: 22px; }
+  .w-meteo, .w-photo { width: 100%; aspect-ratio: 1; border-radius: 56px; }
+  .w-meteo { background: linear-gradient(170deg, #4a4a4a, #2c2c2c); padding: 26px 28px; display: flex; flex-direction: column; color: var(--blanc); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); }
+  .w-meteo b { font-size: 26px; font-weight: 600; } .w-meteo strong { font-size: 76px; font-weight: 300; line-height: 1; margin: 2px 0 auto; }
+  .w-meteo span { font-size: 24px; font-weight: 500; } .w-meteo svg { margin-bottom: 4px; }
+  .w-photo { background: radial-gradient(circle at 45% 40%, #7a7a7a 0%, #4a4a4a 45%, #262626 100%); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  #p-accueil .grille { top: 470px; row-gap: 22px; }
+  .tuile.i27 { background: linear-gradient(165deg, #2e2e2e, #121212); overflow: hidden; padding: 0; }
+  .tuile.i27 svg { display: block; }
+  .tuile.i27.cal small { color: var(--gris); font-size: 22px; font-weight: 600; margin-bottom: -2px; } .tuile.i27.cal b { font-size: 64px; font-weight: 400; }
+  #p-accueil .recherche-a { bottom: 190px; }
+  #p-accueil .dock { bottom: 24px; height: 150px; border-radius: 58px; }
+
+  /* ---------- Ouverture « poubelle » ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #poubelle { position: absolute; left: 540px; top: 1180px; width: 300px; height: 300px; margin: -150px 0 0 -150px; color: var(--blanc); transform-origin: 50% 80%; }
+  #vols .vol { position: absolute; left: 0; top: 0; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; }
+  #intro-jours { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #intro-jours b { display: block; font-size: 64px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
+  #intro-jours span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
+  .icone.logo-app { padding: 4px; } .icone.logo-app svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- WhatsApp (iPhone, mode sombre, palette ORA) ---------- */
+  .wa-haut { display: flex; justify-content: space-between; align-items: center; height: 96px; padding: 0 26px; }
+  .wa-haut .d { display: flex; gap: 18px; }
+  .wa-titre { font-size: 64px; font-weight: 700; padding: 0 30px 18px; }
+  .wa-rech { margin: 0 26px 18px; height: 72px; border-radius: 36px; background: #1f1f1f; display: flex; align-items: center; gap: 12px; padding: 0 24px; color: var(--gris); font-size: 26px; white-space: nowrap; }
+  .wa-puces { display: flex; gap: 12px; padding: 0 26px 10px; }
+  .wa-puces span { height: 58px; padding: 0 22px; border-radius: 29px; background: #1f1f1f; font-size: 25px; display: grid; place-items: center; color: var(--gris); }
+  .wa-puces .on { background: #3a3a3a; color: var(--blanc); font-weight: 600; }
+  .wa-chat { display: flex; align-items: center; gap: 22px; padding: 14px 26px 0; }
+  .wa-av { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; flex: none; display: grid; place-items: center; font-size: 34px; font-weight: 600; color: var(--blanc); }
+  .wa-chat .t { flex: 1; min-width: 0; border-bottom: 1px solid #222; padding-bottom: 14px; }
+  .wa-chat .l1 { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; font-weight: 600; }
+  .wa-chat .l1 small { font-size: 22px; color: var(--gris); font-weight: 400; }
+  .wa-chat .l2 { font-size: 25px; color: var(--gris); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 6px; }
+  .wa-tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: #121212; border-top: 1px solid #222; display: grid; grid-template-columns: repeat(5, 1fr); padding-top: 16px; z-index: 3; }
+  .wa-tab { display: grid; justify-items: center; align-content: start; gap: 6px; color: var(--gris); font-size: 19px; }
+  .wa-tab.on { color: var(--blanc); font-weight: 600; }
+  .wa-tab .mini { width: 40px; height: 40px; border-radius: 50%; background: #6a6a6a; display: grid; place-items: center; font-size: 20px; font-weight: 700; color: var(--blanc); }
+  .wa-tab.on .mini { box-shadow: 0 0 0 3px var(--blanc); }
+  .wa-profil { display: grid; justify-items: center; gap: 8px; padding: 10px 0 34px; }
+  .wa-profil .gros-av { width: 190px; height: 190px; border-radius: 50%; background: #4a4a4a; display: grid; place-items: center; font-size: 78px; font-weight: 600; margin-bottom: 8px; }
+  .wa-profil b { font-size: 40px; } .wa-profil span { font-size: 26px; color: var(--gris); }
+  .wa-sec { font-size: 23px; color: var(--gris); padding: 6px 56px 12px; text-transform: uppercase; letter-spacing: .04em; }
+  .wa-note { font-size: 23px; color: var(--gris); padding: 0 56px 24px; margin-top: -16px; line-height: 1.35; }
+  .row .val small { display: block; font-size: 21px; text-align: right; }
+  .wa-barre { margin: 6px 26px 26px; background: #1C1C1C; border-radius: 40px; padding: 28px 30px; }
+  .wa-barre .l { display: flex; justify-content: space-between; align-items: baseline; font-size: 26px; color: var(--gris); }
+  .wa-barre .l b { font-size: 46px; color: var(--blanc); }
+  .wa-jauge { display: flex; gap: 3px; height: 22px; border-radius: 11px; overflow: hidden; background: #2a2a2a; margin: 18px 0 14px; }
+  .wa-jauge i { display: block; height: 100%; }
+  .wa-leg { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 22px; color: var(--gris); }
+  .wa-leg .pt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+  .wa-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 26px 26px; }
+  .wa-carte { background: #1c1c1c; border-radius: 30px; padding: 22px; }
+  .wa-carte .vigs { display: flex; gap: 6px; margin-bottom: 16px; }
+  .wa-carte .vigs i { width: 62px; height: 62px; border-radius: 12px; }
+  .wa-carte b { display: block; font-size: 26px; line-height: 1.2; } .wa-carte span { font-size: 23px; color: var(--gris); }
+  .wa-ls { display: flex; align-items: center; gap: 20px; padding: 10px 26px; }
+  .wa-ls .wa-av { width: 76px; height: 76px; font-size: 28px; }
+  .wa-ls .n { flex: 1; font-size: 29px; font-weight: 600; border-bottom: 1px solid #222; padding: 18px 0; display: flex; justify-content: space-between; }
+  .wa-ls .n small { font-size: 26px; color: var(--gris); font-weight: 400; }
+  .wa-ls.hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 20px; }
+  .wa-info { padding: 0 30px 16px; font-size: 26px; color: var(--gris); }
+  .wa-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .wv { position: relative; aspect-ratio: 1; will-change: opacity, transform; }
+  .wv em { position: absolute; left: 10px; bottom: 8px; font-style: normal; font-size: 22px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .wv .dur { position: absolute; right: 10px; bottom: 8px; display: flex; align-items: center; gap: 4px; font-size: 21px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .wv .ck { position: absolute; right: 10px; top: 10px; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 0 0 2px var(--blanc); display: grid; place-items: center; color: #000; opacity: 0; }
+  .wv.coche .ck { background: var(--blanc); }
+  .wv.coche { filter: brightness(.8); }
+  .wa-selbar { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: #121212; border-top: 1px solid #222; display: flex; justify-content: space-between; align-items: flex-start; padding: 30px 34px 0; font-size: 28px; opacity: 0; z-index: 4; }
+  .wa-selbar #b-wa-trash { margin-top: -6px; }
+  .wa-sheet { position: absolute; left: 22px; right: 22px; bottom: 30px; display: grid; gap: 14px; opacity: 0; z-index: 6; }
+  .wa-sheet .b1, .wa-sheet .ann { background: #242424; border-radius: 36px; text-align: center; overflow: hidden; }
+  .wa-sheet p { margin: 0; padding: 24px; font-size: 24px; color: var(--gris); border-bottom: 1px solid #333; }
+  .wa-sheet .sup { display: block; padding: 26px; font-size: 31px; font-weight: 700; color: var(--blanc); }
+  .wa-sheet .ann { padding: 26px; font-size: 31px; font-weight: 600; }
+  #p-wa-gros .nav .pill { right: 26px; }
+
+  /* ---------- Ouverture : la ligne WhatsApp dans Stockage iPhone ---------- */
+  .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="camera">
+    <div class="phone" id="phone"><div class="ecran" id="ecran">
+      <div class="ilot"></div>
+      <div class="statut"><span>9:41</span><span class="ic"><span class="barres"><i style="height:8px"></i><i style="height:12px"></i><i style="height:16px"></i><i class="off" style="height:21px"></i></span><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><span class="pct">92</span></span></div>
+
+      <!-- Réglages › Général › Stockage iPhone (structure des captures fournies) -->
+      <div class="page" id="p-stockage"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Stockage iPhone</span></div>
+        <div class="carte stock" id="r-barre">
+          <div class="st-haut"><b>iPhone</b><span id="st-txt">61,2 Go sur 64 Go utilisés</span></div>
+          <div class="st-barre"><i class="seg s-photos" id="seg-photos"></i><i class="seg s-apps"></i><i class="seg s-ios"></i><i class="seg s-sys"></i></div>
+          <div class="st-leg"><span><i class="pt s-photos"></i>Photos</span><span><i class="pt s-apps"></i>Applications</span><span><i class="pt s-ios"></i>iOS</span><span><i class="pt s-sys"></i>Données système</span></div>
+        </div>
+        <div class="groupe"><div class="row app-st" id="r-photos-st"><span class="icone logo-app"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></span><span class="nom">Photos<small>Dernière utilisation : aujourd’hui</small></span><span class="val" id="v-photos">38,4 Go</span><span class="fl">›</span></div><div class="row app-st" id="r-wa-st"><span class="icone logo-app"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 14 C30 14 14 30 14 50 C14 57 16 63 19 68 L14 86 L33 81 C38 84 44 86 50 86 C70 86 86 70 86 50 C86 30 70 14 50 14 Z" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><path d="M38 33 C36 33 33 36 33 40 C34 52 48 66 60 67 C64 67 67 64 67 62 L67 58 C67 57 66 56 65 56 L59 54 C58 54 57 54 56 55 L54 57 C49 55 45 51 43 46 L45 44 C46 43 46 42 46 41 L44 35 C44 34 43 33 42 33 Z" fill="#FAFAFA"/></svg></span><span class="nom">WhatsApp<small>Dernière utilisation : aujourd’hui</small></span><span class="val" id="v-wa-st">6,9 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone logo-app"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M55 16 H67 C68 25 74 32 84 33 V45 C76 45 71 42 67 40 V62 C67 74 58 84 46 84 C34 84 25 75 25 63 C25 50 36 41 49 42 V54 C44 53 38 57 38 63 C38 69 42 72 46 72 C51 72 55 68 55 62 Z" fill="#FAFAFA"/></svg></span><span class="nom">TikTok<small>Dernière utilisation : aujourd’hui</small></span><span class="val">2,3 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone logo-app"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="36" fill="#FAFAFA"/><path d="M55 86 V58 H65 L67 47 H55 V40 C55 36 56 34 61 34 H67 V24 C65 24 61 23 57 23 C48 23 43 28 43 37 V47 H33 V58 H43 V86 Z" fill="#2a2a2a"/></svg></span><span class="nom">Facebook<small>Dernière utilisation : hier</small></span><span class="val">1,7 Go</span><span class="fl">›</span></div><div class="row app-st"><span class="icone logo-app"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="12" y="25" width="76" height="50" rx="14" fill="#FAFAFA"/><path d="M43 37 L63 50 L43 63 Z" fill="#2a2a2a"/></svg></span><span class="nom">YouTube<small>Dernière utilisation : aujourd’hui</small></span><span class="val">1,2 Go</span><span class="fl">›</span></div></div>
+      </div></div>
+
+      <div class="page accueil" id="p-accueil">
+        <!-- Écran d'accueil iOS 27.1 : disposition et dessins des icônes d'après capture (palette ORA) -->
+        <div class="widgets">
+          <div class="widget"><div class="w-meteo"><b>Delmas ➚</b><strong>31°</strong><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg><span>Nuageux</span><span>↑ 32° ↓ 24°</span></div><em>Météo</em></div>
+          <div class="widget"><div class="w-photo"></div><em>Photos</em></div>
+        </div>
+        <div class="grille"><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="13" y="31" width="47" height="38" rx="10" fill="#FAFAFA"/><path d="M63 44 L84 32.5 Q88 30.5 88 35 V65 Q88 69.5 84 67.5 L63 56 Z" fill="#FAFAFA"/></svg></div><span>FaceTime</span></div><div class="app"><div class="tuile i27 cal"><small>Sam.</small><b>7</b></div><span>Calendrier</span></div><div class="app"><div class="tuile i27" id="app-photos"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></div><span>Photos</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="36" fill="#a8a8a8"/><circle cx="50" cy="50" r="31" fill="#1c1c1c"/><circle cx="50" cy="50" r="24" fill="#2c2c2c"/><circle cx="50" cy="50" r="15" fill="#0c0c0c"/><circle cx="50" cy="50" r="9" fill="#262626"/><ellipse cx="42" cy="41" rx="6" ry="3.5" fill="#FAFAFA" fill-opacity=".7" transform="rotate(-35 42 41)"/><circle cx="58" cy="58" r="2.2" fill="#FAFAFA" fill-opacity=".4"/></svg></div><span>Caméra</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="14" y="27" width="72" height="47" rx="9" fill="#FAFAFA"/><path d="M17 31 L50 56 L83 31" fill="none" stroke="#9a9a9a" stroke-width="3.2" stroke-linejoin="round"/></svg></div><span>Mail</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="0" y="0" width="100" height="29" fill="#d6d6d6"/><circle cx="8" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="14" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="20" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="26" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="32" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="38" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="44" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="50" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="56" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="62" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="68" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="74" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="80" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="86" cy="34" r="1.6" fill="#7a7a7a"/><circle cx="92" cy="34" r="1.6" fill="#7a7a7a"/><line x1="12" y1="56" x2="88" y2="56" stroke="#7a7a7a" stroke-width="3"/><line x1="12" y1="74" x2="88" y2="74" stroke="#7a7a7a" stroke-width="3"/></svg></div><span>Notes</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="25" cy="31" r="7.5" fill="#FAFAFA"/><line x1="40" y1="31" x2="84" y2="31" stroke="#7a7a7a" stroke-width="3"/><circle cx="25" cy="50" r="7.5" fill="#a8a8a8"/><line x1="40" y1="50" x2="84" y2="50" stroke="#7a7a7a" stroke-width="3"/><circle cx="25" cy="69" r="7.5" fill="#d6d6d6"/><line x1="40" y1="69" x2="84" y2="69" stroke="#7a7a7a" stroke-width="3"/></svg></div><span>Rappels</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="40" fill="#0b0b0b" stroke="#4a4a4a" stroke-width="1"/><line x1="50.0" y1="13.0" x2="50.0" y2="17.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="53.9" y1="13.2" x2="53.7" y2="15.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="57.7" y1="13.8" x2="57.3" y2="15.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="61.4" y1="14.8" x2="60.8" y2="16.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="65.0" y1="16.2" x2="64.2" y2="18.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="68.5" y1="18.0" x2="66.5" y2="21.4" stroke="#FAFAFA" stroke-width="1.6"/><line x1="71.7" y1="20.1" x2="70.6" y2="21.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="74.8" y1="22.5" x2="73.4" y2="24.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="77.5" y1="25.2" x2="76.0" y2="26.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="79.9" y1="28.3" x2="78.3" y2="29.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="82.0" y1="31.5" x2="78.6" y2="33.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="83.8" y1="35.0" x2="82.0" y2="35.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="85.2" y1="38.6" x2="83.3" y2="39.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.2" y1="42.3" x2="84.2" y2="42.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.8" y1="46.1" x2="84.8" y2="46.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="87.0" y1="50.0" x2="83.0" y2="50.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="86.8" y1="53.9" x2="84.8" y2="53.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="86.2" y1="57.7" x2="84.2" y2="57.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="85.2" y1="61.4" x2="83.3" y2="60.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="83.8" y1="65.0" x2="82.0" y2="64.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="82.0" y1="68.5" x2="78.6" y2="66.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="79.9" y1="71.7" x2="78.3" y2="70.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="77.5" y1="74.8" x2="76.0" y2="73.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="74.8" y1="77.5" x2="73.4" y2="76.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="71.7" y1="79.9" x2="70.6" y2="78.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="68.5" y1="82.0" x2="66.5" y2="78.6" stroke="#FAFAFA" stroke-width="1.6"/><line x1="65.0" y1="83.8" x2="64.2" y2="82.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="61.4" y1="85.2" x2="60.8" y2="83.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="57.7" y1="86.2" x2="57.3" y2="84.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="53.9" y1="86.8" x2="53.7" y2="84.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="50.0" y1="87.0" x2="50.0" y2="83.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="46.1" y1="86.8" x2="46.3" y2="84.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="42.3" y1="86.2" x2="42.7" y2="84.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="38.6" y1="85.2" x2="39.2" y2="83.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="35.0" y1="83.8" x2="35.8" y2="82.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="31.5" y1="82.0" x2="33.5" y2="78.6" stroke="#FAFAFA" stroke-width="1.6"/><line x1="28.3" y1="79.9" x2="29.4" y2="78.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="25.2" y1="77.5" x2="26.6" y2="76.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="22.5" y1="74.8" x2="24.0" y2="73.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="20.1" y1="71.7" x2="21.7" y2="70.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="18.0" y1="68.5" x2="21.4" y2="66.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="16.2" y1="65.0" x2="18.0" y2="64.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="14.8" y1="61.4" x2="16.7" y2="60.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.8" y1="57.7" x2="15.8" y2="57.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.2" y1="53.9" x2="15.2" y2="53.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.0" y1="50.0" x2="17.0" y2="50.0" stroke="#FAFAFA" stroke-width="1.6"/><line x1="13.2" y1="46.1" x2="15.2" y2="46.3" stroke="#FAFAFA" stroke-width="0.8"/><line x1="13.8" y1="42.3" x2="15.8" y2="42.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="14.8" y1="38.6" x2="16.7" y2="39.2" stroke="#FAFAFA" stroke-width="0.8"/><line x1="16.2" y1="35.0" x2="18.0" y2="35.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="18.0" y1="31.5" x2="21.4" y2="33.5" stroke="#FAFAFA" stroke-width="1.6"/><line x1="20.1" y1="28.3" x2="21.7" y2="29.4" stroke="#FAFAFA" stroke-width="0.8"/><line x1="22.5" y1="25.2" x2="24.0" y2="26.6" stroke="#FAFAFA" stroke-width="0.8"/><line x1="25.2" y1="22.5" x2="26.6" y2="24.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="28.3" y1="20.1" x2="29.4" y2="21.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="31.5" y1="18.0" x2="33.5" y2="21.4" stroke="#FAFAFA" stroke-width="1.6"/><line x1="35.0" y1="16.2" x2="35.8" y2="18.0" stroke="#FAFAFA" stroke-width="0.8"/><line x1="38.6" y1="14.8" x2="39.2" y2="16.7" stroke="#FAFAFA" stroke-width="0.8"/><line x1="42.3" y1="13.8" x2="42.7" y2="15.8" stroke="#FAFAFA" stroke-width="0.8"/><line x1="46.1" y1="13.2" x2="46.3" y2="15.2" stroke="#FAFAFA" stroke-width="0.8"/><text x="50.0" y="28.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">12</text><text x="76.0" y="54.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">3</text><text x="50.0" y="80.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">6</text><text x="24.0" y="54.5" font-size="12" font-family="-apple-system,Jost,sans-serif" font-weight="500" fill="#FAFAFA" text-anchor="middle">9</text><line x1="50" y1="50" x2="38" y2="42" stroke="#FAFAFA" stroke-width="3.2" stroke-linecap="round"/><line x1="50" y1="50" x2="72" y2="48" stroke="#FAFAFA" stroke-width="2.4" stroke-linecap="round"/><line x1="44" y1="36" x2="58" y2="74" stroke="#a8a8a8" stroke-width="1.2"/><circle cx="50" cy="50" r="2.6" fill="#FAFAFA"/></svg></div><span>Horloge</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M30 39 C27 37.5 22.5 37 19.5 39.5 C15.5 43 15.5 51 18.5 57 C20.5 61 23 64 26 64 C27.5 64 28.5 63 30 63 C31.5 63 32.5 64 34 64 C37 64 39.5 60.5 41 57 C37.5 55 36.5 51 37.5 48 C38 46 39.5 44.5 40.5 43.5 C38.5 40.5 35.5 39 33 39 C31.5 39 31 39.5 30 39.5 Z M30.5 37 C30.5 33.5 32.5 31.5 35.5 31 C35.5 34 33.5 36.5 30.5 37 Z" fill="#FAFAFA"/><text x="45" y="62" font-size="30" font-weight="600" font-family="-apple-system,Jost,sans-serif" fill="#FAFAFA" letter-spacing="-1">tv</text></svg></div><span>TV</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="38" fill="#4a4a4a"/><path d="M30 60 A22 22 0 1 1 70 60" fill="none" stroke="#FAFAFA" stroke-width="5" stroke-linecap="round"/><path d="M39 56 A12 12 0 1 1 61 56" fill="none" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round"/><circle cx="50" cy="47" r="7" fill="#FAFAFA"/><rect x="45" y="57" width="10" height="24" rx="5" fill="#FAFAFA"/></svg></div><span>Podcasts</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><g stroke="#FAFAFA" stroke-width="7.5" stroke-linecap="round"><line x1="35" y1="74" x2="56" y2="30"/><line x1="65" y1="74" x2="44" y2="30"/><line x1="25" y1="61" x2="75" y2="61"/></g></svg></div><span>App Store</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="0" y="0" width="100" height="100" fill="#1d1d1d"/><path d="M66 -5 A40 40 0 0 1 105 30" fill="none" stroke="#4a4a4a" stroke-width="5"/><path d="M76 -5 A30 30 0 0 1 105 20" fill="none" stroke="#4a4a4a" stroke-width="4"/><rect x="40" y="-5" width="18" height="110" fill="#a8a8a8" transform="rotate(-8 50 50)"/><circle cx="50" cy="58" r="21" fill="#FAFAFA"/><circle cx="50" cy="58" r="16" fill="#d6d6d6"/><path d="M50 46 L59 68 L50 63 L41 68 Z" fill="#141414"/></svg></div><span>Plans</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 80 C24 63 16 50 16 38 C16 27 24 20 33 20 C41 20 47 25 50 31 C53 25 59 20 67 20 C76 20 84 27 84 38 C84 50 76 63 50 80 Z" fill="#FAFAFA"/></svg></div><span>Santé</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="16" y="20" width="68" height="22" rx="6" fill="#7a7a7a"/><rect x="16" y="28" width="68" height="22" rx="6" fill="#a8a8a8"/><rect x="16" y="36" width="68" height="22" rx="6" fill="#d6d6d6"/><path d="M14 46 H38 Q42 46 44 50 Q50 58 56 50 Q58 46 62 46 H86 V74 Q86 82 78 82 H22 Q14 82 14 74 Z" fill="#FAFAFA"/></svg></div><span>Cartes</span></div><div class="app"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><polygon points="48.39,8.03 51.61,8.03 52.90,13.11 54.83,13.32 55.70,8.39 58.88,8.95 59.26,14.18 61.13,14.71 62.84,10.01 65.87,11.11 65.34,16.33 67.08,17.18 69.59,12.85 72.38,14.46 70.96,19.51 72.52,20.65 75.74,16.81 78.21,18.89 75.93,23.61 77.28,25.00 81.11,21.79 83.19,24.26 80.12,28.51 81.21,30.12 85.54,27.62 87.15,30.41 83.40,34.07 84.18,35.84 88.89,34.13 89.99,37.16 85.65,40.11 86.12,41.99 91.05,41.12 91.61,44.30 86.83,46.45 86.96,48.39 91.97,48.39 91.97,51.61 86.89,52.90 86.68,54.83 91.61,55.70 91.05,58.88 85.82,59.26 85.29,61.13 89.99,62.84 88.89,65.87 83.67,65.34 82.82,67.08 87.15,69.59 85.54,72.38 80.49,70.96 79.35,72.52 83.19,75.74 81.11,78.21 76.39,75.93 75.00,77.28 78.21,81.11 75.74,83.19 71.49,80.12 69.88,81.21 72.38,85.54 69.59,87.15 65.93,83.40 64.16,84.18 65.87,88.89 62.84,89.99 59.89,85.65 58.01,86.12 58.88,91.05 55.70,91.61 53.55,86.83 51.61,86.96 51.61,91.97 48.39,91.97 47.10,86.89 45.17,86.68 44.30,91.61 41.12,91.05 40.74,85.82 38.87,85.29 37.16,89.99 34.13,88.89 34.66,83.67 32.92,82.82 30.41,87.15 27.62,85.54 29.04,80.49 27.48,79.35 24.26,83.19 21.79,81.11 24.07,76.39 22.72,75.00 18.89,78.21 16.81,75.74 19.88,71.49 18.79,69.88 14.46,72.38 12.85,69.59 16.60,65.93 15.82,64.16 11.11,65.87 10.01,62.84 14.35,59.89 13.88,58.01 8.95,58.88 8.39,55.70 13.17,53.55 13.04,51.61 8.03,51.61 8.03,48.39 13.11,47.10 13.32,45.17 8.39,44.30 8.95,41.12 14.18,40.74 14.71,38.87 10.01,37.16 11.11,34.13 16.33,34.66 17.18,32.92 12.85,30.41 14.46,27.62 19.51,29.04 20.65,27.48 16.81,24.26 18.89,21.79 23.61,24.07 25.00,22.72 21.79,18.89 24.26,16.81 28.51,19.88 30.12,18.79 27.62,14.46 30.41,12.85 34.07,16.60 35.84,15.82 34.13,11.11 37.16,10.01 40.11,14.35 41.99,13.88 41.12,8.95 44.30,8.39 46.45,13.17 48.39,13.04" fill="#a8a8a8"/><circle cx="50" cy="50" r="31" fill="#2b2b2b"/><circle cx="50" cy="50" r="27" fill="none" stroke="#a8a8a8" stroke-width="3"/><path d="M50 50 L50.0 24.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><path d="M50 50 L72.5 63.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><path d="M50 50 L27.5 63.0" stroke="#a8a8a8" stroke-width="4.5" stroke-linecap="round"/><circle cx="50" cy="50" r="7" fill="#a8a8a8"/><circle cx="50" cy="50" r="3" fill="#2b2b2b"/></svg></div><span>Réglages</span></div><div class="app"><div class="tuile i27" id="app-wa"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 14 C30 14 14 30 14 50 C14 57 16 63 19 68 L14 86 L33 81 C38 84 44 86 50 86 C70 86 86 70 86 50 C86 30 70 14 50 14 Z" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><path d="M38 33 C36 33 33 36 33 40 C34 52 48 66 60 67 C64 67 67 64 67 62 L67 58 C67 57 66 56 65 56 L59 54 C58 54 57 54 56 55 L54 57 C49 55 45 51 43 46 L45 44 C46 43 46 42 46 41 L44 35 C44 34 43 33 42 33 Z" fill="#FAFAFA"/></svg></div><span>WhatsApp</span></div></div>
+        <div class="recherche-a"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg><span>Recherche</span></div>
+        <div class="dock"><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M30 20 C26 20 22 24 22 30 C24 56 44 76 70 78 C76 78 80 74 80 70 V62 C80 59 78 57 75 56 L66 53 C63 52 61 53 59 55 L55 59 C46 54 41 49 36 40 L40 36 C42 34 43 32 42 29 L39 20 C38 17 36 15 33 15 Z" fill="#FAFAFA" transform="translate(0 4)"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><circle cx="50" cy="50" r="38" fill="#d6d6d6"/><circle cx="50" cy="50" r="35" fill="#e9e9e9"/><line x1="50.0" y1="16.0" x2="50.0" y2="20.0" stroke="#7a7a7a" stroke-width="1"/><line x1="55.3" y1="16.4" x2="55.0" y2="18.4" stroke="#7a7a7a" stroke-width="1"/><line x1="60.5" y1="17.7" x2="59.9" y2="19.6" stroke="#7a7a7a" stroke-width="1"/><line x1="65.4" y1="19.7" x2="64.5" y2="21.5" stroke="#7a7a7a" stroke-width="1"/><line x1="70.0" y1="22.5" x2="68.8" y2="24.1" stroke="#7a7a7a" stroke-width="1"/><line x1="74.0" y1="26.0" x2="71.2" y2="28.8" stroke="#7a7a7a" stroke-width="1"/><line x1="77.5" y1="30.0" x2="75.9" y2="31.2" stroke="#7a7a7a" stroke-width="1"/><line x1="80.3" y1="34.6" x2="78.5" y2="35.5" stroke="#7a7a7a" stroke-width="1"/><line x1="82.3" y1="39.5" x2="80.4" y2="40.1" stroke="#7a7a7a" stroke-width="1"/><line x1="83.6" y1="44.7" x2="81.6" y2="45.0" stroke="#7a7a7a" stroke-width="1"/><line x1="84.0" y1="50.0" x2="80.0" y2="50.0" stroke="#7a7a7a" stroke-width="1"/><line x1="83.6" y1="55.3" x2="81.6" y2="55.0" stroke="#7a7a7a" stroke-width="1"/><line x1="82.3" y1="60.5" x2="80.4" y2="59.9" stroke="#7a7a7a" stroke-width="1"/><line x1="80.3" y1="65.4" x2="78.5" y2="64.5" stroke="#7a7a7a" stroke-width="1"/><line x1="77.5" y1="70.0" x2="75.9" y2="68.8" stroke="#7a7a7a" stroke-width="1"/><line x1="74.0" y1="74.0" x2="71.2" y2="71.2" stroke="#7a7a7a" stroke-width="1"/><line x1="70.0" y1="77.5" x2="68.8" y2="75.9" stroke="#7a7a7a" stroke-width="1"/><line x1="65.4" y1="80.3" x2="64.5" y2="78.5" stroke="#7a7a7a" stroke-width="1"/><line x1="60.5" y1="82.3" x2="59.9" y2="80.4" stroke="#7a7a7a" stroke-width="1"/><line x1="55.3" y1="83.6" x2="55.0" y2="81.6" stroke="#7a7a7a" stroke-width="1"/><line x1="50.0" y1="84.0" x2="50.0" y2="80.0" stroke="#7a7a7a" stroke-width="1"/><line x1="44.7" y1="83.6" x2="45.0" y2="81.6" stroke="#7a7a7a" stroke-width="1"/><line x1="39.5" y1="82.3" x2="40.1" y2="80.4" stroke="#7a7a7a" stroke-width="1"/><line x1="34.6" y1="80.3" x2="35.5" y2="78.5" stroke="#7a7a7a" stroke-width="1"/><line x1="30.0" y1="77.5" x2="31.2" y2="75.9" stroke="#7a7a7a" stroke-width="1"/><line x1="26.0" y1="74.0" x2="28.8" y2="71.2" stroke="#7a7a7a" stroke-width="1"/><line x1="22.5" y1="70.0" x2="24.1" y2="68.8" stroke="#7a7a7a" stroke-width="1"/><line x1="19.7" y1="65.4" x2="21.5" y2="64.5" stroke="#7a7a7a" stroke-width="1"/><line x1="17.7" y1="60.5" x2="19.6" y2="59.9" stroke="#7a7a7a" stroke-width="1"/><line x1="16.4" y1="55.3" x2="18.4" y2="55.0" stroke="#7a7a7a" stroke-width="1"/><line x1="16.0" y1="50.0" x2="20.0" y2="50.0" stroke="#7a7a7a" stroke-width="1"/><line x1="16.4" y1="44.7" x2="18.4" y2="45.0" stroke="#7a7a7a" stroke-width="1"/><line x1="17.7" y1="39.5" x2="19.6" y2="40.1" stroke="#7a7a7a" stroke-width="1"/><line x1="19.7" y1="34.6" x2="21.5" y2="35.5" stroke="#7a7a7a" stroke-width="1"/><line x1="22.5" y1="30.0" x2="24.1" y2="31.2" stroke="#7a7a7a" stroke-width="1"/><line x1="26.0" y1="26.0" x2="28.8" y2="28.8" stroke="#7a7a7a" stroke-width="1"/><line x1="30.0" y1="22.5" x2="31.2" y2="24.1" stroke="#7a7a7a" stroke-width="1"/><line x1="34.6" y1="19.7" x2="35.5" y2="21.5" stroke="#7a7a7a" stroke-width="1"/><line x1="39.5" y1="17.7" x2="40.1" y2="19.6" stroke="#7a7a7a" stroke-width="1"/><line x1="44.7" y1="16.4" x2="45.0" y2="18.4" stroke="#7a7a7a" stroke-width="1"/><path d="M50 50 L73 27 L54 54 Z" fill="#141414"/><path d="M50 50 L27 73 L46 46 Z" fill="#a8a8a8"/><circle cx="50" cy="50" r="2.4" fill="#FAFAFA"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 20 C27 20 14 34 14 48 C14 57 19 64 27 69 C26 75 22 79 18 81 C26 81 33 78 37 74 C41 75 45 76 50 76 C73 76 86 62 86 48 C86 34 73 20 50 20 Z" fill="#FAFAFA"/></svg></div><div class="tuile i27"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M40 30 L72 22 V62" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><line x1="40" y1="30" x2="40" y2="70" stroke="#FAFAFA" stroke-width="6"/><ellipse cx="32" cy="70" rx="9" ry="7" fill="#FAFAFA" transform="rotate(-18 32 70)"/><ellipse cx="64" cy="62" rx="9" ry="7" fill="#FAFAFA" transform="rotate(-18 64 62)"/></svg></div></div>
+      </div>
+
+      <div class="voile-haut"></div>
+
+      <!-- WhatsApp › Discussions (ouverture de l'app) -->
+      <div class="page" id="p-wa-disc"><div class="contenu">
+        <div class="wa-haut"><span class="rond-s">···</span><span class="d"><span class="rond-s"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9z"/></svg></span><span class="rond-s" style="background:#3a3a3a"><svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span></span></div>
+        <div class="wa-titre">Discussions</div>
+        <div class="wa-rech"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>Rechercher</div>
+        <div class="wa-puces"><span class="on">Toutes</span><span>Non lues</span><span>Favoris</span><span>Groupes</span></div>
+        <div id="wa-chats"></div>
+      </div>
+        <div class="wa-tabs" id="tabs-disc"></div>
+      </div>
+
+      <!-- WhatsApp › Vous (ex-Réglages) -->
+      <div class="page" id="p-wa-vous"><div class="contenu">
+        <div class="wa-haut"><span></span><span class="rond-s"><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg></span></div>
+        <div class="wa-profil"><span class="gros-av">J</span><b>Jude</b><span>+509 •••• ••••</span></div>
+        <div class="groupe" id="wa-g1"></div>
+        <div class="groupe" id="wa-g2"></div>
+      </div>
+        <div class="wa-tabs" id="tabs-vous"></div>
+      </div>
+
+      <!-- WhatsApp › Stockage et données -->
+      <div class="page" id="p-wa-stock"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Stockage et données</span></div>
+        <div class="groupe" style="margin-top:26px">
+          <div class="row sans-icone" id="r-gerer"><span class="nom">Gérer le stockage</span><span class="val" id="v-gerer">6,9 Go</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Utilisation réseau</span><span class="val">10,6 Go</span><span class="fl">›</span></div>
+        </div>
+        <div class="groupe"><div class="row sans-icone"><span class="nom">Utiliser moins de données pour les appels</span><span class="toggle"></span></div></div>
+        <div class="wa-sec">Téléchargement auto des médias</div>
+        <div class="groupe">
+          <div class="row sans-icone"><span class="nom">Photos</span><span class="val">Wi‑Fi et données</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Audio</span><span class="val">Wi‑Fi et données</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Vidéos</span><span class="val">Wi‑Fi et données</span><span class="fl">›</span></div>
+          <div class="row sans-icone"><span class="nom">Documents</span><span class="val">Wi‑Fi et données</span><span class="fl">›</span></div>
+        </div>
+      </div></div>
+
+      <!-- WhatsApp › Gérer le stockage -->
+      <div class="page" id="p-wa-gerer"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Gérer le stockage</span></div>
+        <div class="wa-barre">
+          <div class="l"><span><b id="g-utilise">6,9 Go</b> utilisés par WhatsApp</span></div>
+          <div class="wa-jauge"><i id="g-seg" style="width:11%;background:var(--blanc)"></i><i style="width:84%;background:#8A8A8A"></i></div>
+          <div class="wa-leg"><span><i class="pt" style="background:var(--blanc)"></i>WhatsApp</span><span><i class="pt" style="background:#8A8A8A"></i>Apps et autres éléments</span><span><i class="pt" style="background:#2a2a2a"></i>Libre : <span id="g-libre">2,8 Go</span></span></div>
+        </div>
+        <div class="wa-sec">Examiner et supprimer des éléments</div>
+        <div class="wa-cartes">
+          <div class="wa-carte" id="c-transf"><div class="vigs"><i style="background:radial-gradient(circle at 40% 40%,#7a7a7a,#3a3a3a)"></i><i style="background:radial-gradient(circle at 60% 40%,#6a6a6a,#2e2e2e)"></i></div><b>Transférés de nombreuses fois</b><span>310 Mo</span></div>
+          <div class="wa-carte" id="c-gros"><div class="vigs"><i style="background:radial-gradient(circle at 40% 40%,#8a8a8a,#3e3e3e)"></i><i style="background:radial-gradient(circle at 60% 50%,#6e6e6e,#2a2a2a)"></i><i style="background:radial-gradient(circle at 50% 40%,#9a9a9a,#444)"></i></div><b>Plus de 5 Mo</b><span id="c-gros-t">2,4 Go</span></div>
+        </div>
+        <div class="wa-sec" id="wa-liste">Discussions</div>
+        <div id="wa-tailles"></div>
+      </div></div>
+
+      <!-- WhatsApp › Gérer le stockage › Plus de 5 Mo -->
+      <div class="page" id="p-wa-gros"><div class="contenu">
+        <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Plus de 5 Mo</span><span class="pill" id="b-wa-sel">Sélectionner</span></div>
+        <div class="wa-info" id="gros-info">2,4 Go · 64 éléments</div>
+        <div class="wa-grille" id="wa-grille"></div>
+      </div>
+        <div class="wa-selbar" id="wa-selbar"><span>Tout sélectionner</span><span id="sel-n">0 sélectionné</span><span id="b-wa-trash"><svg viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span></div>
+        <div class="wa-sheet" id="wa-sheet"><div class="b1"><p>Supprimer 3 éléments ?</p><span class="sup" id="b-wa-ok">Supprimer</span></div><div class="ann">Annuler</div></div>
+      </div>
+
+    </div></div>
+    <div class="doigt" id="doigt"></div>
+  </div>
+  <div class="texte" id="textes"></div>
+  <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
+  <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
+  <div id="noir"></div>
+</div>
+<script src="../../templates/moteur-tuto-ios.js"></script>
+<script>
+// ---------- Contenu fictif des écrans WhatsApp ----------
+const ic = d => `<svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="${d}"/></svg>`;
+const P = {
+  actus: '<svg viewBox="0 0 24 24" width="40" height="40"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2.6"/></svg>',
+  appels: '<svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>',
+  commu: '<svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>',
+  disc: '<svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>',
+};
+const tabs = (actif, id) => [['actus', 'Actus'], ['appels', 'Appels'], ['commu', 'Communautés'], ['disc', 'Discussions'], ['vous', 'Vous']]
+  .map(([k, n]) => `<span class="wa-tab${k === actif ? ' on' : ''}"${k === 'vous' && id ? ` id="${id}"` : ''}>${k === 'vous' ? '<span class="mini">J</span>' : P[k]}${n}</span>`).join('');
+document.getElementById('tabs-disc').innerHTML = tabs('disc', 'tab-vous');
+document.getElementById('tabs-vous').innerHTML = tabs('vous');
+const CHATS = [['Famille', 'F', 'Vidéo', '09:41'], ['Église – chorale', 'É', 'Marc : Vidéo', '09:12'], ['Voisins Delmas', 'V', 'Photo', 'Hier'], ['Maman', 'M', 'Message vocal (0:42)', 'Hier'], ['Nadia', 'N', 'Ok, à demain', 'Hier'], ['Marc', 'M', 'Vidéo', 'Mardi']];
+document.getElementById('wa-chats').innerHTML = CHATS.map(([n, a, m, h], i) => `<div class="wa-chat"><span class="wa-av" style="background:${['#4a4a4a', '#3e3e3e', '#555', '#444', '#3a3a3a', '#4e4e4e'][i]}">${a}</span><span class="t"><span class="l1">${n}<small>${h}</small></span><span class="l2">${m}</span></span></div>`).join('');
+const R = (id, d, nom) => `<div class="row"${id ? ` id="${id}"` : ''}><span class="icone">${ic(d)}</span><span class="nom">${nom}</span><span class="fl">›</span></div>`;
+document.getElementById('wa-g1').innerHTML = R('', 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z', 'Messages importants') + R('', 'M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z', 'Appareils connectés');
+document.getElementById('wa-g2').innerHTML = R('', 'M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z', 'Compte')
+  + R('', 'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z', 'Confidentialité')
+  + R('', 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z', 'Discussions')
+  + R('', 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z', 'Notifications')
+  + R('r-wa-stock', 'M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z', 'Stockage et données');
+const TAILLES = [['Famille', 'F', '1,9 Go', 'r-famille'], ['Église – chorale', 'É', '1,2 Go'], ['Voisins Delmas', 'V', '860 Mo'], ['Maman', 'M', '420 Mo'], ['Marc', 'M', '190 Mo'], ['Nadia', 'N', '75 Mo']];
+document.getElementById('wa-tailles').innerHTML = TAILLES.map(([n, a, t, id], i) => `<div class="wa-ls"${id ? ` id="${id}"` : ''}><span class="wa-av" style="background:${['#4a4a4a', '#3e3e3e', '#555', '#444', '#4e4e4e', '#3a3a3a'][i]}">${a}</span><span class="n">${n}<small>${t}</small></span></div>`).join('');
+const VID = [['412 Mo', '6:48'], ['286 Mo', '4:51'], ['198 Mo', '3:20'], ['154 Mo', '2:36'], ['120 Mo', '2:02'], ['96 Mo', '1:38'], ['88 Mo', '1:29'], ['71 Mo', '1:12'], ['64 Mo', '1:05'], ['58 Mo', '0:59'], ['52 Mo', '0:53'], ['47 Mo', '0:48'], ['41 Mo', '0:42'], ['38 Mo', '0:39'], ['33 Mo', '0:34']];
+const JEU = '<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
+document.getElementById('wa-grille').innerHTML = VID.map(([t, d], i) => `<i class="wv" id="v${i + 1}" style="background:radial-gradient(circle at ${30 + (i * 37) % 45}% ${30 + (i * 23) % 40}%, rgb(${120 - i * 3},${120 - i * 3},${120 - i * 3}) 0%, rgb(${48 + (i % 3) * 6},${48 + (i % 3) * 6},${48 + (i % 3) * 6}) 70%)"><em>${t}</em><span class="dur">${JEU}${d}</span><b class="ck"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i>`).join('');
+
+// ---------- Scénario (temps de la version muette) ----------
+const SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
+window.ORA_DURATION = 20.0;
+const CFG = {
+  textes: [
+    { a: 0, b: 2.6, label: 'iPhone plein · 3/3', titre: 'WhatsApp :|6,9 Go.', sous: 'Sans que vous le voyiez.', visible: true },
+    { a: 2.9, b: 6.2, label: 'Étape 1 · Vous', titre: 'Stockage|et données' },
+    { a: 6.2, b: 8.2, label: 'Étape 2', titre: 'Gérer le|stockage' },
+    { a: 8.2, b: RET, label: 'Étape 3', titre: 'Plus de 5 Mo ›|Supprimer' },
+    { a: RET, b: FIN, label: 'Ensuite', titre: 'Les groupes|pèsent lourd.', sous: 'Ouvrez-les dans la liste.', retard: 0.9 },
+    { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Fin de la série · Demain, le bonus.', retard: 0.5 },
+  ],
+  nav: [[0, 'p-stockage', 0], [2.6, 'p-accueil', 0], [3.6, 'p-wa-disc', 0], [4.7, 'p-wa-vous', 0], [6.05, 'p-wa-stock', 1], [7.25, 'p-wa-gerer', 1], [9.05, 'p-wa-gros', 1], [RET, 'p-wa-gerer', -1]],
+  defil: [[0, 'p-wa-gerer', 0], [RET + 0.4, 'p-wa-gerer', 'wa-liste:260']],
+  taps: [[3.4, '#app-wa'], [4.5, '#tab-vous'], [5.8, '#r-wa-stock'], [7.0, '#r-gerer'], [8.8, '#c-gros'], [9.8, '#b-wa-sel'], [10.4, '#v1'], [10.75, '#v2'], [11.1, '#v3'], [11.7, '#b-wa-trash'], [12.45, '#b-wa-ok']],
+  surbrillance: [[0.6, 2.5, '#r-wa-st'], [3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
+                 [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.0, FIN - 0.1, '#r-famille']],
+  camera: [[0, 1.15, '#r-wa-st', 1460, 0.02], [2.6, 0.72, '#phone', 1200], [3.6, 0.62, '#phone', 1060], [5.0, 0.8, '#r-wa-stock', 1480], [6.05, 0.62, '#phone', 1060],
+           [7.9, 1.0, '#c-gros', 1250], [9.05, 0.62, '#phone', 1060], [RET + 0.6, 1.0, '#r-famille', 1320]],
+  fin: FIN,
+  sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], impact: FIN + 0.9 },
+  apres: t => {
+    const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
+    const $ = s => document.querySelector(s), fr = v => v.toFixed(1).replace('.', ',');
+    // ouverture : la taille de WhatsApp monte jusqu'à 6,9 Go
+    $('#v-wa-st').textContent = `${fr(6.9 * out(t / 1.2))} Go`;
+    // Plus de 5 Mo : sélection de trois vidéos, corbeille, confirmation
+    const sel = t >= SEL && t < SUP + 0.1;
+    $('#b-wa-sel').textContent = sel ? 'Annuler' : 'Sélectionner';
+    $('#wa-selbar').style.opacity = sel ? 1 : 0;
+    const coch = [10.5, 10.85, 11.2].filter(a => t >= a && t < SUP + 0.1).length;
+    document.querySelectorAll('.wv').forEach((v, i) => { v.querySelector('.ck').style.opacity = sel ? 1 : 0; v.classList.toggle('coche', i < coch); });
+    $('#sel-n').textContent = coch > 1 ? `${coch} sélectionnés` : `${coch} sélectionné`;
+    const s = t >= 11.85 && t < SUP ? out((t - 11.85) / 0.25) : 0;
+    $('#wa-sheet').style.opacity = s; $('#wa-sheet').style.transform = `translateY(${(1 - s) * 60}px)`;
+    // suppression : les trois vidéos partent, la grille se resserre, les tailles baissent
+    const parti = t >= SUP + 0.45;
+    [1, 2, 3].forEach(i => { const v = $('#v' + i); const k = clamp((t - SUP - 0.1) / 0.3); v.style.opacity = t < SUP + 0.1 ? 1 : 1 - k; v.style.transform = `scale(${1 - 0.2 * k})`; v.style.display = parti ? 'none' : ''; });
+    $('#gros-info').textContent = parti ? '1,5 Go · 61 éléments' : '2,4 Go · 64 éléments';
+    $('#c-gros-t').textContent = parti ? '1,5 Go' : '2,4 Go';
+    $('#g-utilise').textContent = parti ? '6,0 Go' : '6,9 Go';
+    $('#v-gerer').textContent = parti ? '6,0 Go' : '6,9 Go';
+    $('#g-libre').textContent = parti ? '3,7 Go' : '2,8 Go';
+    $('#g-seg').style.width = parti ? '9.5%' : '11%';
+  },
+};
+SCENE(CFG);
+</script>
+</body>
+</html>

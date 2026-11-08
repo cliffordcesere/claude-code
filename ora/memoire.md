@@ -102,7 +102,10 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 - Conseil de prise (si la pièce sonne encore) : parler près du téléphone (15 cm), dans un placard ou face à des rideaux, des vêtements ou un lit ; éviter les pièces vides et carrelées.
 3. WhatsApp › Gérer le stockage.
    Lancé le 2026-11-08. Vérifié (presse) : WhatsApp › Stockage et données › Gérer le stockage ; « Plus de 5 Mo », fichiers transférés plusieurs fois, liste des discussions par taille ; sélection puis suppression. Depuis mars 2026 (v26.10.73), l'onglet Réglages d'iPhone devient « Vous » (photo de profil) — libellé FR à confirmer. Supprimer dans WhatsApp n'efface pas la copie enregistrée dans Photos.
-   Règle tirée de la partie 2 : **vidéo d'écran d'abord, voix ensuite** (les écrans réels différaient de la reconstruction : deux confirmations au lieu d'une).
+   Brouillon v01 sans voix (2026-11-08, `stockage-whatsapp.html`, 20 s) : écrans WhatsApp reconstruits d'après la presse ; tuile WhatsApp à la place de Chrome sur l'accueil.
+4. **Bonus validé (2026-11-08)** : « le réglage qui le remplit en cachette » — WhatsApp › Vous › Discussions › Enregistrer dans Pellicule désactivé. Annoncé à la fin de la partie 3. Pas « partie 4 » (la série est annoncée en 3).
+- 2026-11-08 : **le propriétaire trouve épuisant de demander une vidéo d'écran à chaque tuto.** Nouvelle façon : je construis d'après ce que je sais + la presse ; la copine vérifie en regardant le brouillon (capture de l'écran qui diffère seulement). Une vidéo d'écran groupée pour plusieurs tutos si besoin. Sujets que le propriétaire peut filmer lui-même : à privilégier. Le web n'est lisible ici qu'en résumés texte (pages et images inaccessibles depuis cet espace).
+   Règle tirée de la partie 2 : **vérifier les écrans avant d'enregistrer la voix** (les écrans réels différaient de la reconstruction : deux confirmations au lieu d'une).
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
 
