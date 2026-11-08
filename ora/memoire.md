@@ -37,6 +37,7 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 
 ## Retours du propriétaire
 
+- 2026-11-08 : **règle du propriétaire : toutes les voix off sont accélérées (~8 %, pauses resserrées), sans changer le ton** (`tools/resserrer_voix.py`, tempo 1.08). S'applique à chaque nouvelle vidéo, sans redemander.
 - 2026-11-07 : consigne de voix off : ne plus écrire « Ne pas lire » (compris comme « ne pas dire »). Écrire : **tout se dit, avec vos mots** ; seuls les mots-clés de l'écran, la 1re et la dernière phrase restent exacts.
 - 2026-11-07 : **toute légende, tout texte de voix off proposé va aussitôt dans le brief de la semaine** (`brief.md` + page « ORA • Semaine 1 »), même à l'état de proposition : c'est là que le propriétaire copie.
 - 2026-11-04 : **toujours montrer le produit vendu.** Les visuels texte seul (« Index » sans produit) sont du bruit à ce stade.
