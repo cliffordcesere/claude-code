@@ -101,6 +101,8 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 - **Voix « pièce vide » (2026-11-08)** : mesuré sur la prise Adobe : bosse de bas-médium vers 380–400 Hz (+11,5 dB / 1 kHz) et peu de présence → son de boîte. `tools/resserrer_voix.py` applique désormais : expandeur avant l'égalisation (queues raccourcies), -4 dB à 190 Hz, -6 dB à 380 Hz, -2,5 dB à 650 Hz, +3 dB à 2,2 kHz, +2 dB à 4 kHz, aigus +2,5 dB, dé-esseur. Rapport bas-médium/présence 21,9 → 12,8 dB ; chute après les mots 30 → 45 dB. Jugé à la mesure (pas d'écoute possible) : le retour du propriétaire fait foi.
 - Conseil de prise (si la pièce sonne encore) : parler près du téléphone (15 cm), dans un placard ou face à des rideaux, des vêtements ou un lit ; éviter les pièces vides et carrelées.
 3. WhatsApp › Gérer le stockage.
+   Lancé le 2026-11-08. Vérifié (presse) : WhatsApp › Stockage et données › Gérer le stockage ; « Plus de 5 Mo », fichiers transférés plusieurs fois, liste des discussions par taille ; sélection puis suppression. Depuis mars 2026 (v26.10.73), l'onglet Réglages d'iPhone devient « Vous » (photo de profil) — libellé FR à confirmer. Supprimer dans WhatsApp n'efface pas la copie enregistrée dans Photos.
+   Règle tirée de la partie 2 : **vidéo d'écran d'abord, voix ensuite** (les écrans réels différaient de la reconstruction : deux confirmations au lieu d'une).
 
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
 

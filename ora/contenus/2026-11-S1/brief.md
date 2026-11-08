@@ -152,3 +152,25 @@ Tout se dit, avec vos mots. Restent exacts (l'écran change dessus) : Photos, Co
 
 `ORA_EDUCATION_IPHONE-PLEIN-2_TUTO-VOIX_261108_v02.mp4` (24,7 s, hors dépôt) — fichier Adobe Podcast « optimisé v2 » (la v01 avait été faite sur le mauvais fichier, supprimée). Voix +8 %, pauses resserrées, traitement « pièce vide », -14,7 LUFS. Écrans calés sur : en double, triple, Photos, Collections, Doublons, Sélectionner, tout, Fusionner, celui du bas, confirmez, meilleure version, Supprimés récemment.
 La dernière phrase (« Partie 2 sur 3. La suite : WhatsApp. ») n'est pas dans la prise ; l'écran de fin l'affiche en texte.
+
+## Tuto « iPhone plein » 3/3 — WhatsApp (lancé le 2026-11-08)
+
+En préparation : écrans WhatsApp d'après une vidéo d'écran à recevoir. Ouverture : page Stockage iPhone (partie 1), ligne WhatsApp en cuivre.
+
+- TikTok : `iPhone plein : WhatsApp prend plus de place que vous ne pensez. Partie 3/3. #iphone #stockage #whatsapp #haiti`
+- Commentaire à épingler :
+  > WhatsApp › Vous (ou Réglages) › Stockage et données › Gérer le stockage › Plus de 5 Mo › Sélectionner › Supprimer.
+  > Supprimer dans WhatsApp n'efface pas la copie déjà enregistrée dans Photos : vérifiez aussi vos photos.
+  > Parties 1 et 2 : Supprimés récemment, Doublons.
+
+### Voix off — provisoire, ne pas enregistrer encore
+
+> WhatsApp peut prendre plusieurs gigas sur votre iPhone, sans que vous le voyiez.
+> Ouvrez WhatsApp, touchez Vous en bas à droite, puis Stockage et données, puis Gérer le stockage.
+> Commencez par Plus de 5 Mo : ce sont les grosses vidéos qu'on vous a envoyées.
+> Touchez Sélectionner, choisissez ce que vous ne voulez plus, puis supprimez.
+> Et regardez la liste en dessous : les groupes sont souvent les plus lourds.
+> Fin de la série. Enregistrez-la : un jour, votre iPhone sera encore plein.
+
+Libellés à confirmer par la vidéo d'écran (Vous ou Réglages, Plus de 5 Mo, Supprimer) avant l'enregistrement.
+Vidéo d'écran demandée : accueil › WhatsApp › onglet bas droite › Stockage et données › Gérer le stockage › Plus de 5 Mo › Sélectionner › 1–2 fichiers › corbeille › Annuler ; puis une discussion de la liste.
