@@ -107,6 +107,22 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 - 2026-11-08 : **le propriétaire trouve épuisant de demander une vidéo d'écran à chaque tuto.** Nouvelle façon : je construis d'après ce que je sais + la presse ; la copine vérifie en regardant le brouillon (capture de l'écran qui diffère seulement). Une vidéo d'écran groupée pour plusieurs tutos si besoin. Sujets que le propriétaire peut filmer lui-même : à privilégier. Le web n'est lisible ici qu'en résumés texte (pages et images inaccessibles depuis cet espace).
    Règle tirée de la partie 2 : **vérifier les écrans avant d'enregistrer la voix** (les écrans réels différaient de la reconstruction : deux confirmations au lieu d'une).
 
+## Format « vidéo qui marche » analysé (2026-11-14, @Rowanitoo, « Tes barres réseau te mentent », 70 s, 22,3 K j'aime, 19,5 K enregistrements)
+
+Le propriétaire montre une vidéo à succès pour qu'on en tire **ce qui est profitable pour ORA**, jamais pour la copier.
+Mécanique à reprendre : une image nouvelle toutes les 0,5–1 s ; **un seul mot à l'écran, synchronisé avec la voix** ; étiquettes encadrées sur les mots-clés ; pastilles en haut (étape 2/4, minuteur, valeur) ; un **chiffre à interpréter** (cadran rouge → vert) ; mention « Écran iOS reconstitué » en bas.
+Plan du texte : affirmation choc → 3 galères vécues → pourquoi → le secret (« mode caché ») → **« Enregistrez cette vidéo, vous allez vous en servir »** (vers 0:18) → étapes → lire le chiffre → bonus pratique → abonnement + **« envoyez ça à celui qui… »**.
+Pour ORA : vouvoiement, pas d'exagération, 40–50 s visés plutôt que 70. Minutage mot par mot possible en local (modèle zipformer français sherpa-onnx, GitHub k2-fsa/sherpa-onnx, release asr-models : sherpa-onnx-streaming-zipformer-fr-2023-04-14).
+
+## Haïti — réalités d'usage (propriétaire, 2026-11-14)
+
+- **Pas de problème de forfait / données ; le problème, c'est la qualité d'internet.** Sujet « WhatsApp mange votre forfait » écarté.
+
+## Prochaine vidéo (choisie le 2026-11-14) : « Votre iPhone sait si une pièce a été changée »
+
+Réglages › Général › Informations › Historique des pièces et des réparations (iOS 15.2+, n'apparaît que si l'iPhone a été réparé ; « Pièce d'origine Apple », « Pièce inconnue », « Utilisée » sur iPhone 15+ / iOS 18). Batterie : « Impossible de vérifier si cet iPhone possède une batterie Apple d'origine ».
+Source écran : vidéo d'écran d'une cliente (iPhone 13 Pro, batterie changée par ORA le 2026-11-13), avec son accord. À savoir avant d'écrire : batterie posée d'origine Apple ou compatible (le message affiché en dépend).
+
 ## Série « En clair » — vie pratique du téléphone en Haïti (proposée 2026-11-06)
 
 Critère du propriétaire : utile, apprend vraiment quelque chose, suscite partage, enregistrement, abonnement.
