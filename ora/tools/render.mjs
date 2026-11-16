@@ -90,10 +90,12 @@ try {
         const run = (cmd, args) => new Promise((ok, ko) => spawn(cmd, args, { stdio: 'inherit' })
           .on('close', c => c === 0 ? ok() : ko(new Error(`${cmd} a échoué (code ${c})`))));
         await run('python3', [path.join(dir, 'son.py'), json, String(duration), wav]);
-        await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', muette, '-i', wav,
-          '-af', 'loudnorm=I=-14:TP=-1:LRA=11', '-ar', '48000',
+        // Niveau final : -10 LUFS par défaut (le propriétaire trouvait -14 trop bas), crête ≤ -1 dBTP ; --lufs N pour changer.
+        const fort = output.replace(/\.mp4$/, '.fort.tmp.wav');
+        await run('python3', [path.join(dir, 'mastering.py'), wav, fort, String(opt('lufs', -10))]);
+        await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', muette, '-i', fort, '-ar', '48000',
           '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', output]);
-        for (const f of [json, wav, muette]) fs.rmSync(f, { force: true });
+        for (const f of [json, wav, fort, muette]) fs.rmSync(f, { force: true });
       }
     }
   }
