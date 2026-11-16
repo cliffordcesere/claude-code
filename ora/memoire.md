@@ -119,7 +119,9 @@ Pour ORA : vouvoiement, pas d'exagération, 40–50 s visés plutôt que 70. Min
 Barre d'onglets flottante : Actus · Appels · Communautés · Discussions · **Vous** (photo de profil). Discussions : « ··· », appareil photo, « + » ; Rechercher ; Toutes / Non lues / Favoris / Groupes / + ; Archivées.
 Vous : loupe ; QR + crayon ; photo, nom ⌄, @pseudo ; Abonnements ↗, Listes, Messages de diffusion, Événements, Important, Appareils connectés ; Compte, Confidentialité, Discussions, Apparence, Notifications… (Stockage et données plus bas, non filmé).
 Vous › Discussions : Réactions par défaut ; **Enregistrer (Photos)** (« Enregistrez automatiquement les photos et vidéos que vous recevez dans Photos. ») ; Suggestions de stickers ; Sauvegarde des discussions ; Exporter la discussion ; Transcrire les messages vocaux ; Maintenir les discussions archivées ; Transférer l'historique des discussions ; Archiver toutes les discussions.
-Pas encore filmé : Stockage et données › Gérer le stockage › Plus de 5 Mo.
+Captures du 2026-11-16 : Vous (… Notifications, **Stockage et données**, Contrôle parental ; Aide et commentaires, Inviter un proche ; carte Compte Meta). **Stockage et données** : *Stockage* — **« Libérer de l'espace de stockage »** (ex-« Gérer le stockage », sans taille affichée), Sauvegarde des discussions ; *Réseau* — Utilisation du réseau, Utiliser moins de données pour les appels (désactivé), Proxy ; *Qualité des médias* — Qualité d'importation HD, Qualité de téléchargement automatique HD ; *Téléchargement automatique des médias* — Photos Wi‑Fi et mobile, Audio / Vidéo / Documents Wi‑Fi.
+Pas encore vu : l'écran ouvert par « Libérer de l'espace de stockage », « Plus de 5 Mo », la confirmation de suppression.
+Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données pour les appels » et la qualité des médias (HD → standard) sur réseau faible — effet réel à vérifier avant toute promesse.
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 

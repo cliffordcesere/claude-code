@@ -159,21 +159,21 @@ En préparation : écrans WhatsApp d'après une vidéo d'écran à recevoir. Ouv
 
 - TikTok : `iPhone plein : WhatsApp prend plus de place que vous ne pensez. Partie 3/3. #iphone #stockage #whatsapp #haiti`
 - Commentaire à épingler :
-  > WhatsApp › Vous › Stockage et données › Gérer le stockage › Plus de 5 Mo › Sélectionner › Supprimer.
+  > WhatsApp › Vous › Stockage et données › Libérer de l’espace de stockage › Plus de 5 Mo › Sélectionner › Supprimer.
   > Supprimer dans WhatsApp n'efface pas la copie déjà enregistrée dans Photos : vérifiez aussi vos photos.
   > Parties 1 et 2 : Supprimés récemment, Doublons.
 
 ### Voix off — provisoire, ne pas enregistrer encore
 
 > WhatsApp peut prendre plusieurs gigas sur votre iPhone, sans que vous le voyiez.
-> Ouvrez WhatsApp, touchez Vous en bas à droite, puis Stockage et données, puis Gérer le stockage.
+> Ouvrez WhatsApp, touchez Vous en bas à droite, puis Stockage et données, puis Libérer de l’espace de stockage.
 > Commencez par Plus de 5 Mo : ce sont les grosses vidéos qu'on vous a envoyées.
 > Touchez Sélectionner, choisissez ce que vous ne voulez plus, puis supprimez.
 > Et regardez la liste en dessous : les groupes sont souvent les plus lourds.
 > Fin de la série. Demain, le bonus : le réglage qui remplit votre iPhone en cachette.
 
 Libellés à confirmer par la vidéo d'écran (Vous ou Réglages, Plus de 5 Mo, Supprimer) avant l'enregistrement.
-v02 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v02.mp4` ; onglet Vous, barre du bas et Discussions vérifiés (vidéo d'écran du 15 nov.), Gérer le stockage encore reconstruit. Vérification : la copine compare le brouillon avec son WhatsApp (capture de l'écran qui diffère).
+v03 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v03.mp4` ; Vous, barre du bas, Discussions, Stockage et données vérifiés (15–16 nov.) ; l'écran après « Libérer de l’espace de stockage » encore reconstruit. Vérification : la copine compare le brouillon avec son WhatsApp (capture de l'écran qui diffère).
 
 ## Bonus « iPhone plein » — le réglage qui le remplit en cachette (validé le 2026-11-08)
 
