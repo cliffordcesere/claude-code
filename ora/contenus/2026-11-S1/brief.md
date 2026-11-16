@@ -163,14 +163,16 @@ v05 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v05.mp4`. Ouver
   > Ici, l’espace revient tout de suite, sans attendre 30 jours comme dans Photos.
   > Les copies déjà enregistrées dans Photos, elles, restent : c’est le bonus de demain.
 
-### Voix off — à dire avec vos mots (enregistrable)
+### Voix off — à dire avec vos mots (version du 2026-11-16, moins générique)
 
-> Sur un seul iPhone, vérifié cette semaine : dix-neuf gigas de gros fichiers WhatsApp.
+> Dix-neuf gigas de gros fichiers WhatsApp, sur un seul iPhone vérifié cette semaine.
+> Le plus gros : près de neuf cents mégas.
+> Enregistrez cette vidéo, vous en aurez besoin.
 > Ouvrez WhatsApp, touchez Vous en bas à droite, puis Stockage et données, puis Libérer de l’espace de stockage.
-> Touchez Plus de 5 Mo : ce sont les grosses vidéos et les fichiers qu’on vous a envoyés.
-> Touchez Sélectionner, choisissez ce que vous ne voulez plus, puis supprimez.
-> Et ici, l’espace revient tout de suite.
-> Fin de la série. Demain, le bonus : le réglage qui remplit votre iPhone en cachette.
+> Touchez Plus de 5 Mo. Les plus lourds sont en haut.
+> Touchez Sélectionner, cochez ce dont vous n’avez plus besoin, et supprimez.
+> Et là, l’espace revient tout de suite.
+> Demain, le bonus : le réglage qui remplit votre iPhone en cachette.
 
 Restent exacts : Vous, Stockage et données, Libérer de l’espace de stockage, Plus de 5 Mo, Sélectionner ; 1re et dernière phrase.
 
