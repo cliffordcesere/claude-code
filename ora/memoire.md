@@ -46,6 +46,8 @@ ElevenLabs abandonné (`tools/voix_elevenlabs.py` conservé mais non utilisé).
 - 2026-11-05 : tuto iPhone publié avec « va dans Réglages » (tutoiement) par choix du propriétaire ; à l'avenir : « Allez dans Réglages ».
 - 2026-11-05 : **le public des tutos est débutant** : montrer chaque geste (écran d'accueil, appui sur l'icône de l'app), ne rien supposer connu.
 - 2026-11-05 : volume de sortie : -14 LUFS, crête -1 dBFS (le propriétaire trouvait sa voix trop basse ; Adobe Podcast utilisé pour le débruitage).
+- **2026-11-16 : -14 LUFS encore « très bas » pour le propriétaire → volume de sortie -10 LUFS, crête ≤ -1 dBTP** (`tools/mastering.py`, appelé par `render.mjs` ; `--lufs N` pour changer).
+- 2026-11-16 : plugin **lemo-opuscar** (bibliothèque de ~99 styles de films faits en code, github.com/lemomo-ai/lemo-opuscar) installé et inscrit dans `.claude/settings.json` du dépôt pour qu'il revienne à chaque session. Licence : les films faits avec sont à ORA, commercial compris ; ne pas revendre ni redistribuer ses fiches de style (CC BY-NC + permission pour ses propres films). Idée à discuter : style « Exploded Teardown » pour les produits.
 - 2026-11-04 : le son est souhaité. Habillage synthétisé par défaut (`tools/son.py`), version muette livrée à côté.
 - 2026-11-04 : version courante : iOS 27 (sortie avec l'iPhone 18, selon le propriétaire). Captures de référence : Réglages FR (bloc compte Apple en haut, recherche flottante), Informations iOS 27 (référence affichée directement, ex. MG1D4LL/A).
 - 2026-11-04 : le propriétaire n'a pas d'iPhone ; les tutos d'interface se font en écrans reconstruits (HTML), exactitude à faire vérifier sur un vrai appareil.

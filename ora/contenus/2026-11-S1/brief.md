@@ -178,7 +178,7 @@ Restent exacts : Vous, Stockage et données, Libérer de l’espace de stockage,
 
 ### Version avec voix (2026-11-16) — À PUBLIER
 
-`ORA_EDUCATION_IPHONE-PLEIN-3_TUTO-VOIX_261116_v01.mp4` (27,3 s, hors dépôt). Prise « Enregistrement_standard_80 » (Adobe Podcast), +8 %, traitement « pièce vide », -14,5 LUFS. Écrans calés sur : dix-neuf gigas, gros fichiers, vérifié, le plus gros (896,3 Mo ressort), Enregistrez (étiquette « ENREGISTREZ CETTE VIDÉO »), WhatsApp, Vous, Stockage et données, Libérer, Plus de 5 Mo, Sélectionner, cochez, supprimez, l'espace revient, Demain le bonus.
+`ORA_EDUCATION_IPHONE-PLEIN-3_TUTO-VOIX_261116_v02.mp4` (27,3 s, hors dépôt). Prise « Enregistrement_standard_80 » (Adobe Podcast), +8 %, traitement « pièce vide », **-9,9 LUFS** (v01 à -14,5 jugée trop basse, supprimée). Écrans calés sur : dix-neuf gigas, gros fichiers, vérifié, le plus gros (896,3 Mo ressort), Enregistrez (étiquette « ENREGISTREZ CETTE VIDÉO »), WhatsApp, Vous, Stockage et données, Libérer, Plus de 5 Mo, Sélectionner, cochez, supprimez, l'espace revient, Demain le bonus.
 
 ## Bonus « iPhone plein » — le réglage qui le remplit en cachette (validé le 2026-11-08)
 
