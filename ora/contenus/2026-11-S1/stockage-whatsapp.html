@@ -320,6 +320,8 @@
   #h-tuiles { position: absolute; left: 0; right: 0; top: 1110px; display: flex; justify-content: center; gap: 22px; }
   #h-tuiles .wf { width: 250px; border-radius: 26px; box-shadow: 0 16px 40px rgba(0,0,0,.6); will-change: transform; }
   #h-tuiles .wf .tl { font-size: 28px; } #h-tuiles .wf .doc { font-size: 30px; } #h-tuiles .wf .nm { font-size: 22px; }
+  #h-save { position: absolute; left: 0; right: 0; top: 1480px; display: flex; justify-content: center; opacity: 0; }
+  .tag-save { display: flex; align-items: center; gap: 14px; padding: 14px 28px; border: 3px solid var(--cuivre); border-radius: 14px; color: var(--cuivre); font-size: 34px; font-weight: 700; letter-spacing: .06em; }
   #h-note { position: absolute; left: 0; right: 0; top: 1405px; text-align: center; font-size: 32px; font-weight: 300; color: var(--gris); }
   .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
 </style>
@@ -449,7 +451,7 @@
     <div class="doigt" id="doigt"></div>
   </div>
   <!-- Ouverture : le vrai chiffre « Plus de 5 Mo » d'un iPhone vérifié le 16 nov. 2026 (accord de sa propriétaire) -->
-  <div id="intro"><div id="h-num">19,32 Go</div><div id="h-sous">de gros fichiers WhatsApp</div><div id="h-tuiles"></div><div id="h-note">Vérifié cette semaine sur un vrai iPhone.</div></div>
+  <div id="intro"><div id="h-num">19,32 Go</div><div id="h-sous">de gros fichiers WhatsApp</div><div id="h-tuiles"></div><div id="h-note">Vérifié cette semaine sur un vrai iPhone.</div><div id="h-save"><span class="tag-save"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>ENREGISTREZ CETTE VIDÉO</span></div></div>
   <div class="texte" id="textes"></div>
   <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
   <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
@@ -504,7 +506,7 @@ document.getElementById('o-transf').innerHTML = [['VID', '136,3 Mo', '15:01'], [
 document.getElementById('tabs-gerer').innerHTML = tabs('vous');
 
 // ---------- Scénario (temps de la version muette) ----------
-const I = 2.4, SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
+const I = 2.6, SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
 window.ORA_DURATION = 20.0;
 const CFG = {
   textes: [
@@ -519,18 +521,21 @@ const CFG = {
   defil: [[0, 'p-wa-vous', 0], [4.85, 'p-wa-vous', 'r-wa-stock:1020']],
   taps: [[3.4, '#app-wa'], [4.5, '#tab-vous'], [5.8, '#r-wa-stock'], [7.0, '#r-gerer'], [8.8, '#c-gros'], [9.8, '#b-wa-sel'], [10.4, '#v1'], [10.75, '#v2'], [11.1, '#v3'], [11.7, '#b-wa-trash'], [12.45, '#b-wa-ok']],
   surbrillance: [[3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
-                 [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.6, FIN - 0.1, '#g-note', 'hl-txt']],
+                 [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 0.9, FIN - 0.1, '#g-note', 'hl-txt']],
   camera: [[0, 0.72, '#phone', 1200], [3.6, 0.62, '#phone', 1060], [5.0, 0.8, '#r-wa-stock', 1480], [6.05, 0.62, '#phone', 1060],
            [7.9, 0.95, '#c-gros', 1480], [9.05, 0.62, '#phone', 1060], [RET + 0.4, 1.05, '#g-carte', 1240]],
   fin: FIN,
-  sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], crans: [0.75, 0.95, 1.15], impact: FIN + 0.9 },
+  sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], crans: [0.75, 0.95, 1.15, 1.97], impact: FIN + 0.9 },
   apres: t => {
     const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
     const $ = s => document.querySelector(s), fr = v => v.toFixed(1).replace('.', ',');
     // ouverture : la taille de WhatsApp monte jusqu'à 6,9 Go
     // ouverture : 19,32 Go qui montent, trois gros fichiers qui arrivent, puis le téléphone
     $('#h-num').style.transform = `scale(${1.12 - 0.12 * out(t / 0.5)})`; // le vrai chiffre dès la 1re image
-    document.querySelectorAll('#h-tuiles .wf').forEach((w, i) => { const k = out((t - 0.6 - i * 0.2) / 0.35); w.style.opacity = k; w.style.transform = `translateY(${(1 - k) * 80}px) rotate(${(i - 1) * 4 * (1 - k)}deg)`; });
+    // « le plus gros » : le premier fichier (896,3 Mo) ressort ; puis « Enregistrez cette vidéo »
+    const gros = t >= 1.5 ? out((t - 1.5) / 0.25) : 0;
+    document.querySelectorAll('#h-tuiles .wf').forEach((w, i) => { const k = out((t - 0.6 - i * 0.2) / 0.35); const g = i === 0 ? gros : 0; w.style.opacity = k; w.style.transform = `translateY(${(1 - k) * 80 - 20 * g}px) rotate(${(i - 1) * 4 * (1 - k)}deg) scale(${1 + 0.1 * g})`; w.style.boxShadow = g ? `0 0 0 ${6 * g}px var(--cuivre), 0 16px 40px rgba(0,0,0,.6)` : ''; w.style.zIndex = i === 0 ? 2 : 1; });
+    const sv = out((t - 1.95) / 0.25); $('#h-save').style.opacity = sv; $('#h-save').style.transform = `scale(${0.9 + 0.1 * sv})`;
     $('#h-note').style.opacity = out((t - 1.3) / 0.4);
     $('#intro').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
     const ph = $('#phone');
@@ -558,6 +563,12 @@ const CFG = {
     $('#g-libre').textContent = (83.83 + 1.99 * o).toFixed(2).replace('.', ',');
     $('#g-seg').style.width = `${16.3 - 1.7 * o}%`;
   },
+};
+// Voix du propriétaire (2026-11-16, Adobe Podcast), +8 %, pauses resserrées, traitement « pièce vide » : repères [temps voix, temps vidéo]
+// dix-neuf gigas 0 · gros fichiers 1,3 · vérifié 3,3 · le plus gros 4,6 · Enregistrez 6,6 · WhatsApp 9,3 · Vous 10,4 · Stockage et données 11,9 · Libérer 13,3 · Plus de 5 Mo 15,4 · Sélectionner 17,8 · cochez 18,4 · supprimez 20,2 · l'espace revient 21,9 · Demain, le bonus 22,9
+CFG.voix = {
+  src: 'voix/iphone-plein-3_voix-proprietaire_v1.flac',
+  reperes: [[0.0, 0], [1.296, 0.55], [2.407, 1.05], [3.333, 1.3], [4.593, 1.5], [6.019, 1.9], [6.597, 1.95], [8.449, 2.3], [8.901, 2.9], [9.271, 3.4], [9.888, 4.2], [10.443, 4.5], [11.138, 4.85], [11.879, 5.8], [12.62, 6.2], [13.268, 7.0], [14.286, 7.9], [15.359, 8.8], [16.377, 9.3], [17.119, 9.5], [17.808, 9.8], [18.364, 10.4], [19.567, 11.1], [20.215, 11.7], [20.771, 12.45], [21.67, 13.6], [22.226, 14.3], [22.809, 15.2], [23.407, 16.4], [23.87, 17.0], [27.259, 20.0]],
 };
 SCENE(CFG);
 </script>
