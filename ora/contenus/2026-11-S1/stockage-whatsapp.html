@@ -14,7 +14,9 @@
   WhatsApp (iPhone) : reste reconstruit d'après la presse 2025–2026 :
     écran ouvert par « Libérer de l'espace de stockage » (titre, jauge, « Examiner et supprimer », liste) ›
     « Plus de 5 Mo » › Sélectionner › corbeille › confirmation (texte à confirmer).
-  Valeurs et noms fictifs.
+  Vérifié (captures iPhone, 16 nov. 2026) : « Libérer de l'espace de stockage » (Stockage de l'appareil, note « La suppression de médias libère immédiatement de l'espace… »,
+  Outils pour libérer de l'espace : Plus de 5 Mo / Transféré de nombreuses fois, Discussions, Détails du stockage) et « Plus de 5 Mo » (Sélectionner, Taille, grille, total en bas).
+  Reconstruit : le mode sélection et la fenêtre de suppression. Valeurs et noms fictifs.
   Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-whatsapp.html sortie.mp4
 -->
 <style>
@@ -284,6 +286,30 @@
   .wa-sheet .sup { display: block; padding: 26px; font-size: 31px; font-weight: 700; color: var(--blanc); }
   .wa-sheet .ann { padding: 26px; font-size: 31px; font-weight: 600; }
   #p-wa-gros .nav .pill { right: 26px; }
+  .wa-barre .l2 { display: flex; justify-content: space-between; align-items: baseline; margin-top: 2px; }
+  .wa-barre .l2 b { font-size: 66px; font-weight: 600; } .wa-barre .l2 > span { font-size: 27px; color: var(--gris); }
+  .wa-jauge.cadre { background: transparent; box-shadow: 0 0 0 2px #cfcfcf; }
+  .wa-note { padding: 0 44px 10px !important; margin-top: -8px !important; font-size: 24px !important; }
+  .wa-sec-r { display: flex; justify-content: space-between; align-items: center; padding-right: 30px; }
+  .wa-outils { padding: 24px 26px 26px; }
+  .o-h { display: flex; justify-content: space-between; align-items: center; font-size: 30px; padding: 0 6px; }
+  .o-h .val { color: var(--gris); font-size: 29px; }
+  .o-v { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 14px; }
+  .o-sep { height: 1px; background: #333; margin: 22px 0 22px 90px; }
+  .wf { position: relative; aspect-ratio: 1; display: block; overflow: hidden; font-style: normal; background: linear-gradient(#8c8c8c, #ececec 30%, #ececec 70%, #8c8c8c); }
+  .wf.vid { background: radial-gradient(circle at 45% 40%, #7a7a7a, #2c2c2c 75%); }
+  .wf .doc { position: absolute; left: 50%; top: 50%; width: 38%; height: 46%; transform: translate(-50%, -50%); border-radius: 6px; background: #fafafa; box-shadow: 0 0 0 1px #d6d6d6; display: grid; place-items: center; font-size: 20px; font-weight: 600; color: #8a8a8a; }
+  .wa-grille .wf .doc { font-size: 26px; }
+  .wf .tl { position: absolute; right: 8px; top: 4px; font-size: 19px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.7); }
+  .wf .nm { position: absolute; left: 8px; right: 8px; bottom: 5px; font-size: 18px; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wf .du { position: absolute; right: 8px; bottom: 5px; font-size: 19px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.7); display: flex; gap: 6px; align-items: center; }
+  .wa-grille .wf .tl, .wa-grille .wf .du { font-size: 24px; } .wa-grille .wf .nm { font-size: 22px; }
+  .wf .plus { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.45); color: var(--blanc); font-size: 30px; font-weight: 600; }
+  .wf.wv .ck { left: 10px; right: auto; }
+  .wa-tri { padding: 10px 30px 18px; font-size: 30px; }
+  .wa-bas { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 96px; display: flex; align-items: center; justify-content: center; z-index: 3; }
+  .wa-bas .rond-s { position: absolute; left: 0; width: 96px; height: 96px; background: rgba(46,46,46,.95); }
+  .pill-tot { height: 84px; padding: 0 40px; border-radius: 42px; background: rgba(46,46,46,.95); display: grid; place-items: center; font-size: 34px; font-weight: 600; }
 
   /* ---------- Ouverture : la ligne WhatsApp dans Stockage iPhone ---------- */
   .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
@@ -374,29 +400,38 @@
         <div class="wa-tabs" id="tabs-stock"></div>
       </div>
 
-      <!-- WhatsApp › Libérer de l'espace de stockage (contenu reconstruit d'après la presse) -->
+      <!-- WhatsApp › Libérer de l'espace de stockage (capture iPhone, 16 nov. 2026) -->
       <div class="page" id="p-wa-gerer"><div class="contenu">
         <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu" style="font-size:28px">Libérer de l’espace de stockage</span></div>
-        <div class="wa-barre">
-          <div class="l"><span><b id="g-utilise">6,9 Go</b> utilisés par WhatsApp</span></div>
-          <div class="wa-jauge"><i id="g-seg" style="width:11%;background:var(--blanc)"></i><i style="width:84%;background:#8A8A8A"></i></div>
-          <div class="wa-leg"><span><i class="pt" style="background:var(--blanc)"></i>WhatsApp</span><span><i class="pt" style="background:#8A8A8A"></i>Apps et autres éléments</span><span><i class="pt" style="background:#2a2a2a"></i>Libre : <span id="g-libre">2,8 Go</span></span></div>
+        <div class="wa-sec">Stockage de l’appareil</div>
+        <div class="wa-barre" id="g-carte">
+          <div class="l"><span>Utilisé</span></div>
+          <div class="l2"><b id="g-utilise">61,2 Go</b><span><span id="g-libre">2,80</span> Go de libres</span></div>
+          <div class="wa-jauge cadre"><i id="g-seg" style="width:10.8%;background:var(--blanc)"></i><i style="width:84.8%;background:#8A8A8A"></i></div>
+          <div class="wa-leg"><span><i class="pt" style="background:var(--blanc)"></i>Fichiers médias WhatsApp</span><span><i class="pt" style="background:#8A8A8A"></i>Applications et autres éléments</span></div>
         </div>
-        <div class="wa-sec">Examiner et supprimer des éléments</div>
-        <div class="wa-cartes">
-          <div class="wa-carte" id="c-transf"><div class="vigs"><i style="background:radial-gradient(circle at 40% 40%,#7a7a7a,#3a3a3a)"></i><i style="background:radial-gradient(circle at 60% 40%,#6a6a6a,#2e2e2e)"></i></div><b>Transférés de nombreuses fois</b><span>310 Mo</span></div>
-          <div class="wa-carte" id="c-gros"><div class="vigs"><i style="background:radial-gradient(circle at 40% 40%,#8a8a8a,#3e3e3e)"></i><i style="background:radial-gradient(circle at 60% 50%,#6e6e6e,#2a2a2a)"></i><i style="background:radial-gradient(circle at 50% 40%,#9a9a9a,#444)"></i></div><b>Plus de 5 Mo</b><span id="c-gros-t">2,4 Go</span></div>
+        <div class="wa-note" id="g-note">La suppression de médias libère immédiatement de l’espace sur votre appareil. Le stockage dans le cloud sera mis à jour après votre prochaine sauvegarde. <u>En savoir plus</u></div>
+        <div class="wa-sec">Outils pour libérer de l’espace</div>
+        <div class="groupe wa-outils">
+          <div id="c-gros"><div class="o-h"><span>Plus de 5 Mo</span><span class="val"><span id="c-gros-t">2,4 Go</span> ›</span></div><div class="o-v" id="o-gros"></div><div class="o-v" id="o-gros2" style="display:none"></div></div>
+          <div class="o-sep"></div>
+          <div><div class="o-h"><span>Transféré de nombreuses fois</span><span class="val">310 Mo ›</span></div><div class="o-v" id="o-transf"></div></div>
         </div>
-        <div class="wa-sec" id="wa-liste">Discussions</div>
+        <div class="wa-sec wa-sec-r">Discussions <span class="rond-s" style="width:64px;height:64px"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div>
+        <div class="groupe"><div class="row" style="min-height:130px"><span class="icone"><svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.962 8.962 0 0 0 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg></span><span class="nom" style="white-space:normal">Activer les messages éphémères<small style="display:block;font-size:22px;color:var(--gris);line-height:1.3;margin-top:4px">Contrôlez vos futurs besoins de stockage et renforcez la confidentialité de vos discussions</small></span><span class="fl">›</span></div></div>
+        <div class="wa-sec wa-sec-r" id="wa-liste">Détails du stockage <span class="rond-s" style="width:64px;height:64px"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div>
         <div id="wa-tailles"></div>
-      </div></div>
+      </div>
+        <div class="wa-tabs" id="tabs-gerer"></div>
+      </div>
 
-      <!-- WhatsApp › Libérer de l'espace de stockage › Plus de 5 Mo (reconstruit) -->
+      <!-- WhatsApp › Libérer de l'espace de stockage › Plus de 5 Mo (capture iPhone, 16 nov. 2026 ; sélection et suppression reconstruites) -->
       <div class="page" id="p-wa-gros"><div class="contenu">
         <div class="nav"><span class="rond"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></span><span class="milieu">Plus de 5 Mo</span><span class="pill" id="b-wa-sel">Sélectionner</span></div>
-        <div class="wa-info" id="gros-info">2,4 Go · 64 éléments</div>
+        <div class="wa-tri">Taille</div>
         <div class="wa-grille" id="wa-grille"></div>
       </div>
+        <div class="wa-bas" id="wa-bas"><span class="rond-s"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg></span><span class="pill-tot" id="gros-info">2,4 Go</span></div>
         <div class="wa-selbar" id="wa-selbar"><span>Tout sélectionner</span><span id="sel-n">0 sélectionné</span><span id="b-wa-trash"><svg viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span></div>
         <div class="wa-sheet" id="wa-sheet"><div class="b1"><p>Supprimer 3 éléments ?</p><span class="sup" id="b-wa-ok">Supprimer</span></div><div class="ann">Annuler</div></div>
       </div>
@@ -443,9 +478,18 @@ document.getElementById('wa-g2').innerHTML = R('', 'M12.65 10C11.83 7.67 9.61 6 
   + R('', 'M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.8 1.1 2.8 2.5V11c.6 0 1.2.6 1.2 1.2v3.5c0 .7-.6 1.3-1.2 1.3H9.2c-.7 0-1.2-.6-1.2-1.2v-3.5c0-.7.6-1.3 1.2-1.3V9.5C9.2 8.1 10.6 7 12 7zm0 1.2c-.8 0-1.5.5-1.5 1.3V11h3V9.5c0-.8-.7-1.3-1.5-1.3z', 'Contrôle parental');
 const TAILLES = [['Famille', 'F', '1,9 Go', 'r-famille'], ['Église – chorale', 'É', '1,2 Go'], ['Voisins Delmas', 'V', '860 Mo'], ['Maman', 'M', '420 Mo'], ['Marc', 'M', '190 Mo'], ['Nadia', 'N', '75 Mo']];
 document.getElementById('wa-tailles').innerHTML = TAILLES.map(([n, a, t, id], i) => `<div class="wa-ls"${id ? ` id="${id}"` : ''}><span class="wa-av" style="background:${['#4a4a4a', '#3e3e3e', '#555', '#444', '#4e4e4e', '#3a3a3a'][i]}">${a}</span><span class="n">${n}<small>${t}</small></span></div>`).join('');
-const VID = [['412 Mo', '6:48'], ['286 Mo', '4:51'], ['198 Mo', '3:20'], ['154 Mo', '2:36'], ['120 Mo', '2:02'], ['96 Mo', '1:38'], ['88 Mo', '1:29'], ['71 Mo', '1:12'], ['64 Mo', '1:05'], ['58 Mo', '0:59'], ['52 Mo', '0:53'], ['47 Mo', '0:48'], ['41 Mo', '0:42'], ['38 Mo', '0:39'], ['33 Mo', '0:34']];
-const JEU = '<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
-document.getElementById('wa-grille').innerHTML = VID.map(([t, d], i) => `<i class="wv" id="v${i + 1}" style="background:radial-gradient(circle at ${30 + (i * 37) % 45}% ${30 + (i * 23) % 40}%, rgb(${120 - i * 3},${120 - i * 3},${120 - i * 3}) 0%, rgb(${48 + (i % 3) * 6},${48 + (i % 3) * 6},${48 + (i % 3) * 6}) 70%)"><em>${t}</em><span class="dur">${JEU}${d}</span><b class="ck"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b></i>`).join('');
+const CAM = '<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>';
+const COCHE_WA = '<b class="ck"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></b>';
+const tuile = ([type, taille, nom], i, id, plus) => type === 'VID'
+  ? `<i class="wf vid${id ? ' wv' : ''}"${id ? ` id="${id}"` : ''} style="background:radial-gradient(circle at ${30 + (i * 37) % 45}% ${30 + (i * 23) % 40}%, #8a8a8a, #2a2a2a 75%)"><em class="tl">${taille}</em><span class="du">${CAM}${nom}</span>${plus ? `<span class="plus">${plus}</span>` : ''}${id ? COCHE_WA : ''}</i>`
+  : `<i class="wf${id ? ' wv' : ''}"${id ? ` id="${id}"` : ''}><span class="doc">${type}</span><em class="tl">${taille}</em><span class="nm">${nom}</span>${plus ? `<span class="plus">${plus}</span>` : ''}${id ? COCHE_WA : ''}</i>`;
+const GROS = [['VID', '412 Mo', '6:48'], ['MOV', '286 Mo', 'IMG_2041.MOV'], ['ZIP', '198 Mo', 'Photos mariage.zip'], ['PDF', '154 Mo', 'Catalogue 2026.pdf'], ['VID', '120 Mo', '2:02'], ['MOV', '96 Mo', 'IMG_1830.MOV'],
+              ['VID', '88 Mo', '1:29'], ['MP4', '71 Mo', 'VID-20261012.mp4'], ['VID', '64 Mo', '1:05'], ['PDF', '58 Mo', 'Cours compta.pdf'], ['VID', '52 Mo', '0:53'], ['MOV', '47 Mo', 'IMG_1702.MOV'], ['VID', '41 Mo', '0:42'], ['ZIP', '38 Mo', 'Documents.zip'], ['VID', '33 Mo', '0:34']];
+document.getElementById('wa-grille').innerHTML = GROS.map((g, i) => tuile(g, i, `v${i + 1}`)).join('');
+document.getElementById('o-gros').innerHTML = GROS.slice(0, 4).map((g, i) => tuile(g, i, '', i === 3 ? '+61' : '')).join('');
+document.getElementById('o-gros2').innerHTML = GROS.slice(3, 7).map((g, i) => tuile(g, i + 3, '', i === 3 ? '+58' : '')).join('');
+document.getElementById('o-transf').innerHTML = [['VID', '36 Mo', '3:12'], ['PDF', '24 Mo', 'Programme.pdf'], ['VID', '19 Mo', '1:40'], ['VID', '12 Mo', '0:58']].map((g, i) => tuile(g, i + 5, '', i === 3 ? '+12' : '')).join('');
+document.getElementById('tabs-gerer').innerHTML = tabs('vous');
 
 // ---------- Scénario (temps de la version muette) ----------
 const SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
@@ -456,16 +500,16 @@ const CFG = {
     { a: 2.9, b: 6.2, label: 'Étape 1 · Vous', titre: 'Stockage|et données' },
     { a: 6.2, b: 8.2, label: 'Étape 2', titre: 'Libérer|de l’espace' },
     { a: 8.2, b: RET, label: 'Étape 3', titre: 'Plus de 5 Mo ›|Supprimer' },
-    { a: RET, b: FIN, label: 'Ensuite', titre: 'Les groupes|pèsent lourd.', sous: 'Ouvrez-les dans la liste.', retard: 0.9 },
+    { a: RET, b: FIN, label: 'Bonne nouvelle', titre: 'L’espace revient|tout de suite.', sous: 'Ici, pas d’attente de 30 jours.', retard: 0.9 },
     { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Fin de la série · Demain, le bonus.', retard: 0.5 },
   ],
   nav: [[0, 'p-stockage', 0], [2.6, 'p-accueil', 0], [3.6, 'p-wa-disc', 0], [4.7, 'p-wa-vous', 0], [6.05, 'p-wa-stock', 1], [7.25, 'p-wa-gerer', 1], [9.05, 'p-wa-gros', 1], [RET, 'p-wa-gerer', -1]],
-  defil: [[0, 'p-wa-gerer', 0], [RET + 0.4, 'p-wa-gerer', 'wa-liste:260'], [0, 'p-wa-vous', 0], [4.85, 'p-wa-vous', 'r-wa-stock:1020']],
+  defil: [[0, 'p-wa-vous', 0], [4.85, 'p-wa-vous', 'r-wa-stock:1020']],
   taps: [[3.4, '#app-wa'], [4.5, '#tab-vous'], [5.8, '#r-wa-stock'], [7.0, '#r-gerer'], [8.8, '#c-gros'], [9.8, '#b-wa-sel'], [10.4, '#v1'], [10.75, '#v2'], [11.1, '#v3'], [11.7, '#b-wa-trash'], [12.45, '#b-wa-ok']],
   surbrillance: [[0.6, 2.5, '#r-wa-st'], [3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
-                 [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.0, FIN - 0.1, '#r-famille']],
+                 [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.6, FIN - 0.1, '#g-note', 'hl-txt']],
   camera: [[0, 1.15, '#r-wa-st', 1460, 0.02], [2.6, 0.72, '#phone', 1200], [3.6, 0.62, '#phone', 1060], [5.0, 0.8, '#r-wa-stock', 1480], [6.05, 0.62, '#phone', 1060],
-           [7.9, 1.0, '#c-gros', 1250], [9.05, 0.62, '#phone', 1060], [RET + 0.6, 1.0, '#r-famille', 1320]],
+           [7.9, 0.95, '#c-gros', 1480], [9.05, 0.62, '#phone', 1060], [RET + 0.4, 1.05, '#g-carte', 1240]],
   fin: FIN,
   sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], impact: FIN + 0.9 },
   apres: t => {
@@ -486,11 +530,15 @@ const CFG = {
     // suppression : les trois vidéos partent, la grille se resserre, les tailles baissent
     const parti = t >= SUP + 0.45;
     [1, 2, 3].forEach(i => { const v = $('#v' + i); const k = clamp((t - SUP - 0.1) / 0.3); v.style.opacity = t < SUP + 0.1 ? 1 : 1 - k; v.style.transform = `scale(${1 - 0.2 * k})`; v.style.display = parti ? 'none' : ''; });
-    $('#gros-info').textContent = parti ? '1,5 Go · 61 éléments' : '2,4 Go · 64 éléments';
+    $('#gros-info').textContent = parti ? '1,5 Go' : '2,4 Go';
+    $('#wa-bas').style.opacity = sel ? 0 : 1;
+    $('#o-gros').style.display = parti ? 'none' : ''; $('#o-gros2').style.display = parti ? '' : 'none';
     $('#c-gros-t').textContent = parti ? '1,5 Go' : '2,4 Go';
-    $('#g-utilise').textContent = parti ? '6,0 Go' : '6,9 Go';
-    $('#g-libre').textContent = parti ? '3,7 Go' : '2,8 Go';
-    $('#g-seg').style.width = parti ? '9.5%' : '11%';
+    // retour sur « Libérer de l'espace » : l'espace libre remonte aussitôt (2,80 → 3,70 Go)
+    const o = out((t - (RET + 0.7)) / 0.9);
+    $('#g-utilise').textContent = `${fr(61.2 - 0.9 * o)} Go`;
+    $('#g-libre').textContent = (2.8 + 0.9 * o).toFixed(2).replace('.', ',');
+    $('#g-seg').style.width = `${10.8 - 1.4 * o}%`;
   },
 };
 SCENE(CFG);
