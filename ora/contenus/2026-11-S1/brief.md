@@ -155,9 +155,9 @@ La dernière phrase (« Partie 2 sur 3. La suite : WhatsApp. ») n'est pas dans 
 
 ## Tuto « iPhone plein » 3/3 — WhatsApp (lancé le 2026-11-08)
 
-v04 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v04.mp4`. Écrans vérifiés (vidéo du 15 nov., captures du 16 nov.) ; seule la fenêtre de suppression reste reconstruite.
+v05 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v05.mp4`. Ouverture sur le vrai chiffre : 19,32 Go de gros fichiers WhatsApp (iPhone de la copine, avec son accord) ; tailles et totaux réels, noms fictifs. Écrans vérifiés (vidéo du 15 nov., captures du 16 nov.) ; seule la fenêtre de suppression reste reconstruite.
 
-- TikTok : `iPhone plein : WhatsApp prend plus de place que vous ne pensez. Partie 3/3. #iphone #stockage #whatsapp #haiti`
+- TikTok : `iPhone plein : 19 Go de gros fichiers WhatsApp, sur un seul iPhone. Partie 3/3. #iphone #stockage #whatsapp #haiti`
 - Commentaire à épingler :
   > WhatsApp › Vous › Stockage et données › Libérer de l’espace de stockage › Plus de 5 Mo › Sélectionner › Supprimer.
   > Ici, l’espace revient tout de suite, sans attendre 30 jours comme dans Photos.
@@ -165,7 +165,7 @@ v04 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v04.mp4`. Écra
 
 ### Voix off — à dire avec vos mots (enregistrable)
 
-> WhatsApp peut prendre plusieurs gigas sur votre iPhone, sans que vous le voyiez.
+> Sur un seul iPhone, vérifié cette semaine : dix-neuf gigas de gros fichiers WhatsApp.
 > Ouvrez WhatsApp, touchez Vous en bas à droite, puis Stockage et données, puis Libérer de l’espace de stockage.
 > Touchez Plus de 5 Mo : ce sont les grosses vidéos et les fichiers qu’on vous a envoyés.
 > Touchez Sélectionner, choisissez ce que vous ne voulez plus, puis supprimez.

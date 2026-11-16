@@ -123,6 +123,7 @@ Captures du 2026-11-16 : Vous (… Notifications, **Stockage et données**, Cont
 « Libérer de l'espace de stockage » (captures du 2026-11-16) : *Stockage de l'appareil* — Utilisé « 34,7 Go », « 83,83 Go de libres », barre Fichiers médias WhatsApp / Applications et autres éléments ; note **« La suppression de médias libère immédiatement de l'espace sur votre appareil. Le stockage dans le cloud sera mis à jour après votre prochaine sauvegarde. »** ; *Outils pour libérer de l'espace* — **Plus de 5 Mo** (taille ›, 4 vignettes, « +N »), Transféré de nombreuses fois ; *Discussions* (loupe) — Activer les messages éphémères ; *Détails du stockage* (loupe). Barre d'onglets visible.
 « Plus de 5 Mo » : ‹ · titre · « Sélectionner » ; « Taille » ; grille 3 colonnes (taille en haut à droite, nom de fichier en bas, icône ZIP/MOV/PDF ou vignette vidéo + durée) ; en bas : bouton de tri rond + pastille du total (ex. « 19,32 Go »).
 Pas encore vu : mode sélection et fenêtre de suppression (reconstruits).
+**Accord de la copine (2026-11-16)** pour utiliser ses vrais chiffres (pas son nom ni ses fichiers) : « Plus de 5 Mo » **19,32 Go**, tailles des fichiers, Utilisé 34,7 Go / 83,83 Go de libres, Transféré 328,5 Mo. Partie 3 v05 ouvre sur « Sur un seul iPhone : 19,32 Go de gros fichiers WhatsApp ».
 Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données pour les appels » et la qualité des médias (HD → standard) sur réseau faible — effet réel à vérifier avant toute promesse.
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)

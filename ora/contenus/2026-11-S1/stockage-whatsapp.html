@@ -16,7 +16,9 @@
     « Plus de 5 Mo » › Sélectionner › corbeille › confirmation (texte à confirmer).
   Vérifié (captures iPhone, 16 nov. 2026) : « Libérer de l'espace de stockage » (Stockage de l'appareil, note « La suppression de médias libère immédiatement de l'espace… »,
   Outils pour libérer de l'espace : Plus de 5 Mo / Transféré de nombreuses fois, Discussions, Détails du stockage) et « Plus de 5 Mo » (Sélectionner, Taille, grille, total en bas).
-  Reconstruit : le mode sélection et la fenêtre de suppression. Valeurs et noms fictifs.
+  Reconstruit : le mode sélection et la fenêtre de suppression.
+  Valeurs RÉELLES de l'iPhone vérifié (accord de sa propriétaire, 16 nov.) : Plus de 5 Mo 19,32 Go, tailles des fichiers, Utilisé 34,7 Go / 83,83 Go de libres,
+  Transféré de nombreuses fois 328,5 Mo. Noms des fichiers et des discussions fictifs.
   Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/stockage-whatsapp.html sortie.mp4
 -->
 <style>
@@ -312,6 +314,13 @@
   .pill-tot { height: 84px; padding: 0 40px; border-radius: 42px; background: rgba(46,46,46,.95); display: grid; place-items: center; font-size: 34px; font-weight: 600; }
 
   /* ---------- Ouverture : la ligne WhatsApp dans Stockage iPhone ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #h-num { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font-size: 200px; font-weight: 700; letter-spacing: -.02em; color: var(--cuivre); line-height: 1; }
+  #h-sous { position: absolute; left: 0; right: 0; top: 990px; text-align: center; font-size: 50px; font-weight: 600; }
+  #h-tuiles { position: absolute; left: 0; right: 0; top: 1110px; display: flex; justify-content: center; gap: 22px; }
+  #h-tuiles .wf { width: 250px; border-radius: 26px; box-shadow: 0 16px 40px rgba(0,0,0,.6); will-change: transform; }
+  #h-tuiles .wf .tl { font-size: 28px; } #h-tuiles .wf .doc { font-size: 30px; } #h-tuiles .wf .nm { font-size: 22px; }
+  #h-note { position: absolute; left: 0; right: 0; top: 1405px; text-align: center; font-size: 32px; font-weight: 300; color: var(--gris); }
   .voile-haut { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(#000 55%, rgba(0,0,0,0)); z-index: 4; pointer-events: none; }
 </style>
 </head>
@@ -406,16 +415,16 @@
         <div class="wa-sec">Stockage de l’appareil</div>
         <div class="wa-barre" id="g-carte">
           <div class="l"><span>Utilisé</span></div>
-          <div class="l2"><b id="g-utilise">61,2 Go</b><span><span id="g-libre">2,80</span> Go de libres</span></div>
-          <div class="wa-jauge cadre"><i id="g-seg" style="width:10.8%;background:var(--blanc)"></i><i style="width:84.8%;background:#8A8A8A"></i></div>
+          <div class="l2"><b id="g-utilise">34,7 Go</b><span><span id="g-libre">83,83</span> Go de libres</span></div>
+          <div class="wa-jauge cadre"><i id="g-seg" style="width:16.3%;background:var(--blanc)"></i><i style="width:13%;background:#8A8A8A"></i></div>
           <div class="wa-leg"><span><i class="pt" style="background:var(--blanc)"></i>Fichiers médias WhatsApp</span><span><i class="pt" style="background:#8A8A8A"></i>Applications et autres éléments</span></div>
         </div>
         <div class="wa-note" id="g-note">La suppression de médias libère immédiatement de l’espace sur votre appareil. Le stockage dans le cloud sera mis à jour après votre prochaine sauvegarde. <u>En savoir plus</u></div>
         <div class="wa-sec">Outils pour libérer de l’espace</div>
         <div class="groupe wa-outils">
-          <div id="c-gros"><div class="o-h"><span>Plus de 5 Mo</span><span class="val"><span id="c-gros-t">2,4 Go</span> ›</span></div><div class="o-v" id="o-gros"></div><div class="o-v" id="o-gros2" style="display:none"></div></div>
+          <div id="c-gros"><div class="o-h"><span>Plus de 5 Mo</span><span class="val"><span id="c-gros-t">19,32 Go</span> ›</span></div><div class="o-v" id="o-gros"></div><div class="o-v" id="o-gros2" style="display:none"></div></div>
           <div class="o-sep"></div>
-          <div><div class="o-h"><span>Transféré de nombreuses fois</span><span class="val">310 Mo ›</span></div><div class="o-v" id="o-transf"></div></div>
+          <div><div class="o-h"><span>Transféré de nombreuses fois</span><span class="val">328,5 Mo ›</span></div><div class="o-v" id="o-transf"></div></div>
         </div>
         <div class="wa-sec wa-sec-r">Discussions <span class="rond-s" style="width:64px;height:64px"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span></div>
         <div class="groupe"><div class="row" style="min-height:130px"><span class="icone"><svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.962 8.962 0 0 0 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg></span><span class="nom" style="white-space:normal">Activer les messages éphémères<small style="display:block;font-size:22px;color:var(--gris);line-height:1.3;margin-top:4px">Contrôlez vos futurs besoins de stockage et renforcez la confidentialité de vos discussions</small></span><span class="fl">›</span></div></div>
@@ -431,7 +440,7 @@
         <div class="wa-tri">Taille</div>
         <div class="wa-grille" id="wa-grille"></div>
       </div>
-        <div class="wa-bas" id="wa-bas"><span class="rond-s"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg></span><span class="pill-tot" id="gros-info">2,4 Go</span></div>
+        <div class="wa-bas" id="wa-bas"><span class="rond-s"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg></span><span class="pill-tot" id="gros-info">19,32 Go</span></div>
         <div class="wa-selbar" id="wa-selbar"><span>Tout sélectionner</span><span id="sel-n">0 sélectionné</span><span id="b-wa-trash"><svg viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></span></div>
         <div class="wa-sheet" id="wa-sheet"><div class="b1"><p>Supprimer 3 éléments ?</p><span class="sup" id="b-wa-ok">Supprimer</span></div><div class="ann">Annuler</div></div>
       </div>
@@ -439,6 +448,8 @@
     </div></div>
     <div class="doigt" id="doigt"></div>
   </div>
+  <!-- Ouverture : le vrai chiffre « Plus de 5 Mo » d'un iPhone vérifié le 16 nov. 2026 (accord de sa propriétaire) -->
+  <div id="intro"><div id="h-num">19,32 Go</div><div id="h-sous">de gros fichiers WhatsApp</div><div id="h-tuiles"></div><div id="h-note">Vérifié cette semaine sur un vrai iPhone.</div></div>
   <div class="texte" id="textes"></div>
   <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
   <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
@@ -483,40 +494,47 @@ const COCHE_WA = '<b class="ck"><svg viewBox="0 0 24 24" width="26" height="26">
 const tuile = ([type, taille, nom], i, id, plus) => type === 'VID'
   ? `<i class="wf vid${id ? ' wv' : ''}"${id ? ` id="${id}"` : ''} style="background:radial-gradient(circle at ${30 + (i * 37) % 45}% ${30 + (i * 23) % 40}%, #8a8a8a, #2a2a2a 75%)"><em class="tl">${taille}</em><span class="du">${CAM}${nom}</span>${plus ? `<span class="plus">${plus}</span>` : ''}${id ? COCHE_WA : ''}</i>`
   : `<i class="wf${id ? ' wv' : ''}"${id ? ` id="${id}"` : ''}><span class="doc">${type}</span><em class="tl">${taille}</em><span class="nm">${nom}</span>${plus ? `<span class="plus">${plus}</span>` : ''}${id ? COCHE_WA : ''}</i>`;
-const GROS = [['VID', '412 Mo', '6:48'], ['MOV', '286 Mo', 'IMG_2041.MOV'], ['ZIP', '198 Mo', 'Photos mariage.zip'], ['PDF', '154 Mo', 'Catalogue 2026.pdf'], ['VID', '120 Mo', '2:02'], ['MOV', '96 Mo', 'IMG_1830.MOV'],
-              ['VID', '88 Mo', '1:29'], ['MP4', '71 Mo', 'VID-20261012.mp4'], ['VID', '64 Mo', '1:05'], ['PDF', '58 Mo', 'Cours compta.pdf'], ['VID', '52 Mo', '0:53'], ['MOV', '47 Mo', 'IMG_1702.MOV'], ['VID', '41 Mo', '0:42'], ['ZIP', '38 Mo', 'Documents.zip'], ['VID', '33 Mo', '0:34']];
+const GROS = [['ZIP', '896,3 Mo', 'Archive discussion.zip'], ['MOV', '609,1 Mo', 'IMG_2041.MOV'], ['MOV', '486,5 Mo', 'IMG_1957.MOV'], ['PDF', '343,7 Mo', 'Cours RH.pdf'], ['PDF', '286,8 Mo', 'Formation.pdf'], ['MOV', '231,1 Mo', 'IMG_1830.MOV'],
+              ['MOV', '217,1 Mo', 'IMG_1702.MOV'], ['PDF', '214,6 Mo', 'Compte rendu.pdf'], ['VID', '136,3 Mo', '15:01'], ['ZIP', '108,8 Mo', 'Relevés.zip'], ['PDF', '101 Mo', 'Catalogue.pdf'], ['MP4', '98,4 Mo', 'VID-20251019.mp4'], ['MOV', '97,3 Mo', 'IMG_1688.MOV'], ['PDF', '95 Mo', 'Gestion du temps.pdf'], ['PDF', '91,2 Mo', 'Certificat.pdf']];
 document.getElementById('wa-grille').innerHTML = GROS.map((g, i) => tuile(g, i, `v${i + 1}`)).join('');
-document.getElementById('o-gros').innerHTML = GROS.slice(0, 4).map((g, i) => tuile(g, i, '', i === 3 ? '+61' : '')).join('');
-document.getElementById('o-gros2').innerHTML = GROS.slice(3, 7).map((g, i) => tuile(g, i + 3, '', i === 3 ? '+58' : '')).join('');
-document.getElementById('o-transf').innerHTML = [['VID', '36 Mo', '3:12'], ['PDF', '24 Mo', 'Programme.pdf'], ['VID', '19 Mo', '1:40'], ['VID', '12 Mo', '0:58']].map((g, i) => tuile(g, i + 5, '', i === 3 ? '+12' : '')).join('');
+document.getElementById('o-gros').innerHTML = GROS.slice(0, 4).map((g, i) => tuile(g, i, '', i === 3 ? '+1.718' : '')).join('');
+document.getElementById('h-tuiles').innerHTML = GROS.slice(0, 3).map((g, i) => tuile(g, i, '')).join('');
+document.getElementById('o-gros2').innerHTML = GROS.slice(3, 7).map((g, i) => tuile(g, i + 3, '', i === 3 ? '+1.715' : '')).join('');
+document.getElementById('o-transf').innerHTML = [['VID', '136,3 Mo', '15:01'], ['PDF', '101 Mo', 'Catalogue.pdf'], ['VID', '27,3 Mo', '8:23'], ['VID', '12 Mo', '0:58']].map((g, i) => tuile(g, i + 5, '', i === 3 ? '+28' : '')).join('');
 document.getElementById('tabs-gerer').innerHTML = tabs('vous');
 
 // ---------- Scénario (temps de la version muette) ----------
-const SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
+const I = 2.4, SEL = 9.95, SUP = 12.6, RET = 13.6, FIN = 17.0;
 window.ORA_DURATION = 20.0;
 const CFG = {
   textes: [
-    { a: 0, b: 2.6, label: 'iPhone plein · 3/3', titre: 'WhatsApp :|6,9 Go.', sous: 'Sans que vous le voyiez.', visible: true },
+    { a: 0, b: 2.9, label: 'iPhone plein · 3/3', titre: 'Sur un seul|iPhone :', visible: true },
     { a: 2.9, b: 6.2, label: 'Étape 1 · Vous', titre: 'Stockage|et données' },
     { a: 6.2, b: 8.2, label: 'Étape 2', titre: 'Libérer|de l’espace' },
     { a: 8.2, b: RET, label: 'Étape 3', titre: 'Plus de 5 Mo ›|Supprimer' },
     { a: RET, b: FIN, label: 'Bonne nouvelle', titre: 'L’espace revient|tout de suite.', sous: 'Ici, pas d’attente de 30 jours.', retard: 0.9 },
     { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Fin de la série · Demain, le bonus.', retard: 0.5 },
   ],
-  nav: [[0, 'p-stockage', 0], [2.6, 'p-accueil', 0], [3.6, 'p-wa-disc', 0], [4.7, 'p-wa-vous', 0], [6.05, 'p-wa-stock', 1], [7.25, 'p-wa-gerer', 1], [9.05, 'p-wa-gros', 1], [RET, 'p-wa-gerer', -1]],
+  nav: [[0, 'p-accueil', 0], [3.6, 'p-wa-disc', 0], [4.7, 'p-wa-vous', 0], [6.05, 'p-wa-stock', 1], [7.25, 'p-wa-gerer', 1], [9.05, 'p-wa-gros', 1], [RET, 'p-wa-gerer', -1]],
   defil: [[0, 'p-wa-vous', 0], [4.85, 'p-wa-vous', 'r-wa-stock:1020']],
   taps: [[3.4, '#app-wa'], [4.5, '#tab-vous'], [5.8, '#r-wa-stock'], [7.0, '#r-gerer'], [8.8, '#c-gros'], [9.8, '#b-wa-sel'], [10.4, '#v1'], [10.75, '#v2'], [11.1, '#v3'], [11.7, '#b-wa-trash'], [12.45, '#b-wa-ok']],
-  surbrillance: [[0.6, 2.5, '#r-wa-st'], [3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
+  surbrillance: [[3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
                  [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.6, FIN - 0.1, '#g-note', 'hl-txt']],
-  camera: [[0, 1.15, '#r-wa-st', 1460, 0.02], [2.6, 0.72, '#phone', 1200], [3.6, 0.62, '#phone', 1060], [5.0, 0.8, '#r-wa-stock', 1480], [6.05, 0.62, '#phone', 1060],
+  camera: [[0, 0.72, '#phone', 1200], [3.6, 0.62, '#phone', 1060], [5.0, 0.8, '#r-wa-stock', 1480], [6.05, 0.62, '#phone', 1060],
            [7.9, 0.95, '#c-gros', 1480], [9.05, 0.62, '#phone', 1060], [RET + 0.4, 1.05, '#g-carte', 1240]],
   fin: FIN,
-  sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], impact: FIN + 0.9 },
+  sons: { souffles: [2.6, 6.2, 8.2, RET, FIN], crans: [0.75, 0.95, 1.15], impact: FIN + 0.9 },
   apres: t => {
     const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
     const $ = s => document.querySelector(s), fr = v => v.toFixed(1).replace('.', ',');
     // ouverture : la taille de WhatsApp monte jusqu'à 6,9 Go
-    $('#v-wa-st').textContent = `${fr(6.9 * out(t / 1.2))} Go`;
+    // ouverture : 19,32 Go qui montent, trois gros fichiers qui arrivent, puis le téléphone
+    $('#h-num').style.transform = `scale(${1.12 - 0.12 * out(t / 0.5)})`; // le vrai chiffre dès la 1re image
+    document.querySelectorAll('#h-tuiles .wf').forEach((w, i) => { const k = out((t - 0.6 - i * 0.2) / 0.35); w.style.opacity = k; w.style.transform = `translateY(${(1 - k) * 80}px) rotate(${(i - 1) * 4 * (1 - k)}deg)`; });
+    $('#h-note').style.opacity = out((t - 1.3) / 0.4);
+    $('#intro').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
+    const ph = $('#phone');
+    if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
     $('#wa-nom-haut').style.opacity = clamp((t - 5.0) / 0.4);
     // Plus de 5 Mo : sélection de trois vidéos, corbeille, confirmation
     const sel = t >= SEL && t < SUP + 0.1;
@@ -530,15 +548,15 @@ const CFG = {
     // suppression : les trois vidéos partent, la grille se resserre, les tailles baissent
     const parti = t >= SUP + 0.45;
     [1, 2, 3].forEach(i => { const v = $('#v' + i); const k = clamp((t - SUP - 0.1) / 0.3); v.style.opacity = t < SUP + 0.1 ? 1 : 1 - k; v.style.transform = `scale(${1 - 0.2 * k})`; v.style.display = parti ? 'none' : ''; });
-    $('#gros-info').textContent = parti ? '1,5 Go' : '2,4 Go';
+    $('#gros-info').textContent = parti ? '17,33 Go' : '19,32 Go';
     $('#wa-bas').style.opacity = sel ? 0 : 1;
     $('#o-gros').style.display = parti ? 'none' : ''; $('#o-gros2').style.display = parti ? '' : 'none';
-    $('#c-gros-t').textContent = parti ? '1,5 Go' : '2,4 Go';
-    // retour sur « Libérer de l'espace » : l'espace libre remonte aussitôt (2,80 → 3,70 Go)
+    $('#c-gros-t').textContent = parti ? '17,33 Go' : '19,32 Go';
+    // retour sur « Libérer de l'espace » : 1,99 Go reviennent aussitôt (83,83 → 85,82 Go de libres)
     const o = out((t - (RET + 0.7)) / 0.9);
-    $('#g-utilise').textContent = `${fr(61.2 - 0.9 * o)} Go`;
-    $('#g-libre').textContent = (2.8 + 0.9 * o).toFixed(2).replace('.', ',');
-    $('#g-seg').style.width = `${10.8 - 1.4 * o}%`;
+    $('#g-utilise').textContent = `${fr(34.7 - 2.0 * o)} Go`;
+    $('#g-libre').textContent = (83.83 + 1.99 * o).toFixed(2).replace('.', ',');
+    $('#g-seg').style.width = `${16.3 - 1.7 * o}%`;
   },
 };
 SCENE(CFG);
