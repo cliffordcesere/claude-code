@@ -124,6 +124,7 @@ Captures du 2026-11-16 : Vous (… Notifications, **Stockage et données**, Cont
 « Plus de 5 Mo » : ‹ · titre · « Sélectionner » ; « Taille » ; grille 3 colonnes (taille en haut à droite, nom de fichier en bas, icône ZIP/MOV/PDF ou vignette vidéo + durée) ; en bas : bouton de tri rond + pastille du total (ex. « 19,32 Go »).
 Pas encore vu : mode sélection et fenêtre de suppression (reconstruits).
 **Accord de la copine (2026-11-16)** pour utiliser ses vrais chiffres (pas son nom ni ses fichiers) : « Plus de 5 Mo » **19,32 Go**, tailles des fichiers, Utilisé 34,7 Go / 83,83 Go de libres, Transféré 328,5 Mo. Partie 3 v05 ouvre sur « Sur un seul iPhone : 19,32 Go de gros fichiers WhatsApp ».
+**Voix de la partie 3 reçue le 2026-11-16** (29,7 s, Adobe Podcast) → 26,3 s après accélération ; vidéo avec voix 27,3 s, -14,5 LUFS. Minutage mot par mot : zipformer français (1 s de silence ajoutée devant, sinon le début est raté) + Whisper pour les passages manqués. Étiquette « ENREGISTREZ CETTE VIDÉO » ajoutée à l'ouverture (mécanique reprise de l'analyse du 14 nov.).
 Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données pour les appels » et la qualité des médias (HD → standard) sur réseau faible — effet réel à vérifier avant toute promesse.
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)

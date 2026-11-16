@@ -176,6 +176,10 @@ v05 sans voix (20 s) : `ORA_EDUCATION_IPHONE-PLEIN-3_TUTO_261116_v05.mp4`. Ouver
 
 Restent exacts : Vous, Stockage et données, Libérer de l’espace de stockage, Plus de 5 Mo, Sélectionner ; 1re et dernière phrase.
 
+### Version avec voix (2026-11-16) — À PUBLIER
+
+`ORA_EDUCATION_IPHONE-PLEIN-3_TUTO-VOIX_261116_v01.mp4` (27,3 s, hors dépôt). Prise « Enregistrement_standard_80 » (Adobe Podcast), +8 %, traitement « pièce vide », -14,5 LUFS. Écrans calés sur : dix-neuf gigas, gros fichiers, vérifié, le plus gros (896,3 Mo ressort), Enregistrez (étiquette « ENREGISTREZ CETTE VIDÉO »), WhatsApp, Vous, Stockage et données, Libérer, Plus de 5 Mo, Sélectionner, cochez, supprimez, l'espace revient, Demain le bonus.
+
 ## Bonus « iPhone plein » — le réglage qui le remplit en cachette (validé le 2026-11-08)
 
 WhatsApp › Vous › Discussions › « Enregistrer (Photos) » désactivé. À faire après la partie 3.
