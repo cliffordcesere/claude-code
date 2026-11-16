@@ -103,7 +103,7 @@ Idées du propriétaire : batterie qui se vide (« 3 réglages à changer ») ; 
 3. WhatsApp › Gérer le stockage.
    Lancé le 2026-11-08. Vérifié (presse) : WhatsApp › Stockage et données › Gérer le stockage ; « Plus de 5 Mo », fichiers transférés plusieurs fois, liste des discussions par taille ; sélection puis suppression. Depuis mars 2026 (v26.10.73), l'onglet Réglages d'iPhone devient « Vous » (photo de profil) — libellé FR à confirmer. Supprimer dans WhatsApp n'efface pas la copie enregistrée dans Photos.
    Brouillon v01 sans voix (2026-11-08, `stockage-whatsapp.html`, 20 s) : écrans WhatsApp reconstruits d'après la presse ; tuile WhatsApp à la place de Chrome sur l'accueil.
-4. **Bonus validé (2026-11-08)** : « le réglage qui le remplit en cachette » — WhatsApp › Vous › Discussions › Enregistrer dans Pellicule désactivé. Annoncé à la fin de la partie 3. Pas « partie 4 » (la série est annoncée en 3).
+4. **Bonus validé (2026-11-08)** : « le réglage qui le remplit en cachette » — WhatsApp › Vous › Discussions › **« Enregistrer (Photos) »** désactivé (libellé vérifié le 2026-11-15 ; « Enregistrer dans Pellicule » n'existe plus sous ce nom). Annoncé à la fin de la partie 3. Pas « partie 4 » (la série est annoncée en 3).
 - 2026-11-08 : **le propriétaire trouve épuisant de demander une vidéo d'écran à chaque tuto.** Nouvelle façon : je construis d'après ce que je sais + la presse ; la copine vérifie en regardant le brouillon (capture de l'écran qui diffère seulement). Une vidéo d'écran groupée pour plusieurs tutos si besoin. Sujets que le propriétaire peut filmer lui-même : à privilégier. Le web n'est lisible ici qu'en résumés texte (pages et images inaccessibles depuis cet espace).
    Règle tirée de la partie 2 : **vérifier les écrans avant d'enregistrer la voix** (les écrans réels différaient de la reconstruction : deux confirmations au lieu d'une).
 
@@ -113,6 +113,13 @@ Le propriétaire montre une vidéo à succès pour qu'on en tire **ce qui est pr
 Mécanique à reprendre : une image nouvelle toutes les 0,5–1 s ; **un seul mot à l'écran, synchronisé avec la voix** ; étiquettes encadrées sur les mots-clés ; pastilles en haut (étape 2/4, minuteur, valeur) ; un **chiffre à interpréter** (cadran rouge → vert) ; mention « Écran iOS reconstitué » en bas.
 Plan du texte : affirmation choc → 3 galères vécues → pourquoi → le secret (« mode caché ») → **« Enregistrez cette vidéo, vous allez vous en servir »** (vers 0:18) → étapes → lire le chiffre → bonus pratique → abonnement + **« envoyez ça à celui qui… »**.
 Pour ORA : vouvoiement, pas d'exagération, 40–50 s visés plutôt que 70. Minutage mot par mot possible en local (modèle zipformer français sherpa-onnx, GitHub k2-fsa/sherpa-onnx, release asr-models : sherpa-onnx-streaming-zipformer-fr-2023-04-14).
+
+## WhatsApp iPhone — vérifié sur vidéo d'écran (2026-11-15, iPhone de la copine)
+
+Barre d'onglets flottante : Actus · Appels · Communautés · Discussions · **Vous** (photo de profil). Discussions : « ··· », appareil photo, « + » ; Rechercher ; Toutes / Non lues / Favoris / Groupes / + ; Archivées.
+Vous : loupe ; QR + crayon ; photo, nom ⌄, @pseudo ; Abonnements ↗, Listes, Messages de diffusion, Événements, Important, Appareils connectés ; Compte, Confidentialité, Discussions, Apparence, Notifications… (Stockage et données plus bas, non filmé).
+Vous › Discussions : Réactions par défaut ; **Enregistrer (Photos)** (« Enregistrez automatiquement les photos et vidéos que vous recevez dans Photos. ») ; Suggestions de stickers ; Sauvegarde des discussions ; Exporter la discussion ; Transcrire les messages vocaux ; Maintenir les discussions archivées ; Transférer l'historique des discussions ; Archiver toutes les discussions.
+Pas encore filmé : Stockage et données › Gérer le stockage › Plus de 5 Mo.
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 

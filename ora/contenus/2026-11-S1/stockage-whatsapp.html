@@ -7,7 +7,9 @@
 <!--
   Tuto 9:16, ~20 s (brouillon sans voix). Série « iPhone plein », partie 3/3.
   Stockage iPhone et écran d'accueil : repris de la partie 1 (iOS 27.1). La tuile WhatsApp occupe la place de Chrome.
-  WhatsApp (iPhone) : reconstruit d'après la presse 2025–2026, PAS d'après une vidéo d'écran :
+  Vérifié (vidéo d'écran iPhone, 15 nov. 2026) : barre d'onglets flottante Actus/Appels/Communautés/Discussions/Vous, écran Discussions,
+  écran « Vous » (Abonnements, Listes, Messages de diffusion, Événements, Important, Appareils connectés ; Compte, Confidentialité, Discussions, Apparence, Notifications…).
+  WhatsApp (iPhone) : reste reconstruit d'après la presse 2025–2026 :
     onglet « Vous » (photo de profil, depuis mars 2026 ; libellé FR à confirmer) › Stockage et données › Gérer le stockage ›
     « Plus de 5 Mo » › Sélectionner › corbeille › confirmation (texte à confirmer).
   Valeurs et noms fictifs.
@@ -223,7 +225,7 @@
   .wa-titre { font-size: 64px; font-weight: 700; padding: 0 30px 18px; }
   .wa-rech { margin: 0 26px 18px; height: 72px; border-radius: 36px; background: #1f1f1f; display: flex; align-items: center; gap: 12px; padding: 0 24px; color: var(--gris); font-size: 26px; white-space: nowrap; }
   .wa-puces { display: flex; gap: 12px; padding: 0 26px 10px; }
-  .wa-puces span { height: 58px; padding: 0 22px; border-radius: 29px; background: #1f1f1f; font-size: 25px; display: grid; place-items: center; color: var(--gris); }
+  .wa-puces span { height: 58px; padding: 0 18px; border-radius: 29px; background: #1f1f1f; font-size: 23px; display: grid; place-items: center; color: var(--gris); white-space: nowrap; }
   .wa-puces .on { background: #3a3a3a; color: var(--blanc); font-weight: 600; }
   .wa-chat { display: flex; align-items: center; gap: 22px; padding: 14px 26px 0; }
   .wa-av { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; flex: none; display: grid; place-items: center; font-size: 34px; font-weight: 600; color: var(--blanc); }
@@ -231,7 +233,9 @@
   .wa-chat .l1 { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; font-weight: 600; }
   .wa-chat .l1 small { font-size: 22px; color: var(--gris); font-weight: 400; }
   .wa-chat .l2 { font-size: 25px; color: var(--gris); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 6px; }
-  .wa-tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: #121212; border-top: 1px solid #222; display: grid; grid-template-columns: repeat(5, 1fr); padding-top: 16px; z-index: 3; }
+  .wa-tabs { position: absolute; left: 18px; right: 18px; bottom: 26px; height: 112px; border-radius: 56px; background: rgba(36,36,36,.96); box-shadow: inset 0 1px 0 rgba(250,250,250,.12), 0 10px 30px rgba(0,0,0,.5); display: grid; grid-template-columns: repeat(5, 1fr); padding-top: 14px; z-index: 3; }
+  .wa-arch { display: flex; align-items: center; gap: 22px; padding: 14px 40px 4px; font-size: 28px; color: var(--gris); }
+  .wa-profil .pseudo { font-size: 26px; color: var(--gris); }
   .wa-tab { display: grid; justify-items: center; align-content: start; gap: 6px; color: var(--gris); font-size: 19px; }
   .wa-tab.on { color: var(--blanc); font-weight: 600; }
   .wa-tab .mini { width: 40px; height: 40px; border-radius: 50%; background: #6a6a6a; display: grid; place-items: center; font-size: 20px; font-weight: 700; color: var(--blanc); }
@@ -316,7 +320,8 @@
         <div class="wa-haut"><span class="rond-s">···</span><span class="d"><span class="rond-s"><svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9z"/></svg></span><span class="rond-s" style="background:#3a3a3a"><svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span></span></div>
         <div class="wa-titre">Discussions</div>
         <div class="wa-rech"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>Rechercher</div>
-        <div class="wa-puces"><span class="on">Toutes</span><span>Non lues</span><span>Favoris</span><span>Groupes</span></div>
+        <div class="wa-puces"><span class="on">Toutes</span><span>Non lues 12</span><span>Favoris</span><span>Groupes 8</span></div>
+        <div class="wa-arch"><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.81.97H5.44l.8-.97zM5 19V8h14v11H5zm8.45-9h-2.9v3H8l4 4 4-4h-2.55z"/></svg>Archivées</div>
         <div id="wa-chats"></div>
       </div>
         <div class="wa-tabs" id="tabs-disc"></div>
@@ -324,10 +329,11 @@
 
       <!-- WhatsApp › Vous (ex-Réglages) -->
       <div class="page" id="p-wa-vous"><div class="contenu">
-        <div class="wa-haut"><span></span><span class="rond-s"><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg></span></div>
-        <div class="wa-profil"><span class="gros-av">J</span><b>Jude</b><span>+509 •••• ••••</span></div>
+        <div class="wa-haut"><span class="rond-s"><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span><span class="pill" style="position:static;display:flex;gap:26px;align-items:center;height:72px;padding:0 26px;border-radius:36px;background:#262626"><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg><svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></span></div>
+        <div class="wa-profil"><span class="gros-av">J</span><b>Jude ⌄</b><span class="pseudo">@jude.delmas</span></div>
         <div class="groupe" id="wa-g1"></div>
         <div class="groupe" id="wa-g2"></div>
+        <div class="groupe" id="wa-g3"></div>
       </div>
         <div class="wa-tabs" id="tabs-vous"></div>
       </div>
@@ -400,11 +406,18 @@ document.getElementById('tabs-disc').innerHTML = tabs('disc', 'tab-vous');
 document.getElementById('tabs-vous').innerHTML = tabs('vous');
 const CHATS = [['Famille', 'F', 'Vidéo', '09:41'], ['Église – chorale', 'É', 'Marc : Vidéo', '09:12'], ['Voisins Delmas', 'V', 'Photo', 'Hier'], ['Maman', 'M', 'Message vocal (0:42)', 'Hier'], ['Nadia', 'N', 'Ok, à demain', 'Hier'], ['Marc', 'M', 'Vidéo', 'Mardi']];
 document.getElementById('wa-chats').innerHTML = CHATS.map(([n, a, m, h], i) => `<div class="wa-chat"><span class="wa-av" style="background:${['#4a4a4a', '#3e3e3e', '#555', '#444', '#3a3a3a', '#4e4e4e'][i]}">${a}</span><span class="t"><span class="l1">${n}<small>${h}</small></span><span class="l2">${m}</span></span></div>`).join('');
-const R = (id, d, nom) => `<div class="row"${id ? ` id="${id}"` : ''}><span class="icone">${ic(d)}</span><span class="nom">${nom}</span><span class="fl">›</span></div>`;
-document.getElementById('wa-g1').innerHTML = R('', 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z', 'Messages importants') + R('', 'M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z', 'Appareils connectés');
+const R = (id, d, nom, fl = '›') => `<div class="row"${id ? ` id="${id}"` : ''}><span class="icone">${ic(d)}</span><span class="nom">${nom}</span><span class="fl">${fl}</span></div>`;
+document.getElementById('wa-g1').innerHTML = R('', 'M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z', 'Abonnements', '↗')
+  + R('', 'M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z', 'Listes')
+  + R('', 'M18 11v2h4v-2h-4zm-2 6.61c.96.71 2.21 1.65 3.2 2.39.4-.53.8-1.07 1.2-1.6-.99-.74-2.24-1.68-3.2-2.4-.4.54-.8 1.08-1.2 1.61zM20.4 5.6c-.4-.53-.8-1.07-1.2-1.6-.99.74-2.24 1.68-3.2 2.4.4.53.8 1.07 1.2 1.6.96-.72 2.21-1.65 3.2-2.4zM4 9c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h1v4h2v-4h1l5 3V6L8 9H4zm11.5 3c0-1.33-.58-2.53-1.5-3.35v6.69c.92-.81 1.5-2.01 1.5-3.34z', 'Messages de diffusion')
+  + R('', 'M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z', 'Événements')
+  + R('', 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z', 'Important')
+  + R('', 'M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z', 'Appareils connectés');
+document.getElementById('wa-g3').innerHTML = R('', 'M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z', 'Accessibilité') + R('', 'M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z', 'Langue de l’app');
 document.getElementById('wa-g2').innerHTML = R('', 'M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z', 'Compte')
   + R('', 'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z', 'Confidentialité')
   + R('', 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z', 'Discussions')
+  + R('', 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z', 'Apparence')
   + R('', 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z', 'Notifications')
   + R('r-wa-stock', 'M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z', 'Stockage et données');
 const TAILLES = [['Famille', 'F', '1,9 Go', 'r-famille'], ['Église – chorale', 'É', '1,2 Go'], ['Voisins Delmas', 'V', '860 Mo'], ['Maman', 'M', '420 Mo'], ['Marc', 'M', '190 Mo'], ['Nadia', 'N', '75 Mo']];
@@ -426,7 +439,7 @@ const CFG = {
     { a: FIN, b: 99, centre: true, titre: 'La tech, en clair.', sous: 'Fin de la série · Demain, le bonus.', retard: 0.5 },
   ],
   nav: [[0, 'p-stockage', 0], [2.6, 'p-accueil', 0], [3.6, 'p-wa-disc', 0], [4.7, 'p-wa-vous', 0], [6.05, 'p-wa-stock', 1], [7.25, 'p-wa-gerer', 1], [9.05, 'p-wa-gros', 1], [RET, 'p-wa-gerer', -1]],
-  defil: [[0, 'p-wa-gerer', 0], [RET + 0.4, 'p-wa-gerer', 'wa-liste:260']],
+  defil: [[0, 'p-wa-gerer', 0], [RET + 0.4, 'p-wa-gerer', 'wa-liste:260'], [0, 'p-wa-vous', 0], [4.85, 'p-wa-vous', 'r-wa-stock:1020']],
   taps: [[3.4, '#app-wa'], [4.5, '#tab-vous'], [5.8, '#r-wa-stock'], [7.0, '#r-gerer'], [8.8, '#c-gros'], [9.8, '#b-wa-sel'], [10.4, '#v1'], [10.75, '#v2'], [11.1, '#v3'], [11.7, '#b-wa-trash'], [12.45, '#b-wa-ok']],
   surbrillance: [[0.6, 2.5, '#r-wa-st'], [3.0, 3.5, '#app-wa', 'hl-ic'], [4.2, 4.6, '#tab-vous', 'hl-txt'], [5.4, 5.95, '#r-wa-stock'], [6.6, 7.1, '#r-gerer'],
                  [8.4, 8.9, '#c-gros', 'hl-txt'], [9.5, 9.9, '#b-wa-sel', 'hl-txt'], [11.4, 11.8, '#b-wa-trash', 'hl-txt'], [12.15, 12.55, '#b-wa-ok', 'hl-txt'], [RET + 1.0, FIN - 0.1, '#r-famille']],
