@@ -129,6 +129,10 @@ Pas encore vu : mode sélection et fenêtre de suppression (reconstruits).
 **Voix de la partie 3 reçue le 2026-11-16** (29,7 s, Adobe Podcast) → 26,3 s après accélération ; vidéo avec voix 27,3 s, -14,5 LUFS. Minutage mot par mot : zipformer français (1 s de silence ajoutée devant, sinon le début est raté) + Whisper pour les passages manqués. Étiquette « ENREGISTREZ CETTE VIDÉO » ajoutée à l'ouverture (mécanique reprise de l'analyse du 14 nov.).
 Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données pour les appels » et la qualité des médias (HD → standard) sur réseau faible — effet réel à vérifier avant toute promesse.
 
+## Commentaires (2026-11-19, partie 3 : 10 j'aime, 4 commentaires en 2 jours)
+
+Premier partage par identification : junior a identifié @Nana, qui a répondu en créole (« pafwa ou itil »). Règle : répondre à chaque vrai commentaire, 1 phrase, 0 émoji, jamais le même texte ; créole possible pour la proximité, mais écrit ou validé par le propriétaire (§7). Interdit : provoquer les commentaires (« tague 3 amis »).
+
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 
 - **Pas de problème de forfait / données ; le problème, c'est la qualité d'internet.** Sujet « WhatsApp mange votre forfait » écarté.
