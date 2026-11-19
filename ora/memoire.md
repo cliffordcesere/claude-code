@@ -131,7 +131,7 @@ Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données 
 
 ## Commentaires (2026-11-19, partie 3 : 10 j'aime, 4 commentaires en 2 jours)
 
-Premier partage par identification : junior a identifié @Nana, qui a répondu en créole (« pafwa ou itil »). Règle : répondre à chaque vrai commentaire, 1 phrase, 0 émoji, jamais le même texte ; créole possible pour la proximité, mais écrit ou validé par le propriétaire (§7). Interdit : provoquer les commentaires (« tague 3 amis »).
+Premier partage par identification : junior a identifié @Nana, qui a répondu en créole (« pafwa ou itil »). Règle : répondre à chaque vrai commentaire, 1 phrase, 0 émoji, jamais le même texte ; créole possible pour la proximité, mais écrit ou validé par le propriétaire (§7). Interdit : provoquer les commentaires (« tague 3 amis »). **Une blague entre amis dans les commentaires (ex. Nana à junior : « Pafwa ou itil » = « Tu es utile parfois ») : on ne s'immisce pas, un cœur suffit** (correction du propriétaire, 2026-11-19).
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 
