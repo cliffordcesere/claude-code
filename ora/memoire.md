@@ -166,6 +166,19 @@ Fabrication : captures d'écran réelles du téléphone du propriétaire, animé
 Vidéo existante « Nou Blende Ekran Tout Telefòn » (06-06) : 260 vues, 12 j'aime, 1 enregistrement. Légende « Invisible. Impénétrable. Sur mesure. » : « blende » absent de la légende ; « Impénétrable » = promesse excessive (§1), proposer « Invisible. Résistant. Sur mesure. » Le propriétaire dit l'avoir corrigé par un post sur le canal et TikTok ; la légende de la vidéo reste à modifier si TikTok le permet.
 Post canal « La vérité sur l'hydrogel » (25 mai 2026) : bon fond (l'hydrogel ne remplace pas le verre trempé) ; forme pré-v3.1 (tutoiement, capitales, 3 emojis). Sujet à refaire en vidéo « En clair » avec le nano liquide.
 
+## Statistiques « iPhone plein » (TikTok, relevées le 2026-11-24/25)
+
+| Vidéo | Vues | J'aime | Com. | Partages | Enreg. | Visionnage moyen | Vue en entier | Abonnés | Décrochage |
+|---|---|---|---|---|---|---|---|---|---|
+| 1/3 Supprimées (7 nov.) | 480 | 11 | 0 | 2 | 4 | 5,8 s (23 %) | 4,51 % | 0 | 0:02 |
+| 2/3 Doublons (9 nov.) | 657 | 11 | 1 | 2 | 1 | 4,9 s (20 %) | 3,82 % | 2 | 0:01 |
+| 3/3 WhatsApp (16 nov.) | 622 | 11 | 3 | 1 | 4 | 7,0 s (26 %) | 6,32 % | 1 | 0:02 |
+
+Trafic : « Pour toi » 94–97 %, recherche 0,5–1,5 %. Recherches réelles : « photo supprimer iphone », « recupere photo », « photo stocker en double », « iphone comment fusionner les photos », « Watchapp plein », « pourquoi WhatsApp me dit stockage plein ».
+**Diagnostic (2026-11-25)** : la majorité part à 1–2 s sur les trois vidéos → l'ouverture ne retient pas (premières images trop statiques, petit texte d'interface). La partie 3, ouverte sur un gros chiffre, retient le mieux.
+**Règle d'ouverture (à partir du bonus)** : mouvement dès la 1re image (rien de figé), un élément gros et lisible, et **sous-titres mot à mot calés sur la voix** (`C.mots` dans `moteur-tuto-ios.js`, fond sombre). Les mots que les gens cherchent vont dans la légende et à l'écran.
+Idée de sujet tirée des recherches : « récupérer une photo supprimée » (Supprimés récemment › Récupérer).
+
 ## Mesures
 
 Reel câble USB-C 90° v2 (TikTok, publié le 2026-11-04 12:29, relevé le 2026-11-05) : 379 vues, 16 j'aime, 0 commentaire, 0 partage, **0 enregistrement**, 2 nouveaux abonnés.

@@ -409,8 +409,9 @@
   <!-- Ouverture : ce qu'on reçoit sur WhatsApp part aussi dans Photos ; la même affiche reçue deux fois = un doublon -->
   <div id="intro-b">
     <div class="ib-col" id="ib-wa"><div class="ib-tete"><span class="ic" id="ib-ic-wa" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 14 C30 14 14 30 14 50 C14 57 16 63 19 68 L14 86 L33 81 C38 84 44 86 50 86 C70 86 86 70 86 50 C86 30 70 14 50 14 Z" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><path d="M38 33 C36 33 33 36 33 40 C34 52 48 66 60 67 C64 67 67 64 67 62 L67 58 C67 57 66 56 65 56 L59 54 C58 54 57 54 56 55 L54 57 C49 55 45 51 43 46 L45 44 C46 43 46 42 46 41 L44 35 C44 34 43 33 42 33 Z" fill="#FAFAFA"/></svg></span>WhatsApp</div><div id="ib-bulles"></div></div>
-    <div class="ib-col" id="ib-ph"><div class="ib-tete"><span class="ic" id="ib-ic-ph" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></span>Photos</div><div class="ib-grille" id="ib-grille"></div></div>
+    <div class="ib-col" id="ib-ph"><div class="ib-tete"><span class="ic" id="ib-ic-ph" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></span>Photos<b id="ib-compte" style="margin-left:auto;color:var(--cuivre);font-size:34px">+0</b></div><div class="ib-grille" id="ib-grille"></div></div>
     <div id="ib-vols"></div>
+    <div id="ib-rafale"></div>
     <div id="ib-doublon">LA MÊME AFFICHE, DEUX FOIS</div>
   </div>
   <div class="texte" id="textes"></div>
@@ -461,13 +462,16 @@ const SUITE = ['affiche', 'bonjour', 'video', 'affiche'];
 document.getElementById('ib-bulles').innerHTML = ['affiche', 'bonjour', 'video'].map((k, i) => `<div class="ib-bulle" style="top:${110 + i * 215}px"><div class="ib-img">${IMG[k]}</div></div>`).join('');
 document.getElementById('ib-grille').innerHTML = [0, 1, 2, 3, 4, 5].map(i => `<div class="ib-cell">${i < 4 ? `<div class="ib-img">${IMG[SUITE[i]]}</div>` : ''}${i === 0 || i === 3 ? '<b class="ib-x2">×2</b>' : ''}</div>`).join('');
 document.getElementById('ib-vols').innerHTML = SUITE.map(k => `<div class="ib-vol">${IMG[k]}</div>`).join('');
+const RK = ['affiche', 'bonjour', 'video'];
+document.getElementById('ib-rafale').innerHTML = Array.from({ length: 14 }, (_, i) => `<div class="ib-vol ib-raf">${IMG[RK[i % 3]]}</div>`).join('');
 
 // ---------- Scénario (temps de la version muette) ----------
-const O = 1.8, I = 3.0 + O, FIN = 12.4 + O;
+const PR = 1.2, O = 1.8 + PR, I = 3.0 + O, FIN = 12.4 + O;   // P : rafale d'ouverture
 window.ORA_DURATION = 15.4 + O;
-const X2 = 4.2;                                  // l'affiche reçue une 2e fois : doublon
-const HL = [[1.8, 2.3, [0]], [2.3, 2.8, [1]], [2.8, 3.3, [2]], [3.3, 3.6, [0, 1, 2]]];  // affiche, bonjour, vidéo, tout
-const VOLS = [0.3, 0.7, 1.1, 3.6];           // départs des copies
+const X2 = 4.2 + PR;                                  // l'affiche reçue une 2e fois : doublon
+const HL = [[1.8, 2.3, [0]], [2.3, 2.8, [1]], [2.8, 3.3, [2]], [3.3, 3.6, [0, 1, 2]]].map(([a, b, l]) => [a + PR, b + PR, l]);  // affiche, bonjour, vidéo, tout
+const VOLS = [0.3, 0.7, 1.1, 3.6].map(v => v + PR);
+const RAF = Array.from({ length: 14 }, (_, i) => -0.35 + i * 0.1);   // départs de la rafale (déjà en vol à la 1re image)           // départs des copies
 const DEP = [[198, 905], [198, 1120], [198, 1335], [198, 905]];
 const ARR = [[728, 898], [900, 898], [728, 1070], [900, 1070]];
 const CFG = {
@@ -506,6 +510,20 @@ const CFG = {
       c.style.transform = on ? 'scale(1.06)' : '';
     });
     $('#ib-doublon').style.opacity = d;
+    // rafale : tout ce qui arrive sur WhatsApp file vers Photos, le compteur monte
+    let arrivees = 0;
+    document.querySelectorAll('#ib-rafale .ib-raf').forEach((v, i) => {
+      const k = clamp((t - RAF[i]) / 0.5), e = io(k), y0 = 905 + (i % 3) * 215;
+      const x = 198 + (790 - 198) * e, y = y0 + (770 - y0) * e - Math.sin(Math.PI * k) * 110;
+      v.style.opacity = t < RAF[i] || k >= 1 ? 0 : 1;
+      v.style.transform = `translate(${x}px, ${y}px) scale(${0.75 - 0.45 * e}) rotate(${(i % 2 ? 1 : -1) * 12 * (1 - e)}deg)`;
+      if (k >= 1) arrivees++;
+    });
+    const total = arrivees + VOLS.filter(v => t >= v + 0.55).length;
+    $('#ib-compte').textContent = `+${total}`;
+    const der = RAF.map(r => r + 0.5).concat(VOLS.map(v => v + 0.55)).filter(x => x <= t);
+    const pulse = der.length ? clamp(1 - (t - Math.max(...der)) / 0.15) : 0;
+    $('#ib-compte').style.transform = `scale(${1 + 0.25 * pulse})`; $('#ib-compte').style.display = 'inline-block';
     $('#intro-b').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
     const ph = $('#phone');
     if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
@@ -517,8 +535,10 @@ const CFG = {
 // Voix du propriétaire (2026-11-25, Adobe Podcast), +8 %, pauses resserrées, traitement « pièce vide » : repères [temps voix, temps vidéo]
 CFG.voix = {
   src: 'voix/iphone-plein-bonus_voix-proprietaire_v1.flac',
-  reperes: [[0.0, 0], [1.672, 0.3], [2.783, 0.7], [3.616, 1.1], [4.162, 1.65], [5.288, 1.8], [6.793, 2.3], [8.089, 2.8], [9.108, 3.3], [9.798, 3.6], [10.632, 4.2], [11.187, 4.45], [11.65, 5.0], [11.696, 5.3], [12.02, 5.7], [12.574, 6.3], [13.269, 6.7], [13.408, 6.9], [14.101, 8.1], [14.282, 8.35], [14.93, 9.3], [15.532, 10.0], [16.228, 11.2], [16.413, 11.4], [20.137, 14.2], [23.137, 17.2]],
+  reperes: [[0.0, 0], [1.672, 1.5], [2.783, 1.9], [3.616, 2.3], [4.162, 2.85], [5.288, 3.0], [6.793, 3.5], [8.089, 4.0], [9.108, 4.5], [9.798, 4.8], [10.632, 5.4], [11.187, 5.65], [11.65, 6.2], [11.696, 6.5], [12.02, 6.9], [12.574, 7.5], [13.269, 7.9], [13.408, 8.1], [14.101, 9.3], [14.282, 9.55], [14.93, 10.5], [15.532, 11.2], [16.228, 12.4], [16.413, 12.6], [20.137, 15.4], [23.137, 18.4]],
 };
+// Sous-titres mot à mot (temps vidéo, calés sur la prise du 25 nov.) ; cuivre = mots-clés
+CFG.mots = [[0.47, 0.586, "Tout", 0], [0.586, 0.668, "ce", 0], [0.668, 0.764, "qu’on", 0], [0.764, 0.886, "vous", 0], [0.886, 1.132, "envoie", 0], [1.132, 1.261, "sur", 0], [1.261, 1.633, "WhatsApp", 1], [1.673, 1.76, "votre", 0], [1.76, 1.909, "iPhone", 0], [1.909, 1.971, "le", 0], [1.971, 2.176, "recopie", 1], [2.176, 2.247, "dans", 0], [2.247, 2.318, "vos", 0], [2.318, 2.85, "photos.", 1], [2.85, 2.873, "Sans", 0], [2.873, 2.889, "vous", 0], [2.889, 2.976, "demander.", 1], [3.0, 3.047, "Les", 0], [3.047, 3.171, "images", 0], [3.171, 3.206, "de", 0], [3.206, 3.426, "l’église,", 1], [3.476, 3.543, "les", 0], [3.543, 3.693, "images", 0], [3.693, 3.75, "de", 0], [3.75, 3.95, "bonjour,", 1], [3.95, 4.0, "les", 0], [4.0, 4.164, "vidéos", 0], [4.164, 4.227, "des", 0], [4.227, 4.486, "groupes :", 1], [4.486, 4.696, "tout.", 1], [4.8, 4.907, "C’est", 0], [4.907, 5.027, "comme", 0], [5.027, 5.12, "ça", 0], [5.12, 5.213, "que", 0], [5.213, 5.307, "les", 0], [5.307, 5.492, "doublons", 1], [5.492, 6.057, "arrivent.", 0], [6.178, 6.694, "Ouvrez", 0], [6.694, 7.389, "WhatsApp,", 1], [7.431, 7.857, "touchez", 0], [7.9, 8.1, "Vous,", 1], [8.1, 8.34, "puis", 0], [8.34, 9.338, "Discussions.", 1], [9.5, 10.473, "Désactivez", 1], [10.473, 11.103, "Enregistrer,", 1], [11.103, 11.954, "Photos.", 1], [12.56, 12.683, "Les", 0], [12.683, 12.89, "photos", 0], [12.89, 13.098, "restent", 0], [13.098, 13.222, "dans", 0], [13.222, 13.651, "WhatsApp.", 1], [13.651, 13.789, "Celles", 0], [13.789, 13.886, "que", 0], [13.886, 13.983, "vous", 0], [13.983, 14.259, "aimez,", 0], [14.259, 14.674, "enregistrez-les", 0], [14.674, 15.193, "vous-même.", 1], [15.408, 15.544, "Et", 0], [15.544, 15.882, "envoyez", 0], [15.882, 16.0, "ça", 0], [16.0, 16.101, "à", 0], [16.101, 16.338, "quelqu’un", 0], [16.338, 16.423, "qui", 0], [16.423, 16.558, "est", 0], [16.558, 16.744, "dans", 0], [16.744, 16.896, "dix", 1], [16.896, 17.403, "groupes.", 1]];
 SCENE(CFG);
 </script>
 </body>

@@ -63,8 +63,18 @@
     };
     const pos = (s, t) => { const p = POS[s]; return { x: p.x, y: p.y - (p.page ? defil(p.page, t) : 0) }; };
 
+    // Sous-titres mot à mot (C.mots : [[t0, t1, mot, accent?]] en temps vidéo), en bas, calés sur la voix
+    let motsEl = null;
+    if (C.mots) {
+      motsEl = document.createElement('div'); motsEl.id = 'mots'; canvas.append(motsEl);
+      const st = document.createElement('style');
+      st.textContent = '#mots{position:absolute;left:40px;right:40px;top:1430px;text-align:center;font:800 96px/1.1 "Jost",sans-serif;color:var(--blanc);'
+        + 'pointer-events:none;z-index:20;opacity:0;will-change:transform}#mots span{display:inline-block;padding:2px 28px 12px;border-radius:24px;background:rgba(8,8,8,.82)}#mots.acc{color:var(--cuivre)}';
+      document.head.append(st);
+    }
+
     // Sons
-    window.ORA_SONS = { souffles: (C.sons && C.sons.souffles) || [], crans: C.taps.map(x => x[0] + 0.12).concat((C.sons && C.sons.crans) || []), impact: C.sons && C.sons.impact };
+    window.ORA_SONS ={ souffles: (C.sons && C.sons.souffles) || [], crans: C.taps.map(x => x[0] + 0.12).concat((C.sons && C.sons.crans) || []), impact: C.sons && C.sons.impact };
 
     function seek(t) {
       noir.style.opacity = 0; // la 1re image est complète (décrochage à 0:02 constaté)
@@ -142,6 +152,15 @@
       logoV.style.opacity = out((t - C.fin - 0.9) / 0.6);
       contact.style.opacity = out((t - C.fin - 1.6) / 0.6);
       contact.style.transform = `translateY(${(1 - out((t - C.fin - 1.6) / 0.6)) * 12}px)`;
+
+      // Sous-titres mot à mot : un mot à la fois, petit « pop » à l'arrivée ; cachés quand le logo de fin arrive
+      if (motsEl) {
+        const m = t < C.fin + 0.9 ? C.mots.find(w => t >= w[0] && t < w[1]) : null;
+        if (m) {
+          motsEl.innerHTML = `<span>${m[2]}</span>`; motsEl.classList.toggle('acc', !!m[3]);
+          motsEl.style.opacity = 1; motsEl.style.transform = `scale(${1.18 - 0.18 * out((t - m[0]) / 0.12)})`;
+        } else motsEl.style.opacity = 0;
+      }
 
       if (C.apres) C.apres(t);
     }
