@@ -138,6 +138,11 @@ Idée à discuter (qualité internet en Haïti) : « Utiliser moins de données 
 
 Premier partage par identification : junior a identifié @Nana, qui a répondu en créole (« pafwa ou itil »). Règle : répondre à chaque vrai commentaire, 1 phrase, 0 émoji, jamais le même texte ; créole possible pour la proximité, mais écrit ou validé par le propriétaire (§7). Interdit : provoquer les commentaires (« tague 3 amis »). **Une blague entre amis dans les commentaires (ex. Nana à junior : « Pafwa ou itil » = « Tu es utile parfois ») : on ne s'immisce pas, un cœur suffit** (correction du propriétaire, 2026-11-19).
 
+## Prochain tuto (choisi le 2026-11-25) : « Programmer un message WhatsApp »
+
+Idée du propriétaire, d'après une vidéo d'Abdoul Network (35 s : compteur qui défile dès la 1re image, titre à mot coloré + étiquette, vrai enregistrement d'écran dans un cadre, étiquettes « JOUR / HEURE », tampon « PROGRAMMÉ ✓ », cartes de cas concrets avec l'heure, fin « Enregistre cette vidéo » + bouton « Ma chaîne WhatsApp »). À reprendre en noir et cuivre, vouvoiement, exemples d'ici (bonne fête à minuit, rappel du sòl, famille à l'étranger) — pas leur bleu/orange ni leur texte.
+Fonction : bêta Android, déploiement compte par compte ; iPhone non confirmé (presse, nov. 2026). **Le propriétaire est sur Android et a l'option** → il filme son propre écran (nouveau mode : vraie vidéo d'écran dans notre cadre). Test demandé : le message part-il en mode avion ?
+
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 
 - **Pas de problème de forfait / données ; le problème, c'est la qualité d'internet.** Sujet « WhatsApp mange votre forfait » écarté.
