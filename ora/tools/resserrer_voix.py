@@ -1,5 +1,5 @@
 """ORA — resserre une voix off : pauses plafonnées, accélération sans changer la hauteur, égalisation ; transpose les repères voix→vidéo.
-Usage : python3 resserrer.py voix.flac sortie.wav tempo pause_max pause_section t_sections(csv) reperes.json
+Usage : python3 resserrer.py voix.flac sortie.wav tempo pause_max pause_section t_sections(csv) reperes.json [brut]
 """
 import sys, json, re, subprocess
 src, out, tempo, pmax, psec, tsec, rep = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5]), [float(x) for x in sys.argv[6].split(',')], json.load(open(sys.argv[7]))
@@ -25,11 +25,13 @@ filt = ''.join(f'[0:a]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS[s{i}];' for i, 
 filt += ''.join(f'[s{i}]' for i in range(len(keep))) + f'concat=n={len(keep)}:v=0:a=1,atempo={tempo},'
 # Traitement « pièce vide » (2026-11-08) : queues de réverbération raccourcies (expandeur avant l'égalisation),
 # son de boîte retiré (190, 380, 650 Hz), clarté rendue (2,2 et 4 kHz, aigus), sifflantes tenues.
+# 8e argument « brut » : voix déjà propre (studio, synthèse) → pas de traitement « pièce vide », seulement niveau et compression.
+traiter = not (len(sys.argv) > 8 and sys.argv[8] == 'brut')
 filt += ('highpass=f=85,'
-         'agate=threshold=0.018:ratio=2.5:attack=4:range=0.25:release=140,'
-         'equalizer=f=190:t=o:w=1:g=-4,equalizer=f=380:t=o:w=0.8:g=-6,equalizer=f=650:t=o:w=1:g=-2.5,'
-         'equalizer=f=2200:t=o:w=1.2:g=3,equalizer=f=4000:t=o:w=1.2:g=2,highshelf=f=8000:g=2.5,deesser=i=0.35,'
-         'acompressor=threshold=-20dB:ratio=2.5:attack=6:release=110:makeup=2,'
+         + ('agate=threshold=0.018:ratio=2.5:attack=4:range=0.25:release=140,'
+            'equalizer=f=190:t=o:w=1:g=-4,equalizer=f=380:t=o:w=0.8:g=-6,equalizer=f=650:t=o:w=1:g=-2.5,'
+            'equalizer=f=2200:t=o:w=1.2:g=3,equalizer=f=4000:t=o:w=1.2:g=2,highshelf=f=8000:g=2.5,deesser=i=0.35,' if traiter else '')
+         + 'acompressor=threshold=-20dB:ratio=2.5:attack=6:release=110:makeup=2,'
          'loudnorm=I=-14:TP=-1.5:LRA=7,aresample=48000[o]')
 subprocess.run(['ffmpeg','-loglevel','error','-y','-i',src,'-filter_complex',filt,'-map','[o]',out], check=True)
 new = []; last = -1
