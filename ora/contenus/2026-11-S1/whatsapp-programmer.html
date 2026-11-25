@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — tuto WhatsApp : programmer un message</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<!--
+  Tuto 9:16 (brouillon sans voix, ~24 s ; la voix du propriétaire recalera les écrans).
+  WhatsApp Android vérifié sur l'enregistrement d'écran du propriétaire (25 nov. 2026) : appui long sur la flèche d'envoi →
+  « Planifier un message » (roues jour / heure / minutes, « Aujourd'hui », « ven. 28 nov. »), bouton « Envoyer 28 nov. à 00:00 » ;
+  « Vous avez planifié un message. Voir » ; écran « Messages planifiés », « Programmé pour demain à 00:00 ».
+  Test du propriétaire : en mode avion, le message programmé est parti quand même.
+  Contact, fond et messages fictifs (l'enregistrement d'origine montre son visage et des messages personnels : jamais intégré).
+  Inspiration de rythme : vidéo d'Abdoul Network (compteur, étiquettes, tampon, cartes, fin « enregistrez »), en noir et cuivre ORA.
+  Rendu : node ora/tools/render.mjs ora/contenus/2026-11-S1/whatsapp-programmer.html sortie.mp4
+-->
+<style>
+  .canvas { --W: 1080; --H: 1920; }
+  /* ---------- Textes ORA ---------- */
+  .texte { position: absolute; left: var(--marge); right: var(--marge); top: 262px; }
+  .bloc { position: absolute; left: 0; right: 0; top: 0; }
+  .bloc .label { margin-bottom: 20px; }
+  .bloc .titre { font-size: calc(var(--H) * 0.06px); }
+  .bloc .sous { font-size: 50px; font-weight: 300; line-height: 1.3; margin-top: 16px; color: var(--gris); }
+  .ligne { display: block; overflow: hidden; padding-bottom: .12em; }
+  .ligne > span { display: block; will-change: transform; }
+  .bloc.centre { top: 290px; text-align: center; }
+  #logoV { position: absolute; left: 50%; top: 880px; width: 260px; margin-left: -130px; opacity: 0; }
+  #contact { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #contact .cta { font-size: 40px; }
+  #contact .lieu { font-size: 30px; color: var(--gris); margin-top: 14px; font-weight: 300; }
+  #noir { position: absolute; inset: 0; background: var(--noir); }
+
+  /* ---------- Téléphone : interface iOS 27 (captures fournies), palette ORA ---------- */
+  #camera { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; will-change: transform; }
+  .phone {
+    position: absolute; left: 190px; top: 720px; width: 700px; height: 1518px;
+    border-radius: 108px; background: #000; padding: 14px;
+    box-shadow: 0 0 0 2px #2a2a2a, 0 0 0 8px #141414, 0 0 0 9px #3a3a3a;
+  }
+  .ecran { position: relative; width: 100%; height: 100%; border-radius: 96px; overflow: hidden; background: #000;
+           font-family: -apple-system, "Jost", sans-serif; color: var(--blanc); }
+  .ilot { position: absolute; left: 50%; top: 24px; width: 180px; height: 52px; margin-left: -90px; border-radius: 30px; background: #000; z-index: 6; box-shadow: 0 0 0 1px #111; }
+  .statut { position: absolute; left: 0; right: 0; top: 0; height: 100px; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 14px 58px 0 76px; font: 600 30px/1 "Jost", sans-serif; }
+  .statut .ic { display: flex; gap: 10px; align-items: center; }
+  .barres { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+  .barres i { width: 6px; background: var(--blanc); border-radius: 2px; }
+  .barres i.off { background: rgba(250,250,250,.35); }
+  .pct { min-width: 52px; height: 26px; padding: 0 6px; border-radius: 8px; background: var(--blanc); color: #000; font: 700 20px/26px "Jost", sans-serif; text-align: center; position: relative; }
+  .pct::after { content: ""; position: absolute; right: -6px; top: 8px; width: 3px; height: 10px; border-radius: 0 2px 2px 0; background: rgba(250,250,250,.5); }
+
+  .page { position: absolute; inset: 0; background: #000; padding-top: 104px; will-change: transform; }
+  .nav { position: relative; height: 104px; display: flex; align-items: center; padding: 0 26px; }
+  .nav .rond { width: 78px; height: 78px; border-radius: 50%; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; color: var(--blanc); }
+  .nav .milieu { position: absolute; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 600; pointer-events: none; }
+  .grand-titre { font-size: 66px; font-weight: 700; letter-spacing: -.01em; padding: 40px 40px 26px; }
+  .groupe { margin: 0 26px 30px; background: #1C1C1C; border-radius: 40px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 22px; min-height: 84px; padding: 0 30px; font-size: 30px; }
+  .row + .row::before { content: ""; position: absolute; left: 104px; right: 0; top: 0; height: 1px; background: #333; }
+  .row.sans-icone + .row.sans-icone::before { left: 30px; }
+  .row .icone { width: 52px; height: 52px; border-radius: 14px; background: #2e2e2e; display: grid; place-items: center; color: var(--blanc); flex: none; }
+  .row .nom { flex: 1; white-space: nowrap; }
+  .row .val { color: var(--gris); white-space: nowrap; }
+  .row .fl { color: #5a5a5a; font-size: 38px; margin-left: 6px; }
+  .compte { display: flex; align-items: center; gap: 24px; padding: 22px 30px; }
+  .avatar { width: 92px; height: 92px; border-radius: 50%; background: #3a3a3a; display: grid; place-items: center; font-size: 36px; font-weight: 600; color: var(--blanc); flex: none; }
+  .compte .nom { font-size: 34px; font-weight: 600; }
+  .compte .sous-c { font-size: 25px; color: var(--gris); margin-top: 4px; }
+  .compte .fl { margin-left: auto; color: #5a5a5a; font-size: 38px; }
+  .toggle { width: 98px; height: 58px; border-radius: 30px; background: #3a3a3a; position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; left: 4px; top: 4px; width: 62px; height: 50px; border-radius: 26px; background: var(--blanc); }
+  .toggle.on { background: var(--blanc); } .toggle.on::after { left: 32px; background: #000; }
+  .note { color: var(--gris); font-size: 24px; line-height: 1.35; padding: 0 56px 26px; margin-top: -18px; }
+  .recherche { position: absolute; left: 34px; right: 34px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; align-items: center; gap: 16px; padding: 0 30px; color: var(--gris); font-size: 30px; z-index: 3; }
+  .recherche .m { margin-left: auto; color: var(--blanc); }
+  .carte { margin: 20px 26px 30px; background: #1C1C1C; border-radius: 40px; padding: 30px; }
+  .carte .gros { font-size: 72px; font-weight: 700; } .carte .gros small { font-size: 36px; }
+  .carte .info { font-size: 24px; color: var(--gris); margin-top: 4px; }
+  .jauge { height: 14px; border-radius: 7px; background: #333; margin-top: 20px; overflow: hidden; } .jauge b { display: block; height: 100%; width: 92%; background: var(--blanc); border-radius: 7px; }
+  .graph { padding: 26px 30px 30px; }
+  .g-titre { font-size: 26px; font-weight: 600; margin-bottom: 4px; } .g-sous { font-size: 22px; color: var(--gris); margin-bottom: 18px; }
+  .barres-g { display: flex; align-items: flex-end; gap: 14px; height: 150px; }
+  .barres-g i { flex: 1; background: #555; border-radius: 6px 6px 0 0; } .barres-g i.auj { background: var(--blanc); }
+  .hl { outline: 4px solid var(--cuivre); outline-offset: -4px; border-radius: 40px; }
+  .row.hl { border-radius: 0; }
+  .flou { filter: blur(9px); }
+  .lettre { font-weight: 400; } .lettre.on { color: var(--cuivre); font-weight: 700; }
+
+  /* écran d'accueil */
+  .accueil { padding-top: 0; background: radial-gradient(ellipse 90% 60% at 30% 18%, #262626 0%, #121212 45%, #0A0A0A 75%); }
+  .widgets { position: absolute; left: 34px; right: 34px; top: 118px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .widget { display: grid; gap: 10px; justify-items: center; }
+  .widget em { font-style: normal; font-size: 22px; color: var(--blanc); }
+  .w-cal, .w-pile { width: 100%; aspect-ratio: 1; border-radius: 58px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); padding: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .w-cal small { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: var(--gris); }
+  .w-cal b { font-size: 76px; font-weight: 500; line-height: 1; }
+  .w-cal span { margin-top: auto; font-size: 22px; color: var(--gris); }
+  .w-pile b { font-size: 60px; font-weight: 600; margin-top: auto; } .w-pile span { font-size: 22px; color: var(--gris); }
+  .w-pile i { display: block; height: 12px; border-radius: 6px; background: #3a3a3a; margin-top: 12px; overflow: hidden; } .w-pile u { display: block; height: 100%; background: var(--blanc); }
+  .grille { position: absolute; left: 34px; right: 34px; top: 520px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 30px; justify-items: center; }
+  .app { display: grid; gap: 10px; justify-items: center; }
+  .app span { font-size: 21px; color: var(--blanc); white-space: nowrap; }
+  .tuile { width: 124px; height: 124px; border-radius: 30px; background: linear-gradient(160deg, #303030, #1a1a1a); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); display: grid; place-items: center; color: var(--blanc); position: relative; }
+  .tuile.cal { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+  .tuile.cal small { font-size: 20px; font-weight: 700; color: var(--gris); } .tuile.cal b { font-size: 56px; font-weight: 400; line-height: 1; }
+  .tuile.hl-ic { box-shadow: 0 0 0 5px var(--cuivre), inset 0 1px 0 rgba(250,250,250,.16); }
+  .recherche-a { position: absolute; left: 50%; transform: translateX(-50%); bottom: 236px; height: 56px; padding: 0 26px; border-radius: 28px; background: rgba(40,40,40,.9); display: flex; align-items: center; gap: 10px; color: var(--blanc); font-size: 24px; }
+  .dock { position: absolute; left: 26px; right: 26px; bottom: 40px; height: 172px; border-radius: 64px; background: rgba(38,38,38,.88); box-shadow: inset 0 1px 0 rgba(250,250,250,.14); display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; }
+  /* clavier téléphone */
+  .saisie { height: 260px; display: flex; align-items: flex-end; justify-content: center; font-size: 84px; font-weight: 300; letter-spacing: .04em; padding-bottom: 30px; }
+  .pave { display: grid; grid-template-columns: repeat(3, 170px); gap: 34px 46px; justify-content: center; margin-top: 30px; }
+  .touche { width: 170px; height: 170px; border-radius: 50%; background: #333; display: grid; place-items: center; font-size: 72px; font-weight: 300; }
+  .touche small { display: block; font-size: 20px; letter-spacing: .2em; color: var(--blanc); margin-top: -18px; text-align: center; }
+  .feuille { position: absolute; left: 50px; right: 50px; top: 420px; background: #1C1C1C; border-radius: 44px; padding: 44px 44px 30px; opacity: 0; transform: scale(.94); }
+  .feuille h3 { margin: 0 0 26px; font-size: 34px; font-weight: 600; text-align: center; }
+  .feuille .l { font-size: 28px; color: var(--gris); margin-bottom: 6px; }
+  .feuille .v { font-size: 36px; margin-bottom: 26px; letter-spacing: .04em; }
+  .feuille .ok { border-top: 1px solid #333; margin: 6px -44px 0; padding-top: 26px; text-align: center; font-size: 32px; font-weight: 600; }
+
+  .doigt { position: absolute; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: rgba(250,250,250,.35); box-shadow: 0 0 0 2px rgba(250,250,250,.5); opacity: 0; z-index: 9; pointer-events: none; }
+
+  /* ---------- Photos iOS 27.1 ---------- */
+  .onglets { position: absolute; left: 30px; right: 30px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; z-index: 3; }
+  .ong-g { display: flex; padding: 6px; border-radius: 60px; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  .ong { width: 180px; height: 104px; border-radius: 52px; display: grid; justify-items: center; align-content: center; gap: 2px; color: var(--blanc); }
+  .ong small { font-size: 19px; font-weight: 600; }
+  .ong.on { background: #3a3a3a; }
+  .ong-r { width: 116px; height: 116px; border-radius: 50%; background: rgba(40,40,40,.92); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; }
+  .rond-s { width: 78px; height: 78px; border-radius: 50%; background: #262626; display: grid; place-items: center; font-size: 30px; letter-spacing: 2px; }
+  .ph-sec { position: relative; }
+  .ph-sec .pli { position: absolute; right: 40px; top: 36px; width: 52px; height: 52px; border-radius: 50%; background: #1d1d1d; font-style: normal; display: grid; place-items: center; font-size: 26px; }
+  .ph-voy { position: relative; width: 240px; margin-left: 40px; } .ph-voy .vig { border-radius: 26px; } .ph-voy em { position: absolute; left: 18px; bottom: 14px; font-style: normal; font-size: 24px; }
+  .ph-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; padding: 0 34px 0 40px; }
+  .pil { position: relative; display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 20px; border-radius: 20px; background: #1d1d1d; font-size: 27px; white-space: nowrap; overflow: hidden; }
+  .pil svg { flex: none; color: var(--gris); }
+  .pil .cad { margin-left: auto; color: var(--gris); display: grid; }
+  .ph-fonds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 34px 0 40px; } .ph-fonds .vig { aspect-ratio: .56; border-radius: 26px; }
+  .faceid { position: absolute; left: 50%; top: 14px; width: 170px; height: 170px; margin: 0 0 0 -85px; border-radius: 60px; background: #000 !important; background: rgba(40,40,40,.95); display: grid; place-items: center; opacity: 0; z-index: 6; }
+  .alb-sous { display: flex; align-items: center; gap: 10px; padding: 6px 40px 26px; font-size: 30px; font-weight: 600; }
+  .alb-sous svg:last-child { color: var(--gris); }
+  .nav .tri { position: absolute; right: 190px; }
+  .pill-menu { opacity: 0; }
+  .vig .ck { position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 50%; background: var(--blanc); color: #000; display: grid; place-items: center; opacity: 0; }
+  .vig.coche .ck { opacity: 1; } .vig.coche { filter: brightness(.75); }
+  .onglets-wrap { position: absolute; inset: auto 0 0 0; height: 200px; }
+  .sel-pill { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); height: 84px; padding: 0 34px; border-radius: 42px; background: rgba(40,40,40,.95); display: grid; place-items: center; font-size: 30px; font-weight: 600; white-space: nowrap; opacity: 0; z-index: 4; }
+  .menu-g { position: absolute; right: 22px; top: 130px; width: 470px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 18px 0; display: grid; opacity: 0; transform: scale(.9); transform-origin: top right; z-index: 5; }
+  .menu-g span { display: flex; align-items: center; gap: 22px; height: 84px; padding: 0 38px; font-size: 32px; }
+  .menu-g .danger, .confirm-g .danger { color: var(--blanc); font-weight: 700; }
+  .confirm-g { position: absolute; left: 22px; right: 22px; top: 130px; border-radius: 44px; background: rgba(36,36,36,.97); box-shadow: 0 20px 50px rgba(0,0,0,.6); padding: 36px 30px 30px; display: grid; gap: 26px; opacity: 0; transform: translateY(-20px); z-index: 5; }
+  .confirm-g p { margin: 0; font-size: 28px; line-height: 1.35; color: var(--blanc); padding: 0 10px; }
+  .confirm-g span { height: 92px; border-radius: 46px; background: #3a3a3a; display: grid; place-items: center; font-size: 30px; }
+
+  /* ---------- Stockage iPhone ---------- */
+  .contenu { will-change: transform; }
+  .stock { margin-top: 20px; }
+  .st-haut { display: flex; justify-content: space-between; align-items: baseline; font-size: 30px; }
+  .st-haut span { color: var(--gris); font-size: 26px; }
+  .st-barre { display: flex; gap: 3px; height: 30px; margin: 22px 0 18px; border-radius: 8px; overflow: hidden; background: #2a2a2a; }
+  .seg { display: block; height: 100%; }
+  .s-photos { background: var(--blanc); } .s-apps { background: #8A8A8A; } .s-ios { background: #5a5a5a; } .s-sys { background: #3e3e3e; }
+  #seg-photos { width: 60%; } .seg.s-apps { width: 15%; } .seg.s-ios { width: 12%; } .seg.s-sys { width: 9%; }
+  .st-leg { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 22px; color: var(--gris); }
+  .st-leg .pt { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+  .app-st { min-height: 100px; }
+  .app-st .icone b { font-size: 26px; }
+  .app-st .nom small { display: block; font-size: 22px; color: var(--gris); margin-top: 2px; }
+  /* ---------- Photos ---------- */
+  .ph-entete { display: flex; align-items: center; gap: 16px; padding: 124px 34px 24px; }
+  .ph-titre { font-size: 66px; font-weight: 700; flex: 1; }
+  .ph-rech { display: flex; align-items: center; gap: 8px; height: 62px; padding: 0 22px; border-radius: 31px; background: #2a2a2a; font-size: 26px; font-weight: 600; }
+  .ph-av { width: 62px; height: 62px; border-radius: 50%; background: #3a3a3a; }
+  .ph-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vig { display: block; aspect-ratio: 1; position: relative; }
+  .vig em { position: absolute; left: 8px; bottom: 6px; font-style: normal; font-size: 22px; font-weight: 600; color: var(--blanc); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .ph-sec { font-size: 40px; font-weight: 700; padding: 40px 40px 18px; }
+  .ph-sec span { color: var(--gris); }
+  .ph-row .pic { width: 46px; display: grid; place-items: center; color: var(--blanc); }
+  .ph-row .val svg { display: block; color: var(--gris); }
+  .ph-albums { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 26px; }
+  .ph-albums .vig { border-radius: 26px; }
+  .gt2 { font-size: 58px; font-weight: 700; line-height: 1.05; padding: 10px 40px 0; }
+  .verrou { display: grid; justify-items: center; gap: 26px; margin-top: 360px; text-align: center; padding: 0 60px; color: var(--gris); }
+  .verrou p { margin: 0; font-size: 36px; font-weight: 700; color: var(--blanc); line-height: 1.25; }
+  .verrou span { font-size: 30px; font-weight: 600; color: var(--blanc); text-decoration: underline; text-underline-offset: 6px; }
+  .nav .pill { position: absolute; right: 26px; height: 66px; padding: 0 26px; border-radius: 33px; background: #262626; box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: grid; place-items: center; font-size: 26px; font-weight: 600; }
+  .alb-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+  .vide { position: absolute; left: 0; right: 0; top: 700px; text-align: center; font-size: 34px; font-weight: 600; color: var(--gris); opacity: 0; }
+  .barre-outils { position: absolute; left: 26px; right: 26px; bottom: 44px; height: 92px; border-radius: 46px; background: rgba(46,46,46,.95); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); display: flex; justify-content: space-between; align-items: center; padding: 0 36px; font-size: 28px; font-weight: 600; opacity: 0; z-index: 3; }
+  .barre-outils span { padding: 10px 6px; border-radius: 20px; }
+  .feuille-a { position: absolute; left: 22px; right: 22px; bottom: 30px; background: #1f1f1f; border-radius: 44px; padding: 34px 30px 26px; display: grid; gap: 14px; text-align: center; transform: translateY(120%); z-index: 4; box-shadow: 0 -10px 40px rgba(0,0,0,.6); }
+  .feuille-a p { margin: 0 0 6px; font-size: 24px; color: var(--gris); }
+  .feuille-a span { height: 86px; border-radius: 43px; display: grid; place-items: center; font-size: 30px; font-weight: 600; background: #2e2e2e; }
+  .feuille-a .danger { color: var(--blanc); font-weight: 700; }
+  .hl-txt { outline: 4px solid var(--cuivre); outline-offset: 4px; }
+
+  /* ---------- Écran d'accueil iOS 27.1 (d'après capture) ---------- */
+  #p-accueil .widgets { top: 112px; gap: 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #p-accueil .widget em { font-size: 22px; }
+  .w-meteo, .w-photo { width: 100%; aspect-ratio: 1; border-radius: 56px; }
+  .w-meteo { background: linear-gradient(170deg, #4a4a4a, #2c2c2c); padding: 26px 28px; display: flex; flex-direction: column; color: var(--blanc); box-shadow: inset 0 1px 0 rgba(250,250,250,.16); }
+  .w-meteo b { font-size: 26px; font-weight: 600; } .w-meteo strong { font-size: 76px; font-weight: 300; line-height: 1; margin: 2px 0 auto; }
+  .w-meteo span { font-size: 24px; font-weight: 500; } .w-meteo svg { margin-bottom: 4px; }
+  .w-photo { background: radial-gradient(circle at 45% 40%, #7a7a7a 0%, #4a4a4a 45%, #262626 100%); box-shadow: inset 0 1px 0 rgba(250,250,250,.12); }
+  #p-accueil .grille { top: 470px; row-gap: 22px; }
+  .tuile.i27 { background: linear-gradient(165deg, #2e2e2e, #121212); overflow: hidden; padding: 0; }
+  .tuile.i27 svg { display: block; }
+  .tuile.i27.cal small { color: var(--gris); font-size: 22px; font-weight: 600; margin-bottom: -2px; } .tuile.i27.cal b { font-size: 64px; font-weight: 400; }
+  #p-accueil .recherche-a { bottom: 190px; }
+  #p-accueil .dock { bottom: 24px; height: 150px; border-radius: 58px; }
+
+  /* ---------- Ouverture « poubelle » ---------- */
+  #intro { position: absolute; inset: 0; pointer-events: none; }
+  #poubelle { position: absolute; left: 540px; top: 1180px; width: 300px; height: 300px; margin: -150px 0 0 -150px; color: var(--blanc); transform-origin: 50% 80%; }
+  #vols .vol { position: absolute; left: 0; top: 0; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,.5); opacity: 0; }
+  #intro-jours { position: absolute; left: 0; right: 0; top: 1360px; text-align: center; opacity: 0; }
+  #intro-jours b { display: block; font-size: 64px; font-weight: 700; color: var(--cuivre); letter-spacing: -.01em; }
+  #intro-jours span { display: block; font-size: 32px; font-weight: 300; color: var(--gris); margin-top: 6px; }
+  .icone.logo-app { padding: 4px; } .icone.logo-app svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Téléphone Android (cadre plus droit, caméra perforée) ---------- */
+  .phone { border-radius: 74px; padding: 12px; }
+  .ecran { border-radius: 62px; background: #0b0b0b; }
+  .trou { position: absolute; left: 50%; top: 26px; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; background: #000; box-shadow: 0 0 0 2px #151515; z-index: 8; }
+  .stat-a { position: absolute; left: 0; right: 0; top: 0; height: 76px; display: flex; justify-content: space-between; align-items: center; padding: 6px 54px 0; font: 600 27px/1 "Jost", sans-serif; color: var(--blanc); z-index: 7; }
+  .stat-a .ic { display: flex; gap: 12px; align-items: center; }
+  .page { padding-top: 76px; background: #0b0b0b; }
+  .wa-tete { height: 120px; display: flex; align-items: center; gap: 18px; padding: 0 22px; background: #141414; }
+  .wa-tete .av { width: 76px; height: 76px; border-radius: 50%; background: #4a4a4a; display: grid; place-items: center; font: 600 32px "Jost"; }
+  .wa-tete .nm { flex: 1; font: 500 34px "Jost", sans-serif; }
+  .wa-tete .ics { display: flex; gap: 34px; }
+  .fond-wa { position: absolute; left: 0; right: 0; top: 196px; bottom: 0; background: radial-gradient(circle at 20% 30%, #161616 0 2px, transparent 3px) 0 0 / 46px 46px, radial-gradient(circle at 70% 70%, #141414 0 2px, transparent 3px) 0 0 / 58px 58px, #0b0b0b; }
+  .bul { position: absolute; max-width: 70%; padding: 14px 20px 12px; border-radius: 22px; font: 400 29px/1.3 "Jost", sans-serif; }
+  .bul small { font-size: 19px; color: var(--gris); margin-left: 14px; }
+  .bul.in { left: 22px; background: #1f1f1f; border-top-left-radius: 6px; }
+  .bul.out { right: 22px; background: #3a3a3a; border-top-right-radius: 6px; }
+  .pastille { position: absolute; left: 50%; transform: translateX(-50%); padding: 10px 22px; border-radius: 16px; background: #1c1c1c; font: 400 23px "Jost", sans-serif; color: var(--gris); white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+  .pastille b { color: var(--blanc); font-weight: 600; }
+  .saisie-a { position: absolute; left: 14px; right: 126px; height: 96px; border-radius: 48px; background: #1f1f1f; display: flex; align-items: center; gap: 16px; padding: 0 24px; font: 400 31px "Jost", sans-serif; color: var(--blanc); }
+  .saisie-a .ph { color: #7a7a7a; }
+  .saisie-a .curseur { display: inline-block; width: 3px; height: 34px; background: var(--blanc); vertical-align: -6px; margin-left: 2px; }
+  .envoi { position: absolute; right: 14px; width: 96px; height: 96px; border-radius: 50%; background: var(--blanc); color: #000; display: grid; place-items: center; }
+  .clavier { position: absolute; left: 0; right: 0; bottom: 0; height: 560px; background: #171717; padding: 10px 8px 0; display: grid; grid-template-rows: 64px repeat(4, 1fr) 1fr; gap: 10px; }
+  .clavier .sugg { display: flex; justify-content: space-around; align-items: center; font: 400 27px "Jost"; color: var(--gris); }
+  .clavier .rg { display: flex; gap: 8px; justify-content: center; }
+  .clavier .rg span { flex: 1; max-width: 62px; border-radius: 12px; background: #2c2c2c; display: grid; place-items: center; font: 400 30px "Jost"; color: var(--blanc); }
+  .clavier .rg span.l { max-width: 100px; background: #3a3a3a; font-size: 24px; }
+  .clavier .rg span.esp { max-width: 300px; }
+  .clavier .rg span.on { background: #6a6a6a; }
+  /* feuille « Planifier un message » */
+  .feuille-p { position: absolute; left: 0; right: 0; bottom: 0; height: 780px; background: #1a1a1a; border-radius: 40px 40px 0 0; z-index: 5; }
+  .feuille-p .poignee { width: 64px; height: 8px; border-radius: 4px; background: #555; margin: 16px auto 0; }
+  .feuille-p h4 { margin: 34px 0 26px; text-align: center; font: 500 36px "Jost", sans-serif; }
+  .roues { position: relative; height: 430px; margin: 0 22px; overflow: hidden; display: grid; grid-template-columns: 1.7fr 1fr 1fr; }
+  .roues .bande { position: absolute; left: 0; right: 0; top: 173px; height: 84px; border-radius: 20px; background: #2a2a2a; }
+  .roue { position: relative; overflow: hidden; }
+  .roue .lst { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+  .roue .lst div { height: 84px; display: grid; place-items: center; font: 500 31px "Jost", sans-serif; color: #8a8a8a; }
+  .roue .lst div.sel { color: var(--blanc); font-weight: 700; }
+  .btn-env { position: absolute; left: 30px; right: 30px; bottom: 54px; height: 92px; border-radius: 46px; background: #e6e6e6; color: #111; display: grid; place-items: center; font: 600 30px "Jost", sans-serif; }
+  .etq { position: absolute; top: 96px; padding: 6px 18px; border-radius: 12px; border: 3px solid var(--cuivre); color: var(--cuivre); font: 800 24px "Jost", sans-serif; letter-spacing: .08em; opacity: 0; background: #1a1a1a; z-index: 2; }
+  .anneau { position: absolute; inset: -14px; border-radius: 50%; }
+
+  /* ---------- Ouverture : le compteur qui file jusqu'à minuit ---------- */
+  #intro-p { position: absolute; inset: 0; pointer-events: none; }
+  #horloge { position: absolute; left: 0; right: 0; top: 760px; display: flex; justify-content: center; gap: 16px; align-items: center; }
+  #horloge .ch { position: relative; width: 168px; height: 230px; border-radius: 26px; background: linear-gradient(#262626, #161616); box-shadow: inset 0 1px 0 rgba(250,250,250,.12), 0 18px 40px rgba(0,0,0,.6); overflow: hidden; }
+  #horloge .ch::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; background: #0b0b0b; }
+  #horloge .ch span { position: absolute; inset: 0; display: grid; place-items: center; font: 700 168px/1 "Jost", sans-serif; color: var(--blanc); will-change: transform; }
+  #horloge .deux { font: 700 130px/1 "Jost", sans-serif; color: var(--cuivre); margin: 0 4px; }
+  #h-bulle { position: absolute; right: 150px; top: 1070px; padding: 20px 28px 16px; border-radius: 26px; border-top-right-radius: 8px; background: #3a3a3a; font: 500 40px "Jost", sans-serif; opacity: 0; }
+  #h-bulle small { font-size: 26px; color: var(--gris); margin-left: 16px; }
+  #h-tag { position: absolute; left: 0; right: 0; top: 1240px; display: flex; justify-content: center; opacity: 0; }
+  #h-tag span { padding: 12px 30px; border-radius: 16px; border: 3px solid var(--cuivre); color: var(--cuivre); font: 800 40px "Jost", sans-serif; letter-spacing: .06em; }
+  #h-fond { position: absolute; inset: -200px; pointer-events: none; }
+  /* tampon, preuve « mode avion », cas concrets, fin */
+  #tampon { position: absolute; left: 0; right: 0; top: 1120px; display: flex; justify-content: center; opacity: 0; pointer-events: none; z-index: 12; }
+  #tampon span { padding: 16px 38px; border: 6px solid var(--cuivre); border-radius: 20px; color: var(--cuivre); font: 800 70px "Jost", sans-serif; letter-spacing: .06em; background: rgba(11,11,11,.85); transform: rotate(-8deg); display: inline-block; }
+  .carte-p { position: absolute; left: 110px; right: 110px; height: 128px; border-radius: 30px; background: #1a1a1a; box-shadow: inset 0 1px 0 rgba(250,250,250,.1), 0 18px 40px rgba(0,0,0,.6); display: flex; align-items: center; gap: 26px; padding: 0 34px; opacity: 0; z-index: 12; }
+  .carte-p .hh { font: 800 40px "Jost", sans-serif; color: var(--cuivre); min-width: 160px; }
+  .carte-p .tx { font: 500 34px "Jost", sans-serif; }
+  .carte-p .ico { width: 64px; height: 64px; border-radius: 18px; background: #2a2a2a; display: grid; place-items: center; color: var(--blanc); }
+  #contact .cta { display: inline-block; padding: 18px 40px; border-radius: 40px; border: 3px solid var(--cuivre); color: var(--blanc); }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div id="h-fond"></div>
+  <div id="camera">
+    <div class="phone" id="phone"><div class="ecran" id="ecran">
+      <div class="trou"></div>
+      <div class="stat-a"><span>21:47</span><span class="ic" id="stat-ic"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M2 22h20V2z"/></svg><span style="font-size:24px">68 %</span></span></div>
+
+      <!-- Discussion (fictive) : écrire, appui long sur la flèche, feuille « Planifier un message » -->
+      <div class="page" id="p-chat">
+        <div class="wa-tete"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg><span class="av">M</span><span class="nm">Maman</span><span class="ics"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></span></div>
+        <div class="fond-wa"></div>
+        <div class="bul in" style="top:236px">On se voit dimanche ?<small>18:02</small></div>
+        <div class="bul out" style="top:330px">Oui, après la messe.<small>18:05 ✓✓</small></div>
+        <div class="pastille" id="past-plan" style="top:440px;opacity:0"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>Vous avez planifié un message. <b id="b-voir">Voir</b></div>
+        <div id="zone-saisie" style="position:absolute;left:0;right:0;bottom:576px;height:96px">
+          <div class="saisie-a"><svg viewBox="0 0 24 24" width="36" height="36" style="color:#8a8a8a;flex:none"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg><span id="txt" style="flex:1;white-space:nowrap;overflow:hidden"><span class="ph">Message</span></span></div>
+          <span class="envoi" id="b-envoi"><span class="anneau" id="anneau"></span><svg id="ic-mic" viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg><svg id="ic-env" viewBox="0 0 24 24" width="44" height="44" style="display:none"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></span>
+        </div>
+        <div class="clavier" id="clavier"></div>
+        <div id="voile-f" style="position:absolute;inset:0;background:#000;opacity:0;z-index:4"></div>
+        <div class="feuille-p" id="feuille">
+          <div class="poignee"></div>
+          <h4>Planifier un message</h4>
+          <div class="roues">
+            <div class="bande"></div>
+            <div class="roue" id="r-jour"><div class="lst"></div></div>
+            <div class="roue" id="r-heure"><div class="lst"></div></div>
+            <div class="roue" id="r-min"><div class="lst"></div></div>
+          </div>
+          <span class="etq" id="etq-jour" style="left:120px">JOUR</span>
+          <span class="etq" id="etq-heure" style="left:368px">HEURE</span>
+          <div class="btn-env" id="b-env-plan">Envoyer 28 nov. à 09:00</div>
+        </div>
+      </div>
+
+      <!-- Messages planifiés -->
+      <div class="page" id="p-plan">
+        <div class="wa-tete"><svg viewBox="0 0 24 24" width="40" height="40"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg><span class="nm" style="margin-left:14px">Messages planifiés</span></div>
+        <div class="fond-wa"></div>
+        <div class="pastille" style="top:236px">Programmé pour demain à 00:00</div>
+        <div class="bul out" id="bul-plan" style="top:322px">Bonne fête, Maman</div>
+      </div>
+
+    </div></div>
+    <div class="doigt" id="doigt"></div>
+  </div>
+  <!-- Ouverture : l'heure file jusqu'à minuit, le message part tout seul -->
+  <div id="intro-p">
+    <div id="horloge"><div class="ch"><span id="c0">2</span></div><div class="ch"><span id="c1">1</span></div><span class="deux">:</span><div class="ch"><span id="c2">4</span></div><div class="ch"><span id="c3">7</span></div></div>
+    <div id="h-bulle">Bonne fête, Maman<small>00:00 ✓✓</small></div>
+    <div id="h-tag"><span>IL PART TOUT SEUL</span></div>
+  </div>
+  <div id="tampon"><span>PROGRAMMÉ ✓</span></div>
+  <div class="carte-p" id="cp-avion" style="top:1080px"><span class="ico"><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span><span class="tx">Mode avion : activé</span></div>
+  <div class="carte-p" id="cp-parti" style="top:1230px"><span class="ico">✓</span><span class="tx">Message parti à 00:00</span></div>
+  <div class="carte-p" id="cp-fete" style="top:1080px"><span class="hh">00:00</span><span class="tx">Bonne fête à minuit</span></div>
+  <div class="carte-p" id="cp-sol" style="top:1230px"><span class="hh">Le 1er</span><span class="tx">Rappel du sòl</span></div>
+  <div class="texte" id="textes"></div>
+  <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
+  <div id="contact"><div class="cta">Chaîne WhatsApp ORA</div><div class="lieu">Le lien est dans la bio</div></div>
+  <div id="noir"></div>
+</div>
+<script src="../../templates/moteur-tuto-ios.js"></script>
+<script>
+// ---------- Clavier, roues ----------
+const RANGS = [['1','2','3','4','5','6','7','8','9','0'], ['a','z','e','r','t','y','u','i','o','p'], ['q','s','d','f','g','h','j','k','l','m'], ['⇧','w','x','c','v','b','n','’','⌫'], ['?123',',','space','.','↵']];
+document.getElementById('clavier').innerHTML = '<div class="sugg"><span>Bonne</span><span>Bonjour</span><span>Bon</span></div>' +
+  RANGS.map(r => `<div class="rg">${r.map(k => `<span class="${k.length > 1 && k !== 'space' ? 'l' : ''}${k === 'space' ? ' esp' : ''}" data-k="${k}">${k === 'space' ? '' : k}</span>`).join('')}</div>`).join('');
+const JOURS = ['Aujourd’hui', 'ven. 28 nov.', 'sam. 29 nov.', 'dim. 30 nov.', 'lun. 1 déc.'];
+const HEURES = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(h => String(h).padStart(2, '0'));
+const MINS = [58, 59, 0, 1, 2, 3].map(m => String(m).padStart(2, '0'));
+const remplir = (id, l) => { document.querySelector(`#${id} .lst`).innerHTML = l.map(x => `<div>${x}</div>`).join(''); };
+remplir('r-jour', JOURS); remplir('r-heure', HEURES); remplir('r-min', MINS);
+const MSG = 'Bonne fête, Maman';
+
+// ---------- Scénario (temps de la version muette) ----------
+const I = 2.4, TAPE = [3.0, 5.4], APPUI = [6.4, 7.9], OUV = 8.0, H0 = 11.0, H1 = 12.2, ENV = 12.9, VOIR = 14.4, AVION = 15.8, CAS = 18.0, FIN = 21.0;
+window.ORA_DURATION = 24.0;
+const CFG = {
+  textes: [
+    { a: 0, b: 2.7, label: 'WhatsApp · astuce', titre: 'Un message qui|part tout seul.', visible: true },
+    { a: 2.8, b: 6.0, label: 'Étape 1', titre: 'Écrivez|le message.' },
+    { a: 6.0, b: 9.6, label: 'Étape 2', titre: 'Doigt appuyé|sur la flèche.' },
+    { a: 9.6, b: 13.4, label: 'Étape 3', titre: 'Le jour, l’heure,|Envoyer.' },
+    { a: 13.4, b: AVION, label: 'Astuce', titre: 'Retrouvez-le|avec « Voir ».' },
+    { a: AVION, b: CAS, label: 'On a testé', titre: 'Même en|mode avion.', sous: 'Le message est parti quand même.', retard: 0.8 },
+    { a: CAS, b: FIN, label: 'Parfait pour', titre: 'Même quand|vous dormez.' },
+    { a: FIN, b: 99, centre: true, titre: 'Enregistrez|cette vidéo.', retard: 0.5 },
+  ],
+  nav: [[0, 'p-chat', 0], [VOIR + 0.2, 'p-plan', 1]],
+  taps: [[ENV, '#b-env-plan'], [VOIR, '#b-voir']],
+  surbrillance: [[APPUI[0] - 0.3, APPUI[0], '#b-envoi', 'hl-txt'], [ENV - 0.4, ENV + 0.05, '#b-env-plan', 'hl-txt'], [VOIR - 0.4, VOIR + 0.1, '#b-voir', 'hl-txt']],
+  camera: [[0, 0.72, '#phone', 1200], [2.8, 0.62, '#phone', 1060], [6.0, 1.05, '#b-envoi', 1420], [OUV, 0.62, '#phone', 1060], [9.6, 1.0, '#r-heure', 1250], [ENV - 0.3, 0.62, '#phone', 1060], [CAS, 0.5, '#phone', 1250]],
+  fin: FIN,
+  sons: { souffles: [I, 6.0, 9.6, AVION, CAS, FIN], crans: [0.7, 1.15, 1.55, 7.9, 11.25, 11.6, 11.95, 13.45], impact: 13.4 },
+  apres: t => {
+    const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
+    const expo = x => { x = clamp(x); return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); };
+    const back = (x, o = 1.2) => { x = clamp(x); return 1 + (o + 1) * Math.pow(x - 1, 3) + o * Math.pow(x - 1, 2); };
+    const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+    const $ = s => document.querySelector(s);
+    // ---- ouverture : 21:47 → 00:00, le message part tout seul ----
+    const m = Math.round(133 * io((t - 0.15) / 1.35)), mins = (21 * 60 + 47 + m) % 1440;
+    const hh = String(Math.floor(mins / 60)).padStart(2, '0'), mm = String(mins % 60).padStart(2, '0');
+    [hh[0], hh[1], mm[0], mm[1]].forEach((c, i) => { const el = $('#c' + i); if (el.textContent !== c) el.textContent = c; el.style.transform = `translateY(${t < 1.5 ? Math.sin(t * 40 + i) * 4 : 0}px)`; });
+    const b = back((t - 1.55) / 0.35, 1.6); $('#h-bulle').style.opacity = clamp((t - 1.55) / 0.15); $('#h-bulle').style.transform = `scale(${0.6 + 0.4 * b})`;
+    const g = expo((t - 1.9) / 0.35); $('#h-tag').style.opacity = g; $('#h-tag').style.transform = `translateY(${(1 - g) * 40}px)`;
+    $('#intro-p').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
+    $('#h-fond').style.background = `radial-gradient(circle at ${50 + 16 * Math.sin(t * 0.6)}% ${58 + 10 * Math.cos(t * 0.45)}%, rgba(184,115,51,${0.10 + 0.03 * Math.sin(t * 1.8)}) 0%, rgba(184,115,51,0) 40%)`;
+    const ph = $('#phone');
+    if (t < I + 0.2) { const k = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - k) * 900}px)`; ph.style.opacity = k; }
+    // ---- étape 1 : on écrit (touches qui s'allument) ----
+    const n = Math.round(MSG.length * clamp((t - TAPE[0]) / (TAPE[1] - TAPE[0])));
+    const efface = t >= ENV + 0.15;
+    $('#txt').innerHTML = efface || n === 0 ? '<span class="ph">Message</span>' : MSG.slice(0, n) + (t < OUV ? '<span class="curseur"></span>' : '');
+    document.querySelectorAll('#clavier span[data-k]').forEach(k => k.classList.toggle('on', n > 0 && n < MSG.length && t < TAPE[1] && k.dataset.k === MSG[n - 1].toLowerCase()));
+    $('#ic-mic').style.display = n > 0 && !efface ? 'none' : ''; $('#ic-env').style.display = n > 0 && !efface ? '' : 'none';
+    // ---- étape 2 : appui long sur la flèche (le doigt reste, un anneau cuivre se remplit) ----
+    const ap = clamp((t - APPUI[0]) / (APPUI[1] - APPUI[0])), tenu = t >= APPUI[0] && t < OUV;
+    $('#anneau').style.background = tenu ? `conic-gradient(var(--cuivre) ${ap * 360}deg, rgba(184,115,51,.18) 0)` : 'transparent';
+    $('#anneau').style.webkitMask = 'radial-gradient(circle, transparent 55px, #000 56px)'; $('#anneau').style.mask = 'radial-gradient(circle, transparent 55px, #000 56px)';
+    $('#b-envoi').style.transform = tenu ? `scale(${0.92 - 0.02 * Math.sin(ap * Math.PI)})` : '';
+    const dg = $('#doigt');
+    if (t >= APPUI[0] - 0.25 && t < OUV + 0.1) {
+      const r = $('#b-envoi').getBoundingClientRect(), cv = $('#canvas').getBoundingClientRect(), cam = $('#camera').getBoundingClientRect();
+      const sc = cam.width / 1080, cx = (r.left + r.width / 2 - cam.left) / sc, cy = (r.top + r.height / 2 - cam.top) / sc;
+      dg.style.left = cx + 'px'; dg.style.top = cy + 'px'; dg.style.opacity = 0.9 * Math.min(out((t - APPUI[0] + 0.25) / 0.2), 1 - clamp((t - OUV) / 0.1)); dg.style.transform = `scale(${0.85 + 0.05 * Math.sin(t * 6)})`;
+    }
+    // ---- étape 3 : la feuille monte, les roues tournent, Envoyer ----
+    const f = t < ENV + 0.05 ? expo((t - OUV) / 0.35) : 1 - io((t - ENV - 0.05) / 0.3);
+    $('#feuille').style.transform = `translateY(${(1 - (t >= OUV ? f : 0)) * 100}%)`;
+    $('#clavier').style.opacity = t >= OUV && t < ENV + 0.35 ? 0 : 1;
+    $('#voile-f').style.opacity = t >= OUV ? 0.62 * f : 0;
+    const posRoue = (id, idx) => { const l = $(`#${id} .lst`); l.style.transform = `translateY(${173 - idx * 84}px)`; l.querySelectorAll('div').forEach((d, j) => d.classList.toggle('sel', Math.round(idx) === j)); };
+    posRoue('r-jour', 1);
+    const hi = 13 - 9 * io((t - H0) / (H1 - H0 - 0.2));   // 09 → 00 (minuit)
+    posRoue('r-heure', hi); posRoue('r-min', 2);
+    $('#b-env-plan').textContent = `Envoyer 28 nov. à ${HEURES[Math.round(hi)]}:00`;
+    [['#etq-jour', 9.9], ['#etq-heure', H0 - 0.1]].forEach(([s, a]) => { const k = back((t - a) / 0.3, 1.8); $(s).style.opacity = t >= a && t < ENV ? 1 : 0; $(s).style.transform = `scale(${0.5 + 0.5 * k})`; });
+    // c'est programmé : tampon (tassement puis éclat), pastille « Voir »
+    const tp = t - (ENV + 0.4), st = tp < 0 ? 0 : back(tp / 0.3, 2.2);
+    $('#tampon').style.opacity = tp >= 0 && t < VOIR - 0.3 ? 1 : 0; $('#tampon').style.transform = `scale(${1.6 - 0.6 * st})`;
+    $('#past-plan').style.opacity = t >= ENV + 0.3 ? 1 : 0;
+    // ---- preuve « mode avion », puis cas concrets : cartes qui glissent (décalage 0,15 s) ----
+    const carte = (s, a, b) => { const k = expo((t - a) / 0.4), q = clamp((t - b) / 0.25); $(s).style.opacity = t >= a && t < b + 0.25 ? Math.min(1, k * 2) * (1 - q) : 0; $(s).style.transform = `translateX(${(1 - k) * 140}px)`; };
+    carte('#cp-avion', AVION + 0.3, CAS - 0.1); carte('#cp-parti', AVION + 1.0, CAS - 0.1);
+    carte('#cp-fete', CAS + 0.3, FIN - 0.1); carte('#cp-sol', CAS + 0.45, FIN - 0.1);
+    $('#stat-ic').style.opacity = 1;
+  },
+};
+SCENE(CFG);
+</script>
+</body>
+</html>
