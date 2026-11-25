@@ -326,6 +326,9 @@
 
   /* ---------- Ouverture : WhatsApp recopie tout dans Photos ---------- */
   #intro-b { position: absolute; inset: 0; pointer-events: none; transform-origin: 0 0; will-change: transform; }
+  #ib-fond { position: absolute; inset: -200px; pointer-events: none; will-change: transform, background; }
+  #ib-fond i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--blanc); }
+  #ib-doublon span { display: inline-block; will-change: transform; }
   .ib-col { position: absolute; top: 700px; width: 400px; height: 760px; border-radius: 48px; background: #151515; box-shadow: inset 0 1px 0 rgba(250,250,250,.08); }
   #ib-wa { left: 60px; } #ib-ph { right: 60px; }
   .ib-tete { display: flex; align-items: center; gap: 14px; padding: 26px 28px; font-size: 32px; font-weight: 600; }
@@ -407,13 +410,14 @@
     <div class="doigt" id="doigt"></div>
   </div>
   <!-- Ouverture : ce qu'on reçoit sur WhatsApp part aussi dans Photos ; la même affiche reçue deux fois = un doublon -->
+  <div id="ib-fond"></div>
   <div id="intro-b">
     <div class="ib-col" id="ib-wa"><div class="ib-tete"><span class="ic" id="ib-ic-wa" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 14 C30 14 14 30 14 50 C14 57 16 63 19 68 L14 86 L33 81 C38 84 44 86 50 86 C70 86 86 70 86 50 C86 30 70 14 50 14 Z" fill="none" stroke="#FAFAFA" stroke-width="6" stroke-linejoin="round"/><path d="M38 33 C36 33 33 36 33 40 C34 52 48 66 60 67 C64 67 67 64 67 62 L67 58 C67 57 66 56 65 56 L59 54 C58 54 57 54 56 55 L54 57 C49 55 45 51 43 46 L45 44 C46 43 46 42 46 41 L44 35 C44 34 43 33 42 33 Z" fill="#FAFAFA"/></svg></span>WhatsApp</div><div id="ib-bulles"></div></div>
     <div class="ib-col" id="ib-ph"><div class="ib-tete"><span class="ic" id="ib-ic-ph" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></span>Photos<b id="ib-compte" style="margin-left:auto;color:var(--cuivre);font-size:34px">+0</b></div><div class="ib-grille" id="ib-grille"></div></div>
     <div id="ib-vols"></div>
     <div id="ib-rafale"></div>
   </div>
-  <div id="ib-doublon">LA MÊME AFFICHE,<br>DEUX FOIS</div>
+  <div id="ib-doublon"><span>LA MÊME AFFICHE,</span><br><span>DEUX FOIS</span></div>
   <div class="texte" id="textes"></div>
   <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
   <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
@@ -481,6 +485,7 @@ const PLANS = [[0, 1.45, 260, 1130, 1300],     // WhatsApp en grand : les messag
                [4.5, 1.9, 820, 1000, 1050],    // « tout »
                [4.8, 2.3, 814, 984, 1050]];    // la même affiche, deux fois
 const RAF = Array.from({ length: 14 }, (_, i) => -0.35 + i * 0.1);   // départs de la rafale (déjà en vol à la 1re image)           // départs des copies
+document.getElementById('ib-fond').innerHTML = Array.from({ length: 22 }, () => '<i></i>').join('');
 const DEP = [[198, 905], [198, 1120], [198, 1335], [198, 905]];
 const ARR = [[728, 898], [900, 898], [728, 1070], [900, 1070]];
 const CFG = {
@@ -502,44 +507,91 @@ const CFG = {
     const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
     const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
     const $ = s => document.querySelector(s);
-    // copies qui volent de WhatsApp vers Photos, puis l'affiche reçue une 2e fois : doublon
+    // ---- Ouverture, d'après motion-design (LottieFiles) ----
+    // Identité de mouvement : énergique mais sobre. Courbe signature = sortie expo ; durées 0,15 / 0,3 / 0,55 s ;
+    // entrée = surgit avec ~6 % de dépassement. Trois couches : principale (caméra, copies), secondaire (réactions), ambiance (fond).
+    const expo = x => { x = clamp(x); return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); };
+    const back = (x, o = 1.2) => { x = clamp(x); return 1 + (o + 1) * Math.pow(x - 1, 3) + o * Math.pow(x - 1, 2); };
+    const inq = x => Math.pow(clamp(x), 3);
     const vols = [...document.querySelectorAll('#ib-vols .ib-vol')], cells = [...document.querySelectorAll('#ib-grille .ib-cell')];
+    const bulles = [...document.querySelectorAll('#ib-bulles .ib-bulle')];
+    // 1. Copies : anticipation (la bulle se tasse), vol en arc qui suit sa trajectoire, impact (onde cuivre, la case rebondit)
+    const impacts = [];
     vols.forEach((v, i) => {
-      const k = clamp((t - VOLS[i]) / 0.55), e = io(k);
-      const x = DEP[i][0] + (ARR[i][0] - DEP[i][0]) * e, y = DEP[i][1] + (ARR[i][1] - DEP[i][1]) * e - Math.sin(Math.PI * k) * 90;
+      const k = clamp((t - VOLS[i]) / 0.55);
+      let x, y, s, r;
+      if (i < 3) {
+        const e = expo(k);
+        x = DEP[i][0] + (ARR[i][0] - DEP[i][0]) * e; y = DEP[i][1] + (ARR[i][1] - DEP[i][1]) * e - Math.sin(Math.PI * e) * 120;
+        s = 1 - 0.15 * e; r = -14 * (1 - e);
+      } else {   // l'affiche reçue une 2e fois : elle plane au-dessus (anticipation), puis tombe sèchement (impact)
+        const a = expo(k / 0.6), b = inq((k - 0.6) / 0.4);
+        const hx = ARR[3][0], hy = ARR[3][1] - 190;
+        x = k < 0.6 ? DEP[3][0] + (hx - DEP[3][0]) * a : hx; y = k < 0.6 ? DEP[3][1] + (hy - DEP[3][1]) * a - Math.sin(Math.PI * a) * 80 : hy + (ARR[3][1] - hy) * b;
+        s = k < 0.6 ? 1 + 0.18 * a : 1.18 - 0.33 * b; r = k < 0.6 ? 8 * Math.sin(Math.PI * a) : 0;
+      }
       v.style.opacity = t < VOLS[i] || k >= 1 ? 0 : 1;
-      v.style.transform = `translate(${x}px, ${y}px) scale(${1 - 0.15 * e})`;
-      cells[i].querySelector('.ib-img').style.opacity = k >= 1 ? 1 : 0;
+      v.style.transform = `translate(${x}px, ${y}px) scale(${s}) rotate(${r}deg)`;
+      const atterri = VOLS[i] + 0.55, img = cells[i].querySelector('.ib-img');
+      img.style.opacity = t >= atterri ? 1 : 0;
+      img.style.transform = t >= atterri ? `scale(${1.14 - 0.14 * back((t - atterri) / 0.3)})` : '';
+      impacts[i] = t >= atterri && t < atterri + 0.4 ? (t - atterri) / 0.4 : null;
     });
-    const d = out((t - X2) / 0.3);
+    // 2. Mise en scène des gros plans : la case nommée respire, les autres s'effacent ; puis le doublon
+    const d = t >= X2 ? 1 : 0, dx = back((t - X2) / 0.3, 1.6);
+    const focus = HL.find(([a, b]) => t >= a && t < b);
     cells.forEach((c, i) => {
-      const on = HL.some(([a, b, l]) => t >= a && t < b && l.includes(i));
-      if (i === 0 || i === 3) c.querySelector('.ib-x2').style.opacity = d;
-      c.style.boxShadow = (i === 0 || i === 3) && d ? `0 0 0 ${4 * d}px var(--cuivre)` : on ? '0 0 0 4px var(--cuivre)' : '';
-      c.style.transform = on ? 'scale(1.06)' : '';
+      const on = !!focus && focus[2].includes(i), ip = impacts[i];
+      if (i === 0 || i === 3) { const x2 = c.querySelector('.ib-x2'); x2.style.opacity = d; x2.style.transform = `scale(${d ? dx : 0})`; }
+      const ring = ip != null ? `0 0 0 ${18 * expo(ip)}px rgba(184,115,51,${0.8 * (1 - ip)})` : '';
+      const cadre = (i === 0 || i === 3) && d ? `0 0 0 ${4 * Math.min(dx, 1)}px var(--cuivre)` : on ? '0 0 0 4px var(--cuivre)' : '';
+      c.style.boxShadow = [cadre, ring].filter(Boolean).join(', ');
+      c.style.transform = on ? `scale(${1.05 + 0.02 * Math.sin((t - focus[0]) * 9)})` : '';
+      c.style.opacity = focus && focus[2].length < 3 && !on ? 0.45 : 1;
     });
-    // caméra de l'ouverture : un plan nouveau chaque seconde environ, passages rapides (0,3 s)
+    // 3. Caméra : un plan par idée ; anticipation (petit recul 0,1 s avant chaque coup), arrivée avec léger dépassement, secousse à l'impact du doublon
     let pi = 0; while (pi + 1 < PLANS.length && t >= PLANS[pi + 1][0]) pi++;
     const plan = p => ({ s: p[1], x: 540 - p[2] * p[1], y: p[4] - p[3] * p[1] });
-    const A = plan(PLANS[Math.max(0, pi - 1)]), B = plan(PLANS[pi]), kc = pi ? io((t - PLANS[pi][0]) / 0.3) : 1;
-    $('#intro-b').style.transform = `translate(${A.x + (B.x - A.x) * kc}px, ${A.y + (B.y - A.y) * kc}px) scale(${A.s + (B.s - A.s) * kc})`;
-    // les messages arrivent un par un dans WhatsApp (le premier est là dès la 1re image)
-    document.querySelectorAll('#ib-bulles .ib-bulle').forEach((b, i) => { const k = i === 0 ? 1 : out((t - (i === 1 ? 0.35 : 0.7)) / 0.25); b.style.opacity = k; b.style.transform = `translateY(${(1 - k) * 40}px) scale(${0.9 + 0.1 * k})`; });
-    $('#ib-doublon').style.opacity = d * (1 - out((t - (I - 0.35)) / 0.45));
-    // rafale : tout ce qui arrive sur WhatsApp file vers Photos, le compteur monte
+    const A = plan(PLANS[Math.max(0, pi - 1)]), B = plan(PLANS[pi]), kc = pi ? back((t - PLANS[pi][0]) / 0.32, 0.7) : 1;
+    const suivant = PLANS[pi + 1] ? PLANS[pi + 1][0] : 99, recul = 1 - 0.035 * Math.sin(Math.PI * clamp((t - (suivant - 0.1)) / 0.1));
+    const choc = t >= X2 - 0.02 && t < X2 + 0.35 ? Math.sin((t - X2) * 55) * 12 * (1 - (t - X2) / 0.35) : 0;
+    const cs = (A.s + (B.s - A.s) * kc) * recul, cx = A.x + (B.x - A.x) * kc + choc, cy = A.y + (B.y - A.y) * kc;
+    $('#intro-b').style.transform = `translate(${cx}px, ${cy}px) scale(${cs})`;
+    // 4. WhatsApp : chaque message surgit (dépassement), et se tasse quand une copie en part (anticipation + rebond)
+    bulles.forEach((b, i) => {
+      const e = i === 0 ? 1 : back((t - (i === 1 ? 0.35 : 0.7)) / 0.28, 1.6);
+      const dep = RAF.filter((r, j) => j % 3 === i && t >= r - 0.08 && t < r + 0.15).map(r => t - r)[0];
+      const tasse = dep == null ? 1 : dep < 0 ? 1 - 0.05 * (dep + 0.08) / 0.08 : 0.95 + 0.05 * back(dep / 0.15, 2);
+      b.style.opacity = clamp(e * 3); b.style.transform = `translateY(${(1 - Math.min(e, 1)) * 60}px) scale(${(0.7 + 0.3 * e) * tasse})`;
+    });
+    // 5. Étiquette du doublon : deux lignes qui montent l'une après l'autre (décalage 0,1 s)
+    const fin0 = 1 - out((t - (I - 0.35)) / 0.45);
+    $('#ib-doublon').style.opacity = d * fin0;
+    [...document.querySelectorAll('#ib-doublon span')].forEach((s, i) => { const k = expo((t - X2 - 0.15 - i * 0.1) / 0.35); s.style.opacity = k; s.style.transform = `translateY(${(1 - k) * 40}px)`; });
+    // 6. Rafale : tout ce qui arrive sur WhatsApp part vers Photos (arc, rotation qui suit la trajectoire), le compteur réagit
     let arrivees = 0;
     document.querySelectorAll('#ib-rafale .ib-raf').forEach((v, i) => {
-      const k = clamp((t - RAF[i]) / 0.5), e = io(k), y0 = 905 + (i % 3) * 215;
-      const x = 198 + (790 - 198) * e, y = y0 + (770 - y0) * e - Math.sin(Math.PI * k) * 110;
-      v.style.opacity = t < RAF[i] || k >= 1 ? 0 : 1;
-      v.style.transform = `translate(${x}px, ${y}px) scale(${0.75 - 0.45 * e}) rotate(${(i % 2 ? 1 : -1) * 12 * (1 - e)}deg)`;
+      const k = clamp((t - RAF[i]) / 0.5), e = expo(k), y0 = 905 + (i % 3) * 215;
+      const x = 198 + (790 - 198) * e, y = y0 + (770 - y0) * e - Math.sin(Math.PI * e) * 130;
+      v.style.opacity = t < RAF[i] || k >= 1 ? 0 : 1 - clamp((k - 0.8) / 0.2);
+      v.style.transform = `translate(${x}px, ${y}px) scale(${0.8 - 0.5 * e}) rotate(${(i % 2 ? 1 : -1) * 18 * (1 - e)}deg)`;
       if (k >= 1) arrivees++;
     });
     const total = arrivees + VOLS.filter(v => t >= v + 0.55).length;
     $('#ib-compte').textContent = `+${total}`;
     const der = RAF.map(r => r + 0.5).concat(VOLS.map(v => v + 0.55)).filter(x => x <= t);
-    const pulse = der.length ? clamp(1 - (t - Math.max(...der)) / 0.15) : 0;
-    $('#ib-compte').style.transform = `scale(${1 + 0.25 * pulse})`; $('#ib-compte').style.display = 'inline-block';
+    const pulse = der.length ? 1 - expo((t - Math.max(...der)) / 0.25) : 0;
+    $('#ib-compte').style.transform = `scale(${1 + 0.35 * pulse})`; $('#ib-compte').style.display = 'inline-block';
+    $('#ib-compte').style.color = pulse > 0.6 ? 'var(--blanc)' : 'var(--cuivre)';
+    // 7. Ambiance : halo cuivre qui dérive, poussière qui monte, en contre-mouvement léger de la caméra (parallaxe 15 %)
+    const gx = 50 + 18 * Math.sin(t * 0.7), gy = 55 + 12 * Math.cos(t * 0.5);
+    $('#ib-fond').style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(184,115,51,${0.11 + 0.03 * Math.sin(t * 2)}) 0%, rgba(184,115,51,0) 38%), radial-gradient(circle at ${100 - gx}% ${100 - gy}%, rgba(250,250,250,.04) 0%, rgba(250,250,250,0) 32%)`;
+    $('#ib-fond').style.transform = `translate(${-(cx - 540 + 540 * cs) * 0.15}px, ${-(cy - 1080 + 1080 * cs) * 0.15}px)`;
+    $('#ib-fond').style.opacity = fin0;
+    document.querySelectorAll('#ib-fond i').forEach((p, i) => {
+      const yy = 2300 - ((t * (30 + (i % 5) * 9) + i * 117) % 2400), xx = (i * 211) % 1480 + 16 * Math.sin(t * 0.9 + i);
+      p.style.transform = `translate(${xx}px, ${yy}px) scale(${0.6 + (i % 4) * 0.25})`; p.style.opacity = 0.08 + (i % 5) * 0.04;
+    });
     $('#intro-b').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
     const ph = $('#phone');
     if (t < I + 0.2) { const m = out((t - (I - 0.3)) / 0.5); ph.style.transform = `translateY(${(1 - m) * 900}px)`; ph.style.opacity = m; }
