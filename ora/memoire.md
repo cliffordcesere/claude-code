@@ -176,7 +176,7 @@ Post canal « La vérité sur l'hydrogel » (25 mai 2026) : bon fond (l'hydrogel
 
 Trafic : « Pour toi » 94–97 %, recherche 0,5–1,5 %. Recherches réelles : « photo supprimer iphone », « recupere photo », « photo stocker en double », « iphone comment fusionner les photos », « Watchapp plein », « pourquoi WhatsApp me dit stockage plein ».
 **Diagnostic (2026-11-25)** : la majorité part à 1–2 s sur les trois vidéos → l'ouverture ne retient pas (premières images trop statiques, petit texte d'interface). La partie 3, ouverte sur un gros chiffre, retient le mieux.
-**Règle d'ouverture (à partir du bonus)** : mouvement dès la 1re image (rien de figé), un élément gros et lisible, et **sous-titres mot à mot calés sur la voix** (`C.mots` dans `moteur-tuto-ios.js`, fond sombre). Les mots que les gens cherchent vont dans la légende et à l'écran.
+**Règle d'ouverture (à partir du bonus)** : **l'image entière doit changer environ chaque seconde** (plans : gros plan, coup de caméra, plan large, gros plan sur ce que la voix nomme) — bouger de petits éléments dans une composition fixe ne suffit pas (v03 du bonus : même cadre 10 s, jugée « statique » par le propriétaire, à raison). Un élément gros et lisible dès la 1re image. Sous-titres mot à mot calés sur la voix (`C.mots` dans `moteur-tuto-ios.js`, fond sombre) : utiles (son coupé), mais ce n'est pas eux qui retiennent. Les mots que les gens cherchent vont dans la légende et à l'écran.
 Idée de sujet tirée des recherches : « récupérer une photo supprimée » (Supprimés récemment › Récupérer).
 
 ## Mesures

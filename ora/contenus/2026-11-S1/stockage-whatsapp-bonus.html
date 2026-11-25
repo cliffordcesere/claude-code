@@ -325,7 +325,7 @@
   #t-enreg.mi { background: #8a8a8a; } #t-enreg.mi::after { left: 18px; }
 
   /* ---------- Ouverture : WhatsApp recopie tout dans Photos ---------- */
-  #intro-b { position: absolute; inset: 0; pointer-events: none; }
+  #intro-b { position: absolute; inset: 0; pointer-events: none; transform-origin: 0 0; will-change: transform; }
   .ib-col { position: absolute; top: 700px; width: 400px; height: 760px; border-radius: 48px; background: #151515; box-shadow: inset 0 1px 0 rgba(250,250,250,.08); }
   #ib-wa { left: 60px; } #ib-ph { right: 60px; }
   .ib-tete { display: flex; align-items: center; gap: 14px; padding: 26px 28px; font-size: 32px; font-weight: 600; }
@@ -338,7 +338,7 @@
   .ib-cell .ib-img { position: absolute; inset: 0; border-radius: 0; opacity: 0; }
   .ib-vol { position: absolute; left: 0; top: 0; width: 170px; height: 120px; margin: -60px 0 0 -85px; border-radius: 14px; overflow: hidden; opacity: 0; box-shadow: 0 10px 30px rgba(0,0,0,.6); }
   .ib-x2 { position: absolute; right: 8px; top: 8px; padding: 2px 12px; border-radius: 10px; background: var(--cuivre); color: #000; font-weight: 700; font-size: 26px; opacity: 0; }
-  #ib-doublon { position: absolute; left: 0; right: 0; top: 1490px; text-align: center; font-size: 36px; color: var(--cuivre); font-weight: 700; letter-spacing: .08em; opacity: 0; }
+  #ib-doublon { position: absolute; left: 60px; right: 60px; top: 250px; text-align: center; font-size: 60px; line-height: 1.1; color: var(--cuivre); font-weight: 800; letter-spacing: .06em; opacity: 0; text-shadow: 0 4px 20px rgba(0,0,0,.9); }
 </style>
 </head>
 <body>
@@ -412,8 +412,8 @@
     <div class="ib-col" id="ib-ph"><div class="ib-tete"><span class="ic" id="ib-ic-ph" style="width:58px;height:58px;padding:6px"><svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(0 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(45 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(90 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(135 50 50)" fill="#7a7a7a" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(180 50 50)" fill="#a8a8a8" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(225 50 50)" fill="#d6d6d6" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(270 50 50)" fill="#FAFAFA" fill-opacity=".82"/><ellipse cx="50" cy="29" rx="11.5" ry="19" transform="rotate(315 50 50)" fill="#d6d6d6" fill-opacity=".82"/><circle cx="50" cy="50" r="4.5" fill="#141414"/></svg></span>Photos<b id="ib-compte" style="margin-left:auto;color:var(--cuivre);font-size:34px">+0</b></div><div class="ib-grille" id="ib-grille"></div></div>
     <div id="ib-vols"></div>
     <div id="ib-rafale"></div>
-    <div id="ib-doublon">LA MÊME AFFICHE, DEUX FOIS</div>
   </div>
+  <div id="ib-doublon">LA MÊME AFFICHE,<br>DEUX FOIS</div>
   <div class="texte" id="textes"></div>
   <img id="logoV" src="../../logo/svg/ORA_logo_vertical_cuivre-sur-noir.svg" alt="ORA">
   <div id="contact"><div class="cta">WhatsApp +509 4630 2424</div><div class="lieu">Delmas, Haïti</div></div>
@@ -471,12 +471,21 @@ window.ORA_DURATION = 15.4 + O;
 const X2 = 4.2 + PR;                                  // l'affiche reçue une 2e fois : doublon
 const HL = [[1.8, 2.3, [0]], [2.3, 2.8, [1]], [2.8, 3.3, [2]], [3.3, 3.6, [0, 1, 2]]].map(([a, b, l]) => [a + PR, b + PR, l]);  // affiche, bonjour, vidéo, tout
 const VOLS = [0.3, 0.7, 1.1, 3.6].map(v => v + PR);
+// Plans de l'ouverture (temps vidéo) : [début, zoom, x, y à amener au centre, y à l'écran]
+const PLANS = [[0, 1.45, 260, 1130, 1300],     // WhatsApp en grand : les messages arrivent
+               [1.45, 2.0, 820, 1000, 1250],   // coup de caméra vers Photos : les copies tombent, le compteur monte
+               [2.85, 1.0, 540, 1080, 1080],   // plan large : « sans vous demander »
+               [3.0, 2.6, 728, 898, 1050],     // l'affiche de l'église
+               [3.5, 2.6, 900, 898, 1050],     // l'image de bonjour
+               [4.0, 2.6, 728, 1070, 1050],    // la vidéo du groupe
+               [4.5, 1.9, 820, 1000, 1050],    // « tout »
+               [4.8, 2.3, 814, 984, 1050]];    // la même affiche, deux fois
 const RAF = Array.from({ length: 14 }, (_, i) => -0.35 + i * 0.1);   // départs de la rafale (déjà en vol à la 1re image)           // départs des copies
 const DEP = [[198, 905], [198, 1120], [198, 1335], [198, 905]];
 const ARR = [[728, 898], [900, 898], [728, 1070], [900, 1070]];
 const CFG = {
   textes: [
-    { a: 0, b: 3.4 + O, label: 'iPhone plein · bonus', titre: 'Le réglage qui|le remplit.', sous: 'En cachette.', visible: true },
+    { a: 0, b: 2.9, label: 'iPhone plein · bonus', titre: 'Le réglage qui|le remplit.', sous: 'En cachette.', visible: true },
     { a: 3.6 + O, b: 6.8 + O, label: 'Étape 1', titre: 'Vous ›|Discussions' },
     { a: 6.8 + O, b: 9.6 + O, label: 'Étape 2', titre: 'Désactivez|Enregistrer.', sous: 'La ligne « Enregistrer (Photos) ».' },
     { a: 9.6 + O, b: FIN, titre: 'Elles restent|dans WhatsApp.', sous: 'Celles que vous aimez,|enregistrez-les vous-même.', retard: 0.9 },
@@ -509,7 +518,14 @@ const CFG = {
       c.style.boxShadow = (i === 0 || i === 3) && d ? `0 0 0 ${4 * d}px var(--cuivre)` : on ? '0 0 0 4px var(--cuivre)' : '';
       c.style.transform = on ? 'scale(1.06)' : '';
     });
-    $('#ib-doublon').style.opacity = d;
+    // caméra de l'ouverture : un plan nouveau chaque seconde environ, passages rapides (0,3 s)
+    let pi = 0; while (pi + 1 < PLANS.length && t >= PLANS[pi + 1][0]) pi++;
+    const plan = p => ({ s: p[1], x: 540 - p[2] * p[1], y: p[4] - p[3] * p[1] });
+    const A = plan(PLANS[Math.max(0, pi - 1)]), B = plan(PLANS[pi]), kc = pi ? io((t - PLANS[pi][0]) / 0.3) : 1;
+    $('#intro-b').style.transform = `translate(${A.x + (B.x - A.x) * kc}px, ${A.y + (B.y - A.y) * kc}px) scale(${A.s + (B.s - A.s) * kc})`;
+    // les messages arrivent un par un dans WhatsApp (le premier est là dès la 1re image)
+    document.querySelectorAll('#ib-bulles .ib-bulle').forEach((b, i) => { const k = i === 0 ? 1 : out((t - (i === 1 ? 0.35 : 0.7)) / 0.25); b.style.opacity = k; b.style.transform = `translateY(${(1 - k) * 40}px) scale(${0.9 + 0.1 * k})`; });
+    $('#ib-doublon').style.opacity = d * (1 - out((t - (I - 0.35)) / 0.45));
     // rafale : tout ce qui arrive sur WhatsApp file vers Photos, le compteur monte
     let arrivees = 0;
     document.querySelectorAll('#ib-rafale .ib-raf').forEach((v, i) => {
