@@ -43,6 +43,6 @@ environment variables in workflow logs.
 
 Le dossier `ora/` contient le kit de marque ORA (charte, logo, police, gabarits,
 outil de rendu). Pour toute demande de contenu ORA (flyer, post, story, vidéo,
-tuto, caption, réponse client), lire d'abord `ora/charte/ORA_SYSTEM_PROMPT_v3.1.md`
+tuto, caption, réponse client), lire d'abord `ora/charte/ORA_SYSTEM_PROMPT_v3.2.md`
 et l'appliquer intégralement, puis `ora/README.md` et `ora/memoire.md`.
 Le logo s'utilise uniquement depuis `ora/logo/` ; il n'est jamais redessiné ni généré par IA.

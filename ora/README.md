@@ -2,7 +2,7 @@
 
 Tout le contenu ORA (flyers, posts, stories, vidéos motion, tutos) part d'ici.
 
-**Source de vérité : [`charte/ORA_SYSTEM_PROMPT_v3.1.md`](charte/ORA_SYSTEM_PROMPT_v3.1.md).**
+**Source de vérité : [`charte/ORA_SYSTEM_PROMPT_v3.2.md`](charte/ORA_SYSTEM_PROMPT_v3.2.md).**
 Copie intégrale, non modifiée. En cas de doute, c'est elle qui tranche, pas ce README.
 Seul le propriétaire de la marque la modifie (§21) : nouvelle version = nouveau fichier, l'ancien est conservé.
 
@@ -10,7 +10,7 @@ Seul le propriétaire de la marque la modifie (§21) : nouvelle version = nouvea
 
 | Dossier | Contenu |
 |---|---|
-| `charte/` | Charte v3.1 (system prompt ORA). |
+| `charte/` | Charte v3.2 (system prompt ORA, en vigueur) ; v3.1 conservée. |
 | `logo/ORA_logo_construction_v3.1.pdf` | Fiche de construction : seule source valable du logo (§5). |
 | `logo/svg/` | Logo vectoriel, extrait tel quel de la fiche. 4 formes × 3 versions officielles, avec ou sans fond (`_fond` = zone de sécurité 12u incluse). |
 | `logo/png/` | Exports PNG transparents + favicons (symbole renforcé 16–48 px) + avatar réseaux 1080 px. |

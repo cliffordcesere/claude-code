@@ -1,6 +1,6 @@
 # ORA — mémoire de marque (§17)
 
-Mise à jour : 2026-11-04 · Charte de référence : v3.1 (2026-10-24)
+Mise à jour : 2026-11-04 · Charte de référence : v3.2 (2026-11-27)
 
 ## Slogans figés vivants (5 max)
 
@@ -154,7 +154,8 @@ Ouverture : la photo tombe dans la corbeille, la corbeille tremble, la photo res
 ## Produits de marque tierce (discussion du 2026-11-27)
 
 Le propriétaire conteste l'idée de « cacher » Apple : un magasin qui vend un vrai produit Apple doit pouvoir le montrer. **D'accord** : un produit d'origine se montre tel qu'il est, logo compris ; la charte interdit seulement de poser le logo Apple / Samsung comme un badge à côté du logo ORA (ce qui ferait croire à un partenariat officiel).
-**Cas différent : les modèles compatibles** (câbles « iPhone 15 Pro Max · 5G », USB-C vers Lightning, chargeur « 35W PD Adapter » au dessin Samsung, déclarés compatibles le 27 nov.). Leurs boîtes reprennent les marques Apple / Samsung : les montrer dans un post ORA présenterait comme Apple ce qui ne l'est pas (charte §1 vérité, §8 peur des faux produits). Règle : produit compatible = photo du produit hors boîte, sans logo de marque, mention « Modèle compatible, neuf ».
+**Cas différent : les modèles compatibles** (câbles « iPhone 15 Pro Max · 5G », USB-C vers Lightning, chargeur « 35W PD Adapter » au dessin Samsung, déclarés compatibles le 27 nov.). Leurs boîtes reprennent les marques Apple / Samsung : les montrer dans un post ORA présenterait comme Apple ce qui ne l'est pas (charte §1 vérité, §8 peur des faux produits). Règle : produit compatible = photo du produit hors boîte, sans logo de marque, mention « Modèle compatible, neuf ». **Inscrite dans la charte v3.2 (2026-11-27), validée par le propriétaire** (§5, §8, §19).
+Contexte du propriétaire : il vend des originaux et des compatibles (moyens et clientèle actuels), jamais présentés comme des originaux. Ambition : une grande marque à 10 ans → la charte reste ambitieuse ; piste à long terme (avis Claude) : des compatibles choisis et testés qui deviennent des produits « ORA » avec garantie.
 
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 
