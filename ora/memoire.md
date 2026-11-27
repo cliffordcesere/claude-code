@@ -247,6 +247,7 @@ Objectif 1000 : 124 abonnés au 2026-11-05 ; à 2–3 abonnés par vidéo, ~290 
 Identifiants : « ora » et « oraofficial » sont pris sur les autres plateformes, d'où « oratech » et « haiti ».
 Bio Instagram (2026-11-04) : « Téléphones, accessoires, énergie solaire, réparation. / Neuf ou occasion : toujours dit clairement. / La tech, en clair. »
 WhatsApp : +509 4630 2424 · Adresse : Carr Gerald Bataille, Delmas, Ouest.
+**2026-11-27 (propriétaire) : dans les posts, écrire « Gérald Bataille » plutôt que « Delmas ».** Ligne de contact des posts de la chaîne (on ne peut pas répondre à une chaîne WhatsApp) : « Pour commander : WhatsApp +509 4630 2424 · Gérald Bataille. » Compatibilité Lightning : « de l’iPhone 5 à l’iPhone 14 Pro Max ».
 Hashtags déjà utilisés (non validés comme set officiel) : #ORA #Hydrogel #PortauPrince.
 
 ## Historique de contenu (constaté le 2026-11-04)
