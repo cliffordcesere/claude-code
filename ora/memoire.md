@@ -151,6 +151,11 @@ Choisi d'après les recherches réelles du public (« recupere photo », « phot
 Ouverture : la photo tombe dans la corbeille, la corbeille tremble, la photo ressort (onde cuivre), « 30 jours » arrive fort ; un plan par seconde, couches LottieFiles.
 **Non vérifié (à confirmer)** : avec une photo cochée, « ··· » propose « Récupérer » ; la confirmation « Récupérer la photo » ; « 1 photo sélectionnée » ; la photo revient à sa date. Les 30 jours : fiche Apple 104967 ; le libellé exact du menu n'a pas pu être lu sur le site d'Apple.
 
+## Produits de marque tierce (discussion du 2026-11-27)
+
+Le propriétaire conteste l'idée de « cacher » Apple : un magasin qui vend un vrai produit Apple doit pouvoir le montrer. **D'accord** : un produit d'origine se montre tel qu'il est, logo compris ; la charte interdit seulement de poser le logo Apple / Samsung comme un badge à côté du logo ORA (ce qui ferait croire à un partenariat officiel).
+**Cas différent : les modèles compatibles** (câbles « iPhone 15 Pro Max · 5G », USB-C vers Lightning, chargeur « 35W PD Adapter » au dessin Samsung, déclarés compatibles le 27 nov.). Leurs boîtes reprennent les marques Apple / Samsung : les montrer dans un post ORA présenterait comme Apple ce qui ne l'est pas (charte §1 vérité, §8 peur des faux produits). Règle : produit compatible = photo du produit hors boîte, sans logo de marque, mention « Modèle compatible, neuf ».
+
 ## Haïti — réalités d'usage (propriétaire, 2026-11-14)
 
 - **Pas de problème de forfait / données ; le problème, c'est la qualité d'internet.** Sujet « WhatsApp mange votre forfait » écarté.

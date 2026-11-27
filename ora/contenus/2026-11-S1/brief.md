@@ -204,3 +204,11 @@ Sujet tiré des recherches TikTok du public (« recupere photo », « photo supp
 - Commentaire : Photos › Collections › Supprimés récemment › Face ID › Sélectionner › la photo › ··· › Récupérer. / Sous chaque photo : le nombre de jours qu’il lui reste. / Après 30 jours, ou si l’album a été vidé, elle n’est plus là.
 - Voix : Une photo effacée par erreur n’est pas perdue. Vous avez trente jours pour la récupérer. / Ouvrez Photos, touchez Collections, puis Supprimés récemment. / Face ID ou votre code, et l’album s’ouvre. / Sous chaque photo : les jours qu’il lui reste. / Touchez Sélectionner, puis la photo. / Les trois points, puis Récupérer. / Elle revient dans vos photos, à la date où elle a été prise. / Après trente jours, ou si l’album a été vidé, c’est fini. / Enregistrez cette vidéo, et envoyez-la à quelqu’un qui efface trop vite.
 - Restent exacts : Collections, Supprimés récemment, Sélectionner, Récupérer ; 1re et dernière phrase.
+
+## Chaîne WhatsApp — câble USB-C, câble Lightning, chargeur 35 W (2026-11-27)
+
+Trois posts distincts. **Modèles compatibles** (réponse du propriétaire) : aucune boîte ni aucun logo Apple / Samsung sur les visuels. Visuels en attente des photos produits sorties de la boîte (câbles enroulés, embouts visibles ; chargeur côté ports, pas la face imprimée « Samsung »). Prix : `[PRIX]` tant qu'ils ne sont pas donnés.
+- Post 1 : USB-C des deux côtés. Câble 1 mètre. Disponible. / Pour les iPhone 15 et suivants, et les téléphones USB-C. / Modèle compatible, neuf. [PRIX] / Réponse sur WhatsApp, à Delmas.
+- Post 2 : Lightning d’un côté, USB-C de l’autre. Câble 1 mètre. Disponible. / Pour les iPhone à port Lightning, de l’iPhone 5 à l’iPhone 14. Il se branche sur un chargeur USB-C. / Modèle compatible, neuf. [PRIX] / Réponse sur WhatsApp, à Delmas.
+- Post 3 : Deux ports, un seul chargeur. 35 W. Disponible. / USB-C jusqu’à 35 W, USB-A jusqu’à 15 W. Prise plate, comme les prises d’ici. / Modèle compatible, neuf. [PRIX] / Réponse sur WhatsApp, à Delmas.
+
