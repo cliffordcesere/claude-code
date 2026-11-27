@@ -273,6 +273,11 @@
   #h-tag { position: absolute; left: 0; right: 0; top: 1240px; display: flex; justify-content: center; opacity: 0; }
   #h-tag span { padding: 12px 30px; border-radius: 16px; border: 3px solid var(--cuivre); color: var(--cuivre); font: 800 40px "Jost", sans-serif; letter-spacing: .06em; }
   #h-fond { position: absolute; inset: -200px; pointer-events: none; }
+  #intro-cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
+  #h-avion { position: absolute; left: 0; right: 0; top: 1110px; display: grid; justify-items: center; gap: 30px; }
+  #h-avion .rond { width: 250px; height: 250px; border-radius: 50%; background: #1a1a1a; box-shadow: inset 0 1px 0 rgba(250,250,250,.1), 0 0 0 4px var(--cuivre); display: grid; place-items: center; color: var(--blanc); opacity: 0; }
+  #h-avion b { padding: 12px 30px; border-radius: 16px; border: 3px solid var(--cuivre); color: var(--cuivre); font: 800 46px "Jost", sans-serif; letter-spacing: .06em; opacity: 0; }
+  #h-coches { display: inline-block; }
   /* tampon, preuve « mode avion », cas concrets, fin */
   #tampon { position: absolute; left: 0; right: 0; top: 1120px; display: flex; justify-content: center; opacity: 0; pointer-events: none; z-index: 12; }
   #tampon span { padding: 16px 38px; border: 6px solid var(--cuivre); border-radius: 20px; color: var(--cuivre); font: 800 70px "Jost", sans-serif; letter-spacing: .06em; background: rgba(11,11,11,.85); transform: rotate(-8deg); display: inline-block; }
@@ -331,11 +336,12 @@
     <div class="doigt" id="doigt"></div>
   </div>
   <!-- Ouverture : l'heure file jusqu'à minuit, le message part tout seul -->
-  <div id="intro-p">
+  <div id="intro-p"><div id="intro-cam">
     <div id="horloge"><div class="ch"><span id="c0">2</span></div><div class="ch"><span id="c1">1</span></div><span class="deux">:</span><div class="ch"><span id="c2">4</span></div><div class="ch"><span id="c3">7</span></div></div>
-    <div id="h-bulle">Bonne fête, Maman<small>00:00 ✓✓</small></div>
+    <div id="h-bulle">Bonne fête, Maman<small id="h-coches">00:00 ✓✓</small></div>
     <div id="h-tag"><span>IL PART TOUT SEUL</span></div>
-  </div>
+    <div id="h-avion"><span class="rond"><svg viewBox="0 0 24 24" width="140" height="140"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span><b>SANS RÉSEAU</b></div>
+  </div></div>
   <div id="tampon"><span>PROGRAMMÉ ✓</span></div>
   <div class="carte-p" id="cp-avion" style="top:1080px"><span class="ico"><svg viewBox="0 0 24 24" width="38" height="38"><path fill="currentColor" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span><span class="tx">Mode avion : activé</span></div>
   <div class="carte-p" id="cp-parti" style="top:1230px"><span class="ico">✓</span><span class="tx">Message parti à 00:00</span></div>
@@ -359,38 +365,63 @@ const remplir = (id, l) => { document.querySelector(`#${id} .lst`).innerHTML = l
 remplir('r-jour', JOURS); remplir('r-heure', HEURES); remplir('r-min', MINS);
 const MSG = 'Bonne fête, Maman';
 
-// ---------- Scénario (temps de la version muette) ----------
-const I = 2.4, TAPE = [3.0, 5.4], APPUI = [6.4, 7.9], OUV = 8.0, H0 = 11.0, H1 = 12.2, ENV = 12.9, VOIR = 14.4, AVION = 15.8, CAS = 18.0, FIN = 21.0;
-window.ORA_DURATION = 24.0;
+// ---------- Scénario : calé sur la voix du propriétaire (prise du 26 nov., +8 %, pauses resserrées) ; temps vidéo = temps voix ----------
+const I = 4.9, TAPE = [6.0, 7.6], APPUI = [10.0, 11.6], OUV = 11.7, JOUR = 14.2, H0 = 14.8, H1 = 15.6, ENV = 16.05, TAMP = 16.9, PAST = 17.7, VOIR = 20.2, AVION = 20.7, CAS = 23.8, FIN = 28.6;
+window.ORA_DURATION = 34.3;
+// Ouverture : un plan par idée de la voix — [début, zoom, x, y à amener au centre, y à l'écran]
+const PLANS = [[0, 1.8, 690, 1115, 1080],     // « Un message WhatsApp » : la bulle, en grand
+               [1.4, 1.3, 640, 1170, 1080],  // « qui part tout seul » : ✓✓, puis l'étiquette
+               [2.55, 1.0, 540, 875, 980],    // « à l'heure que vous voulez » : l'heure file jusqu'à minuit
+               [3.6, 0.92, 540, 1060, 1040]]; // « même sans réseau » : mode avion
 const CFG = {
   textes: [
-    { a: 0, b: 2.7, label: 'WhatsApp · astuce', titre: 'Un message qui|part tout seul.', visible: true },
-    { a: 2.8, b: 6.0, label: 'Étape 1', titre: 'Écrivez|le message.' },
-    { a: 6.0, b: 9.6, label: 'Étape 2', titre: 'Doigt appuyé|sur la flèche.' },
-    { a: 9.6, b: 13.4, label: 'Étape 3', titre: 'Le jour, l’heure,|Envoyer.' },
-    { a: 13.4, b: AVION, label: 'Astuce', titre: 'Retrouvez-le|avec « Voir ».' },
+    { a: 0, b: 2.5, label: 'WhatsApp · astuce', titre: 'Un message qui|part tout seul.', visible: true },
+    { a: 2.2, b: I, titre: 'À l’heure|que vous voulez.' },
+    { a: I + 0.2, b: 8.45, label: 'Étape 1', titre: 'Écrivez|le message.' },
+    { a: 8.45, b: 12.2, label: 'Étape 2', titre: 'Doigt appuyé|sur la flèche.' },
+    { a: 12.2, b: 17.6, label: 'Étape 3', titre: 'Le jour, l’heure,|Envoyer.' },
+    { a: 17.6, b: AVION, label: 'Astuce', titre: 'Retrouvez-le|avec « Voir ».' },
     { a: AVION, b: CAS, label: 'On a testé', titre: 'Même en|mode avion.', sous: 'Le message est parti quand même.', retard: 0.8 },
     { a: CAS, b: FIN, label: 'Parfait pour', titre: 'Même quand|vous dormez.' },
     { a: FIN, b: 99, centre: true, titre: 'Enregistrez|cette vidéo.', retard: 0.5 },
   ],
   nav: [[0, 'p-chat', 0], [VOIR + 0.2, 'p-plan', 1]],
   taps: [[ENV, '#b-env-plan'], [VOIR, '#b-voir']],
-  surbrillance: [[APPUI[0] - 0.3, APPUI[0], '#b-envoi', 'hl-txt'], [ENV - 0.4, ENV + 0.05, '#b-env-plan', 'hl-txt'], [VOIR - 0.4, VOIR + 0.1, '#b-voir', 'hl-txt']],
-  camera: [[0, 0.72, '#phone', 1200], [2.8, 0.62, '#phone', 1060], [6.0, 1.05, '#b-envoi', 1420], [OUV, 0.62, '#phone', 1060], [9.6, 1.0, '#r-heure', 1250], [ENV - 0.3, 0.62, '#phone', 1060], [CAS, 0.5, '#phone', 1250]],
+  surbrillance: [[APPUI[0] - 0.3, APPUI[0], '#b-envoi', 'hl-txt'], [ENV - 0.4, ENV + 0.05, '#b-env-plan', 'hl-txt'], [19.3, VOIR + 0.1, '#b-voir', 'hl-txt']],
+  camera: [[0, 0.72, '#phone', 1200], [5.3, 0.62, '#phone', 1060], [8.5, 0.85, '#b-envoi', 1320], [OUV, 0.62, '#phone', 1060], [13.5, 1.0, '#r-heure', 1250],
+           [ENV - 0.3, 0.62, '#phone', 1060], [PAST, 1.6, '#past-plan', 1300], [VOIR + 0.3, 0.62, '#phone', 1060], [AVION, 0.5, '#phone', 1250]],
   fin: FIN,
-  sons: { souffles: [I, 6.0, 9.6, AVION, CAS, FIN], crans: [0.7, 1.15, 1.55, 7.9, 11.25, 11.6, 11.95, 13.45], impact: 13.4 },
+  sons: { souffles: [1.4, 2.55, 3.6, I, 8.45, 12.2, 17.6, AVION, CAS, FIN], crans: [0.3, 1.65, 2.07, 3.5, 3.67, 4.04, APPUI[1], 15.0, 15.25, 15.5, TAMP], impact: TAMP },
   apres: t => {
     const clamp = x => Math.min(Math.max(x, 0), 1), out = x => 1 - Math.pow(1 - clamp(x), 4);
     const expo = x => { x = clamp(x); return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); };
     const back = (x, o = 1.2) => { x = clamp(x); return 1 + (o + 1) * Math.pow(x - 1, 3) + o * Math.pow(x - 1, 2); };
     const io = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
     const $ = s => document.querySelector(s);
-    // ---- ouverture : 21:47 → 00:00, le message part tout seul ----
-    const m = Math.round(133 * io((t - 0.15) / 1.35)), mins = (21 * 60 + 47 + m) % 1440;
+    // ---- ouverture (identité de mouvement ORA : sortie expo, ~6 % de dépassement, anticipation avant chaque coup) ----
+    // la bulle surgit ; sur « part » : tassement puis départ, ✓✓ ; sur « seul » : l'étiquette ; puis l'heure file ; puis « sans réseau »
+    const kb = back((t - 0.25) / 0.35, 1.6), dep = t - 1.65;
+    const saut = dep < -0.1 ? 0 : dep < 0 ? -0.04 * (dep + 0.1) / 0.1 : back(dep / 0.3, 1.4);
+    $('#h-bulle').style.opacity = clamp((t - 0.25) / 0.1) * (1 - clamp((t - 2.45) / 0.15));
+    $('#h-bulle').style.transform = `translateY(${-30 * Math.max(saut, 0)}px) scale(${(0.6 + 0.4 * kb) * (1 + Math.min(saut, 0))})`;
+    const kc = back(dep / 0.25, 2); $('#h-coches').style.opacity = dep >= 0 ? 1 : 0; $('#h-coches').style.transform = `scale(${dep >= 0 ? 1.6 - 0.6 * kc : 1})`;
+    $('#h-coches').style.color = dep >= 0 && dep < 0.3 ? 'var(--cuivre)' : '';
+    const g = back((t - 2.07) / 0.3, 1.8); $('#h-tag').style.opacity = clamp((t - 2.07) / 0.06) * (1 - clamp((t - 2.45) / 0.15)); $('#h-tag').style.transform = `scale(${t < 2.07 ? 1.4 : 1.4 - 0.4 * g})`;
+    const m = Math.round(133 * io((t - 2.6) / 0.9)), mins = (21 * 60 + 47 + m) % 1440;
     const hh = String(Math.floor(mins / 60)).padStart(2, '0'), mm = String(mins % 60).padStart(2, '0');
-    [hh[0], hh[1], mm[0], mm[1]].forEach((c, i) => { const el = $('#c' + i); if (el.textContent !== c) el.textContent = c; el.style.transform = `translateY(${t < 1.5 ? Math.sin(t * 40 + i) * 4 : 0}px)`; });
-    const b = back((t - 1.55) / 0.35, 1.6); $('#h-bulle').style.opacity = clamp((t - 1.55) / 0.15); $('#h-bulle').style.transform = `scale(${0.6 + 0.4 * b})`;
-    const g = expo((t - 1.9) / 0.35); $('#h-tag').style.opacity = g; $('#h-tag').style.transform = `translateY(${(1 - g) * 40}px)`;
+    [hh[0], hh[1], mm[0], mm[1]].forEach((c, i) => { const el = $('#c' + i); if (el.textContent !== c) el.textContent = c; el.style.transform = `translateY(${t > 2.6 && t < 3.5 ? Math.sin(t * 40 + i) * 4 : 0}px)`; });
+    $('#horloge').style.opacity = clamp((t - 2.5) / 0.1);
+    const ka = back((t - 3.67) / 0.35, 1.6), kl = back((t - 4.04) / 0.3, 1.8);
+    $('#h-avion .rond').style.opacity = clamp((t - 3.67) / 0.08); $('#h-avion .rond').style.transform = `scale(${t < 3.67 ? 0.5 : 0.5 + 0.5 * ka}) rotate(${-20 * (1 - Math.min(ka, 1))}deg)`;
+    $('#h-avion b').style.opacity = clamp((t - 4.04) / 0.06); $('#h-avion b').style.transform = `scale(${t < 4.04 ? 1.4 : 1.4 - 0.4 * kl})`;
+    // caméra de l'ouverture : recul de 0,1 s avant chaque coup, arrivée avec dépassement, secousse sur « sans réseau »
+    let pi = 0; while (pi + 1 < PLANS.length && t >= PLANS[pi + 1][0]) pi++;
+    const plan = q => ({ s: q[1], x: 540 - q[2] * q[1], y: q[4] - q[3] * q[1] });
+    const A = plan(PLANS[Math.max(0, pi - 1)]), B = plan(PLANS[pi]), kp = pi ? back((t - PLANS[pi][0]) / 0.32, 0.7) : 1;
+    const suiv = PLANS[pi + 1] ? PLANS[pi + 1][0] : 99, recul = 1 - 0.035 * Math.sin(Math.PI * clamp((t - (suiv - 0.1)) / 0.1));
+    const sec = t >= 4.04 && t < 4.34 ? Math.sin((t - 4.04) * 55) * 10 * (1 - (t - 4.04) / 0.3) : 0;
+    const cs = (A.s + (B.s - A.s) * kp) * recul;
+    $('#intro-cam').style.transform = `translate(${A.x + (B.x - A.x) * kp + sec}px, ${A.y + (B.y - A.y) * kp}px) scale(${cs})`;
     $('#intro-p').style.opacity = 1 - out((t - (I - 0.35)) / 0.45);
     $('#h-fond').style.background = `radial-gradient(circle at ${50 + 16 * Math.sin(t * 0.6)}% ${58 + 10 * Math.cos(t * 0.45)}%, rgba(184,115,51,${0.10 + 0.03 * Math.sin(t * 1.8)}) 0%, rgba(184,115,51,0) 40%)`;
     const ph = $('#phone');
@@ -422,18 +453,22 @@ const CFG = {
     const hi = 13 - 9 * io((t - H0) / (H1 - H0 - 0.2));   // 09 → 00 (minuit)
     posRoue('r-heure', hi); posRoue('r-min', 2);
     $('#b-env-plan').textContent = `Envoyer 28 nov. à ${HEURES[Math.round(hi)]}:00`;
-    [['#etq-jour', 9.9], ['#etq-heure', H0 - 0.1]].forEach(([s, a]) => { const k = back((t - a) / 0.3, 1.8); $(s).style.opacity = t >= a && t < ENV ? 1 : 0; $(s).style.transform = `scale(${0.5 + 0.5 * k})`; });
+    [['#etq-jour', JOUR], ['#etq-heure', H0 - 0.1]].forEach(([s, a]) => { const k = back((t - a) / 0.3, 1.8); $(s).style.opacity = t >= a && t < ENV ? 1 : 0; $(s).style.transform = `scale(${0.5 + 0.5 * k})`; });
     // c'est programmé : tampon (tassement puis éclat), pastille « Voir »
-    const tp = t - (ENV + 0.4), st = tp < 0 ? 0 : back(tp / 0.3, 2.2);
-    $('#tampon').style.opacity = tp >= 0 && t < VOIR - 0.3 ? 1 : 0; $('#tampon').style.transform = `scale(${1.6 - 0.6 * st})`;
+    const tp = t - TAMP, st = tp < 0 ? 0 : back(tp / 0.3, 2.2);
+    $('#tampon').style.opacity = tp >= 0 && t < PAST ? 1 : 0; $('#tampon').style.transform = `scale(${1.6 - 0.6 * st})`;
     $('#past-plan').style.opacity = t >= ENV + 0.3 ? 1 : 0;
     // ---- preuve « mode avion », puis cas concrets : cartes qui glissent (décalage 0,15 s) ----
     const carte = (s, a, b) => { const k = expo((t - a) / 0.4), q = clamp((t - b) / 0.25); $(s).style.opacity = t >= a && t < b + 0.25 ? Math.min(1, k * 2) * (1 - q) : 0; $(s).style.transform = `translateX(${(1 - k) * 140}px)`; };
-    carte('#cp-avion', AVION + 0.3, CAS - 0.1); carte('#cp-parti', AVION + 1.0, CAS - 0.1);
-    carte('#cp-fete', CAS + 0.3, FIN - 0.1); carte('#cp-sol', CAS + 0.45, FIN - 0.1);
+    carte('#cp-avion', 21.4, CAS - 0.1); carte('#cp-parti', 22.45, CAS - 0.1);
+    carte('#cp-fete', 24.1, FIN - 0.1); carte('#cp-sol', 26.4, FIN - 0.1);
     $('#stat-ic').style.opacity = 1;
   },
 };
+// Voix du propriétaire (prise du 26 nov., Adobe Podcast), +8 %, pauses resserrées, traitement « pièce vide » ; le scénario est déjà en temps voix
+CFG.voix = { src: 'voix/whatsapp-programmer_voix-proprietaire_v1.flac', reperes: [[0, 0], [34.3, 34.3]] };
+// Sous-titres (temps vidéo = temps voix) ; cuivre = mots-clés. « sans avoir resté éveillé » est écrit « sans rester éveillé ».
+CFG.mots = [[0.298, 0.425, "Un", 0], [0.425, 0.89, "message", 0], [0.89, 1.396, "WhatsApp", 1], [1.396, 1.65, "qui", 0], [1.65, 1.861, "part", 0], [1.861, 2.072, "tout", 0], [2.072, 2.582, "seul", 1], [2.582, 2.919, "à l’heure", 1], [2.919, 3.182, "que vous", 0], [3.182, 3.668, "voulez", 0], [3.668, 4.043, "même", 0], [4.043, 4.626, "sans réseau", 1], [4.626, 5.119, "Maintenant", 0], [5.119, 5.345, "c’est", 0], [5.345, 5.876, "possible", 0], [5.876, 6.404, "Écrivez", 0], [6.404, 6.835, "votre", 0], [6.835, 7.735, "message", 0], [7.746, 7.938, "comme", 0], [7.938, 8.447, "d’habitude", 0], [8.447, 8.669, "Mais", 0], [8.669, 9.002, "au lieu", 0], [9.002, 9.852, "d’envoyer", 0], [9.852, 10.259, "gardez", 0], [10.259, 10.702, "le doigt", 0], [10.702, 11.11, "appuyé", 1], [11.11, 11.405, "sur la", 0], [11.405, 12.305, "flèche", 1], [12.305, 12.762, "Planifiez", 1], [12.762, 12.958, "votre", 0], [12.958, 13.578, "message", 0], [13.578, 14.101, "choisissez", 0], [14.101, 14.917, "le jour", 1], [14.917, 15.426, "l’heure", 1], [15.426, 15.641, "puis", 0], [15.641, 16.035, "touchez", 0], [16.035, 16.608, "Envoyer", 1], [16.608, 16.931, "et c’est", 0], [16.931, 17.74, "programmé", 1], [17.74, 17.964, "Pour", 0], [17.964, 18.864, "le retrouver", 0], [18.901, 19.41, "facile", 0], [19.41, 20.227, "touchez", 0], [20.227, 20.746, "Voir", 1], [20.746, 21.351, "On a testé", 0], [21.351, 21.777, "et même", 0], [21.777, 22.453, "en mode avion", 1], [22.453, 22.738, "il est", 0], [22.738, 22.951, "parti", 0], [22.951, 23.851, "tout seul", 1], [23.892, 24.08, "La", 0], [24.08, 24.571, "bonne fête", 0], [24.571, 24.954, "à minuit", 1], [24.954, 25.172, "sans", 0], [25.172, 25.888, "rester", 0], [25.888, 26.397, "éveillé", 0], [26.397, 26.807, "Le rappel", 0], [26.807, 27.285, "du sòl", 1], [27.285, 27.593, "le 1er", 0], [27.593, 28.493, "du mois", 0], [28.619, 29.226, "Enregistrez", 1], [29.226, 30.126, "cette vidéo", 0]];
 SCENE(CFG);
 </script>
 </body>
