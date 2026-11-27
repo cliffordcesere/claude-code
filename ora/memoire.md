@@ -151,6 +151,12 @@ Choisi d'après les recherches réelles du public (« recupere photo », « phot
 Ouverture : la photo tombe dans la corbeille, la corbeille tremble, la photo ressort (onde cuivre), « 30 jours » arrive fort ; un plan par seconde, couches LottieFiles.
 **Non vérifié (à confirmer)** : avec une photo cochée, « ··· » propose « Récupérer » ; la confirmation « Récupérer la photo » ; « 1 photo sélectionnée » ; la photo revient à sa date. Les 30 jours : fiche Apple 104967 ; le libellé exact du menu n'a pas pu être lu sur le site d'Apple.
 
+## Images produits : agrandir et détourer (2026-11-27)
+
+- **Agrandissement IA local** : `tools/agrandir_ia.py` (Real-ESRGAN x4plus, ncnn sur le processeur, ~20 s ; ncnn et le modèle s'installent seuls au 1er usage). Pour les petites photos de fournisseur (ex. 800 px) : net, fidèle au produit.
+- **Détourage** : rembg `birefnet-general-lite` (retire aussi le fond dans les trous, ex. boucle d'un câble) ; `isnet` et `u2net` gardaient le blanc au centre.
+- Le propriétaire a retouché un visuel ORA avec un outil IA externe : produit plus net, mais **cuivre devenu orange (#EA9030 au lieu de #B87333) et logo redessiné** → ces versions ne se publient pas ; on ne reprend que le produit, le reste se refait depuis les gabarits.
+
 ## Produits de marque tierce (discussion du 2026-11-27)
 
 Le propriétaire conteste l'idée de « cacher » Apple : un magasin qui vend un vrai produit Apple doit pouvoir le montrer. **D'accord** : un produit d'origine se montre tel qu'il est, logo compris ; la charte interdit seulement de poser le logo Apple / Samsung comme un badge à côté du logo ORA (ce qui ferait croire à un partenariat officiel).

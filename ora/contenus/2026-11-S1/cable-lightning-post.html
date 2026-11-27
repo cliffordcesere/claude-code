@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="../../templates/ora.css">
 <style>
   /* Chaîne WhatsApp / Instagram 1080 × 1350. Modèle compatible (charte v3.2 §5, §8) : câble montré hors de sa boîte,
-     sans logo ni emballage de marque ; origine écrite en clair. Câble détouré d'après la photo du fournisseur (800 px : légèrement doux). */
+     sans logo ni emballage de marque ; origine écrite en clair. Câble : photo du fournisseur agrandie ×4 par IA (tools/agrandir_ia.py), puis détourée. */
   .canvas { --W: 1080; --H: 1350; }
   .flaque { background: radial-gradient(ellipse 62% 30% at 50% 60%, rgba(250,250,250,.10) 0%, rgba(250,250,250,.03) 50%, transparent 76%); }
   .haut { position: absolute; left: var(--marge); right: var(--marge); top: var(--marge); }
   .haut .label { margin-bottom: 24px; }
   #cable { position: absolute; left: 50%; top: 430px; width: 860px; margin-left: -430px;
-           filter: brightness(.9) contrast(1.06) drop-shadow(0 36px 40px rgba(0,0,0,.7)); }
+           filter: brightness(1.02) contrast(1.1) drop-shadow(0 36px 40px rgba(0,0,0,.7)); }
   .bas { position: absolute; left: var(--marge); bottom: var(--marge); }
 </style>
 </head>
