@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>ORA — câble USB-C vers Lightning, post v1</title>
+<link rel="stylesheet" href="../../templates/ora.css">
+<style>
+  /* Chaîne WhatsApp / Instagram 1080 × 1350. Modèle compatible (charte v3.2 §5, §8) : câble montré hors de sa boîte,
+     sans logo ni emballage de marque ; origine écrite en clair. Câble détouré d'après la photo du fournisseur (800 px : légèrement doux). */
+  .canvas { --W: 1080; --H: 1350; }
+  .flaque { background: radial-gradient(ellipse 62% 30% at 50% 60%, rgba(250,250,250,.10) 0%, rgba(250,250,250,.03) 50%, transparent 76%); }
+  .haut { position: absolute; left: var(--marge); right: var(--marge); top: var(--marge); }
+  .haut .label { margin-bottom: 24px; }
+  #cable { position: absolute; left: 50%; top: 430px; width: 860px; margin-left: -430px;
+           filter: brightness(.9) contrast(1.06) drop-shadow(0 36px 40px rgba(0,0,0,.7)); }
+  .bas { position: absolute; left: var(--marge); bottom: var(--marge); }
+</style>
+</head>
+<body>
+<div class="canvas" id="canvas">
+  <div class="flaque"></div>
+  <div class="haut">
+    <div class="label">Câble iPhone</div>
+    <h1 class="titre">Lightning d’un côté.<br>USB-C de l’autre.</h1>
+  </div>
+  <img id="cable" src="../../produits/cable-usbc-lightning/cable-usbc-lightning_detoure.png" alt="Câble USB-C vers Lightning, 1 mètre, enroulé">
+  <div class="bas">
+    <p class="sous">1 mètre · iPhone 5 à 14 · Compatible, neuf</p>
+    <p class="cta">Disponible.</p>
+  </div>
+  <img class="logo" src="../../logo/svg/ORA_logo_horizontal_cuivre-sur-noir.svg" alt="ORA">
+</div>
+<script>
+  window.ORA_READY = false;
+  cable.decode().finally(() => { window.ORA_READY = true; });
+</script>
+</body>
+</html>
